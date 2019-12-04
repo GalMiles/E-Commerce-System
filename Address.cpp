@@ -20,16 +20,11 @@ int Address::getHomeNumber()
 	return m_homeNumber;
 }
 
-int Address::getZipCode()
-{
-	return m_zipCode;
-}
-
 /////////////////////////////////////////////////////////////
 bool Address::setCountry(char *country)
 {
 	bool res;
-	res = isValid(country);
+	res = isAddressValid(country);
 
 	if (res)
 	{
@@ -43,7 +38,7 @@ bool Address::setCountry(char *country)
 bool Address::setCity(char *city)
 {
 	bool res;
-	res = isValid(city);
+	res = isAddressValid(city);
 
 	if (res)
 	{
@@ -57,7 +52,7 @@ bool Address::setCity(char *city)
 bool Address::setStreet(char *street)
 {
 	bool res;
-	res = isValid(street);
+	res = isAddressValid(street);
 
 	if (res)
 	{
@@ -73,10 +68,12 @@ void Address::setHomeNumber(int homeNumber)
 	m_homeNumber = homeNumber;
 }
 
-void Address::setZipCode(int zipCode)
-{
-	m_zipCode = zipCode;
+bool Address::isAddressValid(char* address) {
+	int length = strlen(address);
+	for (int i = 0; i < length; i++) {
+		if ((address[i] < 'A' || (address[i] > 'Z' && address[i] < 'a') || address[i] > 'z'))
+			return false;
+		else
+			return true;
+	}
 }
-
-
-
