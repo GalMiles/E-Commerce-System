@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include <string.h>
-#include "User.h"
 using namespace std;
 
+#include "User.h"
+
 #pragma warning(disable: 4996)
+
 
 class Feedback
 {

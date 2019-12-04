@@ -5,10 +5,13 @@
 #include <string.h>
 using namespace std;
 
+#pragma warning(disable: 4996)
+
+const int OPTIONS_LENGTH = 11;
+
 class Menu
 {
 public:
-	const int OPTIONS_LENGTH = 11;
 	int initMenu();
 
 private:

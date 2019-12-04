@@ -7,6 +7,9 @@ using namespace std;
 
 #pragma warning(disable: 4996)
 
+#include "Feedback.h"
+
+
 class Product
 {
 
@@ -19,13 +22,12 @@ public:
 
 	char *getName();
 	double getPrice();
-	eCategory getCategory();
+	//eCategory getCategory();
 	int getProductId();
 	
 private:
 	void setProductId(int ProductId);
 
-private:
 	char     *m_name;
 	double    m_price;
 	eCategory m_category;

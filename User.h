@@ -4,8 +4,6 @@
 #include <iostream>
 #include <string.h>
 #include "Address.h"
-#include "Buyer.h"
-#include "Seller.h"
 
 using namespace std;
 
@@ -33,8 +31,6 @@ private:
 	char *     m_password;
 	Address    m_address;
 	eUserType  m_userType;
-	Buyer*     m_buyer;
-	Seller*    m_seller;
 };
 
 #endif

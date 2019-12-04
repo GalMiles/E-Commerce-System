@@ -3,12 +3,13 @@
 
 #include <iostream>
 #include <string.h>
-#include "Product.h"
-#include "User.h"
-
 using namespace std;
 
 #pragma warning(disable: 4996)
+
+class User;
+class Product;
+
 
 class Seller
 {
@@ -20,7 +21,6 @@ public:
 	Product *getProducts();
 	int getAmount();
 
-public:
 	void addProduct(Product **products, int count, Product product);
 
 private:

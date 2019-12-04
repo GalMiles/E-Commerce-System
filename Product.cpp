@@ -15,8 +15,10 @@ int Product::getProductId()
 	return m_productId;
 }
 
+/*
 eCategory Product::getCategory()
 {
 	return m_category;
 }
+*/
 
