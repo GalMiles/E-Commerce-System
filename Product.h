@@ -23,6 +23,7 @@ public:
 	//eCategory getCategory();
 	int getProductId();
 	
+
 private:
 	static int productCounter;
 	char     *name;

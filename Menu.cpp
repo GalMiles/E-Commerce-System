@@ -33,7 +33,7 @@ void Menu::choiceCases(int choice)
 		break;
 
 	case 3:
-		addProduct();
+		addProductToSeller();
 		break;
 
 	case 4:
@@ -110,6 +110,7 @@ void Menu::addSeller()
 	Seller newSeller(&newUser);
 
 	initMenu();
+	
 }
 
 void Menu::addFeedback()
@@ -130,7 +131,7 @@ void Menu::addFeedback()
 	Feedback feedback(userName, content);
 }
 
-void Menu::addProduct()
+void Menu::addProductToSeller()
 {
 	cin.ignore();
 	char productName[20];
@@ -149,4 +150,5 @@ void Menu::addProduct()
 	cin >> categoryChoice;
 	
 	Product newProduct(productName, price, Product::eCategory(categoryChoice));
+
 }
