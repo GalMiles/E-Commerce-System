@@ -1,6 +1,4 @@
 #include "Seller.h"
+#include "User.h"
 
-Seller::Seller(User* sellerUser) {
-	cout << "In Seller constructor\n";
-	this->sellerUser = sellerUser;
-}
+
