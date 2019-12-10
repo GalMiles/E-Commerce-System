@@ -14,17 +14,15 @@ class Feedback
 {
 	
 public:
-	bool setUserName(char *userName);
-	bool setDate(char *date);
-	bool setContent(char *content);
+	Feedback(char *userName, char *date, char *content);
 
-	User getUser();
+	char *getUserName();
 	char *getDate();
 	char *getContent();
 
 private:
-	char *m_userName;
-	char *m_date;
-	char *m_content;
+	char *userName;
+	char *date;
+	char *content;
 };
 #endif
