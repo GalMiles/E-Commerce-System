@@ -1,25 +1,21 @@
 #include "Feedback.h"
 
-Feedback::Feedback(char *userName, char *content)//feedback c'tor
-
+Feedback::Feedback(char *userName, char *content) //feedback c'tor
 {
 	int nameLength = strlen(userName);
 	cout << "In Feedback constructor\n";
 	this->userName = new char[nameLength + 1];
 	strcpy(this->userName, userName);
 
-<<<<<<< HEAD
 	nameLength = strlen(date);
 	this->date = new char[nameLength + 1];
 	strcpy(this->date, date);
 
-=======
 	/*
 	nameLength = strlen(date);
 	this->date = new char[nameLength + 1];
 	strcpy(this->date, date);
-*/
->>>>>>> 94ed56f25363c1e1de738fca6e9455e0fd1e5848
+	*/
 	nameLength = strlen(content);
 	this->content = new char[nameLength + 1];
 	strcpy(this->content, content);

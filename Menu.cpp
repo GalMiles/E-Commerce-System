@@ -29,6 +29,9 @@ void Menu::choiceCases(int choice)
 	case 2:
 		addSeller();
 
+	case 4:
+		addFeedback();
+
 	case 11:
 		cout << "GoodbyeMessage\n"; //TODO
 		return;
@@ -103,6 +106,7 @@ void Menu::addSeller()
 
 void Menu::addFeedback()
 {
+	cin.ignore();
 	char userName[20];
 	cout << "Please enter your user name: " << endl;
 	cin.getline(userName, 20);
