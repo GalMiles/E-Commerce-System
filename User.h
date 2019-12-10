@@ -14,7 +14,6 @@ class User
 public:
 	enum eUserType {SELLER, BUYER};
 
-public:
 	bool setUserName(char *name);
 	bool setPassword(char *password);
 	bool setAdress(Address adress);
@@ -25,12 +24,14 @@ public:
 	Address getAdress();
 	eUserType getUserType();
 
+	User(char* name, char* password, Address* address, eUserType userType);
+	//~User();
 
 private:
-	char *     m_name;
-	char *     m_password;
-	Address    m_address;
-	eUserType  m_userType;
+	char*		name;
+	char*		password;
+	Address		*address;
+	eUserType	userType;
 };
 
 #endif

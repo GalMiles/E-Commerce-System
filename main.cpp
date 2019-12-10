@@ -5,8 +5,8 @@
 
 using namespace std;
 
-int main() {
+void main() {
 	Menu mainMenu;
-	mainMenu.initMenu();
-	return 0;
+	int choice = mainMenu.initMenu();
+	mainMenu.choiceCases(choice);
 }

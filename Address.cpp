@@ -1,26 +1,33 @@
 #include "Address.h"
 
+Address::Address(char* country, char* city, char* street, int homeNumber) {
+	cout << "In Address constructor\n";
+	strcpy(this->country, country);
+	strcpy(this->city, city);
+	strcpy(this->street, street);
+	this->homeNumber = homeNumber;
+}
+
 char* Address::getCountry()
 {
-	return m_country;
+	return country;
 }
 
 char* Address::getCity()
 {
-	return m_city;
+	return city;
 }
 
 char* Address::getStreet()
 {
-	return m_street;
+	return street;
 }
 
 int Address::getHomeNumber()
 {
-	return m_homeNumber;
+	return homeNumber;
 }
 
-/////////////////////////////////////////////////////////////
 bool Address::setCountry(char *country)
 {
 	bool res;
@@ -28,7 +35,7 @@ bool Address::setCountry(char *country)
 
 	if (res)
 	{
-		strcpy(m_country, country);
+		strcpy(country, country);
 		return true;
 	}
 	else
@@ -42,7 +49,7 @@ bool Address::setCity(char *city)
 
 	if (res)
 	{
-		strcpy(m_city, city);
+		strcpy(city, city);
 		return true;
 	}
 	else
@@ -56,7 +63,7 @@ bool Address::setStreet(char *street)
 
 	if (res)
 	{
-		strcpy(m_street, street);
+		strcpy(street, street);
 		return true;
 	}
 	else
@@ -65,7 +72,7 @@ bool Address::setStreet(char *street)
 
 void Address::setHomeNumber(int homeNumber)
 {
-	m_homeNumber = homeNumber;
+	homeNumber = homeNumber;
 }
 
 bool Address::isAddressValid(char* address) {

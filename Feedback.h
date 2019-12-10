@@ -23,8 +23,8 @@ public:
 	char *getContent();
 
 private:
-	char   *m_userName;
-	char  *m_date;
-	char  *m_content;
+	char *m_userName;
+	char *m_date;
+	char *m_content;
 };
 #endif

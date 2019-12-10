@@ -13,6 +13,10 @@ class Menu
 {
 public:
 	int initMenu();
+	void choiceCases(int choice);
+	void addBuyer();
+
+
 
 private:
 	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",

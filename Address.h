@@ -10,6 +10,7 @@ using namespace std;
 class Address
 {
 public:
+	Address(char* country, char* city, char* street, int homeNumber);
 	const int MAX_COUNTRY_LENGTH = 57;
 	bool setCountry(char *country);
 	bool setCity(char *city);
@@ -24,11 +25,10 @@ public:
 	bool isAddressValid(char* address);
 
 private:
-	char*     m_country;
-	char*     m_city;
-	char*     m_street;
-	int       m_homeNumber;
-	int       m_zipCode;
+	char	country[50];
+	char	city[50];
+	char	street[50];
+	int		homeNumber;
 
 };
 #endif
