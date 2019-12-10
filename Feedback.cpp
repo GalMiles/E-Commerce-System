@@ -1,8 +1,38 @@
 #include "Feedback.h"
 
-bool Feedback::setUserName(char *userName)
+Feedback::Feedback(char *userName, char *date, char *content)//feedback c'tor
+
 {
-	strcpy(m_userName, userName);
-	return true; ///just to make it work
+	int nameLength = strlen(userName);
+	cout << "In Feedback constructor\n";
+	this->userName = new char[nameLength + 1];
+	strcpy(this->userName, userName);
+
+	int nameLength = strlen(date);
+	this->date = new char[nameLength + 1];
+	strcpy(this->date, date);
+
+	int nameLength = strlen(content);
+	this->content = new char[nameLength + 1];
+	strcpy(this->content, content);
+
 }
+
+char *Feedback::getUserName()
+{
+	return this->userName;
+}
+
+char *Feedback::getDate()
+{
+	return this->date;
+}
+
+char *Feedback::getContent()
+{
+	return this->content;
+}
+
+
+
 
