@@ -23,11 +23,10 @@ Address User::getAddress()
 	return *address;
 }
 
-/*
-eUserType User::getUserType()
+/*eUserType User::getUserType()
 {
 	return userType;
-}
-*/
+}*/
+
 
 

@@ -6,6 +6,7 @@
 using namespace std;
 
 #include "User.h"
+#include "Seller.h"
 
 #pragma warning(disable: 4996)
 
@@ -14,7 +15,7 @@ class Feedback
 {
 	
 public:
-	Feedback(char *userName, char *date, char *content);
+	Feedback(char *userName, char *content);
 
 	char *getUserName();
 	char *getDate();
@@ -23,6 +24,7 @@ public:
 private:
 	char *userName;
 	char *date;
+	Seller *seller;
 	char *content;
 };
 #endif

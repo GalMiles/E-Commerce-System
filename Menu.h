@@ -16,6 +16,7 @@ public:
 	void choiceCases(int choice);
 	void addBuyer();
 	void addSeller();
+	void addFeedback();
 
 
 

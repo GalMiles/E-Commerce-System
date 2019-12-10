@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "Buyer.h"
+#include "Feedback.h"
 #include "Seller.h"
 
 int Menu::initMenu() {
@@ -99,3 +100,19 @@ void Menu::addSeller()
 	initMenu();
 }
 
+void Menu::addFeedback()
+{
+	char userName[20];
+	cout << "Please enter your user name: " << endl;
+	cin.getline(userName, 20);
+
+	char sellerName[20];
+	cout << "Please enter the seller name: " << endl;
+	cin.getline(sellerName, 20);
+
+	char content[100];
+	cout << "Please enter your feedback: " << endl;
+	cin.getline(content, 100);
+
+	Feedback feedback(userName, content);
+}

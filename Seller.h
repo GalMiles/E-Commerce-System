@@ -3,18 +3,20 @@
 
 #include <iostream>
 #include <string.h>
-#include "User.h"
 using namespace std;
 
 #pragma warning(disable: 4996)
 
+#include "User.h"
 class Product;
+
 
 class Seller
 {
 public:
-	Seller(User *sellerUser);
 	bool setProducts(Product *products);
+	
+	User getUser();
 	Product *getProducts();
 	int getAmount();
 
@@ -22,8 +24,8 @@ public:
 
 private:
 	Product  *products;
-	User     *sellerUser;
-	int      countProducts;
+	User      user;
+	int       countProducts;
 };
 
 #endif 
