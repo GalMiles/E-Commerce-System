@@ -12,13 +12,12 @@ using namespace std;
 
 class Product
 {
-
+	
 public:
-	enum eCategory {CHILDREN, CLOTHES, HOME, SPORT};
+	Product(char *productName, double price, Feedback *feedback);//c'tor
+	//~d'tor
 
-	void setName(char *name);
-	bool setPrice(double price);
-	void setCategory(eCategory category);
+	enum eCategory {CHILDREN, CLOTHES, HOME, SPORT};
 
 	char *getName();
 	double getPrice();
@@ -26,13 +25,13 @@ public:
 	int getProductId();
 	
 private:
-	void setProductId(int ProductId);
-
-	char     *m_name;
-	double    m_price;
-	eCategory m_category;
-	int       m_productId;
-	Feedback  *m_feedback;
+	static int productCounter;
+	char     *name;
+	double    price;
+	eCategory category;
+	int       productId;
+	Feedback  *feedback;
 };
+
 
 #endif
