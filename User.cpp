@@ -13,9 +13,19 @@ User::User(char* name, char* password, Address *address, eUserType userType)
 	this->userType = userType;
 }
 
-/*
-User::~User()
+char *User::getUserName()
 {
-
+	return name;
 }
-*/
+
+Address User::getAddress()
+{
+	return *address;
+}
+
+eUserType User::getUserType()
+{
+	return userType;
+}
+
+
