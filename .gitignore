@@ -2,3 +2,6 @@
 *.vcxproj.filters
 .vs/
 Debug/
+10.12.VC.VC.opendb
+10.12.VC.db
+10.12.sln
