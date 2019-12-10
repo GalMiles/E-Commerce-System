@@ -28,7 +28,6 @@ void Menu::choiceCases(int choice)
 
 	case 2:
 		addSeller();
-
 	case 11:
 		cout << "GoodbyeMessage\n"; //TODO
 		return;
