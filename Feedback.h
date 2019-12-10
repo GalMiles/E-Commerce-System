@@ -12,8 +12,7 @@ using namespace std;
 
 
 class Feedback
-{
-	
+{	
 public:
 	Feedback(char *userName, char *content);
 

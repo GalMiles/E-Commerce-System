@@ -14,9 +14,8 @@ class Product;
 class Seller
 {
 public:
-	bool setProducts(Product *products);
+	Seller(User *sellerUser);
 	
-	User getUser();
 	Product *getProducts();
 	int getAmount();
 
@@ -24,7 +23,7 @@ public:
 
 private:
 	Product  *products;
-	User      user;
+	User      *sellerUser;
 	int       countProducts;
 };
 
