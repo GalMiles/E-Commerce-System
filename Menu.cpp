@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "Buyer.h"
+#include "Seller.h"
 
 int Menu::initMenu() {
 	int choice;
@@ -24,6 +25,8 @@ void Menu::choiceCases(int choice)
 	case 1:
 		addBuyer();
 
+	case 2:
+		addSeller();
 	case 11:
 		cout << "GoodbyeMessage\n"; //TODO
 		return;
@@ -63,4 +66,36 @@ void Menu::addBuyer()
 	initMenu();
 }
 
+void Menu::addSeller()
+{
+	cin.ignore();
+	char userName[20];
+	cout << "Please enter user name: ";
+	cin.getline(userName, 20);
+
+	char password[20];
+	cout << "\nPlease enter password: ";
+	cin.getline(password, 20);
+
+	char country[50];
+	char city[50];
+	char street[50];
+	int homeNumber;
+
+	cout << "\nPlease enter your address:" << endl;
+	cout << "Country: ";
+	cin.getline(country, 50);
+	cout << "\nCity: ";
+	cin.getline(city, 50);
+	cout << "\nStreet: ";
+	cin.getline(street, 50);
+	cout << "\nHome number: ";
+	cin >> homeNumber;
+
+	Address userAdd(country, city, street, homeNumber);
+	User newUser(userName, password, &userAdd, User::SELLER);
+	Seller newSeller(&newUser);
+
+	initMenu();
+}
 

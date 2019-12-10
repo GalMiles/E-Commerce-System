@@ -15,6 +15,7 @@ public:
 	int initMenu();
 	void choiceCases(int choice);
 	void addBuyer();
+	void addSeller();
 
 
 

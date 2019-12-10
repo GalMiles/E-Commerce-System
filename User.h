@@ -14,7 +14,7 @@ class User
 public:
 	enum eUserType {SELLER, BUYER};
 
-	bool setAdress(Address adress);
+	bool setAddress(Address address);
 
 	char *getUserName();
 	Address getAddress();
