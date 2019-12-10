@@ -17,8 +17,6 @@ public:
 	Seller(User *sellerUser);
 	
 	Product *getProducts();
-	int getAmount();
-
 	void addProduct(Product **products, int count, Product product);
 
 private:

@@ -7,17 +7,16 @@ using namespace std;
 
 #pragma warning(disable: 4996)
 
-#include "Feedback.h"
-
 
 class Product
 {
 	
 public:
-	Product(char *productName, double price, Feedback *feedback);//c'tor
-	//~d'tor
-
 	enum eCategory {CHILDREN, CLOTHES, HOME, SPORT};
+	static constexpr char* categories[] = { "Children", "Clothes", "Home", "Sport" };
+
+	Product(char *productName, double price, eCategory category);//c'tor
+	//~d'tor
 
 	char *getName();
 	double getPrice();
@@ -30,7 +29,6 @@ private:
 	double    price;
 	eCategory category;
 	int       productId;
-	Feedback  *feedback;
 };
 
 

@@ -2,6 +2,7 @@
 #include "Buyer.h"
 #include "Feedback.h"
 #include "Seller.h"
+#include "Product.h"
 
 int Menu::initMenu() {
 	int choice;
@@ -25,16 +26,23 @@ void Menu::choiceCases(int choice)
 	switch (choice) {
 	case 1:
 		addBuyer();
+		break;
 
 	case 2:
 		addSeller();
+		break;
+
+	case 3:
+		addProduct();
+		break;
 
 	case 4:
 		addFeedback();
+		break;
 
 	case 11:
 		cout << "GoodbyeMessage\n"; //TODO
-		return;
+		break;
 	}
 }
 
@@ -120,4 +128,25 @@ void Menu::addFeedback()
 	cin.getline(content, 100);
 
 	Feedback feedback(userName, content);
+}
+
+void Menu::addProduct()
+{
+	cin.ignore();
+	char productName[20];
+	cout << "Please enter the product's name: ";
+	cin.getline(productName, 20);
+
+	double price;
+	cout << "/nPlease Enter the product's price: ";
+	cin >> price;
+
+	int categoryChoice;
+	cout << "\nPlease select the product's catergory:" << endl;
+	for (int i = 1; i <= 4; i++) {
+		cout << "(" << i << ") " << Product::categories[i-1] <<endl;
+	}
+	cin >> categoryChoice;
+	
+	Product newProduct(productName, price, Product::eCategory(categoryChoice));
 }

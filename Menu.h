@@ -17,6 +17,7 @@ public:
 	void addBuyer();
 	void addSeller();
 	void addFeedback();
+	void addProduct();
 
 
 

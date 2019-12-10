@@ -2,7 +2,7 @@
 
 int Product::productCounter = 0;
 
-Product:: Product(char *productName,double price, Feedback *feedback)//c'tor
+Product:: Product(char *productName,double price, eCategory category)//c'tor
 {
 	cout << "in Product c'tor" << endl;
 
@@ -13,24 +13,24 @@ Product:: Product(char *productName,double price, Feedback *feedback)//c'tor
 	strcpy(this->name, productName);
 
 	this->price = price;
-	
-	this->feedback = feedback;
+
+	this->category = category;
 
 }
 
 char* Product::getName()
 {
-	return m_name;
+	return name;
 }
 
  double Product::getPrice()
 {
-	 return m_price;
+	 return price;
 }
 
 int Product::getProductId()
 {
-	return m_productId;
+	return productId;
 }
 
 /*
