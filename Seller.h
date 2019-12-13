@@ -16,16 +16,16 @@ class Seller
 public:
 	Seller(User *sellerUser);
 	
-	Product *getProducts();
-	void addProduct(Product **products, int *logSize, int *phySize, Product *product);
-
-	Product *productRealloc(Product **products, int logSize, int *phySize);
+	Product* getProducts();
+	void addProductToSeller(Product *product);
+	void productsArrRealloc();
 
 
 private:
-	Product  **products;
-	User      *sellerUser;
-	int       countProducts;
+	Product	**products;
+	User	*sellerUser;
+	int		productsPhysSize;
+	int		productsLogSize;
 };
 
 #endif 

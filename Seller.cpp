@@ -4,35 +4,36 @@
 
 Seller::Seller(User *sellerUser)//c'tor
 {
-	cout << "In seller constructor" << endl;
+	cout << "In seller constructor" << endl; //TODO: delete this
 	this->sellerUser = sellerUser;
+	this->productsLogSize = 0;
+	this->productsPhysSize = 1;
+	this->products = new Product*[1];
 }
 
-
-Product* Seller::productRealloc(Product **products, int logSize, int *phySize)
+void Seller::productsArrRealloc()
 {
 	Product **new_arr;
-	*phySize = (*phySize) * 2;
-	new_arr = new Product *[*phySize];
+	this->productsPhysSize *= 2;
+	new_arr = new Product*[this->productsPhysSize];
 
-	for (int i = 0; i < logSize; i++)
+	for (int i = 0; i < this->productsLogSize; i++)
 	{
-		new_arr[i] = (products[i]);
-		products[i] = nullptr;
+		new_arr[i] = (this->products[i]);
+		this->products[i] = nullptr;
 	}
-	delete[] products;
+	delete[] this->products;
 
-	return *(new_arr);
+	this->products = new_arr;
 }
 
-void Seller::addProduct(Product **products, int *logSize, int *phySize, Product *product)
+void Seller::addProductToSeller(Product *product)
 {
-	if (*logSize == *phySize) //realloc arr
+	if (this->productsLogSize == this->productsPhysSize) //realloc arr
 	{
-		*products = productRealloc(products, *logSize, phySize);
+		productsArrRealloc();
 	}
 
-	products[*logSize] = product; // add product
-	(*logSize)++;
-
+	products[this->productsLogSize] = product; // add product
+	(this->productsLogSize)++;
 }

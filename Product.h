@@ -9,8 +9,7 @@ using namespace std;
 
 
 class Product
-{
-	
+{	
 public:
 	enum eCategory {CHILDREN, CLOTHES, HOME, SPORT};
 	static constexpr char* categories[] = { "Children", "Clothes", "Home", "Sport" };

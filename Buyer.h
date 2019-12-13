@@ -17,7 +17,7 @@ public:
 	//~Buyer();
 	bool setShoppingCart(Product *shoppingCart);
 	const Product **getShoppingCart();
-	void addProductToCart(Product **shoppingCart);
+	//void addProductToCart(Product **shoppingCart);
 
 private:
 	Product		**m_shoppingCart;

@@ -14,7 +14,6 @@ Feedback::Feedback(char *userName, char *content) //feedback c'tor
 	nameLength = strlen(content);
 	this->content = new char[nameLength + 1];
 	strcpy(this->content, content);
-
 }
 
 char *Feedback::getUserName()

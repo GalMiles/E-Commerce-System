@@ -2,10 +2,9 @@
 
 int Product::productCounter = 0;
 
-Product:: Product(char *productName,double price, eCategory category)//c'tor
+Product:: Product(char *productName,double price, eCategory category) //c'tor
 {
-	cout << "in Product c'tor" << endl;
-
+	cout << "in Product c'tor" << endl; //TODO: delete this
 	productId = ++productCounter;
 
 	int nameLength = strlen(productName);
@@ -13,9 +12,7 @@ Product:: Product(char *productName,double price, eCategory category)//c'tor
 	strcpy(this->name, productName);
 
 	this->price = price;
-
 	this->category = category;
-
 }
 
 char* Product::getName()

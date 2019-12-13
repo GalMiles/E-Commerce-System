@@ -25,10 +25,10 @@ public:
 	bool isAddressValid(char* address);
 
 private:
+	//TODO: add length constraint as const
 	char	country[50];
 	char	city[50];
 	char	street[50];
 	int		homeNumber;
-
 };
 #endif

@@ -23,7 +23,7 @@ public:
 private:
 	char *userName;
 	char *date;
-	Seller *seller;
+	//Seller *seller;
 	char *content;
 };
 #endif

@@ -6,14 +6,14 @@
 
 int Menu::initMenu() {
 	int choice;
-	cout << "Welcome to storeName" << endl;
+	cout << "Welcome to storeName" << endl; //TODO: change store name
 	cout << "\nPlease select the desired option from the following:\n" << endl;
-	for (int i = 0; i < OPTIONS_LENGTH; i++) {
+	for (int i = 0; i < OPTIONS_LENGTH; i++) { // TODO: move to an aux function - printOptions
 		cout << "[" << i + 1 << "] " << options[i] << endl;
 	}
 	cout << "\nChoice: ";
 	cin >> choice;
-	while (choice > 11 || choice < 1) {
+	while (choice > 11 || choice < 1) { //TODO: move to an aux function
 		cout << "\nInvalid choice!\nPlease select an option between 1 and " << OPTIONS_LENGTH << endl;
 		cout << "\nChoice: ";
 		cin >> choice;
@@ -41,20 +41,20 @@ void Menu::choiceCases(int choice)
 		break;
 
 	case 11:
-		cout << "GoodbyeMessage\n"; //TODO
+		cout << "GoodbyeMessage\n"; //TODO: change message
 		break;
 	}
 }
 
-void Menu::addBuyer()
+void Menu::addBuyer() //TODO: ALL constraints should be const
 {
 	cin.ignore();
-	char userName[20];
-	cout << "Please enter user name: ";
+	char userName[20]; 
+	cout << "Please enter user name: "; //TODO: aux function - readUserName
 	cin.getline(userName, 20);
 
 	char password[20];
-	cout << "\nPlease enter password: ";
+	cout << "\nPlease enter password: "; //TODO: aux function - readPassword
 	cin.getline(password, 20);
 
 	char country[50];
@@ -62,7 +62,7 @@ void Menu::addBuyer()
 	char street[50];
 	int homeNumber;
 
-	cout << "\nPlease enter your address:" << endl;
+	cout << "\nPlease enter your address:" << endl; //TODO: aux function - readAddress
 	cout << "Country: ";
 	cin.getline(country, 50);
 	cout << "\nCity: ";
@@ -82,12 +82,12 @@ void Menu::addBuyer()
 void Menu::addSeller()
 {
 	cin.ignore();
-	char userName[20];
+	char userName[20]; //TODO: aux function - readUserName
 	cout << "Please enter user name: ";
 	cin.getline(userName, 20);
 
 	char password[20];
-	cout << "\nPlease enter password: ";
+	cout << "\nPlease enter password: "; //TODO: aux function - readPassword
 	cin.getline(password, 20);
 
 	char country[50];
@@ -95,7 +95,7 @@ void Menu::addSeller()
 	char street[50];
 	int homeNumber;
 
-	cout << "\nPlease enter your address:" << endl;
+	cout << "\nPlease enter your address:" << endl; //TODO: aux function - readAddress
 	cout << "Country: ";
 	cin.getline(country, 50);
 	cout << "\nCity: ";
@@ -115,16 +115,17 @@ void Menu::addSeller()
 
 void Menu::addFeedback()
 {
+	//TODO: make sure the buyer has actually purchased from this seller
 	cin.ignore();
-	char userName[20];
+	char userName[20]; //TODO: aux function - readUserName
 	cout << "Please enter your user name: " << endl;
 	cin.getline(userName, 20);
 
-	char sellerName[20];
-	cout << "Please enter the seller name: " << endl;
+	char sellerName[20]; //TODO: aux function - readSeller's name
+	cout << "Please enter the seller's name: " << endl;
 	cin.getline(sellerName, 20);
 
-	char content[100];
+	char content[100]; //TODO: aux function - readFeedback ?
 	cout << "Please enter your feedback: " << endl;
 	cin.getline(content, 100);
 
@@ -134,15 +135,15 @@ void Menu::addFeedback()
 void Menu::addProductToSeller()
 {
 	cin.ignore();
-	char productName[20];
+	char productName[20]; //TODO: aux function - readProductName
 	cout << "Please enter the product's name: ";
 	cin.getline(productName, 20);
 
-	double price;
+	double price; //TODO: aux function - readPrice
 	cout << "/nPlease Enter the product's price: ";
 	cin >> price;
 
-	int categoryChoice;
+	int categoryChoice; //TODO: aux function - readCategory
 	cout << "\nPlease select the product's catergory:" << endl;
 	for (int i = 1; i <= 4; i++) {
 		cout << "(" << i << ") " << Product::categories[i-1] <<endl;
@@ -152,3 +153,4 @@ void Menu::addProductToSeller()
 	Product newProduct(productName, price, Product::eCategory(categoryChoice));
 
 }
+
