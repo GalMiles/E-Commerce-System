@@ -15,11 +15,9 @@ class Seller
 {
 public:
 	Seller(User *sellerUser);
-	
-	Product* getProducts();
+	Product** getProducts();
 	void addProductToSeller(Product *product);
 	void productsArrRealloc();
-
 
 private:
 	Product	**products;

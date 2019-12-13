@@ -13,6 +13,8 @@ using namespace std;
 class ShoppingCart
 {
 public:
+	ShoppingCart();
+	~ShoppingCart();
 	Product** getShoppingCart();
 	void addProductToShoppingCart(Product* productToAdd); //NOTE: should this be bool?
 	void shoppingCartRealloc(); //NOTE: we should probably use the function implemented in Seller
