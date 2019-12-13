@@ -42,11 +42,11 @@ void Seller::show() const
 	sellerUser->show(); //using User's method
 
 	cout << "The Seller's products are:" << endl;
-	for (int i = 0; i < productsLogSize ;i++)
+	for (int i = 0; i < productsLogSize; i++)
 	{
 		cout << (products[i])->getName();
 	}
-	
+
 }
 
 Product** Seller::getProducts() {
