@@ -35,3 +35,7 @@ void Seller::addProductToSeller(Product *product)
 	products[this->productsLogSize] = product; // add product
 	(this->productsLogSize)++;
 }
+
+Product** Seller::getProducts() {
+	return this->products;
+}
