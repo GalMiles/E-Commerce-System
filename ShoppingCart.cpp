@@ -1,6 +1,6 @@
 #include "ShoppingCart.h"
 
-ShoppingCart::ShoppingCart() //c'tor
+ShoppingCart::ShoppingCart() //constructor
 { 
 	this->shoppingCartLogSize = 0;
 	this->shoppingCartPhysSize = 1;
