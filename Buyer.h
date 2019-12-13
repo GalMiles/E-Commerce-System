@@ -6,6 +6,8 @@
 #include "User.h"
 using namespace std;
 
+#include "ShoppingCart.h"
+
 #pragma warning(disable: 4996)
 
 class Product;
@@ -13,15 +15,14 @@ class Product;
 class Buyer
 {
 public:
-	Buyer(User *buyerUser);
+	Buyer(User *buyerUser, ShoppingCart *shoppingCart);
 	//~Buyer();
-	bool setShoppingCart(Product *shoppingCart);
-	const Product **getShoppingCart();
-	//void addProductToCart(Product **shoppingCart);
+	void setShoppingCart(ShoppingCart shoppingCart); //NOTE: should this be bool?
+	const ShoppingCart getShoppingCart();
 
 private:
-	Product		**m_shoppingCart;
-	User		*user;
+	ShoppingCart	shoppingCart;
+	User			*user;
 };
 
 #endif

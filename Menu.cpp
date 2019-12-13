@@ -74,7 +74,8 @@ void Menu::addBuyer() //TODO: ALL constraints should be const
 
 	Address userAdd(country, city, street, homeNumber);
 	User newUser(userName, password, &userAdd, User::BUYER);
-	Buyer newBuyer(&newUser);
+	ShoppingCart newUserShoppingCart;
+	Buyer newBuyer(&newUser, &newUserShoppingCart);
 
 	initMenu();
 }

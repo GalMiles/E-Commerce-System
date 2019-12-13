@@ -31,14 +31,13 @@ void Seller::productsArrRealloc()
 void Seller::addProductToSeller(Product *product)
 {
 	if (this->productsLogSize == this->productsPhysSize) //realloc arr
-	{
 		productsArrRealloc();
-	}
 
 	products[this->productsLogSize] = product; // add product
 	(this->productsLogSize)++;
 }
 
+<<<<<<< HEAD
 void Seller::show() const
 {
 	sellerUser->show(); //using User's method
@@ -50,3 +49,8 @@ void Seller::show() const
 	}
 	
 }
+=======
+Product** Seller::getProducts() {
+	return this->products;
+}
+>>>>>>> a12d30e49070d0157c0f2bfee44f52c4a30ae0c8
