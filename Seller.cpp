@@ -30,9 +30,7 @@ void Seller::productsArrRealloc()
 void Seller::addProductToSeller(Product *product)
 {
 	if (this->productsLogSize == this->productsPhysSize) //realloc arr
-	{
 		productsArrRealloc();
-	}
 
 	products[this->productsLogSize] = product; // add product
 	(this->productsLogSize)++;
