@@ -19,6 +19,7 @@ public:
 	Product* getProducts();
 	void addProductToSeller(Product *product);
 	void productsArrRealloc();
+	void show() const;
 
 
 private:

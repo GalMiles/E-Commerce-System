@@ -18,6 +18,11 @@ public:
 	void addSeller();
 	void addFeedback();
 	void addProductToSeller();
+	void showSellers() const;
+ 
+
+	//have to be moved to system class!!!
+	/*Seller **sellerArray(int size);*/
 
 private:
 	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",

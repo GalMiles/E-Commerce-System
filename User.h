@@ -21,6 +21,8 @@ public:
 	User(char* name, char* password, Address* address, eUserType userType);
 	//~User();
 
+	void show() const;
+
 private:
 	char*		name;
 	char*		password;

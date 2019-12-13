@@ -153,4 +153,16 @@ void Menu::addProductToSeller()
 	Product newProduct(productName, price, Product::eCategory(categoryChoice));
 
 }
+/*
+Seller **Menu::sellerArray(int size)
+{
+	Seller **sellerArr = new Seller *[size];
+
+	for (int i = 0; i < size; i++)
+		addSeller();
+}
+*/
+
+
+
 

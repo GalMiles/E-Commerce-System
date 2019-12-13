@@ -84,3 +84,8 @@ bool Address::isAddressValid(char* address) {
 			return true;
 	}
 }
+
+void Address::show() const
+{
+	cout << "The address is:" << homeNumber << " " << street << "," << city << "," << country << endl;
+}

@@ -28,5 +28,11 @@ Address User::getAddress()
 	return userType;
 }*/
 
+void User::show() const
+{
+	cout << "The name is:" << name << endl;
+	address->show(); // using Address method
+	cout << "The user is:" << userType << endl;
+}
 
 

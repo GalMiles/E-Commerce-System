@@ -23,8 +23,9 @@ public:
 	int getHomeNumber();
 
 	bool isAddressValid(char* address);
+	void show() const;
 
-private:
+private: 
 	//TODO: add length constraint as const
 	char	country[50];
 	char	city[50];
