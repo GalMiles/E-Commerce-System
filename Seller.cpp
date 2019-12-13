@@ -37,7 +37,6 @@ void Seller::addProductToSeller(Product *product)
 	(this->productsLogSize)++;
 }
 
-<<<<<<< HEAD
 void Seller::show() const
 {
 	sellerUser->show(); //using User's method
@@ -49,8 +48,7 @@ void Seller::show() const
 	}
 	
 }
-=======
+
 Product** Seller::getProducts() {
 	return this->products;
 }
->>>>>>> a12d30e49070d0157c0f2bfee44f52c4a30ae0c8
