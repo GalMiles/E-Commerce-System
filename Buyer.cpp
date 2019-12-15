@@ -55,6 +55,8 @@ void Buyer::addSellerToBuyerArr(Seller *seller)
 	sellerArr[this->sellerArrLogSize] = seller; // add product
 	(this->sellerArrLogSize)++;
 }
+User *Buyer::getUser() { return this->buyerUser; }
+
 
 
 

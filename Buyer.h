@@ -23,6 +23,8 @@ public:
 	void setShoppingCart(ShoppingCart shoppingCart); //NOTE: should this be bool?
 	const ShoppingCart getShoppingCart();
 	void sellerArrRealloc();
+	void addSellerToBuyerArr(Seller *seller);
+	User *getUser();
 
 	void show();
 

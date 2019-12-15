@@ -119,19 +119,25 @@ void Menu::addFeedback()
 	char userName[20]; //TODO: aux function - readUserName
 	cout << "Please enter your user name: " << endl;
 	cin.getline(userName, 20);
-	//check if the buyer exist in buyerArr
+	/*Buyer *buyer = isBuyerExist(userName);
 
-	//buyer.sellerArr - print the array+cases that he will choose
-	char sellerName[20]; //TODO: aux function - readSeller's name
-	cout << "Please enter the seller's name: " << endl;
-	cin.getline(sellerName, 20);
+	if (buyer == nullptr)
+		cout << "Please enter another name, this buyer isn't exist" << endl;
+	else
+	{
+		//buyer.sellerArr - print the array+cases that he will choose
+		char sellerName[20]; //TODO: aux function - readSeller's name
+		cout << "Please enter the seller's name: " << endl;
+		cin.getline(sellerName, 20);
 
-	char content[100]; //TODO: aux function - readFeedback ?
-	cout << "Please enter your feedback: " << endl;
-	cin.getline(content, 100);
+		char content[100]; //TODO: aux function - readFeedback ?
+		cout << "Please enter your feedback: " << endl;
+		cin.getline(content, 100);
 
-	Feedback feedback(userName, content);
-	//go to sellerArr[seller].addfeedback;
+		Feedback feedback(userName, content);
+		//go to sellerArr[seller].addfeedback;
+	}*/
+	
 }
 
 void Menu::addProductToSeller()
@@ -168,6 +174,16 @@ void Menu::showBuyers() const
 {
 
 }
+
+/*Buyer* Menu::isBuyerExist(char *name)
+{
+	for (int i = 0; i < this->system->getBuyerArrLogSize; i++)
+	{
+		if (strcmp(name, (system->getBuyerArr[i]) == 0)
+			return system->getBuyerArr[i];
+	}
+	return nullptr;
+}*/
 
 
 

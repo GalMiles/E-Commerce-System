@@ -105,6 +105,25 @@ void System::showBuyerArr()
 	}
 }
 
+int System::getSellerArrLogSize() { return this->sellerArrLogSize; }
+
+int System::getSellerArrPhySize() { return this->sellerArrPhySize; }
+
+int System::getBuyerArrLogSize() { return this->buyerArrLogSize; }
+
+int System::getBuyerArrPhySize() { return this->buyerArrPhySize; }
+
+Seller** System::getSellerArr() { return this->sellerArr; }
+
+Buyer** System::getBuyerArr() { return this->buyerArr; }
+
+
+
+
+
+
+
+
 
 
 

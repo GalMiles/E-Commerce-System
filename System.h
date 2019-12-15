@@ -15,6 +15,12 @@ public:
 	void addSellerToArr(Seller* s);
 	void addBuyerToArr(Buyer* buyer);
 
+	int getSellerArrLogSize();
+	int getSellerArrPhySize();
+	int getBuyerArrLogSize();
+	int getBuyerArrPhySize();
+	Seller **getSellerArr();
+	Buyer **getBuyerArr();
 	void showSellerArr();
 	void showBuyerArr();
 
