@@ -19,6 +19,8 @@ public:
 	void addProductToShoppingCart(Product* productToAdd); //NOTE: should this be bool?
 	void shoppingCartRealloc(); //NOTE: we should probably use the function implemented in Seller
 
+	int getSoppingCartLogSize();
+	int getSoppingCartPhySize();
 
 private:
 	Product** shoppingCart;

@@ -12,6 +12,11 @@ public:
 
 	void sellerArrRealloc();
 	void buyerArrRealloc();
+	void addSellerToArr(Seller* s);
+	void addBuyerToArr(Buyer* buyer);
+
+	void showSellerArr();
+	void showBuyerArr();
 
 private:
 	char *storeName;
@@ -21,7 +26,6 @@ private:
 	Buyer **buyerArr;
 	int buyerArrLogSize;
 	int buyerArrPhySize;
-
 
 };
 

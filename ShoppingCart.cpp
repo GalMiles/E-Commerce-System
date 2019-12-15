@@ -45,3 +45,13 @@ void ShoppingCart::addProductToShoppingCart(Product* productToAdd)
 	this->shoppingCart[this->shoppingCartLogSize] = productToAdd; // add product
 	(this->shoppingCartLogSize)++;
 }
+
+int ShoppingCart::getSoppingCartLogSize()
+{
+	return (this->shoppingCartLogSize);
+}
+
+int ShoppingCart::getSoppingCartPhySize()
+{
+	return (this->shoppingCartPhysSize);
+}

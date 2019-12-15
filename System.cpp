@@ -71,6 +71,43 @@ void System::buyerArrRealloc()
 	this->buyerArr = new_arr;
 }
 
+void System::addSellerToArr(Seller* seller)
+{
+	if (this->sellerArrLogSize == this->sellerArrPhySize)
+		sellerArrRealloc();
+
+	sellerArr[this->sellerArrLogSize] = seller;
+	(this->sellerArrLogSize)++;
+}
+
+void System::addBuyerToArr(Buyer* buyer)
+{
+	if (this->buyerArrLogSize == this->buyerArrPhySize)
+		buyerArrRealloc();
+
+	buyerArr[this->buyerArrLogSize] = buyer;
+	(this->buyerArrLogSize)++;
+}
+
+void System::showSellerArr()
+{
+	for (int i = 0; i < sellerArrLogSize; i++)
+	{
+		sellerArr[i]->show();//using Seller's show method
+	}
+}
+
+void System::showBuyerArr()
+{
+	for (int i = 0; i < buyerArrLogSize; i++)
+	{
+		buyerArr[i]->show();//using Seller's show method
+	}
+}
+
+
+
+
 
 
 

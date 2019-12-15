@@ -16,13 +16,17 @@ class Buyer
 {
 public:
 	Buyer(User *buyerUser, ShoppingCart *shoppingCart);
+	Buyer(const Buyer&) = delete;
 	//~Buyer();
 	void setShoppingCart(ShoppingCart shoppingCart); //NOTE: should this be bool?
 	const ShoppingCart getShoppingCart();
 
+	void show();
+
 private:
 	ShoppingCart	shoppingCart;
-	User			*user;
+	User			*buyerUser;
+	//Seller **arr=all the sellers buyer bought from
 };
 
 #endif

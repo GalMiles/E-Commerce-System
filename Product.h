@@ -29,6 +29,7 @@ private:
 	double    price;
 	eCategory category;
 	int       productId;
+	//pointer to seller;
 };
 
 

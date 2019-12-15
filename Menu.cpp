@@ -72,8 +72,8 @@ void Menu::addBuyer() //TODO: ALL constraints should be const
 	User newUser(userName, password, &userAdd, User::BUYER);
 	ShoppingCart newUserShoppingCart;
 	Buyer newBuyer(&newUser, &newUserShoppingCart);
-	//system.addbuyerToArr(newBuyer);
-
+	this->system->addBuyerToArr(&newBuyer);//add buyer to buyersArr
+	
 	initMenu();
 }
 

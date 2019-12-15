@@ -28,6 +28,22 @@ void Seller::productsArrRealloc()
 	this->products = new_arr;
 }
 
+void Seller::feedbackArrRealloc()
+{
+	Feedback **new_arr;
+	this->feedbackPhySize *= 2;
+	new_arr = new Feedback*[this->feedbackPhySize];
+
+	for (int i = 0; this->feedbackLogSize; i++)
+	{
+		new_arr[i] = (this->feedbackArr[i]);
+		this->feedbackArr[i] = nullptr;
+	}
+	delete[] this->feedbackArr;
+
+	this->feedbackArr = new_arr;
+}
+
 void Seller::addProductToSeller(Product *product)
 {
 	if (this->productsLogSize == this->productsPhysSize) //realloc arr
@@ -51,4 +67,14 @@ void Seller::show() const
 
 Product** Seller::getProducts() {
 	return this->products;
+}
+
+void Seller::addFeedbaclToSeller(Feedback *feedback)
+{
+	if (this->feedbackLogSize == this->feedbackPhySize)
+		feedbackArrRealloc();
+
+	feedbackArr[this->feedbackLogSize] = feedback;
+	(this->feedbackLogSize)++;
+
 }

@@ -9,24 +9,34 @@ using namespace std;
 
 #include "User.h"
 #include "Product.h"
-
+class Feedback;
 
 class Seller
 {
 public:
 	Seller(User *sellerUser);
+	Seller(const Seller&) = delete;
+	//~Seller
+
 	Product** getProducts();
 	void addProductToSeller(Product *product);
+	void addFeedbaclToSeller(Feedback *feedback);
 	void productsArrRealloc();
+	void feedbackArrRealloc();
+
+
 	void show() const;
-	//addfeedbacktoarray
+	
 
 private:
-	Product	**products;
-	User	*sellerUser;
-	int		productsPhysSize;
-	int		productsLogSize;
-	//add feedback array+logsize+physize;
+	Product	  **products;
+	User	  *sellerUser;
+	int		   productsPhysSize;
+	int		   productsLogSize;
+	Feedback   **feedbackArr;
+	int        feedbackPhySize;
+	int        feedbackLogSize;
+
 };
 
 #endif 
