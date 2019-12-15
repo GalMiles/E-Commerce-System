@@ -1,4 +1,7 @@
 #include "System.h"
+#include <iostream>
+#include <string.h>
+using namespace std;
 
 System::System(char *name)//c'tor
 {

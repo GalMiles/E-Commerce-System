@@ -1,9 +1,4 @@
 #include "Menu.h"
-#include "Buyer.h"
-#include "Feedback.h"
-#include "Seller.h"
-#include "Product.h"
-#include "System.h"//ggggg//
 
 int Menu::initMenu() {
 	int choice;
@@ -77,6 +72,7 @@ void Menu::addBuyer() //TODO: ALL constraints should be const
 	User newUser(userName, password, &userAdd, User::BUYER);
 	ShoppingCart newUserShoppingCart;
 	Buyer newBuyer(&newUser, &newUserShoppingCart);
+	//system.addbuyerToArr(newBuyer);
 
 	initMenu();
 }
@@ -158,7 +154,7 @@ void Menu::addProductToSeller()
 
 void Menu::showSellers() const
 {
-
+	
 }
 
 void Menu::showBuyers() const
