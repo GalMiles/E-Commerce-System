@@ -118,7 +118,9 @@ void Menu::addFeedback()
 	char userName[20]; //TODO: aux function - readUserName
 	cout << "Please enter your user name: " << endl;
 	cin.getline(userName, 20);
+	//check if the buyer exist in buyerArr
 
+	//buyer.sellerArr - print the array+cases that he will choose
 	char sellerName[20]; //TODO: aux function - readSeller's name
 	cout << "Please enter the seller's name: " << endl;
 	cin.getline(sellerName, 20);
@@ -128,10 +130,14 @@ void Menu::addFeedback()
 	cin.getline(content, 100);
 
 	Feedback feedback(userName, content);
+	//go to sellerArr[seller].addfeedback;
 }
 
 void Menu::addProductToSeller()
 {
+	//ask which seller do you want to add product to?
+	//run on system's sellers' arr and check if it exists bool(Seller *s); 
+
 	cin.ignore();
 	char productName[20]; //TODO: aux function - readProductName
 	cout << "Please enter the product's name: ";
@@ -148,7 +154,7 @@ void Menu::addProductToSeller()
 	}
 	cin >> categoryChoice;
 
-	Product newProduct(productName, price, Product::eCategory(categoryChoice));
+	Product newProduct(productName, price, Product::eCategory(categoryChoice));//add the res from bool
 
 }
 

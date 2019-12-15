@@ -19,12 +19,14 @@ public:
 	void addProductToSeller(Product *product);
 	void productsArrRealloc();
 	void show() const;
+	//addfeedbacktoarray
 
 private:
 	Product	**products;
 	User	*sellerUser;
 	int		productsPhysSize;
 	int		productsLogSize;
+	//add feedback array+logsize+physize;
 };
 
 #endif 
