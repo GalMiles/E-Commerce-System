@@ -3,6 +3,7 @@
 #include "Feedback.h"
 #include "Seller.h"
 #include "Product.h"
+#include "System.h"//ggggg//
 
 int Menu::initMenu() {
 	int choice;
@@ -49,7 +50,7 @@ void Menu::choiceCases(int choice)
 void Menu::addBuyer() //TODO: ALL constraints should be const
 {
 	cin.ignore();
-	char userName[20]; 
+	char userName[20];
 	cout << "Please enter user name: "; //TODO: aux function - readUserName
 	cin.getline(userName, 20);
 
@@ -111,7 +112,7 @@ void Menu::addSeller()
 	Seller newSeller(&newUser);
 
 	initMenu();
-	
+
 }
 
 void Menu::addFeedback()
@@ -147,13 +148,27 @@ void Menu::addProductToSeller()
 	int categoryChoice; //TODO: aux function - readCategory
 	cout << "\nPlease select the product's catergory:" << endl;
 	for (int i = 1; i <= 4; i++) {
-		cout << "(" << i << ") " << Product::categories[i-1] <<endl;
+		cout << "(" << i << ") " << Product::categories[i - 1] << endl;
 	}
 	cin >> categoryChoice;
-	
+
 	Product newProduct(productName, price, Product::eCategory(categoryChoice));
 
 }
+
+void Menu::showSellers() const
+{
+
+}
+
+void Menu::showBuyers() const
+{
+
+}
+
+
+
+
 
 
 
