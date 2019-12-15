@@ -106,6 +106,7 @@ void Menu::addSeller()
 	Address userAdd(country, city, street, homeNumber);
 	User newUser(userName, password, &userAdd, User::SELLER);
 	Seller newSeller(&newUser);
+	this->system->addSellerToArr(&newSeller);
 
 	initMenu();
 
