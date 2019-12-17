@@ -56,6 +56,10 @@ void Buyer::addSellerToBuyerArr(Seller *seller)
 	(this->sellerArrLogSize)++;
 }
 User *Buyer::getUser() { return this->buyerUser; }
+char* Buyer::getName()
+{
+	return(this->buyerUser->getUserName());
+}
 
 
 

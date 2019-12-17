@@ -28,7 +28,7 @@ public:
 	void showSellers() const;
 	void showBuyers() const;
 
-	/*Buyer *isBuyerExist(char *name);*/
+	Buyer *isBuyerExist(char *name);
 
 private:
 	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",

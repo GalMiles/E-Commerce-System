@@ -175,15 +175,19 @@ void Menu::showBuyers() const
 
 }
 
-/*Buyer* Menu::isBuyerExist(char *name)
+Buyer* Menu::isBuyerExist(char *name)
 {
-	for (int i = 0; i < this->system->getBuyerArrLogSize; i++)
+	Buyer **buyerArr = this->system->getBuyerArr();
+	Buyer *b;
+	int size = this->system->getBuyerArrLogSize();
+	for (int i = 0; i < size ; i++)
 	{
-		if (strcmp(name, (system->getBuyerArr[i]) == 0)
-			return system->getBuyerArr[i];
+		b = buyerArr[i];
+		if (strcmp(name, (b->getName())) == 0)
+			return b;
 	}
 	return nullptr;
-}*/
+}
 
 
 

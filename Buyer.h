@@ -25,6 +25,7 @@ public:
 	void sellerArrRealloc();
 	void addSellerToBuyerArr(Seller *seller);
 	User *getUser();
+	char *getName();
 
 	void show();
 
