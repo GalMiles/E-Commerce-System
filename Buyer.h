@@ -26,6 +26,8 @@ public:
 	void addSellerToBuyerArr(Seller *seller);
 	User *getUser();
 	char *getName();
+	int getSellerArrLogSize();
+	Seller **getSellerArr();
 
 	void show();
 

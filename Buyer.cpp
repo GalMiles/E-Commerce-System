@@ -61,6 +61,11 @@ char* Buyer::getName()
 	return(this->buyerUser->getUserName());
 }
 
+int Buyer::getSellerArrLogSize() { return sellerArrLogSize; }
+
+Seller** Buyer::getSellerArr() { return sellerArr; }
+
+
 
 
 

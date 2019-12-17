@@ -119,16 +119,18 @@ void Menu::addFeedback()
 	char userName[20]; //TODO: aux function - readUserName
 	cout << "Please enter your user name: " << endl;
 	cin.getline(userName, 20);
-	/*Buyer *buyer = isBuyerExist(userName);
+	Buyer *buyer = isBuyerExist(userName);
 
 	if (buyer == nullptr)
 		cout << "Please enter another name, this buyer isn't exist" << endl;
 	else
 	{
-		//buyer.sellerArr - print the array+cases that he will choose
-		char sellerName[20]; //TODO: aux function - readSeller's name
-		cout << "Please enter the seller's name: " << endl;
-		cin.getline(sellerName, 20);
+		cout << "Please choose a seller:" << endl;
+		int choice;
+
+		printSellerArrName(buyer);
+		cin >> choice;
+		Seller *choosenSeller = chooseSeller(choice, buyer);
 
 		char content[100]; //TODO: aux function - readFeedback ?
 		cout << "Please enter your feedback: " << endl;
@@ -136,7 +138,7 @@ void Menu::addFeedback()
 
 		Feedback feedback(userName, content);
 		//go to sellerArr[seller].addfeedback;
-	}*/
+	}
 	
 }
 
@@ -192,6 +194,32 @@ Buyer* Menu::isBuyerExist(char *name)
 	}
 	return nullptr;
 }
+
+void Menu::printSellerArrName(Buyer *buyer)
+{
+	int size = buyer->getSellerArrLogSize();
+
+	for (int i = 0; i < size; i++)
+	{
+		cout << "[" << i + 1 << "] " << buyer->getSellerArr()[i] << endl;
+	}
+}
+
+Seller* Menu::chooseSeller(int choice, Buyer *buyer)
+{
+	int size = buyer->getSellerArrLogSize();
+	if ((choice > size) || (choice <= 0))
+		cout << "Please enter another choice" << endl;
+	else
+	{
+		Seller **sellerArr = buyer->getSellerArr();
+		return (sellerArr[choice-1]);
+	}
+
+
+	
+}
+
 
 
 
