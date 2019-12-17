@@ -15,7 +15,7 @@ public:
 	enum eCategory {CHILDREN, CLOTHES, HOME, SPORT};
 	static constexpr char* categories[] = { "Children", "Clothes", "Home", "Sport" };
 
-	Product(char *productName, double price, eCategory category);//c'tor
+	Product(char *productName, double price, eCategory category, Seller* productSeller);//c'tor
 	//~d'tor
 
 	char *getName();

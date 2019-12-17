@@ -2,7 +2,7 @@
 
 int Product::productCounter = 0;
 
-Product:: Product(char *productName,double price, eCategory category) //c'tor
+Product:: Product(char *productName,double price, eCategory category, Seller* productSeller) //c'tor
 {
 	cout << "in Product c'tor" << endl; //TODO: delete this
 	productId = ++productCounter;

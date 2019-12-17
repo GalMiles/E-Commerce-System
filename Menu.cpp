@@ -171,7 +171,7 @@ void Menu::addProductToSeller()
 		}
 		cin >> categoryChoice;
 
-		Product newProduct(productName, price, Product::eCategory(categoryChoice));//add the res from bool
+		Product newProduct(productName, price, Product::eCategory(categoryChoice), theSeller);//add the res from bool
 		theSeller->addProductToSeller(&newProduct);
 	}
 	else
