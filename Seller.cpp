@@ -78,3 +78,8 @@ void Seller::addFeedbaclToSeller(Feedback *feedback)
 	(this->feedbackLogSize)++;
 
 }
+
+char* Seller::getName()
+{
+	return(this->sellerUser->getUserName());
+}

@@ -23,8 +23,7 @@ public:
 	void addFeedbaclToSeller(Feedback *feedback);
 	void productsArrRealloc();
 	void feedbackArrRealloc();
-
-
+	char* getName();
 	void show() const;
 	
 

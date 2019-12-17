@@ -27,7 +27,7 @@ public:
 	void addProductToSeller();
 	void showSellers() const;
 	void showBuyers() const;
-
+	Seller* isSellerExist(char *name);
 	Buyer *isBuyerExist(char *name);
 	void printSellerArrName(Buyer *buyer);
 	Seller *chooseSeller(int choice, Buyer *buyer);

@@ -7,6 +7,7 @@ using namespace std;
 
 #pragma warning(disable: 4996)
 
+class Seller;
 
 class Product
 {	
@@ -21,6 +22,7 @@ public:
 	double getPrice();
 	//eCategory getCategory();
 	int getProductId();
+	Seller* productSeller;
 	
 
 private:
