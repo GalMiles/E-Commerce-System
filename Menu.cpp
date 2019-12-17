@@ -150,23 +150,30 @@ void Menu::addProductToSeller()
 	char sellerName[20]; //TODO: aux function - readSellerName
 	cout << "Please enter the seller's name: ";
 	cin.getline(sellerName, 20);
-	char productName[20]; //TODO: aux function - readProductName
-	cout << "Please enter the product's name: ";
-	cin.getline(productName, 20);
 
-	double price; //TODO: aux function - readPrice
-	cout << "/nPlease Enter the product's price: ";
-	cin >> price;
+	theSeller = isSellerExist(sellerName);
 
-	int categoryChoice; //TODO: aux function - readCategory
-	cout << "\nPlease select the product's catergory:" << endl;
-	for (int i = 1; i <= 4; i++) {
-		cout << "(" << i << ") " << Product::categories[i - 1] << endl;
+	if (theSeller != nullptr) {
+		char productName[20]; //TODO: aux function - readProductName
+		cout << "Please enter the product's name: ";
+		cin.getline(productName, 20);
+
+		double price; //TODO: aux function - readPrice
+		cout << "/nPlease Enter the product's price: ";
+		cin >> price;
+
+		int categoryChoice; //TODO: aux function - readCategory
+		cout << "\nPlease select the product's catergory:" << endl;
+		for (int i = 1; i <= 4; i++) {
+			cout << "(" << i << ") " << Product::categories[i - 1] << endl;
+		}
+		cin >> categoryChoice;
+
+		Product newProduct(productName, price, Product::eCategory(categoryChoice));//add the res from bool
+		theSeller->addProductToSeller(&newProduct);
 	}
-	cin >> categoryChoice;
-
-	Product newProduct(productName, price, Product::eCategory(categoryChoice));//add the res from bool
-
+	else
+		cout << sellerName << " does not exist in our system. Please try again" << endl;
 }
 
 void Menu::showSellers() const
@@ -193,7 +200,19 @@ Buyer* Menu::isBuyerExist(char *name)
 	return nullptr;
 }
 
-
+Seller* Menu::isSellerExist(char *name)
+{
+	Seller **sellerArr = this->system->getSellerArr();
+	Seller *s;
+	int size = this->system->getSellerArrLogSize();
+	for (int i = 0; i < size; i++)
+	{
+		s = sellerArr[i];
+		if (strcmp(name, s->getName()) == 0)
+			return s;
+	}
+	return nullptr;
+}
 
 
 
