@@ -114,7 +114,6 @@ void Menu::addSeller()
 
 void Menu::addFeedback()
 {
-	//TODO: make sure the buyer has actually purchased from this seller
 	cin.ignore();
 	char userName[20]; //TODO: aux function - readUserName
 	cout << "Please enter your user name: " << endl;
@@ -137,7 +136,7 @@ void Menu::addFeedback()
 		cin.getline(content, 100);
 
 		Feedback feedback(userName, content);
-		//go to sellerArr[seller].addfeedback;
+		choosenSeller->addFeedbaclToSeller(&feedback);
 	}
 	
 }
@@ -218,14 +217,12 @@ Seller* Menu::chooseSeller(int choice, Buyer *buyer)
 	int size = buyer->getSellerArrLogSize();
 	if ((choice > size) || (choice <= 0))
 		cout << "Please enter another choice" << endl;
+
 	else
 	{
 		Seller **sellerArr = buyer->getSellerArr();
 		return (sellerArr[choice-1]);
 	}
-
-
-	
 }
 
 Seller* Menu::isSellerExist(char *name)
