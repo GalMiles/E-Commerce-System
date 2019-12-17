@@ -146,6 +146,10 @@ void Menu::addProductToSeller()
 	//run on system's sellers' arr and check if it exists bool(Seller *s); 
 
 	cin.ignore();
+	Seller* theSeller;
+	char sellerName[20]; //TODO: aux function - readSellerName
+	cout << "Please enter the seller's name: ";
+	cin.getline(sellerName, 20);
 	char productName[20]; //TODO: aux function - readProductName
 	cout << "Please enter the product's name: ";
 	cin.getline(productName, 20);
