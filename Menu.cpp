@@ -179,12 +179,12 @@ void Menu::addProductToSeller()
 
 void Menu::showSellers() const
 {
-	
+	this->system->showSellerArr();
 }
 
 void Menu::showBuyers() const
 {
-
+	this->system->showBuyerArr();
 }
 
 Buyer* Menu::isBuyerExist(char *name)

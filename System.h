@@ -32,7 +32,6 @@ private:
 	Buyer **buyerArr;
 	int buyerArrLogSize;
 	int buyerArrPhySize;
-
 };
 
 #endif
