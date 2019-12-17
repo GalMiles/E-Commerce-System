@@ -18,7 +18,7 @@ class Buyer
 public:
 	Buyer(User *buyerUser, ShoppingCart *shoppingCart);
 	Buyer(const Buyer&) = delete;
-	//~Buyer();
+	~Buyer();
 
 	void setShoppingCart(ShoppingCart shoppingCart); //NOTE: should this be bool?
 	const ShoppingCart getShoppingCart();

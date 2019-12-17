@@ -19,7 +19,8 @@ public:
 	eUserType getUserType();
 
 	User(char* name, char* password, Address* address, eUserType userType);
-	//~User();
+	User(const User&) = delete;
+	~User();
 
 	void show() const;
 

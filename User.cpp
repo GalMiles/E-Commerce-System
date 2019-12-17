@@ -13,6 +13,12 @@ User::User(char* name, char* password, Address *address, eUserType userType)
 	this->userType = userType;
 }
 
+User::~User()
+{
+	cout << "in user d'tor" << endl;
+}
+
+
 char *User::getUserName()
 {
 	return name;

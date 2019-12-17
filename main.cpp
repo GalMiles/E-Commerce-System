@@ -6,7 +6,8 @@
 using namespace std;
 
 void main() {
-	Menu mainMenu;
+	System system("AlmoGal");
+	Menu mainMenu(&system);
 	int choice = mainMenu.initMenu();
 	mainMenu.choiceCases(choice);
 }

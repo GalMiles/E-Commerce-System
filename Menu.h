@@ -19,6 +19,7 @@ const int OPTIONS_LENGTH = 11;
 class Menu
 {
 public:
+	Menu(System *system);
 	int initMenu();
 	void choiceCases(int choice);
 	void addBuyer();

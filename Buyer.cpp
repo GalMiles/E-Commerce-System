@@ -7,9 +7,20 @@ Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart)
 	this->shoppingCart = *shoppingCart;
 	this->sellerArr = new Seller*[1];
 	this->sellerArrLogSize = 0;
-	this->sellerArrPhySize = 0;
+	this->sellerArrPhySize = 1;
 
 }
+
+Buyer::~Buyer()
+{
+	cout << "in buyer d'tor" << endl;
+	for (int i = 0; i < this->sellerArrPhySize; i++)
+	{
+		this->sellerArr[i] = nullptr;
+	}
+	delete[]sellerArr;
+}
+
 
 void Buyer::setShoppingCart(ShoppingCart shoppingCart) {
 	this->shoppingCart = shoppingCart;

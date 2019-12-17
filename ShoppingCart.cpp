@@ -9,11 +9,12 @@ ShoppingCart::ShoppingCart() //constructor
 
 ShoppingCart::~ShoppingCart() //d'tor
 {
-	for (int i = 0; i < this->shoppingCartLogSize; i++)
+	cout << "shopping d'tor" << endl;
+	for (int i = 0; i < this->shoppingCartPhysSize; i++)
 	{
 		this->shoppingCart[i] = nullptr;
 	}
-	delete[] this->shoppingCart;
+	delete[]shoppingCart;
 }
 
 Product** ShoppingCart::getShoppingCart()
