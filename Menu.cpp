@@ -1,11 +1,5 @@
 #include "Menu.h"
 
-Menu::Menu(System *system)
-{
-	cout << "Menu ctor" << endl;
-	this->system = system;
-}
-
 int Menu::initMenu() {
 	int choice;
 	cout << "Welcome to storeName" << endl; //TODO: change store name
@@ -23,32 +17,8 @@ int Menu::initMenu() {
 	return choice;
 }
 
-void Menu::choiceCases(int choice)
-{
-	switch (choice) {
-	case 1:
-		addBuyer();
-		break;
 
-	case 2:
-		addSeller();
-		break;
-
-	case 3:
-		addProductToSeller();
-		break;
-
-	case 4:
-		addFeedback();
-		break;
-
-	case 11:
-		cout << "GoodbyeMessage\n"; //TODO: change message
-		break;
-	}
-}
-
-void Menu::addBuyer() //TODO: ALL constraints should be const
+Buyer* Menu::addBuyer() //TODO: ALL constraints should be const
 {
 	cin.ignore();
 	char userName[20];
@@ -78,11 +48,11 @@ void Menu::addBuyer() //TODO: ALL constraints should be const
 	User newUser(userName, password, &userAdd, User::BUYER);
 	//ShoppingCart newUserShoppingCart;
 	Buyer newBuyer(&newUser);
-	this->system->addBuyerToArr(&newBuyer);
+	return &newBuyer;
 
 }
 
-void Menu::addSeller()
+Seller* Menu::addSeller()
 {
 	cin.ignore();
 	char userName[20]; //TODO: aux function - readUserName
@@ -111,7 +81,7 @@ void Menu::addSeller()
 	Address userAdd(country, city, street, homeNumber);
 	User newUser(userName, password, &userAdd, User::SELLER);
 	Seller newSeller(&newUser);
-	this->system->addSellerToArr(&newSeller);
+	return &newSeller;
 
 }
 
@@ -190,12 +160,10 @@ void Menu::showBuyers() const
 	this->system->showBuyerArr();
 }
 
-Buyer* Menu::isBuyerExist(char *name)
+Buyer* Menu::isBuyerExist(char *name, Buyer** buyerArr, int buyerArrLogSize)
 {
-	Buyer **buyerArr = this->system->getBuyerArr();
 	Buyer *b;
-	int size = this->system->getBuyerArrLogSize();
-	for (int i = 0; i < size ; i++)
+	for (int i = 0; i < buyerArrLogSize; i++)
 	{
 		b = buyerArr[i];
 		if (strcmp(name, (b->getName())) == 0)

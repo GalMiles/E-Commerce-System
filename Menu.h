@@ -3,33 +3,29 @@
 
 #include <iostream>
 #include <string.h>
-#include "Buyer.h"
 #include "Feedback.h"
-#include "Seller.h"
 #include "Product.h"
-#include "System.h"
 using namespace std;
 
 #pragma warning(disable: 4996)
 
-//class System;
+class Buyer;
+class Seller;
 
 const int OPTIONS_LENGTH = 11;
 
 class Menu
 {
 public:
-	Menu(System *system);
 	int initMenu();
-	void choiceCases(int choice);
-	void addBuyer();
-	void addSeller();
+	Buyer* addBuyer();
+	Seller* addSeller();
 	void addFeedback();
 	void addProductToSeller();
 	void showSellers() const;
 	void showBuyers() const;
 	Seller* isSellerExist(char *name);
-	Buyer *isBuyerExist(char *name);
+	Buyer* isBuyerExist(char *name, Buyer** buyerArr, int buyerArrLogSize);
 	void printSellerArrName(Buyer *buyer);
 	Seller *chooseSeller(int choice, Buyer *buyer);
 	void addProductToShoppingCart();
@@ -37,7 +33,6 @@ public:
 private:
 	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",
 		"Place an order", "Pay for an order", "Show all buyers", "Show all sellers", "Search for a product", "Exit" };
-	System *system;
 };
 
 

@@ -3,6 +3,7 @@
 
 #include "Seller.h"
 #include "Buyer.h"
+#include "Menu.h"
 class System
 {
 public:
@@ -10,6 +11,8 @@ public:
 	System(System& other) = delete;
 	~System();//d'tor
 
+	void choiceCases(int choice);
+	void initSystem();
 	void sellerArrRealloc();
 	void buyerArrRealloc();
 	void addSellerToArr(Seller* s);
@@ -32,6 +35,7 @@ private:
 	Buyer **buyerArr;
 	int buyerArrLogSize;
 	int buyerArrPhySize;
+	Menu menu;
 };
 
 #endif

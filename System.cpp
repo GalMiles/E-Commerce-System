@@ -22,6 +22,42 @@ System::System(char *name)//c'tor
 
 }
 
+void System::initSystem() {
+	int choice;
+	do {
+		choice = menu.initMenu();
+		choiceCases(choice);
+	} while (choice >= 1 && choice <= 10);
+}
+
+void System::choiceCases(int choice)
+{
+	switch (choice) {
+	case 1:
+		Buyer* b = menu.addBuyer();
+		addBuyerToArr(b);
+		break;
+
+	case 2:
+		Seller* s = menu.addSeller();
+		addSellerToArr(s);
+		break;
+
+	case 3:
+		menu.addProductToSeller();
+		break;
+
+	case 4:
+		menu.addFeedback();
+		break;
+
+	case 11:
+		cout << "GoodbyeMessage\n"; //TODO: change message
+		break;
+	}
+}
+
+
 System::~System() // d'tor
 {
 	cout << "In System d'tor\n";
