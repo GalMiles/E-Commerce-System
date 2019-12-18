@@ -32,6 +32,7 @@ public:
 	Buyer *isBuyerExist(char *name);
 	void printSellerArrName(Buyer *buyer);
 	Seller *chooseSeller(int choice, Buyer *buyer);
+	void addProductToShoppingCart();
 
 private:
 	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",

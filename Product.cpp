@@ -13,6 +13,7 @@ Product:: Product(char *productName,double price, eCategory category, Seller* pr
 
 	this->price = price;
 	this->category = category;
+	this->productSeller = productSeller;
 }
 
 char* Product::getName()

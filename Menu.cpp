@@ -244,7 +244,19 @@ Seller* Menu::isSellerExist(char *name)
 	return nullptr;
 }
 
+/*
+void Menu::addProductToShoppingCart() {
+	char buyerName[20];
+	cout << "Please enter the buyer's name: ";
+	cin.getline(buyerName, 21);
 
+	Buyer* theBuyer = isBuyerExist(buyerName);
+
+	char productName
+
+}
+
+*/
 
 
 
