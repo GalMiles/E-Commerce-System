@@ -1,5 +1,10 @@
 #include "Menu.h"
 
+Menu::Menu(System *system)
+{
+	this->system = system;
+}
+
 int Menu::initMenu() {
 	int choice;
 	cout << "Welcome to storeName" << endl; //TODO: change store name
@@ -72,7 +77,7 @@ void Menu::addBuyer() //TODO: ALL constraints should be const
 	User newUser(userName, password, &userAdd, User::BUYER);
 	ShoppingCart newUserShoppingCart;
 	Buyer newBuyer(&newUser, &newUserShoppingCart);
-	this->system->addBuyerToArr(&newBuyer);//add buyer to buyersArr
+	this->system->addBuyerToArr(&newBuyer);
 	
 	initMenu();
 }

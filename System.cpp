@@ -11,11 +11,11 @@ System::System(char *name)//c'tor
 	strcpy(this->storeName, name);
 
 	this->buyerArr = new Buyer*[1];
-	sellerArrPhySize = 1;
-	sellerArrLogSize = 0;
+	buyerArrPhySize = 1;
+	buyerArrLogSize = 0;
 
 	this->sellerArr = new Seller*[1];
-	buyerArrPhySize = 1;
+	sellerArrPhySize = 1;
 	sellerArrLogSize = 0;
 
 }
