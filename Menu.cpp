@@ -75,8 +75,8 @@ void Menu::addBuyer() //TODO: ALL constraints should be const
 
 	Address userAdd(country, city, street, homeNumber);
 	User newUser(userName, password, &userAdd, User::BUYER);
-	ShoppingCart newUserShoppingCart;
-	Buyer newBuyer(&newUser, &newUserShoppingCart);
+	//ShoppingCart newUserShoppingCart;
+	Buyer newBuyer(&newUser);
 	this->system->addBuyerToArr(&newBuyer);
 	
 	initMenu();
@@ -205,7 +205,6 @@ Buyer* Menu::isBuyerExist(char *name)
 	}
 	return nullptr;
 }
-
 
 void Menu::printSellerArrName(Buyer *buyer)
 {

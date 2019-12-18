@@ -22,7 +22,7 @@ public:
 	double getPrice();
 	//eCategory getCategory();
 	int getProductId();
-	Seller* productSeller;
+	Seller* getSeller();
 	
 
 private:
@@ -31,7 +31,7 @@ private:
 	double    price;
 	eCategory category;
 	int       productId;
-	//pointer to seller;
+	Seller* productSeller;
 };
 
 

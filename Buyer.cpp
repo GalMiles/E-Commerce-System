@@ -1,13 +1,14 @@
 #include "Buyer.h"
 
-Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart)
+Buyer::Buyer(User *userBuyer)
 {
 	cout << "In Buyer constructor\n";
 	this->buyerUser = userBuyer;
-	this->shoppingCart = *shoppingCart;
+	//this->shoppingCart = *shoppingCart;
 	this->sellerArr = new Seller*[1];
 	this->sellerArrLogSize = 0;
 	this->sellerArrPhySize = 1;
+	//this->shoppingCart = ShoppingCart();
 
 }
 

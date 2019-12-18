@@ -38,3 +38,6 @@ eCategory Product::getCategory()
 }
 */
 
+Seller* Product::getSeller() {
+	return this->productSeller;
+}

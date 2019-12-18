@@ -36,6 +36,6 @@ void Order::calculateTotalPrice()
 	}
 }
 
-double Order::totalPrice() {
-	return this->totalPrice();
+double Order::getTotalPrice() {
+	return this->totalPrice;
 }

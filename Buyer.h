@@ -16,7 +16,7 @@ class Product;
 class Buyer
 {
 public:
-	Buyer(User *buyerUser, ShoppingCart *shoppingCart);
+	Buyer::Buyer(User *userBuyer);
 	Buyer(const Buyer&) = delete;
 	~Buyer();
 
@@ -32,9 +32,9 @@ public:
 	void show();
 
 private:
-	ShoppingCart	shoppingCart;
 	User			*buyerUser;
 	Seller			**sellerArr;
+	ShoppingCart	shoppingCart;
 	int             sellerArrLogSize;
 	int             sellerArrPhySize;
 

@@ -2,6 +2,7 @@
 
 ShoppingCart::ShoppingCart() //constructor
 { 
+	cout << "shoppping c'tor" << endl;
 	this->shoppingCartLogSize = 0;
 	this->shoppingCartPhysSize = 1;
 	this->shoppingCart = new Product*[1];

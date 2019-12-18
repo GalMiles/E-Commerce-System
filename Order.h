@@ -12,7 +12,6 @@ using namespace std;
 class Order
 {
 private:
-	Order(ShoppingCart* shoppingCart, Buyer* buyer);
 	ShoppingCart* shoppingCart;
 	Buyer* buyer;
 	Seller** sellers;
@@ -21,9 +20,14 @@ private:
 
 
 public:
+	Order(ShoppingCart* shoppingCart, Buyer* buyer);
+	~Order();
 	Seller** getOrderSellers();
 	Buyer* getBuyer();
 	void calculateTotalPrice();
+	double getTotalPrice();
+	void setOrderSellers();
+
 };
 
 #endif
