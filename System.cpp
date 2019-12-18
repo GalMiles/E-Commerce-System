@@ -11,10 +11,12 @@ System::System(char *name)//c'tor
 	strcpy(this->storeName, name);
 
 	this->buyerArr = new Buyer*[1];
+	this->buyerArr[0] = nullptr;
 	buyerArrPhySize = 1;
 	buyerArrLogSize = 0;
 
 	this->sellerArr = new Seller*[1];
+	this->sellerArr[0] = nullptr;
 	sellerArrPhySize = 1;
 	sellerArrLogSize = 0;
 
@@ -25,14 +27,14 @@ System::~System() // d'tor
 	cout << "In System d'tor\n";
 
 	delete[] storeName;
-	for (int i = 0; i < sellerArrLogSize; i++)
+	for (int i = 0; i < this->sellerArrPhySize; i++)
 	{
-		delete sellerArr[i];
+		delete this->sellerArr[i];
 	}
 
-	for (int i = 0; i < buyerArrLogSize; i++)
+	for (int i = 0; i < this->buyerArrPhySize; i++)
 	{
-		delete buyerArr[i];
+		delete this->buyerArr[i];
 	}
 
 }

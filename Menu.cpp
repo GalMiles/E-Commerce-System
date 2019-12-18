@@ -2,6 +2,7 @@
 
 Menu::Menu(System *system)
 {
+	cout << "Menu ctor" << endl;
 	this->system = system;
 }
 
@@ -78,8 +79,7 @@ void Menu::addBuyer() //TODO: ALL constraints should be const
 	//ShoppingCart newUserShoppingCart;
 	Buyer newBuyer(&newUser);
 	this->system->addBuyerToArr(&newBuyer);
-	
-	initMenu();
+
 }
 
 void Menu::addSeller()
@@ -112,8 +112,6 @@ void Menu::addSeller()
 	User newUser(userName, password, &userAdd, User::SELLER);
 	Seller newSeller(&newUser);
 	this->system->addSellerToArr(&newSeller);
-
-	initMenu();
 
 }
 
