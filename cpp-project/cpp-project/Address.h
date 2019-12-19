@@ -7,11 +7,12 @@ using namespace std;
 
 #pragma warning(disable: 4996)
 
+const int MAX_LENGTH = 20;
+
 class Address
 {
 public:
 	Address(char* country, char* city, char* street, int homeNumber);
-	const int MAX_COUNTRY_LENGTH = 57;
 	bool setCountry(char *country);
 	bool setCity(char *city);
 	bool setStreet(char *street);
@@ -25,11 +26,11 @@ public:
 	bool isAddressValid(char* address);
 	void show() const;
 
-private: 
-	//TODO: add length constraint as const
-	char	country[50];
-	char	city[50];
-	char	street[50];
-	int		homeNumber;
+private:
+	char country[MAX_LENGTH];
+	char city[MAX_LENGTH];
+	char street[MAX_LENGTH];
+	int homeNumber;
 };
+
 #endif

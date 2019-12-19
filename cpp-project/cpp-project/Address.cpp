@@ -2,10 +2,10 @@
 
 Address::Address(char* country, char* city, char* street, int homeNumber) {
 	cout << "In Address constructor\n";
-	strcpy(this->country, country);
-	strcpy(this->city, city);
-	strcpy(this->street, street);
-	this->homeNumber = homeNumber;
+	setCountry(country);
+	setCity(city);
+	setStreet(street);
+	setHomeNumber(homeNumber);
 }
 
 char* Address::getCountry()
@@ -30,10 +30,7 @@ int Address::getHomeNumber()
 
 bool Address::setCountry(char *country)
 {
-	bool res;
-	res = isAddressValid(country);
-
-	if (res)
+	if (isAddressValid(country))
 	{
 		strcpy(country, country);
 		return true;
@@ -44,10 +41,7 @@ bool Address::setCountry(char *country)
 
 bool Address::setCity(char *city)
 {
-	bool res;
-	res = isAddressValid(city);
-
-	if (res)
+	if (isAddressValid(city))
 	{
 		strcpy(city, city);
 		return true;
@@ -58,10 +52,7 @@ bool Address::setCity(char *city)
 
 bool Address::setStreet(char *street)
 {
-	bool res;
-	res = isAddressValid(street);
-
-	if (res)
+	if (isAddressValid(street))
 	{
 		strcpy(street, street);
 		return true;
@@ -80,9 +71,8 @@ bool Address::isAddressValid(char* address) {
 	for (int i = 0; i < length; i++) {
 		if ((address[i] < 'A' || (address[i] > 'Z' && address[i] < 'a') || address[i] > 'z'))
 			return false;
-		else
-			return true;
 	}
+	return true;
 }
 
 void Address::show() const
