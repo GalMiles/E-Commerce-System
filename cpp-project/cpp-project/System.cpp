@@ -17,7 +17,7 @@ void System::initSystem()
 	theMenu.printMenu();
 	int choice;
 	do {
-		choice = theMenu.getUserChoice();
+		choice = theMenu.getUserChoice(OPTIONS_LENGTH);
 		performChoice(choice);
 	} while (choice != 11);
 }
@@ -105,28 +105,36 @@ void System::addUser(eUserType userType) {
 
 	if (userType == BUYER) {
 		Buyer newBuyer(&newUser);
+		addBuyerToBuyerArr(&newBuyer); // TODO: Test if a copy c'tor is needed
 	}
 
 	else if (userType == SELLER) {
 		Seller newSeller(&newUser);
+		addSellerToSellerArr(&newSeller); // TODO: Test if a copy c'tor is needed
 	}
 }
 
 void System::addProductToSeller(Product *product)
 {
-	if (this->productsLogSize == this->productsPhysSize) //realloc arr
-		productsArrRealloc();
-
-	products[this->productsLogSize] = product; // add product
-	(this->productsLogSize)++;
+	cout << "\nPlease choose the seller to whom you'd like the add a product: " << endl;
+	theMenu.printSellers(sellerArr, sellerArrLogSize);
+	int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
+	Seller *chosenSeller = sellerArr[chosenSellerIndex];
+	chosenSeller->addProduct(product);
 }
 
-void System::addFeedbackToSeller(Feedback *feedback)
+void System::addFeedbackToSeller()
 {
-	if (this->feedbackLogSize == this->feedbackPhySize)
-		feedbackArrRealloc();
-
-	feedbackArr[this->feedbackLogSize] = feedback;
-	(this->feedbackLogSize)++;
-
+	cout << "\nPlease choose a buyer to submit feedback: " << endl;
+	theMenu.printBuyers(buyerArr, buyerArrLogSize);
+	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
+	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+	cout << "\nPlease choose the seller to whom you'd like the add a feedback: " << endl;
+	theMenu.printSellers(chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
+	int chosenSellerIndex = theMenu.getUserChoice(chosenBuyer->getSellerArrLogSize()) - 1;
+	Seller *chosenSeller = chosenBuyer->getSellerArr()[chosenSellerIndex];
+	char feedBackContent[MAX_FEEDBACK_SIZE];
+	theMenu.getFeedbackFromUser(feedBackContent, MAX_FEEDBACK_SIZE);
+	Feedback newFeedback(chosenBuyer->getName(), feedBackContent);
+	chosenSeller->addFeedback(&newFeedback);
 }

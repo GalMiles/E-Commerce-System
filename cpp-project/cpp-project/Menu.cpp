@@ -8,15 +8,15 @@ void Menu::printMenu()
 	}
 }
 
-int Menu::getUserChoice()
+int Menu::getUserChoice(int optionsLength)
 {
 	cout << "\nChoice: ";
 	int choice;
 	cin >> choice;
 	cout << endl;
 
-	while (choice < 1 || choice > OPTIONS_LENGTH) {
-		cout << "Invalid option. Please select an option between 1 and " << OPTIONS_LENGTH << endl;
+	while (choice < 1 || choice > optionsLength) {
+		cout << "Invalid option. Please select an option between 1 and " << optionsLength << endl;
 		cout << "\nChoice: ";
 		cin >> choice;
 	}
@@ -44,14 +44,20 @@ void Menu::getUserInfoFromUser(char* userName, char* password, char*country, cha
 	cin >> homeNumber;
 }
 
+void Menu::getFeedbackFromUser(char* feedBack, int feedBackSize) {
+	cin.ignore();
+	cout << "\nPlease enter your feedback (Maximum " << feedBackSize << " characters): " << endl;
+	cin.getline(feedBack, feedBackSize);
+}
+
 void Menu::printSellers(Seller **sellerArr, int size) {
 	for (int i = 0; i < size; i++) {
-		cout << "[" << i << "] " << sellerArr[i]->getName() << endl;
+		cout << "[" << i + 1 << "] " << sellerArr[i]->getName() << endl;
 	}
 }
 
 void Menu::printBuyers(Buyer **buyerArr, int size) {
 	for (int i = 0; i < size; i++) {
-		cout << "[" << i << "] " << buyerArr[i]->getName() << endl;
+		cout << "[" << i + 1 << "] " << buyerArr[i]->getName() << endl;
 	}
 }

@@ -22,13 +22,15 @@ public:
 	void productsArrRealloc();
 	void feedbackArrRealloc();
 	char* getName();
+	void addProduct(Product *product);
+	void addFeedback(Feedback *feedback);
 	void show() const;
 
 
 private:
 	Product	  **products;
 	User	  *sellerUser;
-	int		   productsPhysSize;
+	int		   productsPhySize;
 	int		   productsLogSize;
 	Feedback   **feedbackArr;
 	int        feedbackPhySize;

@@ -8,15 +8,15 @@ Seller::Seller(User *sellerUser)//c'tor
 	cout << "In seller constructor" << endl; //TODO: delete this
 	this->sellerUser = sellerUser;
 	this->productsLogSize = 0;
-	this->productsPhysSize = 1;
+	this->productsPhySize = 1;
 	this->products = new Product*[1];
 }
 
 void Seller::productsArrRealloc()
 {
 	Product **new_arr;
-	this->productsPhysSize *= 2;
-	new_arr = new Product*[this->productsPhysSize];
+	this->productsPhySize *= 2;
+	new_arr = new Product*[this->productsPhySize];
 
 	for (int i = 0; i < this->productsLogSize; i++)
 	{
@@ -54,6 +54,23 @@ void Seller::show() const
 		cout << (products[i])->getName();
 	}
 
+}
+
+void Seller::addProduct(Product *product) {
+	if (this->productsLogSize == this->productsPhySize) //realloc arr
+		this->productsArrRealloc();
+
+	this->products[this->productsLogSize] = product; // add product
+	(this->productsLogSize)++;
+}
+
+void Seller::addFeedback(Feedback *feedback)
+{
+	if (this->feedbackLogSize == this->feedbackPhySize)
+		feedbackArrRealloc();
+
+	feedbackArr[this->feedbackLogSize] = feedback;
+	(this->feedbackLogSize)++;
 }
 
 Product** Seller::getProducts() {

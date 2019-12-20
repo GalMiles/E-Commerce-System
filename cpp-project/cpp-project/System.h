@@ -1,12 +1,11 @@
 #ifndef __SYSTEM_H
 #define __SYSTEM_H
 
-#include "Menu.h"
-#include "Address.h"
-#include "Buyer.h"
 #include "Seller.h"
+#include "Buyer.h"
+#include "Menu.h"
 
-const int MAX_LENGTH = 20;
+const int MAX_FEEDBACK_SIZE = 100;
 
 class System
 {
@@ -22,7 +21,7 @@ public:
 	void performChoice(int choice);
 	void addUser(eUserType userType);
 	void addProductToSeller(Product *product);
-	void addFeedbackToSeller(Feedback *feedback);
+	void addFeedbackToSeller();
 
 private:
 	Menu theMenu;

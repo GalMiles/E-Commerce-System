@@ -7,7 +7,6 @@
 #include "Feedback.h"
 #include "Seller.h"
 #include "Product.h"
-#include "System.h"
 using namespace std;
 
 const int OPTIONS_LENGTH = 11;
@@ -16,10 +15,12 @@ class Menu
 {
 public:
 	void printMenu();
-	int getUserChoice();
+	int getUserChoice(int optionsLength);
 	void getUserInfoFromUser(char* userName, char* password, char* country, char* city, char* street, int& homeNumber, int maxLength);
+	void getFeedbackFromUser(char* feedBack, int feedBackSize);
 	void printSellers(Seller **sellerArr, int size);
 	void printBuyers(Buyer **buyerArr, int size);
+	
 
 
 private:
