@@ -12,17 +12,14 @@ using namespace std;
 class User
 {
 public:
-	enum eUserType { SELLER, BUYER };
 
 	char *getUserName();
 	void setUserName(char* name);
 	void setPassword(char* password);
 	void setAddress(Address* address);
-	void setUserType(eUserType userType);
 	Address* getAddress();
-	eUserType getUserType();
 
-	User(char* name, char* password, Address* address, eUserType userType);
+	User(char* name, char* password, Address* address);
 	User(const User&) = delete;
 	~User();
 
@@ -32,7 +29,6 @@ private:
 	char*		name;
 	char*		password;
 	Address		*address;
-	eUserType	userType;
 };
 
 #endif

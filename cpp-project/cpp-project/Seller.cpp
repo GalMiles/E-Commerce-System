@@ -44,15 +44,6 @@ void Seller::feedbackArrRealloc()
 	this->feedbackArr = new_arr;
 }
 
-void Seller::addProductToSeller(Product *product)
-{
-	if (this->productsLogSize == this->productsPhysSize) //realloc arr
-		productsArrRealloc();
-
-	products[this->productsLogSize] = product; // add product
-	(this->productsLogSize)++;
-}
-
 void Seller::show() const
 {
 	sellerUser->show(); //using User's method
@@ -67,16 +58,6 @@ void Seller::show() const
 
 Product** Seller::getProducts() {
 	return this->products;
-}
-
-void Seller::addFeedbaclToSeller(Feedback *feedback)
-{
-	if (this->feedbackLogSize == this->feedbackPhySize)
-		feedbackArrRealloc();
-
-	feedbackArr[this->feedbackLogSize] = feedback;
-	(this->feedbackLogSize)++;
-
 }
 
 char* Seller::getName()

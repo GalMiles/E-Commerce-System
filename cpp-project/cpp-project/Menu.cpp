@@ -25,7 +25,7 @@ int Menu::getUserChoice()
 }
 
 
-void Menu::getBuyerInfoFromUser(char* userName, char* password, char*country, char* city, char* street, int& homeNumber, int maxLength) {
+void Menu::getUserInfoFromUser(char* userName, char* password, char*country, char* city, char* street, int& homeNumber, int maxLength) {
 	cin.ignore();
 	cout << "Please enter user name: ";
 	cin.getline(userName, maxLength + 1);
@@ -42,4 +42,16 @@ void Menu::getBuyerInfoFromUser(char* userName, char* password, char*country, ch
 	cin.getline(street, maxLength + 1);
 	cout << "\nHome number: ";
 	cin >> homeNumber;
+}
+
+void Menu::printSellers(Seller **sellerArr, int size) {
+	for (int i = 0; i < size; i++) {
+		cout << "[" << i << "] " << sellerArr[i]->getName() << endl;
+	}
+}
+
+void Menu::printBuyers(Buyer **buyerArr, int size) {
+	for (int i = 0; i < size; i++) {
+		cout << "[" << i << "] " << buyerArr[i]->getName() << endl;
+	}
 }

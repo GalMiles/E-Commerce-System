@@ -1,6 +1,6 @@
 #include "User.h"
 
-User::User(char* name, char* password, Address *address, eUserType userType)
+User::User(char* name, char* password, Address *address)
 {
 	cout << "In User constructor\n";
 	this->name = new char[strlen(name) + 1];
@@ -8,7 +8,6 @@ User::User(char* name, char* password, Address *address, eUserType userType)
 	setUserName(name);
 	setPassword(password);
 	setAddress(address);
-	setUserType(userType);
 }
 
 User::~User()
@@ -27,9 +26,7 @@ void User::setPassword(char* password) {
 void User::setAddress(Address* address) {
 	this->address = address;
 }
-void User::setUserType(eUserType userType) {
-	this->userType = userType;
-}
+
 
 char* User::getUserName()
 {
@@ -41,16 +38,9 @@ Address* User::getAddress()
 	return address;
 }
 
-/*
-eUserType User::getUserType()
-{
-	return userType;
-}
-*/
 
 void User::show() const
 {
 	cout << "The name is:" << name << endl;
 	address->show(); // using Address method
-	cout << "The user is:" << userType << endl;
 }

@@ -19,8 +19,6 @@ public:
 	//~Seller // TODO: Add d'tor
 
 	Product** getProducts();
-	void addProductToSeller(Product *product);
-	void addFeedbaclToSeller(Feedback *feedback);
 	void productsArrRealloc();
 	void feedbackArrRealloc();
 	char* getName();
