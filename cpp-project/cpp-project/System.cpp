@@ -54,12 +54,12 @@ void System::buyerArrRealloc()
 	this->buyerArr = new_arr;
 }
 
-void System::addSellerToSellerArr(Seller *seller)
+void System::addSellerToSellerArr(Seller &seller)
 {
 	if (this->sellerArrLogSize == this->sellerArrPhySize)
 		sellerArrRealloc();
 
-	sellerArr[this->sellerArrLogSize] = seller;
+	sellerArr[this->sellerArrLogSize] = new Seller(seller);
 	(this->sellerArrLogSize)++;
 }
 
@@ -110,7 +110,7 @@ void System::addUser(eUserType userType) {
 
 	else if (userType == SELLER) {
 		Seller newSeller(&newUser);
-		addSellerToSellerArr(&newSeller); // TODO: Test if a copy c'tor is needed
+		addSellerToSellerArr(newSeller); // TODO: Test if a copy c'tor is needed
 	}
 }
 
