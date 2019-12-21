@@ -5,7 +5,6 @@ int Product::productCounter = 0;
 
 Product::Product(char *productName, double price, eCategory category, Seller* productSeller) //c'tor
 {
-	cout << "in Product c'tor" << endl; //TODO: delete this
 	productId = ++productCounter;
 
 	name = new char[strlen(productName) + 1];
@@ -16,7 +15,9 @@ Product::Product(char *productName, double price, eCategory category, Seller* pr
 }
 
 Product::Product(const Product& otherProduct) {
-	name = *(new char*(otherProduct.name));
+	name = new char[strlen(otherProduct.name) + 1];
+	//name = *(new char*(otherProduct.name));
+	strcpy(name, otherProduct.name);
 	price = *(new double(otherProduct.price));
 	category = *(new eCategory(otherProduct.category));
 	productId = *(new int(otherProduct.productId));

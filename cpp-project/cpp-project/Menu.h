@@ -10,7 +10,7 @@
 using namespace std;
 
 const int OPTIONS_LENGTH = 11;
-const int SEPERATOR_BLOCK_LENGTH = 15; // Amount of hyphens/dashes to print per seperator block
+const int SEPERATOR_BLOCK_LENGTH = 25; // Amount of hyphens/dashes to print per seperator block
 
 class Menu
 {

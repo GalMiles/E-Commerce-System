@@ -6,7 +6,6 @@
 
 Seller::Seller(User *sellerUser)//c'tor
 {
-	cout << "In seller constructor" << endl; //TODO: delete this
 	this->sellerUser = sellerUser;
 	this->productsLogSize = 0;
 	this->productsPhySize = 1;

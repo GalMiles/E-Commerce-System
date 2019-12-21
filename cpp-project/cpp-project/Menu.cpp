@@ -85,15 +85,15 @@ void Menu::printProducts(Seller **sellerArr, int size) {
 			printSeperatorBlock();
 			cout << "[" << i + 1 << "] Seller: " << sellerArr[i]->getName() << endl;
 			for (int j = 0; j < productsNum; j++) {
-				cout << "\t[" << j + 1 << "] " << sellerArr[i]->getProducts()[j]->getName();
+				cout << "\t[" << j + 1 << "] " << sellerArr[i]->getProducts()[j]->getName() << endl;
 			}
 			printSeperatorBlock();
+			cout << endl;
 		}
 	}
 }
 
 void Menu::printSeperatorBlock() {
-	cout << endl;
 	for (int i = 0; i < SEPERATOR_BLOCK_LENGTH; i++) {
 		cout << "-";
 	}
@@ -102,11 +102,13 @@ void Menu::printSeperatorBlock() {
 
 void Menu::printProductsWithName(Seller **sellerArr, int size) {
 	char findName[MAX_LENGTH];
+	bool found = false;
 	if (size <= 0) {
 		cout << "There are no products present in the system." << endl;
 	}
 	else {
-		cout << "Please enter product name to search for: " << endl;
+		cout << "Please enter product name to search for (case-sensitive): ";
+		cout << endl << endl;
 		cin.ignore();
 		cin.getline(findName, MAX_LENGTH + 1);
 		for (int i = 0; i < size; i++) {
@@ -116,12 +118,15 @@ void Menu::printProductsWithName(Seller **sellerArr, int size) {
 			}
 			for (int j = 0; j < productsNum; j++) {
 				if (strcmp(findName, sellerArr[i]->getProducts()[j]->getName()) == 0) {
+					found = true;
 					printSeperatorBlock();
 					sellerArr[i]->getProducts()[j]->show();
 					printSeperatorBlock();
 				}
 			}
 		}
+		if (!found)
+			cout << "No products found with that name." << endl;
 	}
 }
 

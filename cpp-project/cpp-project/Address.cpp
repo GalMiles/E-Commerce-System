@@ -1,7 +1,6 @@
 #include "Address.h"
 
 Address::Address(char* country, char* city, char* street, int homeNumber) {
-	cout << "In Address constructor\n";
 	setCountry(country);
 	setCity(city);
 	setStreet(street);

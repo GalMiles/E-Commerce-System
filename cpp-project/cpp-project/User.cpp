@@ -2,7 +2,6 @@
 
 User::User(char* name, char* password, Address *address)
 {
-	cout << "In User constructor\n";
 	this->name = new char[strlen(name) + 1];
 	this->password = new char[strlen(password) + 1];
 	setUserName(name);
@@ -18,7 +17,6 @@ User::User(const User& otherUser) {
 
 User::~User()
 {
-	cout << "in user d'tor" << endl;
 }
 
 void User::setUserName(char* name) {
