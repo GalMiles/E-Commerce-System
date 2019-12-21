@@ -22,8 +22,9 @@ public:
 	void productsArrRealloc();
 	void feedbackArrRealloc();
 	char* getName();
-	void addProduct(Product *product);
-	void addFeedback(Feedback *feedback);
+	int getProductsLogSize();
+	void addProduct(Product &product);
+	void addFeedback(Feedback &feedback);
 	void show() const;
 
 

@@ -135,7 +135,7 @@ void System::addProductToSeller()
 		Product::eCategory categoryChoice;
 		theMenu.addProductToSeller(productName, price, categoryChoice);
 		Product newProduct(productName, price, categoryChoice, chosenSeller);
-		chosenSeller->addProduct(new Product(newProduct));
+		chosenSeller->addProduct(newProduct);
 	}
 }
 
@@ -164,7 +164,25 @@ void System::addFeedbackToSeller()
 			char feedBackContent[MAX_FEEDBACK_SIZE];
 			theMenu.getFeedbackFromUser(feedBackContent, MAX_FEEDBACK_SIZE);
 			Feedback newFeedback(chosenBuyer->getName(), feedBackContent);
-			chosenSeller->addFeedback(new Feedback(newFeedback));
+			chosenSeller->addFeedback(newFeedback);
 		}
 	}
+}
+
+void System::addProductToShoppingCart() {
+	if (this->buyerArrLogSize <= 0) {
+		cout << "No buyers present in system." << endl;
+	}
+	cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
+	theMenu.printBuyers(buyerArr, buyerArrLogSize);
+	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
+	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+	theMenu.printProducts(sellerArr, sellerArrLogSize);
+	cout << "Please choose a seller to buy from " << "[1-" << sellerArrLogSize << "]: " << endl;
+	int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
+	Seller *chosenSeller = sellerArr[chosenSellerIndex];
+	cout << "Please choose the desired product number from this seller " << "[1-" << chosenSeller->getProductsLogSize() << "]: " << endl;
+	int chosenProductIndex = theMenu.getUserChoice(chosenSeller->getProductsLogSize());
+	Product *chosenProduct = chosenSeller->getProducts()[chosenProductIndex];
+	chosenBuyer->getShoppingCart().addProductToShoppingCart(*chosenProduct);
 }

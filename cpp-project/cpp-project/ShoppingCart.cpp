@@ -45,12 +45,12 @@ void ShoppingCart::shoppingCartRealloc()
 	this->shoppingCart = new_arr;
 }
 
-void ShoppingCart::addProductToShoppingCart(Product* productToAdd)
+void ShoppingCart::addProductToShoppingCart(Product& productToAdd)
 {
 	if (this->shoppingCartLogSize == this->shoppingCartPhysSize) //realloc shopping cart
 		shoppingCartRealloc();
 
-	this->shoppingCart[this->shoppingCartLogSize] = productToAdd; // add product
+	this->shoppingCart[this->shoppingCartLogSize] = new Product(productToAdd); // add product
 	(this->shoppingCartLogSize)++;
 }
 

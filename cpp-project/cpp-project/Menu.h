@@ -21,6 +21,8 @@ public:
 	void addProductToSeller(char* productName, double& price, Product::eCategory& categoryChoice);
 	void printSellers(Seller **sellerArr, int size);
 	void printBuyers(Buyer **buyerArr, int size);
+	void printProducts(Seller** sellerArr, int size);
+
 	
 
 

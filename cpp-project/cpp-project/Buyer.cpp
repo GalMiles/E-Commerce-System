@@ -68,12 +68,12 @@ void Buyer::sellerArrRealloc()
 	this->sellerArr = new_arr;
 }
 
-void Buyer::addSellerToBuyerArr(Seller *seller)
+void Buyer::addSellerToBuyerArr(Seller &seller)
 {
 	if (this->sellerArrLogSize == this->sellerArrPhySize) //realloc arr
 		sellerArrRealloc();
 
-	sellerArr[this->sellerArrLogSize] = seller; // add product
+	sellerArr[this->sellerArrLogSize] = new Seller(seller);
 	(this->sellerArrLogSize)++;
 }
 

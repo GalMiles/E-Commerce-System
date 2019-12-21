@@ -22,6 +22,7 @@ public:
 	void addUser(eUserType userType);
 	void addProductToSeller();
 	void addFeedbackToSeller();
+	void addProductToShoppingCart();
 
 private:
 	Menu theMenu;

@@ -22,7 +22,7 @@ public:
 
 	const ShoppingCart getShoppingCart();
 	void sellerArrRealloc();
-	void addSellerToBuyerArr(Seller *seller);
+	void addSellerToBuyerArr(Seller &seller);
 	void setUser(User* user);
 	User *getUser();
 	char *getName();

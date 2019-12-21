@@ -17,7 +17,7 @@ public:
 	ShoppingCart(const ShoppingCart& otherShoppingCart);
 	~ShoppingCart();
 	Product** getShoppingCart();
-	void addProductToShoppingCart(Product* productToAdd); //NOTE: should this be bool?
+	void addProductToShoppingCart(Product& productToAdd);
 	void shoppingCartRealloc(); //NOTE: we should probably use the function implemented in Seller
 
 	int getShoppingCartLogSize();
