@@ -117,7 +117,8 @@ void System::addUser(eUserType userType) {
 	User newUser(userName, password, &newAddress);
 
 	if (userType == BUYER) {
-		Buyer newBuyer(&newUser);
+		ShoppingCart newShoppingCart;
+		Buyer newBuyer(&newUser, &newShoppingCart);
 		addBuyerToBuyerArr(newBuyer); // TODO: Test if a copy c'tor is needed
 	}
 
@@ -191,7 +192,7 @@ void System::addProductToShoppingCart() {
 		cout << "Please choose the desired product number from this seller " << "[1 ~ " << chosenSeller->getProductsLogSize() << "]: " << endl;
 		int chosenProductIndex = theMenu.getUserChoice(chosenSeller->getProductsLogSize()) - 1;
 		Product *chosenProduct = chosenSeller->getProducts()[chosenProductIndex];
-		chosenBuyer->getShoppingCart().addProductToShoppingCart(*chosenProduct);
+		chosenBuyer->getShoppingCart()->addProductToShoppingCart(*chosenProduct);
 	}
 	else {
 		cout << "No products present in the system." << endl;

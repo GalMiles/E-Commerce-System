@@ -16,25 +16,26 @@ class Product;
 class Buyer
 {
 public:
-	Buyer::Buyer(User *userBuyer);
+	Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart);
 	Buyer(const Buyer& otherBuyer);
 	~Buyer();
 
-	ShoppingCart getShoppingCart();
 	void sellerArrRealloc();
 	void addSellerToBuyerArr(Seller &seller);
 	void setUser(User* user);
+	void setShoppingCart(ShoppingCart* shoppingCart);
 	User *getUser();
 	char *getName();
 	int getSellerArrLogSize();
 	Seller **getSellerArr();
+	ShoppingCart* getShoppingCart();
 
 	void show();
 
 private:
 	User			*buyerUser;
 	Seller			**sellerArr;
-	ShoppingCart	shoppingCart;
+	ShoppingCart	*shoppingCart;
 	int             sellerArrLogSize;
 	int             sellerArrPhySize;
 

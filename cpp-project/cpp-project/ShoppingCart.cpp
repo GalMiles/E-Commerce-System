@@ -22,7 +22,6 @@ ShoppingCart::~ShoppingCart() //d'tor
 	{
 		this->shoppingCart[i] = nullptr;
 	}
-	//delete[]shoppingCart;
 }
 
 Product** ShoppingCart::getShoppingCart()

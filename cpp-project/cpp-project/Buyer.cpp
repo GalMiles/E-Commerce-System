@@ -1,8 +1,9 @@
 #include "Buyer.h"
 
-Buyer::Buyer(User *userBuyer) : shoppingCart()
+Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart)
 {
 	setUser(userBuyer);
+	setShoppingCart(shoppingCart);
 	this->sellerArr = new Seller*[1];
 	this->sellerArr[0] = nullptr;
 	this->sellerArrLogSize = 0;
@@ -19,7 +20,7 @@ Buyer::Buyer(const Buyer& otherBuyer) {
 	for (int i = 0; i < otherBuyer.sellerArrLogSize; i++) {
 		addSellerToBuyerArr(*(new Seller(*otherBuyer.sellerArr[i])));
 	}
-	shoppingCart = *(new ShoppingCart(otherBuyer.shoppingCart));
+	shoppingCart = new ShoppingCart(*otherBuyer.shoppingCart);
 }
 
 Buyer::~Buyer()
@@ -35,7 +36,11 @@ void Buyer::setUser(User* user) {
 	this->buyerUser = user;
 }
 
-ShoppingCart Buyer::getShoppingCart() {
+void Buyer::setShoppingCart(ShoppingCart* shoppingCart) {
+	this->shoppingCart = shoppingCart;
+}
+
+ShoppingCart* Buyer::getShoppingCart() {
 	return this->shoppingCart;
 }
 
