@@ -76,9 +76,10 @@ void Menu::printBuyers(Buyer **buyerArr, int size) {
 	}
 }
 
-void Menu::printProducts(Seller **sellerArr, int size) {
+bool Menu::printProducts(Seller **sellerArr, int size) {
+	bool foundProducts = false; // If there are sellers but no products whatsoever, should stay false
 	if (size <= 0) {
-		cout << "There are no products present in the system." << endl;
+		cout << "There are no sellers present in the system." << endl;
 	}
 	else {
 		for (int i = 0; i < size; i++) {
@@ -86,6 +87,7 @@ void Menu::printProducts(Seller **sellerArr, int size) {
 			if (productsNum <= 0) { // Seller has no products, no use in printing him/her
 				continue;
 			}
+			foundProducts = true; // Some seller has some products
 			printSeperatorBlock('-');
 			cout << "[" << i + 1 << "] Seller: " << sellerArr[i]->getName() << endl;
 			for (int j = 0; j < productsNum; j++) {
@@ -95,6 +97,7 @@ void Menu::printProducts(Seller **sellerArr, int size) {
 			cout << endl;
 		}
 	}
+	return foundProducts;
 }
 
 void Menu::printSeperatorBlock(char sep) {

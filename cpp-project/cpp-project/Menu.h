@@ -22,15 +22,12 @@ public:
 	void addProductToSeller(char* productName, double& price, Product::eCategory& categoryChoice);
 	void printSellers(Seller **sellerArr, int size);
 	void printBuyers(Buyer **buyerArr, int size);
-	void printProducts(Seller** sellerArr, int size);
+	bool printProducts(Seller** sellerArr, int size);
 	void printProductsWithName(Seller **sellerArr, int size);
 	void printSeperatorBlock(char sep);
 
 	
-
-
 private:
-	
 	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",
 		"Place an order", "Pay for an order", "Show all buyers", "Show all sellers", "Search for a product", "Exit" };
 };

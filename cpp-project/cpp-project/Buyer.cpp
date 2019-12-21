@@ -12,6 +12,10 @@ Buyer::Buyer(User *userBuyer) : shoppingCart()
 
 Buyer::Buyer(const Buyer& otherBuyer) {
 	buyerUser = new User(*otherBuyer.buyerUser);
+	this->sellerArr = new Seller*[1];
+	this->sellerArr[0] = nullptr;
+	this->sellerArrLogSize = 0;
+	this->sellerArrPhySize = 1;
 	for (int i = 0; i < otherBuyer.sellerArrLogSize; i++) {
 		addSellerToBuyerArr(*(new Seller(*otherBuyer.sellerArr[i])));
 	}

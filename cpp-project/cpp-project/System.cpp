@@ -184,12 +184,16 @@ void System::addProductToShoppingCart() {
 	theMenu.printBuyers(buyerArr, buyerArrLogSize);
 	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
 	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
-	theMenu.printProducts(sellerArr, sellerArrLogSize);
-	cout << "Please choose a seller to buy from " << "[1 ~ " << sellerArrLogSize << "]: " << endl;
-	int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
-	Seller *chosenSeller = sellerArr[chosenSellerIndex];
-	cout << "Please choose the desired product number from this seller " << "[1 ~ " << chosenSeller->getProductsLogSize() << "]: " << endl;
-	int chosenProductIndex = theMenu.getUserChoice(chosenSeller->getProductsLogSize());
-	Product *chosenProduct = chosenSeller->getProducts()[chosenProductIndex];
-	chosenBuyer->getShoppingCart().addProductToShoppingCart(*chosenProduct);
+	if (theMenu.printProducts(sellerArr, sellerArrLogSize)) {
+		cout << "Please choose a seller to buy from " << "[1 ~ " << sellerArrLogSize << "]: " << endl;
+		int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
+		Seller *chosenSeller = sellerArr[chosenSellerIndex];
+		cout << "Please choose the desired product number from this seller " << "[1 ~ " << chosenSeller->getProductsLogSize() << "]: " << endl;
+		int chosenProductIndex = theMenu.getUserChoice(chosenSeller->getProductsLogSize()) - 1;
+		Product *chosenProduct = chosenSeller->getProducts()[chosenProductIndex];
+		chosenBuyer->getShoppingCart().addProductToShoppingCart(*chosenProduct);
+	}
+	else {
+		cout << "No products present in the system." << endl;
+	}
 }
