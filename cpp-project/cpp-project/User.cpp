@@ -10,6 +10,12 @@ User::User(char* name, char* password, Address *address)
 	setAddress(address);
 }
 
+User::User(const User& otherUser) {
+	name = *(new char*(otherUser.name));
+	password = *(new char*(otherUser.password));
+	address = new Address(*otherUser.address);
+}
+
 User::~User()
 {
 	cout << "in user d'tor" << endl;

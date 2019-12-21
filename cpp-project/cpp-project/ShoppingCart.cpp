@@ -8,6 +8,12 @@ ShoppingCart::ShoppingCart() //constructor
 	this->shoppingCart = new Product*[1];
 }
 
+ShoppingCart::ShoppingCart(const ShoppingCart& otherShoppingCart) {
+	for (int i = 0; i < otherShoppingCart.shoppingCartLogSize; i++) {
+		addProductToShoppingCart(new Product(*otherShoppingCart.shoppingCart[i]));
+	}
+}
+
 ShoppingCart::~ShoppingCart() //d'tor
 {
 	cout << "shopping d'tor" << endl;
@@ -15,7 +21,7 @@ ShoppingCart::~ShoppingCart() //d'tor
 	{
 		this->shoppingCart[i] = nullptr;
 	}
-	delete[]shoppingCart;
+	//delete[]shoppingCart;
 }
 
 Product** ShoppingCart::getShoppingCart()

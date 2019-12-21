@@ -14,9 +14,9 @@ System::System() : theMenu()
 void System::initSystem()
 {
 	cout << "Welcome to " << STORE_NAME << endl;
-	theMenu.printMenu();
 	int choice;
 	do {
+		theMenu.printMenu();
 		choice = theMenu.getUserChoice(OPTIONS_LENGTH);
 		performChoice(choice);
 	} while (choice != 11);
@@ -63,12 +63,12 @@ void System::addSellerToSellerArr(Seller *seller)
 	(this->sellerArrLogSize)++;
 }
 
-void System::addBuyerToBuyerArr(Buyer *buyer)
+void System::addBuyerToBuyerArr(Buyer &buyer)
 {
 	if (this->buyerArrLogSize == this->buyerArrPhySize)
 		buyerArrRealloc();
 
-	buyerArr[this->buyerArrLogSize] = buyer; 
+	buyerArr[this->buyerArrLogSize] = new Buyer(buyer);
 	(this->buyerArrLogSize)++;
 }
 
@@ -105,7 +105,7 @@ void System::addUser(eUserType userType) {
 
 	if (userType == BUYER) {
 		Buyer newBuyer(&newUser);
-		addBuyerToBuyerArr(&newBuyer); // TODO: Test if a copy c'tor is needed
+		addBuyerToBuyerArr(newBuyer); // TODO: Test if a copy c'tor is needed
 	}
 
 	else if (userType == SELLER) {

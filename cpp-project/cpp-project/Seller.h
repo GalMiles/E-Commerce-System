@@ -15,7 +15,7 @@ class Seller
 {
 public:
 	Seller(User *sellerUser);
-	Seller(const Seller&) = delete;
+	Seller(const Seller& otherSeller);
 	//~Seller // TODO: Add d'tor
 
 	Product** getProducts();

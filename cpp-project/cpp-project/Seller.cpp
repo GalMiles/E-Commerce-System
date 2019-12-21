@@ -1,6 +1,7 @@
 #include "Seller.h"
 #include "User.h"
 #include "Product.h"
+#include "Feedback.h"
 
 
 Seller::Seller(User *sellerUser)//c'tor
@@ -10,6 +11,16 @@ Seller::Seller(User *sellerUser)//c'tor
 	this->productsLogSize = 0;
 	this->productsPhySize = 1;
 	this->products = new Product*[1];
+}
+
+Seller::Seller(const Seller& otherSeller) {
+	for (int i = 0; i < otherSeller.productsLogSize; i++) {
+		addProduct(new Product(*otherSeller.products[i]));
+	}
+	for (int i = 0; i < otherSeller.feedbackLogSize; i++) {
+		addFeedback(new Feedback(*otherSeller.feedbackArr[i]));
+	}
+	sellerUser = new User(*otherSeller.sellerUser);
 }
 
 void Seller::productsArrRealloc()

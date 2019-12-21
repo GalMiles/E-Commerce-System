@@ -17,7 +17,7 @@ class Buyer
 {
 public:
 	Buyer::Buyer(User *userBuyer);
-	//Buyer(const Buyer&) = delete; // TODO: Why needed?
+	Buyer(const Buyer& otherBuyer);
 	~Buyer();
 
 	const ShoppingCart getShoppingCart();

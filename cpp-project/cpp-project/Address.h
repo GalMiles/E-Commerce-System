@@ -13,6 +13,7 @@ class Address
 {
 public:
 	Address(char* country, char* city, char* street, int homeNumber);
+	Address(const Address& otherAddress);
 	bool setCountry(char *country);
 	bool setCity(char *city);
 	bool setStreet(char *street);

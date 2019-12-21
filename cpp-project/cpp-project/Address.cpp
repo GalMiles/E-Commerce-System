@@ -8,6 +8,13 @@ Address::Address(char* country, char* city, char* street, int homeNumber) {
 	setHomeNumber(homeNumber);
 }
 
+Address::Address(const Address& otherAddress) {
+	strcpy(this->city, otherAddress.city);
+	strcpy(this->country, otherAddress.country);
+	strcpy(this->street, otherAddress.street);
+	homeNumber = *(new int(otherAddress.homeNumber));
+}
+
 char* Address::getCountry()
 {
 	return country;
@@ -32,7 +39,7 @@ bool Address::setCountry(char *country)
 {
 	if (isAddressValid(country))
 	{
-		strcpy(country, country);
+		strcpy(this->country, country);
 		return true;
 	}
 	else
@@ -43,7 +50,7 @@ bool Address::setCity(char *city)
 {
 	if (isAddressValid(city))
 	{
-		strcpy(city, city);
+		strcpy(this->city, city);
 		return true;
 	}
 	else
@@ -54,7 +61,7 @@ bool Address::setStreet(char *street)
 {
 	if (isAddressValid(street))
 	{
-		strcpy(street, street);
+		strcpy(this->street, street);
 		return true;
 	}
 	else
@@ -63,7 +70,7 @@ bool Address::setStreet(char *street)
 
 void Address::setHomeNumber(int homeNumber)
 {
-	homeNumber = homeNumber;
+	this->homeNumber = homeNumber;
 }
 
 bool Address::isAddressValid(char* address) {

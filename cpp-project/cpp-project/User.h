@@ -20,7 +20,7 @@ public:
 	Address* getAddress();
 
 	User(char* name, char* password, Address* address);
-	User(const User&) = delete;
+	User(const User& otherUser);
 	~User();
 
 	void show() const;

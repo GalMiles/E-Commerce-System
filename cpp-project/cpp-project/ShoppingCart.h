@@ -14,6 +14,7 @@ class ShoppingCart
 {
 public:
 	ShoppingCart();
+	ShoppingCart(const ShoppingCart& otherShoppingCart);
 	~ShoppingCart();
 	Product** getShoppingCart();
 	void addProductToShoppingCart(Product* productToAdd); //NOTE: should this be bool?

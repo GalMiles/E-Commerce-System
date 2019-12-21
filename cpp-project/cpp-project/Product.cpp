@@ -1,4 +1,5 @@
 #include "Product.h"
+#include "Seller.h"
 
 int Product::productCounter = 0;
 
@@ -12,6 +13,14 @@ Product::Product(char *productName, double price, eCategory category, Seller* pr
 	setPrice(price);
 	setCategory(category);
 	setProductSeller(productSeller);
+}
+
+Product::Product(const Product& otherProduct) {
+	strcpy(this->name, otherProduct.name);
+	price = *(new double(otherProduct.price));
+	category = *(new eCategory(otherProduct.category));
+	productId = *(new int(otherProduct.productId));
+	productSeller = new Seller(*otherProduct.productSeller);
 }
 
 void Product::setProductName(char* productName) {

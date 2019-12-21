@@ -12,6 +12,16 @@ Buyer::Buyer(User *userBuyer) : shoppingCart()
 
 }
 
+
+Buyer::Buyer(const Buyer& otherBuyer) {
+	cout << "IN COPY CONSTRUCTOR OF BUYER" << endl;
+	buyerUser = new User(*otherBuyer.buyerUser);
+	for (int i = 0; i < otherBuyer.sellerArrLogSize; i++) {
+		addSellerToBuyerArr(new Seller(*otherBuyer.sellerArr[i]));
+	}
+	shoppingCart = *(new ShoppingCart(otherBuyer.shoppingCart));
+}
+
 Buyer::~Buyer()
 {
 	cout << "in buyer d'tor" << endl;
@@ -19,7 +29,7 @@ Buyer::~Buyer()
 	{
 		this->sellerArr[i] = nullptr;
 	}
-	delete[]sellerArr;
+	//delete[]sellerArr;
 }
 
 void Buyer::setUser(User* user) {

@@ -16,6 +16,7 @@ public:
 	static constexpr char* categories[] = { "Children", "Clothes", "Home", "Sport" };
 
 	Product(char *productName, double price, eCategory category, Seller* productSeller); //c'tor
+	Product(const Product& otherProduct);
 	void setProductName(char* productName);
 	void setPrice(double price);
 	void setCategory(eCategory category);

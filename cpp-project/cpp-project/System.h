@@ -17,7 +17,7 @@ public:
 	void sellerArrRealloc();
 	void buyerArrRealloc();
 	void addSellerToSellerArr(Seller *seller);
-	void addBuyerToBuyerArr(Buyer *buyer);
+	void addBuyerToBuyerArr(Buyer &buyer);
 	void performChoice(int choice);
 	void addUser(eUserType userType);
 	void addProductToSeller(Product *product);
