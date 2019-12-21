@@ -16,9 +16,10 @@ public:
 	ShoppingCart();
 	ShoppingCart(const ShoppingCart& otherShoppingCart);
 	~ShoppingCart();
-	Product** getShoppingCart();
+	Product** getProducts();
 	void addProductToShoppingCart(Product& productToAdd);
 	void shoppingCartRealloc(); //NOTE: we should probably use the function implemented in Seller
+	void show();
 
 	int getShoppingCartLogSize();
 	int getShoppingCartPhySize();

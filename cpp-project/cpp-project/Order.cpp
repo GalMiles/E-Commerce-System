@@ -1,6 +1,6 @@
 #include "Order.h"
 
-Order::Order(ShoppingCart*& shoppingCart, Buyer*& buyer)
+Order::Order(ShoppingCart* shoppingCart, Buyer* buyer)
 {
 	setShoppingCart(shoppingCart);
 	setNumOfProducts(shoppingCart);
@@ -27,22 +27,26 @@ Order::~Order() {
 	}
 }
 
-void Order::setBuyer(Buyer*& buyer) {
+void Order::setBuyer(Buyer* buyer) {
 	this->buyer = buyer;
 }
 
-void Order::setNumOfProducts(ShoppingCart*& shoppingCart) {
+Buyer* Order::getBuyer() {
+	return this->buyer;
+}
+
+void Order::setNumOfProducts(ShoppingCart* shoppingCart) {
 	this->numOfProducts = shoppingCart->getShoppingCartLogSize();
 }
 
-void Order::setShoppingCart(ShoppingCart*& shoppingCart) {
+void Order::setShoppingCart(ShoppingCart* shoppingCart) {
 	this->shoppingCart = shoppingCart;
 }
 
 void Order::setOrderSellers() {
 	Product* p;
 	for (int i = 0; i < numOfProducts; i++) {
-		p = shoppingCart->getShoppingCart()[i];
+		p = shoppingCart->getProducts()[i];
 		sellers[i] = p->getSeller();
 	}
 }
@@ -52,7 +56,7 @@ void Order::calculateTotalPrice()
 	Product* p;
 	this->totalPrice = 0;
 	for (int i = 0; i < numOfProducts; i++) {
-		p = shoppingCart->getShoppingCart()[i];
+		p = shoppingCart->getProducts()[i];
 		this->totalPrice += p->getPrice();
 	}
 }

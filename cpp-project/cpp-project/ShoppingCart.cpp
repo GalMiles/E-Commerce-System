@@ -24,7 +24,7 @@ ShoppingCart::~ShoppingCart() //d'tor
 	}
 }
 
-Product** ShoppingCart::getShoppingCart()
+Product** ShoppingCart::getProducts()
 {
 	return shoppingCart;
 }
@@ -62,4 +62,11 @@ int ShoppingCart::getShoppingCartLogSize()
 int ShoppingCart::getShoppingCartPhySize()
 {
 	return (this->shoppingCartPhysSize);
+}
+
+void ShoppingCart::show() {
+	for (int i = 0; i < shoppingCartLogSize; i++) {
+		cout << "[" << i + 1 << "]" << endl;
+		shoppingCart[i]->show();
+	}
 }

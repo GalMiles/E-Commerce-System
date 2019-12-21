@@ -72,6 +72,21 @@ void Buyer::sellerArrRealloc()
 	this->sellerArr = new_arr;
 }
 
+void Buyer::orderArrRealloc() {
+	Order **new_arr;
+	this->orderArrPhySize *= 2;
+	new_arr = new Order*[this->orderArrPhySize];
+
+	for (int i = 0; i < this->orderArrLogSize; i++)
+	{
+		new_arr[i] = (this->orderArr[i]);
+		this->orderArr[i] = nullptr;
+	}
+	delete[] this->orderArr;
+
+	this->orderArr = new_arr;
+}
+
 void Buyer::addSellerToBuyerArr(Seller &seller)
 {
 	if (this->sellerArrLogSize == this->sellerArrPhySize) //realloc arr
@@ -79,6 +94,15 @@ void Buyer::addSellerToBuyerArr(Seller &seller)
 
 	sellerArr[this->sellerArrLogSize] = new Seller(seller);
 	(this->sellerArrLogSize)++;
+}
+
+void Buyer::addOrderToOrderArr(Order &order)
+{
+	if (this->orderArrLogSize == this->orderArrPhySize) //realloc arr
+		orderArrRealloc();
+
+	orderArr[this->orderArrLogSize] = new Order(order);
+	(this->orderArrLogSize)++;
 }
 
 User *Buyer::getUser() { return this->buyerUser; }
@@ -91,3 +115,5 @@ char* Buyer::getName()
 int Buyer::getSellerArrLogSize() { return sellerArrLogSize; }
 
 Seller** Buyer::getSellerArr() { return sellerArr; }
+
+Order** Buyer::getOrderArr() { return orderArr; }

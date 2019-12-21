@@ -1,9 +1,10 @@
 #ifndef __SYSTEM_H
 #define __SYSTEM_H
 
-#include "Seller.h"
-#include "Buyer.h"
+//#include "Seller.h"
+//#include "Buyer.h"
 #include "Menu.h"
+//#include "Order.h"
 
 const int MAX_FEEDBACK_SIZE = 100;
 
@@ -14,6 +15,7 @@ public:
 	enum eUserType { SELLER, BUYER };
 	const char STORE_NAME[8] = "AlmoGal";
 	void initSystem();
+	bool isEmpty(int size);
 	void sellerArrRealloc();
 	void buyerArrRealloc();
 	void addSellerToSellerArr(Seller &seller);
@@ -23,6 +25,7 @@ public:
 	void addProductToSeller();
 	void addFeedbackToSeller();
 	void addProductToShoppingCart();
+	void makeOrder();
 
 private:
 	Menu theMenu;

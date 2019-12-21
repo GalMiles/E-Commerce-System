@@ -5,9 +5,11 @@
 #include <string.h>
 using namespace std;
 
+//#include "Seller.h"
 #include "ShoppingCart.h"
-#include "Buyer.h"
+//#include "Buyer.h"
 
+class Buyer;
 
 class Order
 {
@@ -20,16 +22,16 @@ private:
 
 
 public:
-	Order(ShoppingCart*& shoppingCart, Buyer*& buyer);
+	Order(ShoppingCart* shoppingCart, Buyer* buyer);
 	Order(const Order& otherOrder);
 	~Order();
-	Seller** getOrderSellers();
+	//Seller** getOrderSellers();
 	Buyer* getBuyer();
 	void calculateTotalPrice();
 	double getTotalPrice();
-	void setBuyer(Buyer*& buyer);
-	void setNumOfProducts(ShoppingCart*& shoppingCart);
-	void setShoppingCart(ShoppingCart*& shoppingCart);
+	void setBuyer(Buyer* buyer);
+	void setNumOfProducts(ShoppingCart* shoppingCart);
+	void setShoppingCart(ShoppingCart* shoppingCart);
 	void setOrderSellers();
 
 };

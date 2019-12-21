@@ -23,6 +23,10 @@ void System::initSystem()
 	} while (choice != 11);
 }
 
+bool isEmpty(int size) {
+	return (size <= 0);
+}
+
 void System::sellerArrRealloc()
 {
 	Seller **new_arr;
@@ -91,6 +95,10 @@ void System::performChoice(int choice)
 	case 5:
 		addProductToShoppingCart();
 		break;
+	case 6:
+		break;
+	case 7:
+		break;
 	case 8:
 		theMenu.printBuyers(buyerArr, buyerArrLogSize);
 		break;
@@ -130,7 +138,7 @@ void System::addUser(eUserType userType) {
 
 void System::addProductToSeller()
 {
-	if (this->sellerArrLogSize <= 0) {
+	if (isEmpty(this->sellerArrLogSize)) {
 		cout << "No sellers present in system." << endl;
 	}
 	else {
@@ -149,10 +157,10 @@ void System::addProductToSeller()
 
 void System::addFeedbackToSeller()
 {
-	if (this->buyerArrLogSize <= 0) {
+	if (isEmpty(this->buyerArrLogSize)) {
 		cout << "No buyers present in system." << endl;
 	}
-	else if (this->sellerArrLogSize <= 0) {
+	else if (isEmpty(this->sellerArrLogSize)) {
 		cout << "No sellers present in system." << endl;
 	}
 	else {
@@ -161,7 +169,7 @@ void System::addFeedbackToSeller()
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
 		Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
 		// Show only sellers from whom the respective buyer had bought
-		if (chosenBuyer->getSellerArrLogSize() <= 0) {
+		if (isEmpty(chosenBuyer->getSellerArrLogSize())) {
 			cout << chosenBuyer->getName() << " hasn't bought from any sellers yet." << endl;
 		}
 		else {
@@ -178,7 +186,7 @@ void System::addFeedbackToSeller()
 }
 
 void System::addProductToShoppingCart() {
-	if (this->buyerArrLogSize <= 0) {
+	if (isEmpty(this->buyerArrLogSize)) {
 		cout << "No buyers present in system." << endl;
 	}
 	cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
@@ -196,5 +204,39 @@ void System::addProductToShoppingCart() {
 	}
 	else {
 		cout << "No products present in the system." << endl;
+	}
+}
+
+void System::makeOrder() {
+	if (isEmpty(this->buyerArrLogSize)) {
+		cout << "No buyers present in system." << endl;
+	}
+	cout << "\nPlease choose a buyer to make an order for: " << endl;
+	theMenu.printBuyers(buyerArr, buyerArrLogSize);
+	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
+	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+	if (isEmpty(chosenBuyer->getShoppingCart()->getShoppingCartLogSize())) {
+		cout << "This buyer doesn't have any products in his/her shopping cart." << endl;
+	}
+	else {
+		int stringSize = (chosenBuyer->getShoppingCart()->getShoppingCartLogSize() * 2) + 1; // (Integer + comma) per product in Shopping Cart + '\0'
+		char* productsString = new char[stringSize];
+		const char s[2] = ","; // Each product in user input is supposed to be separated by commas
+		char *token;
+		int productIndex;
+		cout << "The following products are in your shopping cart: " << endl;
+		chosenBuyer->getShoppingCart()->show();
+		cout << "Please choose product/s to order, separated by commas with no whitespace (e.g. 1,2,4,6): ";
+		cin.ignore();
+		cin.getline(productsString, stringSize); // TODO: VALIDATE USER INPUT (SOME PRODUCTS ENTERED ETC.)
+		ShoppingCart orderShoppingCart;
+		token = strtok(productsString, s); // Get first product that user wanted to order
+		while (token != NULL) {
+			productIndex = atoi(token) - 1;
+			orderShoppingCart.addProductToShoppingCart(*chosenBuyer->getShoppingCart()->getProducts()[productIndex]);
+			token = strtok(NULL, s);
+		}
+		Order newOrder(&orderShoppingCart, chosenBuyer);
+		delete[] productsString;
 	}
 }
