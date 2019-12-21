@@ -84,6 +84,9 @@ void System::performChoice(int choice)
 	case 3:
 		addProductToSeller();
 		break;
+	case 4:
+		addFeedbackToSeller();
+		break;
 	case 8:
 		theMenu.printBuyers(buyerArr, buyerArrLogSize);
 		break;
@@ -119,30 +122,49 @@ void System::addUser(eUserType userType) {
 
 void System::addProductToSeller()
 {
-	cout << "\nPlease choose the seller to whom you'd like the add a product: " << endl;
-	theMenu.printSellers(sellerArr, sellerArrLogSize);
-	int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
-	Seller *chosenSeller = sellerArr[chosenSellerIndex];
-	char productName[MAX_LENGTH];
-	double price;
-	Product::eCategory categoryChoice;
-	theMenu.addProductToSeller(productName, price, categoryChoice);
-	Product newProduct(productName, price, categoryChoice, chosenSeller);
-	chosenSeller->addProduct(new Product(newProduct));
+	if (this->sellerArrLogSize <= 0) {
+		cout << "No sellers present in system." << endl;
+	}
+	else {
+		cout << "\nPlease choose the seller to whom you'd like the add a product: " << endl;
+		theMenu.printSellers(sellerArr, sellerArrLogSize);
+		int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
+		Seller *chosenSeller = sellerArr[chosenSellerIndex];
+		char productName[MAX_LENGTH];
+		double price;
+		Product::eCategory categoryChoice;
+		theMenu.addProductToSeller(productName, price, categoryChoice);
+		Product newProduct(productName, price, categoryChoice, chosenSeller);
+		chosenSeller->addProduct(new Product(newProduct));
+	}
 }
 
 void System::addFeedbackToSeller()
 {
-	cout << "\nPlease choose a buyer to submit feedback: " << endl;
-	theMenu.printBuyers(buyerArr, buyerArrLogSize);
-	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
-	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
-	cout << "\nPlease choose the seller to whom you'd like the add a feedback: " << endl;
-	theMenu.printSellers(chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
-	int chosenSellerIndex = theMenu.getUserChoice(chosenBuyer->getSellerArrLogSize()) - 1;
-	Seller *chosenSeller = chosenBuyer->getSellerArr()[chosenSellerIndex];
-	char feedBackContent[MAX_FEEDBACK_SIZE];
-	theMenu.getFeedbackFromUser(feedBackContent, MAX_FEEDBACK_SIZE);
-	Feedback newFeedback(chosenBuyer->getName(), feedBackContent);
-	chosenSeller->addFeedback(&newFeedback);
+	if (this->buyerArrLogSize <= 0) {
+		cout << "No buyers present in system." << endl;
+	}
+	else if (this->sellerArrLogSize <= 0) {
+		cout << "No sellers present in system." << endl;
+	}
+	else {
+		cout << "\nPlease choose a buyer to submit feedback: " << endl;
+		theMenu.printBuyers(buyerArr, buyerArrLogSize);
+		int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
+		Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+		// Show only sellers from whom the respective buyer had bought
+		if (chosenBuyer->getSellerArrLogSize() <= 0) {
+			cout << chosenBuyer->getName() << " hasn't bought from any sellers yet." << endl;
+		}
+		else {
+			cout << "\nPlease choose the seller to whom you'd like the add a feedback: " << endl;
+			theMenu.printSellers(chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
+			int chosenSellerIndex = theMenu.getUserChoice(chosenBuyer->getSellerArrLogSize()) - 1;
+			Seller *chosenSeller = chosenBuyer->getSellerArr()[chosenSellerIndex];
+			char feedBackContent[MAX_FEEDBACK_SIZE];
+			theMenu.getFeedbackFromUser(feedBackContent, MAX_FEEDBACK_SIZE);
+			Feedback newFeedback(chosenBuyer->getName(), feedBackContent);
+			chosenSeller->addFeedback(new Feedback(newFeedback));
+		}
+	}
 }
