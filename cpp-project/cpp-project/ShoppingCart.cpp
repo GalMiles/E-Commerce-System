@@ -10,7 +10,7 @@ ShoppingCart::ShoppingCart() //constructor
 
 ShoppingCart::ShoppingCart(const ShoppingCart& otherShoppingCart) {
 	for (int i = 0; i < otherShoppingCart.shoppingCartLogSize; i++) {
-		addProductToShoppingCart(new Product(*otherShoppingCart.shoppingCart[i]));
+		addProductToShoppingCart(*(new Product(*otherShoppingCart.shoppingCart[i])));
 	}
 }
 

@@ -64,3 +64,10 @@ return m_category;
 Seller* Product::getSeller() {
 	return this->productSeller;
 }
+
+void Product::show() {
+	cout << "* Product ID: " << this->getProductId() << endl;
+	cout << "* Product Name: " << this->getName() << endl;
+	cout << "* Proudct Price: " << this->getPrice() << endl;
+	cout << "* Sold By: " << this->getSeller()->getName() << endl;
+}

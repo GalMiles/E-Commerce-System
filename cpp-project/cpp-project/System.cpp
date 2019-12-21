@@ -93,6 +93,9 @@ void System::performChoice(int choice)
 	case 9:
 		theMenu.printSellers(sellerArr, sellerArrLogSize);
 		break;
+	case 10:
+		theMenu.printProductsWithName(sellerArr, sellerArrLogSize);
+		break;
 	}
 }
 

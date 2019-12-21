@@ -20,10 +20,10 @@ Seller::Seller(const Seller& otherSeller) {
 	this->products = new Product*[1];
 	this->products[0] = nullptr;
 	for (int i = 0; i < otherSeller.productsLogSize; i++) {
-		addProduct(new Product(*otherSeller.products[i]));
+		addProduct(*(new Product(*otherSeller.products[i])));
 	}
 	for (int i = 0; i < otherSeller.feedbackLogSize; i++) {
-		addFeedback(new Feedback(*otherSeller.feedbackArr[i]));
+		addFeedback(*(new Feedback(*otherSeller.feedbackArr[i])));
 	}
 	sellerUser = new User(*otherSeller.sellerUser);
 }

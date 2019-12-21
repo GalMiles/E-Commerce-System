@@ -26,6 +26,7 @@ public:
 	//eCategory getCategory();
 	int getProductId();
 	Seller* getSeller();
+	void show();
 
 
 private:

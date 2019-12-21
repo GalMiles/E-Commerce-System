@@ -82,13 +82,49 @@ void Menu::printProducts(Seller **sellerArr, int size) {
 			if (productsNum <= 0) { // Seller has no products, no use in printing him/her
 				continue;
 			}
-			cout << "[" << i + 1 << "] Seller: " << sellerArr[i]->getName << endl;
+			printSeperatorBlock();
+			cout << "[" << i + 1 << "] Seller: " << sellerArr[i]->getName() << endl;
 			for (int j = 0; j < productsNum; j++) {
 				cout << "\t[" << j + 1 << "] " << sellerArr[i]->getProducts()[j]->getName();
+			}
+			printSeperatorBlock();
+		}
+	}
+}
+
+void Menu::printSeperatorBlock() {
+	cout << endl;
+	for (int i = 0; i < SEPERATOR_BLOCK_LENGTH; i++) {
+		cout << "-";
+	}
+	cout << endl;
+}
+
+void Menu::printProductsWithName(Seller **sellerArr, int size) {
+	char findName[MAX_LENGTH];
+	if (size <= 0) {
+		cout << "There are no products present in the system." << endl;
+	}
+	else {
+		cout << "Please enter product name to search for: " << endl;
+		cin.ignore();
+		cin.getline(findName, MAX_LENGTH + 1);
+		for (int i = 0; i < size; i++) {
+			int productsNum = sellerArr[i]->getProductsLogSize();
+			if (productsNum <= 0) { // Seller has no products, no use in printing him/her
+				continue;
+			}
+			for (int j = 0; j < productsNum; j++) {
+				if (strcmp(findName, sellerArr[i]->getProducts()[j]->getName()) == 0) {
+					printSeperatorBlock();
+					sellerArr[i]->getProducts()[j]->show();
+					printSeperatorBlock();
+				}
 			}
 		}
 	}
 }
+
 void Menu::addProductToSeller(char* productName, double& price, Product::eCategory& categoryChoice)
 {
 	//ask which seller do you want to add product to?

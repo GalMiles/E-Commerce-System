@@ -17,7 +17,7 @@ Buyer::Buyer(const Buyer& otherBuyer) {
 	cout << "IN COPY CONSTRUCTOR OF BUYER" << endl;
 	buyerUser = new User(*otherBuyer.buyerUser);
 	for (int i = 0; i < otherBuyer.sellerArrLogSize; i++) {
-		addSellerToBuyerArr(new Seller(*otherBuyer.sellerArr[i]));
+		addSellerToBuyerArr(*(new Seller(*otherBuyer.sellerArr[i])));
 	}
 	shoppingCart = *(new ShoppingCart(otherBuyer.shoppingCart));
 }
