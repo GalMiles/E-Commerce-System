@@ -81,6 +81,9 @@ void System::performChoice(int choice)
 	case 2:
 		addUser(SELLER);
 		break;
+	case 3:
+		addProductToSeller();
+		break;
 	case 8:
 		theMenu.printBuyers(buyerArr, buyerArrLogSize);
 		break;
@@ -114,13 +117,18 @@ void System::addUser(eUserType userType) {
 	}
 }
 
-void System::addProductToSeller(Product *product)
+void System::addProductToSeller()
 {
 	cout << "\nPlease choose the seller to whom you'd like the add a product: " << endl;
 	theMenu.printSellers(sellerArr, sellerArrLogSize);
 	int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
 	Seller *chosenSeller = sellerArr[chosenSellerIndex];
-	chosenSeller->addProduct(product);
+	char productName[MAX_LENGTH];
+	double price;
+	Product::eCategory categoryChoice;
+	theMenu.addProductToSeller(productName, price, categoryChoice);
+	Product newProduct(productName, price, categoryChoice, chosenSeller);
+	chosenSeller->addProduct(new Product(newProduct));
 }
 
 void System::addFeedbackToSeller()

@@ -51,13 +51,43 @@ void Menu::getFeedbackFromUser(char* feedBack, int feedBackSize) {
 }
 
 void Menu::printSellers(Seller **sellerArr, int size) {
-	for (int i = 0; i < size; i++) {
-		cout << "[" << i + 1 << "] " << sellerArr[i]->getName() << endl;
+	if (size <= 0) {
+		cout << "No sellers present in system." << endl;
+	}
+	else {
+		for (int i = 0; i < size; i++) {
+			cout << "[" << i + 1 << "] " << sellerArr[i]->getName() << endl;
+		}
 	}
 }
 
 void Menu::printBuyers(Buyer **buyerArr, int size) {
-	for (int i = 0; i < size; i++) {
-		cout << "[" << i + 1 << "] " << buyerArr[i]->getName() << endl;
+	if (size <= 0) {
+		cout << "No buyers present in system." << endl;
 	}
+	else {
+		for (int i = 0; i < size; i++) {
+			cout << "[" << i + 1 << "] " << buyerArr[i]->getName() << endl;
+		}
+	}
+}
+
+void Menu::addProductToSeller(char* productName, double& price, Product::eCategory& categoryChoice)
+{
+	//ask which seller do you want to add product to?
+	//run on system's sellers' arr and check if it exists bool(Seller *s); 
+
+	cin.ignore();
+
+	cout << "Please enter the product's name: ";
+	cin.getline(productName, 20);
+
+	cout << "\nPlease Enter the product's price: ";
+	cin >> price;
+
+	cout << "\nPlease select the product's category:" << endl;
+	for (int i = 1; i <= 4; i++) {
+		cout << "(" << i << ") " << Product::categories[i - 1] << endl;
+	}
+	categoryChoice = Product::eCategory::HOME;
 }

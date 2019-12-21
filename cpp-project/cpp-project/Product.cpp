@@ -8,15 +8,15 @@ Product::Product(char *productName, double price, eCategory category, Seller* pr
 	cout << "in Product c'tor" << endl; //TODO: delete this
 	productId = ++productCounter;
 
-	this->name = new char[strlen(productName) + 1];
-	setProductName(name);
+	name = new char[strlen(productName) + 1];
+	setProductName(productName);
 	setPrice(price);
 	setCategory(category);
 	setProductSeller(productSeller);
 }
 
 Product::Product(const Product& otherProduct) {
-	strcpy(this->name, otherProduct.name);
+	name = *(new char*(otherProduct.name));
 	price = *(new double(otherProduct.price));
 	category = *(new eCategory(otherProduct.category));
 	productId = *(new int(otherProduct.productId));
@@ -32,7 +32,7 @@ void Product::setPrice(double price) {
 }
 
 void Product::setCategory(eCategory category) {
-	this->price = price;
+	this->category = category;
 }
 
 void Product::setProductSeller(Seller* productSeller) {

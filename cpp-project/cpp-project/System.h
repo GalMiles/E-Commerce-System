@@ -20,7 +20,7 @@ public:
 	void addBuyerToBuyerArr(Buyer &buyer);
 	void performChoice(int choice);
 	void addUser(eUserType userType);
-	void addProductToSeller(Product *product);
+	void addProductToSeller();
 	void addFeedbackToSeller();
 
 private:

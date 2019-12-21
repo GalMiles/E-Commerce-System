@@ -22,7 +22,6 @@ User::~User()
 }
 
 void User::setUserName(char* name) {
-	new char[strlen(name) + 1];
 	strcpy(this->name, name);
 }
 

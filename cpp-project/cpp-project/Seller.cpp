@@ -11,9 +11,14 @@ Seller::Seller(User *sellerUser)//c'tor
 	this->productsLogSize = 0;
 	this->productsPhySize = 1;
 	this->products = new Product*[1];
+	this->products[0] = nullptr;
 }
 
 Seller::Seller(const Seller& otherSeller) {
+	this->productsLogSize = 0;
+	this->productsPhySize = 1;
+	this->products = new Product*[1];
+	this->products[0] = nullptr;
 	for (int i = 0; i < otherSeller.productsLogSize; i++) {
 		addProduct(new Product(*otherSeller.products[i]));
 	}
