@@ -20,7 +20,7 @@ public:
 	Buyer(const Buyer& otherBuyer);
 	~Buyer();
 
-	const ShoppingCart getShoppingCart();
+	ShoppingCart getShoppingCart();
 	void sellerArrRealloc();
 	void addSellerToBuyerArr(Seller &seller);
 	void setUser(User* user);

@@ -36,7 +36,7 @@ void Buyer::setUser(User* user) {
 	this->buyerUser = user;
 }
 
-const ShoppingCart Buyer::getShoppingCart() {
+ShoppingCart Buyer::getShoppingCart() {
 	return this->shoppingCart;
 }
 
