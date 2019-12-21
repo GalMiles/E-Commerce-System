@@ -10,7 +10,7 @@
 using namespace std;
 
 const int OPTIONS_LENGTH = 11;
-const int SEPERATOR_BLOCK_LENGTH = 25; // Amount of hyphens/dashes to print per seperator block
+const int SEPERATOR_BLOCK_LENGTH = 52; // Amount of chars to print per seperator block
 
 class Menu
 {
@@ -24,7 +24,7 @@ public:
 	void printBuyers(Buyer **buyerArr, int size);
 	void printProducts(Seller** sellerArr, int size);
 	void printProductsWithName(Seller **sellerArr, int size);
-	void printSeperatorBlock();
+	void printSeperatorBlock(char sep);
 
 	
 

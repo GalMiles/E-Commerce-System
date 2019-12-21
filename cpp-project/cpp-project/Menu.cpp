@@ -2,10 +2,14 @@
 
 void Menu::printMenu()
 {
+	cout << endl;
+	printSeperatorBlock('*');
 	cout << "\nPlease select the desired option from the following:\n" << endl;
 	for (int i = 0; i < OPTIONS_LENGTH; i++) { // TODO: move to an aux function - printOptions
 		cout << "[" << i + 1 << "] " << options[i] << endl;
 	}
+	cout << endl;
+	printSeperatorBlock('*');
 }
 
 int Menu::getUserChoice(int optionsLength)
@@ -82,20 +86,20 @@ void Menu::printProducts(Seller **sellerArr, int size) {
 			if (productsNum <= 0) { // Seller has no products, no use in printing him/her
 				continue;
 			}
-			printSeperatorBlock();
+			printSeperatorBlock('-');
 			cout << "[" << i + 1 << "] Seller: " << sellerArr[i]->getName() << endl;
 			for (int j = 0; j < productsNum; j++) {
 				cout << "\t[" << j + 1 << "] " << sellerArr[i]->getProducts()[j]->getName() << endl;
 			}
-			printSeperatorBlock();
+			printSeperatorBlock('-');
 			cout << endl;
 		}
 	}
 }
 
-void Menu::printSeperatorBlock() {
+void Menu::printSeperatorBlock(char sep) {
 	for (int i = 0; i < SEPERATOR_BLOCK_LENGTH; i++) {
-		cout << "-";
+		cout << sep;
 	}
 	cout << endl;
 }
@@ -108,9 +112,9 @@ void Menu::printProductsWithName(Seller **sellerArr, int size) {
 	}
 	else {
 		cout << "Please enter product name to search for (case-sensitive): ";
-		cout << endl << endl;
 		cin.ignore();
 		cin.getline(findName, MAX_LENGTH + 1);
+		cout << endl << endl;
 		for (int i = 0; i < size; i++) {
 			int productsNum = sellerArr[i]->getProductsLogSize();
 			if (productsNum <= 0) { // Seller has no products, no use in printing him/her
@@ -119,9 +123,9 @@ void Menu::printProductsWithName(Seller **sellerArr, int size) {
 			for (int j = 0; j < productsNum; j++) {
 				if (strcmp(findName, sellerArr[i]->getProducts()[j]->getName()) == 0) {
 					found = true;
-					printSeperatorBlock();
+					printSeperatorBlock('-');
 					sellerArr[i]->getProducts()[j]->show();
-					printSeperatorBlock();
+					printSeperatorBlock('-');
 				}
 			}
 		}

@@ -16,6 +16,7 @@ void System::initSystem()
 	cout << "Welcome to " << STORE_NAME << endl;
 	int choice;
 	do {
+		cout << endl;
 		theMenu.printMenu();
 		choice = theMenu.getUserChoice(OPTIONS_LENGTH);
 		performChoice(choice);
@@ -184,10 +185,10 @@ void System::addProductToShoppingCart() {
 	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
 	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
 	theMenu.printProducts(sellerArr, sellerArrLogSize);
-	cout << "Please choose a seller to buy from " << "[1~" << sellerArrLogSize << "]: " << endl;
+	cout << "Please choose a seller to buy from " << "[1 ~ " << sellerArrLogSize << "]: " << endl;
 	int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
 	Seller *chosenSeller = sellerArr[chosenSellerIndex];
-	cout << "Please choose the desired product number from this seller " << "[1~" << chosenSeller->getProductsLogSize() << "]: " << endl;
+	cout << "Please choose the desired product number from this seller " << "[1 ~ " << chosenSeller->getProductsLogSize() << "]: " << endl;
 	int chosenProductIndex = theMenu.getUserChoice(chosenSeller->getProductsLogSize());
 	Product *chosenProduct = chosenSeller->getProducts()[chosenProductIndex];
 	chosenBuyer->getShoppingCart().addProductToShoppingCart(*chosenProduct);
