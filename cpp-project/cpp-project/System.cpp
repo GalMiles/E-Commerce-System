@@ -282,13 +282,27 @@ void System::payForAnOrder() {
 			Order* chosenOrder;
 			if (unpaidOrders) {
 				cout << "Please choose an unpaid order to pay for: " << "[1 ~ " << chosenBuyer->getOrderArrLogSize() << ']';
-				cin.ignore();
-				orderChoiceIndex = theMenu.getUserChoice(chosenBuyer->getOrderArrLogSize()) - 1;
-				chosenOrder = chosenBuyer->getOrderArr()[orderChoiceIndex];
-				theMenu.printSeperatorBlock('$');
-				cout << "Processing payment..." << endl;
-				cout << "Payment complete." << endl;
-				theMenu.printSeperatorBlock('$');
+				do {
+					cin.ignore();
+					orderChoiceIndex = theMenu.getUserChoice(chosenBuyer->getOrderArrLogSize()) - 1;
+					chosenOrder = chosenBuyer->getOrderArr()[orderChoiceIndex];
+					if (chosenOrder->isPaid()) {
+						cout << "This order has already been paid for." << endl;
+					}
+				} while (chosenOrder->isPaid());
+				theMenu.printSeperatorBlock('*');
+				cout << "\nProcessing payment...";
+				chosenOrder->setPaymentStatus(true);
+				cout << "\nPayment complete." << endl;
+				theMenu.printSeperatorBlock('*');
+				ShoppingCart* chosenOrderShoppingCart = chosenOrder->getOrderShoppingCart();
+				ShoppingCart* chosenBuyerShoppingCart = chosenBuyer->getShoppingCart();
+				for (int i = 0; i < chosenOrderShoppingCart->getShoppingCartLogSize(); i++) {
+					chosenBuyerShoppingCart->removeProductFromShoppingCart(chosenOrderShoppingCart->getProducts()[i]->getProductId());
+				}
+				for (int i = 0; i < chosenOrderShoppingCart->getShoppingCartLogSize(); i++) {
+					chosenBuyer->addSellerToBuyerArr(*chosenOrderShoppingCart->getProducts()[i]->getSeller());
+				}
 			}
 			else {
 				cout << "All orders are already paid for." << endl;

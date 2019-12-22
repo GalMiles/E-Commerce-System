@@ -22,6 +22,7 @@ Order::Order(const Order& otherOrder) {
 	}
 	paid = otherOrder.paid;
 }
+
 Order::~Order() {
 	for (int i = 0; i < this->numOfProducts; i++)
 	{

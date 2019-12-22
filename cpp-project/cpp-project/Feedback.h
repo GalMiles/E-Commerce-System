@@ -15,7 +15,7 @@ class Feedback
 {
 public:
 	Feedback(char *userName, char *content);
-
+	Feedback(const Feedback& otherFeedback);
 	void setUserName(char* userName);
 	//void setDate(char* date) // TODO: Implement this
 	void setContent(char* content);
@@ -26,7 +26,6 @@ public:
 private:
 	char *userName;
 	char *date;
-	//Seller *seller;
 	char *content;
 };
 #endif

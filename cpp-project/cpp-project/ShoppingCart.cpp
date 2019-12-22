@@ -82,6 +82,6 @@ void ShoppingCart::removeProductFromShoppingCart(int productID) {
 	for (int i = productIndex; i < this->shoppingCartLogSize - 1; i++) {
 		this->shoppingCart[i] = this->shoppingCart[i + 1];
 	}
-	delete[] this->shoppingCart[shoppingCartLogSize];
+	this->shoppingCart[shoppingCartLogSize] = nullptr;
 	shoppingCartLogSize--;
 }

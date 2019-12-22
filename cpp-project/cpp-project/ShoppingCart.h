@@ -18,7 +18,7 @@ public:
 	~ShoppingCart();
 	Product** getProducts();
 	void addProductToShoppingCart(Product& productToAdd);
-	void removeProductFromShoppingCart(int index);
+	void removeProductFromShoppingCart(int productID);
 	void shoppingCartRealloc(); //NOTE: we should probably use the function implemented in Seller
 	void show();
 
