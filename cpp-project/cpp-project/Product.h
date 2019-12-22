@@ -1,3 +1,7 @@
+/*
+This class holds info about products
+*/
+
 #ifndef __PRODUCT_H
 #define __PRODUCT_H
 
@@ -9,31 +13,30 @@ using namespace std;
 
 class Seller;
 
-const int NUM_OF_CATEGORIES = 4;
+const int NUM_OF_CATEGORIES = 4; //num of categories present in the system
 
 class Product
 {
 public:
 	enum eCategory { CHILDREN, CLOTHES, HOME, SPORT };
-	static constexpr char* categories[] = { "Children", "Clothes", "Home", "Sport" };
+	static constexpr char* categories[] = { "Children", "Clothes", "Home", "Sport" }; //strings for the enum
 
 	Product(char *productName, double price, eCategory category, Seller* productSeller); //c'tor
-	Product(const Product& otherProduct);
+	Product(const Product& otherProduct);//copy c'tor
+	~Product();
 	void setProductName(char* productName);
 	void setPrice(double price);
 	void setCategory(eCategory category);
 	void setProductSeller(Seller* productSeller);
 	char *getName();
 	double getPrice();
-	//eCategory getCategory();
 	int getProductId();
 	Seller* getSeller();
-	//int getNumOfCategories();
-	void show();
+	void show(); //prints the product's info
 
 
 private:
-	static int productCounter;
+	static int productCounter; //productId counter
 	char *name;
 	double price;
 	eCategory category;

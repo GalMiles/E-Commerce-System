@@ -36,6 +36,21 @@ Seller::Seller(const Seller& otherSeller) {
 	sellerUser = new User(*otherSeller.sellerUser);
 }
 
+Seller::~Seller() {
+	for (int i = 0; i < productsPhySize; i++)
+	{
+		this->products[i] = nullptr;
+	}
+	delete[]products;
+
+	for (int i = 0; i < feedbackPhySize; i++)
+	{
+		this->feedbackArr[i] = nullptr;
+	}
+	delete[]feedbackArr;
+}
+
+
 void Seller::productsArrRealloc()
 {
 	Product **new_arr;

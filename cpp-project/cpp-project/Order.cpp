@@ -28,6 +28,7 @@ Order::~Order() {
 	{
 		this->sellers[i] = nullptr;
 	}
+	delete[]sellers;
 }
 
 void Order::setBuyer(Buyer* buyer) {

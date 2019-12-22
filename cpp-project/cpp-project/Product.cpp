@@ -1,7 +1,7 @@
 #include "Product.h"
 #include "Seller.h"
 
-int Product::productCounter = 0;
+int Product::productCounter = 0; //initialize the productId counter
 
 Product::Product(char *productName, double price, eCategory category, Seller* productSeller) //c'tor
 {
@@ -22,6 +22,10 @@ Product::Product(const Product& otherProduct) {
 	category = *(new eCategory(otherProduct.category));
 	productId = *(new int(otherProduct.productId));
 	productSeller = new Seller(*otherProduct.productSeller);
+}
+
+Product::~Product() {
+	delete this->name;
 }
 
 void Product::setProductName(char* productName) {
@@ -55,12 +59,6 @@ int Product::getProductId()
 	return productId;
 }
 
-/*
-eCategory Product::getCategory()
-{
-return m_category;
-}
-*/
 
 Seller* Product::getSeller() {
 	return this->productSeller;

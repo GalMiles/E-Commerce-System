@@ -1,29 +1,33 @@
 #include "Feedback.h"
 
-Feedback::Feedback(char *userName, char *content) //feedback c'tor
+Feedback::Feedback(char *userName, char *content, char* date) //feedback c'tor
 {
 	this->userName = new char[strlen(userName) + 1];
-	//this->date = new char[strlen(date) + 1];
 	this->content = new char[strlen(content) + 1];
 	setUserName(userName);
-	//setDate(date); // TODO: Implement this
 	setContent(content);
+	setDate(date);
 }
 
 Feedback::Feedback(const Feedback& otherFeedback) {
 	userName = *(new char*(otherFeedback.userName));
-	//date = *(new char*(otherFeedback.date));
+	strcpy(date, otherFeedback.date);
 	content = *(new char*(otherFeedback.content));
+}
+
+Feedback::~Feedback() {
+	delete this->userName;
+	delete this->content;
 }
 
 void Feedback::setUserName(char* userName) {
 	strcpy(this->userName, userName);
 }
-/*
-void Feedback::setDate(char* date) { // TODO: Implement this
+
+void Feedback::setDate(char* date) {
 	strcpy(this->date, date);
 }
-*/
+
 void Feedback::setContent(char* content) {
 	strcpy(this->content, content);
 }

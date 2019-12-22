@@ -1,3 +1,7 @@
+/*
+This class holds info about the shopping cart
+*/
+
 #ifndef __SHOPPINGCART_H
 #define __SHOPPINGCART_H
 
@@ -13,14 +17,14 @@ using namespace std;
 class ShoppingCart
 {
 public:
-	ShoppingCart();
-	ShoppingCart(const ShoppingCart& otherShoppingCart);
-	~ShoppingCart();
+	ShoppingCart(); //c'tor
+	ShoppingCart(const ShoppingCart& otherShoppingCart); //copy c'tor
+	~ShoppingCart(); //d'tor
 	Product** getProducts();
 	void addProductToShoppingCart(Product& productToAdd);
 	void removeProductFromShoppingCart(int productID);
-	void shoppingCartRealloc(); //NOTE: we should probably use the function implemented in Seller
-	void show();
+	void shoppingCartRealloc();
+	void show(); //print shopping cart
 
 	int getShoppingCartLogSize();
 	int getShoppingCartPhySize();

@@ -1,3 +1,7 @@
+/*
+This class holds general user info (address, password, user name - info which is required for any user - buyer or seller)
+*/
+
 #ifndef __USER_H
 #define __USER_H
 
@@ -19,11 +23,10 @@ public:
 	void setAddress(Address* address);
 	Address* getAddress();
 
-	User(char* name, char* password, Address* address);
-	User(const User& otherUser);
-	~User();
+	User(char* name, char* password, Address* address); //c'tor
+	User(const User& otherUser); //copy c'tor
 
-	void show() const;
+	void show() const; //print user's info
 
 private:
 	char*		name;

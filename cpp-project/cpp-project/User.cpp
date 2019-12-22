@@ -15,10 +15,6 @@ User::User(const User& otherUser) {
 	address = new Address(*otherUser.address);
 }
 
-User::~User()
-{
-}
-
 void User::setUserName(char* name) {
 	strcpy(this->name, name);
 }

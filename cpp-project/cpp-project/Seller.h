@@ -1,3 +1,7 @@
+/*
+This class holds info about sellers
+*/
+
 #ifndef __SELLER_H
 #define __SELLER_H
 
@@ -9,23 +13,25 @@ using namespace std;
 
 #include "User.h"
 #include "Product.h"
+
+//forward declaration
 class Feedback;
 
 class Seller
 {
 public:
-	Seller(User *sellerUser);
-	Seller(const Seller& otherSeller);
-	//~Seller // TODO: Add d'tor
+	Seller(User *sellerUser); //c'tor
+	Seller(const Seller& otherSeller); //copy c'tor
+	~Seller(); //d'tor
 
 	Product** getProducts();
-	void productsArrRealloc();
-	void feedbackArrRealloc();
+	void productsArrRealloc(); //reallocate memory for productsArr
+	void feedbackArrRealloc();//reallocate memory for feedbackArr
 	char* getName();
 	int getProductsLogSize();
-	void addProduct(Product &product);
-	void addFeedback(Feedback &feedback);
-	void show() const;
+	void addProduct(Product &product); //add product to productArr
+	void addFeedback(Feedback &feedback); //add feedback to feedbackArr
+	void show() const; //print info about this seller
 
 
 private:

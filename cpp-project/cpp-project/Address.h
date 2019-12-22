@@ -1,6 +1,5 @@
 /*
-A class which holds address info - country, city, street and home number
-The strings' length is limited by MAX_LENGTH
+This holds address info - country, city, street and home number
 */
 
 #ifndef __ADDRESS_H
@@ -12,14 +11,14 @@ using namespace std;
 
 #pragma warning(disable: 4996)
 
-const int MAX_LENGTH = 20;
+const int MAX_LENGTH = 20; //length limit for strings
 
 class Address
 {
 public:
-	Address(char* country, char* city, char* street, int homeNumber);
-	Address(const Address& otherAddress);
-	bool setCountry(char *country);
+	Address(char* country, char* city, char* street, int homeNumber); //c'tor
+	Address(const Address& otherAddress); //copy c'tor
+	bool setCountry(char *country); 
 	bool setCity(char *city);
 	bool setStreet(char *street);
 	void setHomeNumber(int homeNumber);
@@ -29,8 +28,8 @@ public:
 	char *getStreet();
 	int getHomeNumber();
 
-	bool isAddressValid(char* address);
-	void show() const;
+	bool isAddressValid(char* addressStr); //validates the address
+	void show() const; //prints the address
 
 private:
 	char country[MAX_LENGTH];

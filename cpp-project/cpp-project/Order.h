@@ -1,3 +1,7 @@
+/*
+This class holds info about orders
+*/
+
 #ifndef __ORDER_H
 #define __ORDER_H
 
@@ -23,24 +27,21 @@ private:
 
 
 public:
-	Order(ShoppingCart* shoppingCart, Buyer* buyer);
-	Order(const Order& otherOrder);
-	~Order();
-	//Seller** getOrderSellers();
+	Order(ShoppingCart* shoppingCart, Buyer* buyer); //c'tor
+	Order(const Order& otherOrder); //copy c'tor
+	~Order(); //d'tor
 	Buyer* getBuyer();
-	void calculateTotalPrice();
+	void calculateTotalPrice(); //calculates total price of the items
 	double getTotalPrice();
-	bool isPaid();
-	void setPaymentStatus(bool paymentStatus);
+	bool isPaid(); //is this order paid
+	void setPaymentStatus(bool paymentStatus); //sets payment status - PAID/UNPAID
 	void setBuyer(Buyer* buyer);
 	void setNumOfProducts(ShoppingCart* shoppingCart);
 	void setShoppingCart(ShoppingCart* shoppingCart);
 	ShoppingCart* getOrderShoppingCart();
-	void setOrderSellers();
+	void setOrderSellers(); //set array of sellers whom the products of this order were purchased from
 	enum ePaymentStatus { UNPAID, PAID };
-	static constexpr char* paymentStatuses[] = { "UNPAID", "PAID" };
-
-
+	static constexpr char* paymentStatuses[] = { "UNPAID", "PAID" }; //strings for the enum
 };
 
 #endif

@@ -37,7 +37,13 @@ Buyer::~Buyer()
 	{
 		this->sellerArr[i] = nullptr;
 	}
-	//delete[]sellerArr;
+	delete[]sellerArr; 
+
+	for (int i = 0; i < this->orderArrPhySize; i++)
+	{
+		this->orderArr[i] = nullptr;
+	}
+	delete[]orderArr;
 }
 
 void Buyer::setUser(User* user) {
@@ -54,14 +60,7 @@ ShoppingCart* Buyer::getShoppingCart() {
 
 void Buyer::show()
 {
-	buyerUser->show(); //using User's method
-
-	cout << "The buyer's products are:" << endl;
-	/*for (int i = 0; i < this->shoppingCart.getSoppingCartLogSize; i++)
-	{
-	cout << shoppingCart.shoppingCart[i].getName;
-	}
-	*/
+	buyerUser->show();
 }
 
 void Buyer::sellerArrRealloc()

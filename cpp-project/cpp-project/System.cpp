@@ -11,7 +11,19 @@ System::System() : theMenu()
 	this->buyerArr = new Buyer*[1];
 }
 
-void System::initSystem()
+System::~System() {
+	for (int i = 0; i < sellerArrPhySize; i++) {
+		this->sellerArr[i] = nullptr;
+	}
+	delete[]sellerArr;
+
+	for (int i = 0; i < buyerArrPhySize; i++) {
+		this->buyerArr[i] = nullptr;
+	}
+	delete[]buyerArr;
+}
+
+void System::initSystem() //initialize the system
 {
 	cout << "Welcome to " << STORE_NAME << endl;
 	int choice;
@@ -20,7 +32,7 @@ void System::initSystem()
 		theMenu.printMenu();
 		choice = theMenu.getUserChoice(OPTIONS_LENGTH);
 		performChoice(choice);
-	} while (choice != 11);
+	} while (choice != OPTIONS_LENGTH); //while the user didn't ask to exit the program
 }
 
 bool System::isEmpty(int size) {
@@ -81,10 +93,10 @@ void System::performChoice(int choice)
 {
 	switch (choice) {
 	case 1:
-		addUser(BUYER);
+		addUser(BUYER); //create a new Buyer user
 		break;
 	case 2:
-		addUser(SELLER);
+		addUser(SELLER); //create a new Seller user
 		break;
 	case 3:
 		addProductToSeller();
@@ -129,12 +141,12 @@ void System::addUser(eUserType userType) {
 	if (userType == BUYER) {
 		ShoppingCart newShoppingCart;
 		Buyer newBuyer(&newUser, &newShoppingCart);
-		addBuyerToBuyerArr(newBuyer); // TODO: Test if a copy c'tor is needed
+		addBuyerToBuyerArr(newBuyer); 
 	}
 
 	else if (userType == SELLER) {
 		Seller newSeller(&newUser);
-		addSellerToSellerArr(newSeller); // TODO: Test if a copy c'tor is needed
+		addSellerToSellerArr(newSeller);
 	}
 }
 
@@ -145,14 +157,14 @@ void System::addProductToSeller()
 	}
 	else {
 		cout << "\nPlease choose the seller to whom you'd like the add a product: " << endl;
-		theMenu.printSellers(sellerArr, sellerArrLogSize);
+		theMenu.printSellers(sellerArr, sellerArrLogSize); //print all of the sellers
 		int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
 		Seller *chosenSeller = sellerArr[chosenSellerIndex];
 		char productName[MAX_LENGTH];
 		double price;
 		Product::eCategory categoryChoice;
 		theMenu.addProductToSeller(productName, price, categoryChoice);
-		Product newProduct(productName, price, categoryChoice, chosenSeller);
+		Product newProduct(productName, price, categoryChoice, chosenSeller); //createa new product
 		chosenSeller->addProduct(newProduct);
 	}
 }
@@ -180,8 +192,9 @@ void System::addFeedbackToSeller()
 			int chosenSellerIndex = theMenu.getUserChoice(chosenBuyer->getSellerArrLogSize()) - 1;
 			Seller *chosenSeller = chosenBuyer->getSellerArr()[chosenSellerIndex];
 			char feedBackContent[MAX_FEEDBACK_SIZE];
-			theMenu.getFeedbackFromUser(feedBackContent, MAX_FEEDBACK_SIZE);
-			Feedback newFeedback(chosenBuyer->getName(), feedBackContent);
+			char feedBackDate[DATE_LENGTH];
+			theMenu.getFeedbackFromUser(feedBackContent, MAX_FEEDBACK_SIZE, feedBackDate);
+			Feedback newFeedback(chosenBuyer->getName(), feedBackContent, feedBackDate);
 			chosenSeller->addFeedback(newFeedback);
 		}
 	}

@@ -72,10 +72,10 @@ void Address::setHomeNumber(int homeNumber)
 	this->homeNumber = homeNumber;
 }
 
-bool Address::isAddressValid(char* address) {
-	int length = strlen(address);
+bool Address::isAddressValid(char* addressStr) {
+	int length = strlen(addressStr);
 	for (int i = 0; i < length; i++) {
-		if ((address[i] < 'A' || (address[i] > 'Z' && address[i] < 'a') || address[i] > 'z'))
+		if ((addressStr[i] < 'A' || (addressStr[i] > 'Z' && addressStr[i] < 'a') || addressStr[i] > 'z'))
 			return false;
 	}
 	return true;

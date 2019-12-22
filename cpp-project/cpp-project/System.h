@@ -1,3 +1,8 @@
+/*
+This class is in charge of managing the system. 
+It contains arrays of all of the users in the system
+*/
+
 #ifndef __SYSTEM_H
 #define __SYSTEM_H
 
@@ -6,27 +11,29 @@
 #include "Menu.h"
 #include "Order.h"
 
-const int MAX_FEEDBACK_SIZE = 100;
+const int MAX_FEEDBACK_SIZE = 100; //limit the feedback's length
 
 class System
 {
 public:
-	System();
+	System(); //c'tor
+	System(System& other) = delete; //disabling the copy c'tor
+	~System(); //d'tor
 	enum eUserType { SELLER, BUYER };
 	const char STORE_NAME[8] = "AlmoGal";
-	void initSystem();
-	bool isEmpty(int size);
-	void sellerArrRealloc();
-	void buyerArrRealloc();
-	void addSellerToSellerArr(Seller &seller);
-	void addBuyerToBuyerArr(Buyer &buyer);
-	void performChoice(int choice);
-	void addUser(eUserType userType);
-	void addProductToSeller();
-	void addFeedbackToSeller();
-	void addProductToShoppingCart();
-	void placeOrder();
-	void payForAnOrder();
+	void initSystem(); //initialize the system
+	bool isEmpty(int size); //determintes if an array is empty
+	void sellerArrRealloc(); //reallocate memory for sellerArr
+	void buyerArrRealloc(); //reallocate memory for buyerArr
+	void addSellerToSellerArr(Seller &seller); //add seller to sellerArr
+	void addBuyerToBuyerArr(Buyer &buyer); //add buyer to BuyerArr
+	void performChoice(int choice); //gets a choice and performs the desired action
+	void addUser(eUserType userType); //creates a new user - buyer or seller
+	void addProductToSeller(); //add product to seller's stock
+	void addFeedbackToSeller(); //add feedback to seller
+	void addProductToShoppingCart(); //add product to shopping cart
+	void placeOrder(); //place an order (no payment)
+	void payForAnOrder(); //pay for an existing order
 
 
 private:

@@ -1,3 +1,6 @@
+/*
+This class holds feedback info.
+*/
 #ifndef __FEEDBACK_H
 #define __FEEDBACK_H
 
@@ -10,14 +13,16 @@ using namespace std;
 
 #pragma warning(disable: 4996)
 
+const int DATE_LENGTH = 11; //limit the date's string length
 
 class Feedback
 {
 public:
-	Feedback(char *userName, char *content);
-	Feedback(const Feedback& otherFeedback);
+	Feedback(char *userName, char *content, char *date); //c'tor
+	Feedback(const Feedback& otherFeedback); //copy c'tor
+	~Feedback(); //d'tor
 	void setUserName(char* userName);
-	//void setDate(char* date) // TODO: Implement this
+	void setDate(char* date);
 	void setContent(char* content);
 	char *getUserName();
 	char *getDate();
@@ -25,7 +30,7 @@ public:
 
 private:
 	char *userName;
-	char *date;
+	char date[DATE_LENGTH];
 	char *content;
 };
 #endif

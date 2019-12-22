@@ -5,7 +5,7 @@ void Menu::printMenu()
 	cout << endl;
 	printSeperatorBlock('*');
 	cout << "\nPlease select the desired option from the following:\n" << endl;
-	for (int i = 0; i < OPTIONS_LENGTH; i++) { // TODO: move to an aux function - printOptions
+	for (int i = 0; i < OPTIONS_LENGTH; i++) {
 		cout << "[" << i + 1 << "] " << options[i] << endl;
 	}
 	cout << endl;
@@ -19,7 +19,7 @@ int Menu::getUserChoice(int optionsLength)
 	cin >> choice;
 	cout << endl;
 
-	while (choice < 1 || choice > optionsLength) {
+	while (choice < 1 || choice > optionsLength) { //if the choice is not valid
 		cout << "Invalid option. Please select an option between 1 and " << optionsLength << endl;
 		cout << "\nChoice: ";
 		cin >> choice;
@@ -48,8 +48,42 @@ void Menu::getUserInfoFromUser(char* userName, char* password, char*country, cha
 	cin >> homeNumber;
 }
 
-void Menu::getFeedbackFromUser(char* feedBack, int feedBackSize) {
+bool Menu::validateDate(char* date) { //make sure the submitted date is in DD/MM/YYYY format
+	const char s[2] = "/"; // Date is delimited by / (e.g. 18/12/2019)
+	char *token;
+
+	// Get day
+	token = strtok(date, s);
+	// Day must be 2 chars within 01-31 (e.g. 18)
+	if (token == NULL || strlen(token) != 2 || atoi(token) < 1 || atoi(token) > 31) {
+		cout << "Invalid day entered!" << endl;
+		return false;
+	}
+	// Get month
+	token = strtok(NULL, s);
+	// Month must be 2 chars within 01-12 (e.g. 12)
+	if (token == NULL || strlen(token) != 2 || atoi(token) < 1 || atoi(token) > 12) {
+		cout << "Invalid month entered!" << endl;
+		return false;
+	}
+	// Get year
+	token = strtok(NULL, s);
+	// Year must be 4 chars (e.g. 2019)
+	if (token == NULL || strlen(token) != 4) {
+		cout << "Invalid year entered!" << endl;
+		return false;
+	}
+	return true;
+}
+
+void Menu::getFeedbackFromUser(char* feedBack, int feedBackSize, char* date) {
 	cin.ignore();
+	bool isDateValid = false;
+	do {
+		cout << "\nPlease enter feedback date (DD/MM/YYYY format, e.g. 08/02/2019): ";
+		cin.getline(date, DATE_LENGTH);
+		isDateValid = validateDate(date);
+	} while (!isDateValid);
 	cout << "\nPlease enter your feedback (Maximum " << feedBackSize << " characters): " << endl;
 	cin.getline(feedBack, feedBackSize);
 }
@@ -109,21 +143,21 @@ void Menu::printSeperatorBlock(char sep) {
 
 void Menu::printProductsWithName(Seller **sellerArr, int size) {
 	char findName[MAX_LENGTH];
-	bool found = false;
-	if (size <= 0) {
+	bool found = false; //bool to indicate whether we found matching products or not
+	if (size <= 0) { //if there are no products in the system
 		cout << "There are no products present in the system." << endl;
 	}
-	else {
+	else { //get input from the user and search for the item they are looking for
 		cout << "Please enter product name to search for (case-sensitive): ";
 		cin.ignore();
 		cin.getline(findName, MAX_LENGTH + 1);
 		cout << endl << endl;
-		for (int i = 0; i < size; i++) {
-			int productsNum = sellerArr[i]->getProductsLogSize();
+		for (int i = 0; i < size; i++) { //this loop runs on every seller
+			int productsNum = sellerArr[i]->getProductsLogSize(); //how many products the current seller has
 			if (productsNum <= 0) { // Seller has no products, no use in printing him/her
 				continue;
 			}
-			for (int j = 0; j < productsNum; j++) {
+			for (int j = 0; j < productsNum; j++) { //this loop prints every product in the current seller's stock
 				if (strcmp(findName, sellerArr[i]->getProducts()[j]->getName()) == 0) {
 					found = true;
 					printSeperatorBlock('-');

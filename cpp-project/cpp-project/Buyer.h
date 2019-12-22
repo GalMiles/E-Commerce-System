@@ -1,3 +1,8 @@
+/*
+This class holds info about buyers.
+It contains their user's info, their shopping cart, an array of the sellers they have purchased from and their order history
+*/
+
 #ifndef __BUYER_H
 #define __BUYER_H
 
@@ -12,6 +17,8 @@ using namespace std;
 
 #pragma warning(disable: 4996)
 
+
+//forward declarations:
 class Product;
 
 class Order;
@@ -19,14 +26,14 @@ class Order;
 class Buyer
 {
 public:
-	Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart);
-	Buyer(const Buyer& otherBuyer);
-	~Buyer();
+	Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart); //c'tor
+	Buyer(const Buyer& otherBuyer); //copy c'tor
+	~Buyer(); //d'tor
 
-	void sellerArrRealloc();
-	void orderArrRealloc();
-	void addSellerToBuyerArr(Seller &seller);
-	void addOrderToOrderArr(Order &order);
+	void sellerArrRealloc(); //reallocate memory for sellerArr
+	void orderArrRealloc(); //reallocate memory for orderArr
+	void addSellerToBuyerArr(Seller &seller); //add seller to the buyer's sellers array
+	void addOrderToOrderArr(Order &order); //add order to they buyer's order history
 	void setUser(User* user);
 	void setShoppingCart(ShoppingCart* shoppingCart);
 	User *getUser();
@@ -37,7 +44,7 @@ public:
 	Order **getOrderArr();
 	ShoppingCart* getShoppingCart();
 
-	void show();
+	void show(); //print buyer's info
 
 private:
 	User			*buyerUser;

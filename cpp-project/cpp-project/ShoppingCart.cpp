@@ -22,6 +22,7 @@ ShoppingCart::~ShoppingCart() //d'tor
 	{
 		this->shoppingCart[i] = nullptr;
 	}
+	delete[]shoppingCart;
 }
 
 Product** ShoppingCart::getProducts()
@@ -72,18 +73,18 @@ void ShoppingCart::show() {
 }
 
 void ShoppingCart::removeProductFromShoppingCart(int productID) {
-	if (this->shoppingCartLogSize <= 0) {
+	if (this->shoppingCartLogSize <= 0) { //if there are no products in the shopping cart
 		return;
 	}
 	else {
-		int productIndex;
+		int productIndex; //index of the product we want to delete
 		for (int i = 0; i < this->shoppingCartLogSize; i++) {
-			if (shoppingCart[i]->getProductId() == productID) {
+			if (shoppingCart[i]->getProductId() == productID) { //if this is the product we want to delete
 				productIndex = i;
-				break;
+				break; //break the loop
 			}
 		}
-		for (int i = productIndex; i < this->shoppingCartLogSize - 1; i++) {
+		for (int i = productIndex; i < this->shoppingCartLogSize - 1; i++) { //deleting the product
 			this->shoppingCart[i] = this->shoppingCart[i + 1];
 		}
 		this->shoppingCart[shoppingCartLogSize] = nullptr;
