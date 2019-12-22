@@ -139,9 +139,6 @@ void Menu::printProductsWithName(Seller **sellerArr, int size) {
 
 void Menu::addProductToSeller(char* productName, double& price, Product::eCategory& categoryChoice)
 {
-	//ask which seller do you want to add product to?
-	//run on system's sellers' arr and check if it exists bool(Seller *s); 
-
 	cin.ignore();
 
 	cout << "Please enter the product's name: ";
@@ -154,5 +151,5 @@ void Menu::addProductToSeller(char* productName, double& price, Product::eCatego
 	for (int i = 1; i <= 4; i++) {
 		cout << "(" << i << ") " << Product::categories[i - 1] << endl;
 	}
-	categoryChoice = Product::eCategory::HOME;
+	
 }

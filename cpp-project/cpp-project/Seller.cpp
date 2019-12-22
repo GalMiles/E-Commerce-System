@@ -11,6 +11,10 @@ Seller::Seller(User *sellerUser)//c'tor
 	this->productsPhySize = 1;
 	this->products = new Product*[1];
 	this->products[0] = nullptr;
+	this->feedbackLogSize = 0;
+	this->feedbackPhySize = 1;
+	this->feedbackArr = new Feedback*[1];
+	this->feedbackArr[0] = nullptr;
 }
 
 Seller::Seller(const Seller& otherSeller) {
@@ -21,6 +25,11 @@ Seller::Seller(const Seller& otherSeller) {
 	for (int i = 0; i < otherSeller.productsLogSize; i++) {
 		addProduct(*(new Product(*otherSeller.products[i])));
 	}
+
+	this->feedbackLogSize = 0;
+	this->feedbackPhySize = 1;
+	this->feedbackArr = new Feedback*[1];
+	this->feedbackArr[0] = nullptr;
 	for (int i = 0; i < otherSeller.feedbackLogSize; i++) {
 		addFeedback(*(new Feedback(*otherSeller.feedbackArr[i])));
 	}
