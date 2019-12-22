@@ -5,9 +5,9 @@
 #include <string.h>
 using namespace std;
 
-//#include "Seller.h"
+#include "Seller.h"
 #include "ShoppingCart.h"
-//#include "Buyer.h"
+#include "Buyer.h"
 
 class Buyer;
 
@@ -19,6 +19,7 @@ private:
 	Seller** sellers;
 	double totalPrice;
 	int numOfProducts;
+	bool paid;
 
 
 public:
@@ -29,10 +30,16 @@ public:
 	Buyer* getBuyer();
 	void calculateTotalPrice();
 	double getTotalPrice();
+	bool isPaid();
+	void setPaymentStatus(bool paymentStatus);
 	void setBuyer(Buyer* buyer);
 	void setNumOfProducts(ShoppingCart* shoppingCart);
 	void setShoppingCart(ShoppingCart* shoppingCart);
+	ShoppingCart* getOrderShoppingCart();
 	void setOrderSellers();
+	enum ePaymentStatus { UNPAID, PAID };
+	static constexpr char* paymentStatuses[] = { "UNPAID", "PAID" };
+
 
 };
 

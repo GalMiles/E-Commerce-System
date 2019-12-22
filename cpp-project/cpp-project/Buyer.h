@@ -14,7 +14,7 @@ using namespace std;
 
 class Product;
 
-//class Order;
+class Order;
 
 class Buyer
 {
@@ -32,6 +32,7 @@ public:
 	User *getUser();
 	char *getName();
 	int getSellerArrLogSize();
+	int getOrderArrLogSize();
 	Seller **getSellerArr();
 	Order **getOrderArr();
 	ShoppingCart* getShoppingCart();

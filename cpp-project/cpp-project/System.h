@@ -1,10 +1,10 @@
 #ifndef __SYSTEM_H
 #define __SYSTEM_H
 
-//#include "Seller.h"
-//#include "Buyer.h"
+#include "Seller.h"
+#include "Buyer.h"
 #include "Menu.h"
-//#include "Order.h"
+#include "Order.h"
 
 const int MAX_FEEDBACK_SIZE = 100;
 
@@ -25,7 +25,9 @@ public:
 	void addProductToSeller();
 	void addFeedbackToSeller();
 	void addProductToShoppingCart();
-	void makeOrder();
+	void placeOrder();
+	void payForAnOrder();
+
 
 private:
 	Menu theMenu;

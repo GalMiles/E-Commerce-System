@@ -35,12 +35,24 @@ Buyer* Order::getBuyer() {
 	return this->buyer;
 }
 
+bool Order::isPaid() {
+	return this->paid;
+}
+
+void Order::setPaymentStatus(bool paymentStatus) {
+	this->paid = paymentStatus;
+}
+
 void Order::setNumOfProducts(ShoppingCart* shoppingCart) {
 	this->numOfProducts = shoppingCart->getShoppingCartLogSize();
 }
 
 void Order::setShoppingCart(ShoppingCart* shoppingCart) {
 	this->shoppingCart = shoppingCart;
+}
+
+ShoppingCart* Order::getOrderShoppingCart() {
+	return this->shoppingCart;
 }
 
 void Order::setOrderSellers() {

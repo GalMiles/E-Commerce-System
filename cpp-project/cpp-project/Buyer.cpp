@@ -114,6 +114,8 @@ char* Buyer::getName()
 
 int Buyer::getSellerArrLogSize() { return sellerArrLogSize; }
 
+int Buyer::getOrderArrLogSize() { return orderArrLogSize; }
+
 Seller** Buyer::getSellerArr() { return sellerArr; }
 
 Order** Buyer::getOrderArr() { return orderArr; }

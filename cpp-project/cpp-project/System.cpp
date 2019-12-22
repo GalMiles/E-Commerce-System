@@ -23,7 +23,7 @@ void System::initSystem()
 	} while (choice != 11);
 }
 
-bool isEmpty(int size) {
+bool System::isEmpty(int size) {
 	return (size <= 0);
 }
 
@@ -207,7 +207,7 @@ void System::addProductToShoppingCart() {
 	}
 }
 
-void System::makeOrder() {
+void System::placeOrder() {
 	if (isEmpty(this->buyerArrLogSize)) {
 		cout << "No buyers present in system." << endl;
 	}
@@ -237,6 +237,50 @@ void System::makeOrder() {
 			token = strtok(NULL, s);
 		}
 		Order newOrder(&orderShoppingCart, chosenBuyer);
+		chosenBuyer->addOrderToOrderArr(newOrder);
 		delete[] productsString;
+	}
+}
+
+void System::payForAnOrder() {
+	if (isEmpty(this->buyerArrLogSize)) {
+		cout << "No buyers present in system." << endl;
+	}
+	cout << "Please choose a buyer to make an order for: " << endl;
+	theMenu.printBuyers(buyerArr, buyerArrLogSize);
+	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
+	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+	if (isEmpty(chosenBuyer->getOrderArrLogSize())) {
+		cout << "This buyer does not have any orders to pay for." << endl;
+	}
+	else {
+		bool unpaidOrders = false; // Unless there are unpaid orders, the buyer can't pay
+		cout << "This buyer has placed the following orders: " << endl;
+		for (int i = 0; i < chosenBuyer->getOrderArrLogSize(); i++) {
+			Order* tempOrder = chosenBuyer->getOrderArr()[i];
+			bool isThisOrderPaid = tempOrder->isPaid();
+			if (!isThisOrderPaid && !unpaidOrders) { // There is at least one unpaid order
+				unpaidOrders = true;
+			}
+			cout << "[ Order Number " << i + 1 << " ]\t(Status: " << Order::paymentStatuses[isThisOrderPaid] << ')' << endl;
+			theMenu.printSeperatorBlock('+');
+			tempOrder->getOrderShoppingCart()->show();
+			cout << "Total Price: " << tempOrder->getTotalPrice() << endl;
+			theMenu.printSeperatorBlock('-');
+		}
+		int orderChoiceIndex;
+		Order* chosenOrder;
+		if (unpaidOrders) {
+			cout << "Please choose an unpaid order to pay for: " << "[1 ~ " << chosenBuyer->getOrderArrLogSize() << ']';
+			cin.ignore();
+			orderChoiceIndex = theMenu.getUserChoice(chosenBuyer->getOrderArrLogSize()) - 1;
+			chosenOrder = chosenBuyer->getOrderArr()[orderChoiceIndex];
+			theMenu.printSeperatorBlock('*');
+			cout << "Processing payment...";
+			theMenu.printSeperatorBlock('*');
+		}
+		else {
+			cout << "All orders are already paid for." << endl;
+		}
 	}
 }
