@@ -96,8 +96,10 @@ void System::performChoice(int choice)
 		addProductToShoppingCart();
 		break;
 	case 6:
+		placeOrder();
 		break;
 	case 7:
+		payForAnOrder();
 		break;
 	case 8:
 		theMenu.printBuyers(buyerArr, buyerArrLogSize);
@@ -189,21 +191,23 @@ void System::addProductToShoppingCart() {
 	if (isEmpty(this->buyerArrLogSize)) {
 		cout << "No buyers present in system." << endl;
 	}
-	cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
-	theMenu.printBuyers(buyerArr, buyerArrLogSize);
-	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
-	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
-	if (theMenu.printProducts(sellerArr, sellerArrLogSize)) {
-		cout << "Please choose a seller to buy from " << "[1 ~ " << sellerArrLogSize << "]: " << endl;
-		int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
-		Seller *chosenSeller = sellerArr[chosenSellerIndex];
-		cout << "Please choose the desired product number from this seller " << "[1 ~ " << chosenSeller->getProductsLogSize() << "]: " << endl;
-		int chosenProductIndex = theMenu.getUserChoice(chosenSeller->getProductsLogSize()) - 1;
-		Product *chosenProduct = chosenSeller->getProducts()[chosenProductIndex];
-		chosenBuyer->getShoppingCart()->addProductToShoppingCart(*chosenProduct);
-	}
 	else {
-		cout << "No products present in the system." << endl;
+		cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
+		theMenu.printBuyers(buyerArr, buyerArrLogSize);
+		int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
+		Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+		if (theMenu.printProducts(sellerArr, sellerArrLogSize)) {
+			cout << "Please choose a seller to buy from " << "[1 ~ " << sellerArrLogSize << "]: " << endl;
+			int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
+			Seller *chosenSeller = sellerArr[chosenSellerIndex];
+			cout << "Please choose the desired product number from this seller " << "[1 ~ " << chosenSeller->getProductsLogSize() << "]: " << endl;
+			int chosenProductIndex = theMenu.getUserChoice(chosenSeller->getProductsLogSize()) - 1;
+			Product *chosenProduct = chosenSeller->getProducts()[chosenProductIndex];
+			chosenBuyer->getShoppingCart()->addProductToShoppingCart(*chosenProduct);
+		}
+		else {
+			cout << "No products present in the system." << endl;
+		}
 	}
 }
 
@@ -211,34 +215,38 @@ void System::placeOrder() {
 	if (isEmpty(this->buyerArrLogSize)) {
 		cout << "No buyers present in system." << endl;
 	}
-	cout << "\nPlease choose a buyer to make an order for: " << endl;
-	theMenu.printBuyers(buyerArr, buyerArrLogSize);
-	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
-	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
-	if (isEmpty(chosenBuyer->getShoppingCart()->getShoppingCartLogSize())) {
-		cout << "This buyer doesn't have any products in his/her shopping cart." << endl;
-	}
 	else {
-		int stringSize = (chosenBuyer->getShoppingCart()->getShoppingCartLogSize() * 2) + 1; // (Integer + comma) per product in Shopping Cart + '\0'
-		char* productsString = new char[stringSize];
-		const char s[2] = ","; // Each product in user input is supposed to be separated by commas
-		char *token;
-		int productIndex;
-		cout << "The following products are in your shopping cart: " << endl;
-		chosenBuyer->getShoppingCart()->show();
-		cout << "Please choose product/s to order, separated by commas with no whitespace (e.g. 1,2,4,6): ";
-		cin.ignore();
-		cin.getline(productsString, stringSize); // TODO: VALIDATE USER INPUT (SOME PRODUCTS ENTERED ETC.)
-		ShoppingCart orderShoppingCart;
-		token = strtok(productsString, s); // Get first product that user wanted to order
-		while (token != NULL) {
-			productIndex = atoi(token) - 1;
-			orderShoppingCart.addProductToShoppingCart(*chosenBuyer->getShoppingCart()->getProducts()[productIndex]);
-			token = strtok(NULL, s);
+		cout << "\nPlease choose a buyer to make an order for: " << endl;
+		theMenu.printBuyers(buyerArr, buyerArrLogSize);
+		int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
+		Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+		if (isEmpty(chosenBuyer->getShoppingCart()->getShoppingCartLogSize())) {
+			cout << "This buyer doesn't have any products in his/her shopping cart." << endl;
 		}
-		Order newOrder(&orderShoppingCart, chosenBuyer);
-		chosenBuyer->addOrderToOrderArr(newOrder);
-		delete[] productsString;
+		else {
+			int stringSize = (chosenBuyer->getShoppingCart()->getShoppingCartLogSize() * 2) + 1; // (Integer + comma) per product in Shopping Cart + '\0'
+			char* productsString = new char[stringSize];
+			const char s[2] = ","; // Each product in user input is supposed to be separated by commas
+			char *token;
+			int productIndex;
+			cout << "The following products are in your shopping cart: " << endl << endl;
+			theMenu.printSeperatorBlock('-');
+			chosenBuyer->getShoppingCart()->show();
+			theMenu.printSeperatorBlock('-');
+			cout << endl << "Please choose product/s to order, separated by commas with no whitespace (e.g. 1,2,4,6): ";
+			cin.ignore();
+			cin.getline(productsString, stringSize); // TODO: VALIDATE USER INPUT (SOME PRODUCTS ENTERED ETC.)
+			ShoppingCart orderShoppingCart;
+			token = strtok(productsString, s); // Get first product that user wanted to order
+			while (token != NULL) {
+				productIndex = atoi(token) - 1;
+				orderShoppingCart.addProductToShoppingCart(*chosenBuyer->getShoppingCart()->getProducts()[productIndex]);
+				token = strtok(NULL, s);
+			}
+			Order newOrder(&orderShoppingCart, chosenBuyer);
+			chosenBuyer->addOrderToOrderArr(newOrder);
+			delete[] productsString;
+		}
 	}
 }
 
@@ -246,41 +254,45 @@ void System::payForAnOrder() {
 	if (isEmpty(this->buyerArrLogSize)) {
 		cout << "No buyers present in system." << endl;
 	}
-	cout << "Please choose a buyer to make an order for: " << endl;
-	theMenu.printBuyers(buyerArr, buyerArrLogSize);
-	int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
-	Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
-	if (isEmpty(chosenBuyer->getOrderArrLogSize())) {
-		cout << "This buyer does not have any orders to pay for." << endl;
-	}
 	else {
-		bool unpaidOrders = false; // Unless there are unpaid orders, the buyer can't pay
-		cout << "This buyer has placed the following orders: " << endl;
-		for (int i = 0; i < chosenBuyer->getOrderArrLogSize(); i++) {
-			Order* tempOrder = chosenBuyer->getOrderArr()[i];
-			bool isThisOrderPaid = tempOrder->isPaid();
-			if (!isThisOrderPaid && !unpaidOrders) { // There is at least one unpaid order
-				unpaidOrders = true;
-			}
-			cout << "[ Order Number " << i + 1 << " ]\t(Status: " << Order::paymentStatuses[isThisOrderPaid] << ')' << endl;
-			theMenu.printSeperatorBlock('+');
-			tempOrder->getOrderShoppingCart()->show();
-			cout << "Total Price: " << tempOrder->getTotalPrice() << endl;
-			theMenu.printSeperatorBlock('-');
-		}
-		int orderChoiceIndex;
-		Order* chosenOrder;
-		if (unpaidOrders) {
-			cout << "Please choose an unpaid order to pay for: " << "[1 ~ " << chosenBuyer->getOrderArrLogSize() << ']';
-			cin.ignore();
-			orderChoiceIndex = theMenu.getUserChoice(chosenBuyer->getOrderArrLogSize()) - 1;
-			chosenOrder = chosenBuyer->getOrderArr()[orderChoiceIndex];
-			theMenu.printSeperatorBlock('*');
-			cout << "Processing payment...";
-			theMenu.printSeperatorBlock('*');
+		cout << "Please choose a buyer to pay for an order: " << endl;
+		theMenu.printBuyers(buyerArr, buyerArrLogSize);
+		int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
+		Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+		if (isEmpty(chosenBuyer->getOrderArrLogSize())) {
+			cout << "This buyer does not have any orders to pay for." << endl;
 		}
 		else {
-			cout << "All orders are already paid for." << endl;
+			bool unpaidOrders = false; // Unless there are unpaid orders, the buyer can't pay
+			cout << "This buyer has placed the following orders: " << endl << endl;
+			for (int i = 0; i < chosenBuyer->getOrderArrLogSize(); i++) {
+				Order* tempOrder = chosenBuyer->getOrderArr()[i];
+				bool isThisOrderPaid = tempOrder->isPaid();
+				if (!isThisOrderPaid && !unpaidOrders) { // There is at least one unpaid order
+					unpaidOrders = true;
+				}
+				cout << "[ Order Number " << i + 1 << " ]\t(Status: " << Order::paymentStatuses[isThisOrderPaid] << ')' << endl;
+				theMenu.printSeperatorBlock('+');
+				tempOrder->getOrderShoppingCart()->show();
+				cout << "\n$ Total Price: " << tempOrder->getTotalPrice() << endl;
+				theMenu.printSeperatorBlock('+');
+				cout << endl;
+			}
+			int orderChoiceIndex;
+			Order* chosenOrder;
+			if (unpaidOrders) {
+				cout << "Please choose an unpaid order to pay for: " << "[1 ~ " << chosenBuyer->getOrderArrLogSize() << ']';
+				cin.ignore();
+				orderChoiceIndex = theMenu.getUserChoice(chosenBuyer->getOrderArrLogSize()) - 1;
+				chosenOrder = chosenBuyer->getOrderArr()[orderChoiceIndex];
+				theMenu.printSeperatorBlock('$');
+				cout << "Processing payment..." << endl;
+				cout << "Payment complete." << endl;
+				theMenu.printSeperatorBlock('$');
+			}
+			else {
+				cout << "All orders are already paid for." << endl;
+			}
 		}
 	}
 }

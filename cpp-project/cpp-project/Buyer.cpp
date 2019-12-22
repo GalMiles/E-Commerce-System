@@ -8,6 +8,10 @@ Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart)
 	this->sellerArr[0] = nullptr;
 	this->sellerArrLogSize = 0;
 	this->sellerArrPhySize = 1;
+	this->orderArr = new Order*[1];
+	this->orderArr[0] = nullptr;
+	this->orderArrLogSize = 0;
+	this->orderArrPhySize = 1;
 }
 
 
@@ -17,6 +21,10 @@ Buyer::Buyer(const Buyer& otherBuyer) {
 	this->sellerArr[0] = nullptr;
 	this->sellerArrLogSize = 0;
 	this->sellerArrPhySize = 1;
+	this->orderArr = new Order*[1];
+	this->orderArr[0] = nullptr;
+	this->orderArrLogSize = 0;
+	this->orderArrPhySize = 1;
 	for (int i = 0; i < otherBuyer.sellerArrLogSize; i++) {
 		addSellerToBuyerArr(*(new Seller(*otherBuyer.sellerArr[i])));
 	}

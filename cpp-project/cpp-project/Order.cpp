@@ -8,6 +8,7 @@ Order::Order(ShoppingCart* shoppingCart, Buyer* buyer)
 	calculateTotalPrice();
 	this->sellers = new Seller*[numOfProducts];
 	setOrderSellers();
+	setPaymentStatus(false);
 }
 
 Order::Order(const Order& otherOrder) {
@@ -19,6 +20,7 @@ Order::Order(const Order& otherOrder) {
 	for (int i = 0; i < numOfProducts; i++) {
 		sellers[i] = otherOrder.sellers[i];
 	}
+	paid = otherOrder.paid;
 }
 Order::~Order() {
 	for (int i = 0; i < this->numOfProducts; i++)
