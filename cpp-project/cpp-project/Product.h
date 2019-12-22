@@ -9,6 +9,8 @@ using namespace std;
 
 class Seller;
 
+const int NUM_OF_CATEGORIES = 4;
+
 class Product
 {
 public:
@@ -26,6 +28,7 @@ public:
 	//eCategory getCategory();
 	int getProductId();
 	Seller* getSeller();
+	//int getNumOfCategories();
 	void show();
 
 

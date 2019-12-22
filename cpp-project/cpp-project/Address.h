@@ -1,3 +1,8 @@
+/*
+A class which holds address info - country, city, street and home number
+The strings' length is limited by MAX_LENGTH
+*/
+
 #ifndef __ADDRESS_H
 #define __ADDRESS_H
 

@@ -72,16 +72,21 @@ void ShoppingCart::show() {
 }
 
 void ShoppingCart::removeProductFromShoppingCart(int productID) {
-	int productIndex;
-	for (int i = 0; i < this->shoppingCartLogSize; i++) {
-		if (shoppingCart[i]->getProductId() == productID) {
-			productIndex = i;
-			break;
+	if (this->shoppingCartLogSize <= 0) {
+		return;
+	}
+	else {
+		int productIndex;
+		for (int i = 0; i < this->shoppingCartLogSize; i++) {
+			if (shoppingCart[i]->getProductId() == productID) {
+				productIndex = i;
+				break;
+			}
 		}
+		for (int i = productIndex; i < this->shoppingCartLogSize - 1; i++) {
+			this->shoppingCart[i] = this->shoppingCart[i + 1];
+		}
+		this->shoppingCart[shoppingCartLogSize] = nullptr;
+		shoppingCartLogSize--;
 	}
-	for (int i = productIndex; i < this->shoppingCartLogSize - 1; i++) {
-		this->shoppingCart[i] = this->shoppingCart[i + 1];
-	}
-	this->shoppingCart[shoppingCartLogSize] = nullptr;
-	shoppingCartLogSize--;
 }

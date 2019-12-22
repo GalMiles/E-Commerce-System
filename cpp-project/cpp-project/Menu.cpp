@@ -151,5 +151,5 @@ void Menu::addProductToSeller(char* productName, double& price, Product::eCatego
 	for (int i = 1; i <= 4; i++) {
 		cout << "(" << i << ") " << Product::categories[i - 1] << endl;
 	}
-	
+	categoryChoice = (Product::eCategory)(getUserChoice(NUM_OF_CATEGORIES) - 1);
 }
