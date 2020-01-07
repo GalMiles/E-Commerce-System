@@ -39,3 +39,8 @@ void Order::calculateTotalPrice()
 double Order::getTotalPrice() {
 	return this->totalPrice;
 }
+
+Buyer* Order::getBuyer()
+{
+	return this->buyer;
+}
