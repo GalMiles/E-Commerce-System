@@ -14,7 +14,7 @@ using namespace std;
 class Feedback
 {	
 public:
-	Feedback(char *userName, char *content);
+	Feedback(char *userName, char *content);//comment
 
 	char *getUserName();
 	char *getDate();
