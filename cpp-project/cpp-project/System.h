@@ -23,10 +23,8 @@ public:
 	const char STORE_NAME[8] = "AlmoGal";
 	void initSystem(); //initialize the system
 	bool isEmpty(int size); //determintes if an array is empty
-	void sellerArrRealloc(); //reallocate memory for sellerArr
-	void buyerArrRealloc(); //reallocate memory for buyerArr
-	void addSellerToSellerArr(Seller &seller); //add seller to sellerArr
-	void addBuyerToBuyerArr(Buyer &buyer); //add buyer to BuyerArr
+	void userArrRealloc();
+	void addUserToArr(User &user);
 	void performChoice(int choice); //gets a choice and performs the desired action
 	void addUser(eUserType userType); //creates a new user - buyer or seller
 	void addProductToSeller(); //add product to seller's stock
@@ -40,10 +38,11 @@ private:
 	Menu theMenu;
 	Seller **sellerArr;
 	Buyer **buyerArr;
-	int sellerArrLogSize;
-	int sellerArrPhySize;
-	int buyerArrLogSize;
-	int buyerArrPhySize;
+	User** userArr;
+	int userArrLogSize;
+	int userArrPhySize;
+	int sellerCount;
+	int buyerCount;
 };
 
 #endif

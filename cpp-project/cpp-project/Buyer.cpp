@@ -1,8 +1,7 @@
 #include "Buyer.h"
 
-Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart)
+Buyer::Buyer(char* name, char* password, Address* address, ShoppingCart *shoppingCart) : User(name, password, address)
 {
-	setUser(userBuyer);
 	setShoppingCart(shoppingCart);
 	this->sellerArr = new Seller*[1];
 	this->sellerArr[0] = nullptr;
@@ -15,8 +14,8 @@ Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart)
 }
 
 
-Buyer::Buyer(const Buyer& otherBuyer) {
-	buyerUser = new User(*otherBuyer.buyerUser);
+Buyer::Buyer(const Buyer& otherBuyer) : User(move(otherBuyer))
+{
 	this->sellerArr = new Seller*[1];
 	this->sellerArr[0] = nullptr;
 	this->sellerArrLogSize = 0;
@@ -46,10 +45,6 @@ Buyer::~Buyer()
 	delete[]orderArr;
 }
 
-void Buyer::setUser(User* user) {
-	this->buyerUser = user;
-}
-
 void Buyer::setShoppingCart(ShoppingCart* shoppingCart) {
 	this->shoppingCart = shoppingCart;
 }
@@ -60,7 +55,7 @@ ShoppingCart* Buyer::getShoppingCart() {
 
 void Buyer::show()
 {
-	buyerUser->show();
+	//buyerUser->show();
 }
 
 void Buyer::sellerArrRealloc()
@@ -112,11 +107,12 @@ void Buyer::addOrderToOrderArr(Order &order)
 	(this->orderArrLogSize)++;
 }
 
-User *Buyer::getUser() { return this->buyerUser; }
+//User *Buyer::getUser() { return this->buyerUser; }
+
 
 char* Buyer::getName()
 {
-	return(this->buyerUser->getUserName());
+	return(this->getUserName());
 }
 
 int Buyer::getSellerArrLogSize() { return sellerArrLogSize; }
@@ -126,3 +122,7 @@ int Buyer::getOrderArrLogSize() { return orderArrLogSize; }
 Seller** Buyer::getSellerArr() { return sellerArr; }
 
 Order** Buyer::getOrderArr() { return orderArr; }
+
+bool Buyer::operator>(const Buyer& other) const {
+	return ((this->shoppingCart->getTotalPrice()) > (other.shoppingCart->getTotalPrice()));
+}

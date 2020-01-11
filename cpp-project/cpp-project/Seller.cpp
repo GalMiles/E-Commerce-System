@@ -4,9 +4,8 @@
 #include "Feedback.h"
 
 
-Seller::Seller(User *sellerUser)//c'tor
+Seller::Seller(char* name, char* password, Address* address) : User(name, password, address)
 {
-	this->sellerUser = sellerUser;
 	this->productsLogSize = 0;
 	this->productsPhySize = 1;
 	this->products = new Product*[1];
@@ -17,7 +16,8 @@ Seller::Seller(User *sellerUser)//c'tor
 	this->feedbackArr[0] = nullptr;
 }
 
-Seller::Seller(const Seller& otherSeller) {
+Seller::Seller(const Seller& otherSeller) : User(move(otherSeller))
+{
 	this->productsLogSize = 0;
 	this->productsPhySize = 1;
 	this->products = new Product*[1];
@@ -33,7 +33,6 @@ Seller::Seller(const Seller& otherSeller) {
 	for (int i = 0; i < otherSeller.feedbackLogSize; i++) {
 		addFeedback(*(new Feedback(*otherSeller.feedbackArr[i])));
 	}
-	sellerUser = new User(*otherSeller.sellerUser);
 }
 
 Seller::~Seller() {
@@ -85,7 +84,7 @@ void Seller::feedbackArrRealloc()
 
 void Seller::show() const
 {
-	sellerUser->show(); //using User's method
+	this->show(); //using User's method
 
 	cout << "The Seller's products are:" << endl;
 	for (int i = 0; i < productsLogSize; i++)
@@ -118,7 +117,7 @@ Product** Seller::getProducts() {
 
 char* Seller::getName()
 {
-	return(this->sellerUser->getUserName());
+	return(this->getUserName());
 }
 
 int Seller::getProductsLogSize() {

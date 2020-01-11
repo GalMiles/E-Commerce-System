@@ -3,24 +3,16 @@
 
 System::System() : theMenu()
 {
-	this->sellerArrLogSize = 0;
-	this->sellerArrPhySize = 1;
-	this->sellerArr = new Seller*[1];
-	this->buyerArrLogSize = 0;
-	this->buyerArrPhySize = 1;
-	this->buyerArr = new Buyer*[1];
+	this->userArrLogSize = 0;
+	this->userArrPhySize = 1;
+	this->userArr = new User*[1];
 }
 
 System::~System() {
-	for (int i = 0; i < sellerArrPhySize; i++) {
-		this->sellerArr[i] = nullptr;
+	for (int i = 0; i < userArrPhySize; i++) {
+		this->userArr[i] = nullptr;
 	}
-	delete[]sellerArr;
-
-	for (int i = 0; i < buyerArrPhySize; i++) {
-		this->buyerArr[i] = nullptr;
-	}
-	delete[]buyerArr;
+	delete[]userArr;
 }
 
 void System::initSystem() //initialize the system
@@ -39,54 +31,29 @@ bool System::isEmpty(int size) {
 	return (size <= 0);
 }
 
-void System::sellerArrRealloc()
+void System::userArrRealloc()
 {
-	Seller **new_arr;
-	this->sellerArrPhySize *= 2;
-	new_arr = new Seller *[this->sellerArrPhySize];
+	User **new_arr;
+	this->userArrPhySize *= 2;
+	new_arr = new User *[this->userArrPhySize];
 
-	for (int i = 0; i < this->sellerArrLogSize; i++)
+	for (int i = 0; i < this->userArrLogSize; i++)
 	{
-		new_arr[i] = (this->sellerArr[i]);
-		this->sellerArr[i] = nullptr;
+		new_arr[i] = (this->userArr[i]);
+		this->userArr[i] = nullptr;
 	}
-	delete[] this->sellerArr;
+	delete[] this->userArr;
 
-	this->sellerArr = new_arr;
+	this->userArr = new_arr;
 }
 
-void System::buyerArrRealloc()
+void System::addUserToArr(User &user)
 {
-	Buyer **new_arr;
-	this->buyerArrPhySize *= 2;
-	new_arr = new Buyer *[this->buyerArrPhySize];
+	if (this->userArrLogSize == this->userArrPhySize)
+		//sellerArrRealloc();
 
-	for (int i = 0; i < this->buyerArrLogSize; i++)
-	{
-		new_arr[i] = (this->buyerArr[i]);
-		this->buyerArr[i] = nullptr;
-	}
-	delete[] this->buyerArr;
-
-	this->buyerArr = new_arr;
-}
-
-void System::addSellerToSellerArr(Seller &seller)
-{
-	if (this->sellerArrLogSize == this->sellerArrPhySize)
-		sellerArrRealloc();
-
-	sellerArr[this->sellerArrLogSize] = new Seller(seller);
-	(this->sellerArrLogSize)++;
-}
-
-void System::addBuyerToBuyerArr(Buyer &buyer)
-{
-	if (this->buyerArrLogSize == this->buyerArrPhySize)
-		buyerArrRealloc();
-
-	buyerArr[this->buyerArrLogSize] = new Buyer(buyer);
-	(this->buyerArrLogSize)++;
+	userArr[userArrLogSize] = new User(user);
+	(this->userArrLogSize)++;
 }
 
 void System::performChoice(int choice)
@@ -136,17 +103,18 @@ void System::addUser(eUserType userType) {
 	theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber, MAX_LENGTH);
 
 	Address newAddress(country, city, street, homeNumber);
-	User newUser(userName, password, &newAddress);
 
 	if (userType == BUYER) {
 		ShoppingCart newShoppingCart;
-		Buyer newBuyer(&newUser, &newShoppingCart);
-		addBuyerToBuyerArr(newBuyer); 
+		Buyer newBuyer(userName, password, &newAddress, &newShoppingCart);
+		addUserToArr(newBuyer);
+		this->buyerCount++;
 	}
 
 	else if (userType == SELLER) {
-		Seller newSeller(&newUser);
-		addSellerToSellerArr(newSeller);
+		Seller newSeller(userName, password, &newAddress);
+		addUserToArr(newSeller);
+		this->sellerCount++;
 	}
 }
 
@@ -171,10 +139,10 @@ void System::addProductToSeller()
 
 void System::addFeedbackToSeller()
 {
-	if (isEmpty(this->buyerArrLogSize)) {
+	if (isEmpty(this->buyerCount)) {
 		cout << "No buyers present in system." << endl;
 	}
-	else if (isEmpty(this->sellerArrLogSize)) {
+	else if (isEmpty(this->sellerCount)) {
 		cout << "No sellers present in system." << endl;
 	}
 	else {

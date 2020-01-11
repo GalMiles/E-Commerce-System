@@ -2,6 +2,7 @@
 
 ShoppingCart::ShoppingCart() //constructor
 {
+	this->totalPrice = 0;
 	this->shoppingCartLogSize = 0;
 	this->shoppingCartPhysSize = 1;
 	this->shoppingCart = new Product*[1];
@@ -53,6 +54,7 @@ void ShoppingCart::addProductToShoppingCart(Product& productToAdd)
 
 	this->shoppingCart[this->shoppingCartLogSize] = new Product(productToAdd); // add product
 	(this->shoppingCartLogSize)++;
+	this->totalPrice += productToAdd.getPrice();
 }
 
 int ShoppingCart::getShoppingCartLogSize()
@@ -91,3 +93,5 @@ void ShoppingCart::removeProductFromShoppingCart(int productID) {
 		shoppingCartLogSize--;
 	}
 }
+
+int ShoppingCart::getTotalPrice() { return this->totalPrice; }

@@ -15,6 +15,10 @@ User::User(const User& otherUser) {
 	address = new Address(*otherUser.address);
 }
 
+User::~User() { //TODO: add d'tor
+
+}
+
 void User::setUserName(char* name) {
 	strcpy(this->name, name);
 }

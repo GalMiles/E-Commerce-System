@@ -17,10 +17,10 @@ using namespace std;
 //forward declaration
 class Feedback;
 
-class Seller
+class Seller : public User
 {
 public:
-	Seller(User *sellerUser); //c'tor
+	Seller(char* name, char* password, Address* address); //c'tor
 	Seller(const Seller& otherSeller); //copy c'tor
 	~Seller(); //d'tor
 
@@ -36,7 +36,6 @@ public:
 
 private:
 	Product	  **products;
-	User	  *sellerUser;
 	int		   productsPhySize;
 	int		   productsLogSize;
 	Feedback   **feedbackArr;

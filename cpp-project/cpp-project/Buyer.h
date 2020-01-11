@@ -23,10 +23,10 @@ class Product;
 
 class Order;
 
-class Buyer
+class Buyer : public User
 {
 public:
-	Buyer::Buyer(User *userBuyer, ShoppingCart *shoppingCart); //c'tor
+	Buyer::Buyer(char* name, char* password, Address* address, ShoppingCart *shoppingCart); //c'tor
 	Buyer(const Buyer& otherBuyer); //copy c'tor
 	~Buyer(); //d'tor
 
@@ -34,20 +34,18 @@ public:
 	void orderArrRealloc(); //reallocate memory for orderArr
 	void addSellerToBuyerArr(Seller &seller); //add seller to the buyer's sellers array
 	void addOrderToOrderArr(Order &order); //add order to they buyer's order history
-	void setUser(User* user);
 	void setShoppingCart(ShoppingCart* shoppingCart);
-	User *getUser();
 	char *getName();
 	int getSellerArrLogSize();
 	int getOrderArrLogSize();
 	Seller **getSellerArr();
 	Order **getOrderArr();
 	ShoppingCart* getShoppingCart();
+	bool operator>(const Buyer& other) const;
 
 	void show(); //print buyer's info
 
 private:
-	User			*buyerUser;
 	Seller			**sellerArr;
 	Order			**orderArr;
 	ShoppingCart	*shoppingCart;

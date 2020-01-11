@@ -29,10 +29,13 @@ public:
 	int getShoppingCartLogSize();
 	int getShoppingCartPhySize();
 
+	int getTotalPrice();
+
 private:
 	Product** shoppingCart;
 	int shoppingCartPhysSize;
 	int shoppingCartLogSize;
+	int totalPrice;
 };
 
 #endif // __SHOPPINGCART_H
