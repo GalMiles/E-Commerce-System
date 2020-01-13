@@ -47,3 +47,10 @@ void User::show() const
 	cout << "The name is:" << name << endl;
 	address->show(); // using Address method
 }
+
+ostream& operator<<(ostream& os, const User& user)
+{
+	os << typeid(user).name + 6 << "'s name:" << user.name << endl;
+	user.toOs(os); //using buyer/seller method
+	return os;
+}

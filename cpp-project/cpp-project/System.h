@@ -24,9 +24,13 @@ public:
 	void initSystem(); //initialize the system
 	bool isEmpty(int size); //determintes if an array is empty
 	void userArrRealloc();
-	void addUserToArr(User &user);
-	void performChoice(int choice); //gets a choice and performs the desired action
+	/*void addUserToArr(User &user);
 	void addUser(eUserType userType); //creates a new user - buyer or seller
+	*/
+	const System& operator+=(const Seller seller);//instead of the two functions in comment
+	const System& operator+=(const Buyer buyer);
+
+	void performChoice(int choice); //gets a choice and performs the desired action
 	void addProductToSeller(); //add product to seller's stock
 	void addFeedbackToSeller(); //add feedback to seller
 	void addProductToShoppingCart(); //add product to shopping cart

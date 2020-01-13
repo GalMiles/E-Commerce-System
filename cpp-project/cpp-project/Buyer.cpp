@@ -123,6 +123,12 @@ Seller** Buyer::getSellerArr() { return sellerArr; }
 
 Order** Buyer::getOrderArr() { return orderArr; }
 
-bool Buyer::operator>(const Buyer& other) const {
-	return ((this->shoppingCart->getTotalPrice()) > (other.shoppingCart->getTotalPrice()));
+const Buyer& Buyer::operator>(const Buyer& other) const
+{
+	if (this->shoppingCart->getTotalPrice > other.shoppingCart->getTotalPrice)
+		return *this;
+
+	else
+		return other;
 }
+

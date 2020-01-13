@@ -41,7 +41,8 @@ public:
 	Seller **getSellerArr();
 	Order **getOrderArr();
 	ShoppingCart* getShoppingCart();
-	bool operator>(const Buyer& other) const;
+
+	const Buyer& operator>(const Buyer& other) const;
 
 	void show(); //print buyer's info
 

@@ -47,13 +47,67 @@ void System::userArrRealloc()
 	this->userArr = new_arr;
 }
 
+/*
 void System::addUserToArr(User &user)
 {
 	if (this->userArrLogSize == this->userArrPhySize)
-		//sellerArrRealloc();
+		userArrRealloc();
 
 	userArr[userArrLogSize] = new User(user);
 	(this->userArrLogSize)++;
+}
+
+void System::addUser(eUserType userType)
+{
+char userName[MAX_LENGTH];
+char password[MAX_LENGTH];
+char country[MAX_LENGTH];
+char city[MAX_LENGTH];
+char street[MAX_LENGTH];
+int homeNumber;
+
+theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber, MAX_LENGTH);
+
+Address newAddress(country, city, street, homeNumber);
+
+if (userType == BUYER)
+{
+ShoppingCart newShoppingCart;
+Buyer newBuyer(userName, password, &newAddress, &newShoppingCart);
+addUserToArr(newBuyer);
+this->buyerCount++;
+}
+
+else if (userType == SELLER) {
+Seller newSeller(userName, password, &newAddress);
+addUserToArr(newSeller);
+this->sellerCount++;
+}
+}
+*/
+
+const System& System::operator+=(const Seller seller)
+{
+	if (this->userArrLogSize == this->userArrPhySize)
+		userArrRealloc();
+
+	userArr[userArrLogSize] = new Seller(seller);
+	(this->userArrLogSize)++;
+
+	return *this;
+
+}
+
+const System& System::operator+=(const Buyer buyer)
+{
+	if (this->userArrLogSize == this->userArrPhySize)
+		userArrRealloc();
+
+	userArr[userArrLogSize] = new Buyer(buyer);
+	(this->userArrLogSize)++;
+
+	return *this;
+
 }
 
 void System::performChoice(int choice)
@@ -92,31 +146,6 @@ void System::performChoice(int choice)
 	}
 }
 
-void System::addUser(eUserType userType) {
-	char userName[MAX_LENGTH];
-	char password[MAX_LENGTH];
-	char country[MAX_LENGTH];
-	char city[MAX_LENGTH];
-	char street[MAX_LENGTH];
-	int homeNumber;
-	
-	theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber, MAX_LENGTH);
-
-	Address newAddress(country, city, street, homeNumber);
-
-	if (userType == BUYER) {
-		ShoppingCart newShoppingCart;
-		Buyer newBuyer(userName, password, &newAddress, &newShoppingCart);
-		addUserToArr(newBuyer);
-		this->buyerCount++;
-	}
-
-	else if (userType == SELLER) {
-		Seller newSeller(userName, password, &newAddress);
-		addUserToArr(newSeller);
-		this->sellerCount++;
-	}
-}
 
 void System::addProductToSeller()
 {
