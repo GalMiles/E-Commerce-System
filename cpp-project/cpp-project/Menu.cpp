@@ -88,47 +88,56 @@ void Menu::getFeedbackFromUser(char* feedBack, int feedBackSize, char* date) {
 	cin.getline(feedBack, feedBackSize);
 }
 
-void Menu::printSellers(Seller **sellerArr, int size) {
+void Menu::printSellers(User **userArr, int size) {
 	if (size <= 0) {
 		cout << "No sellers present in system." << endl;
 	}
 	else {
+		int sellersIndex = 0;
 		for (int i = 0; i < size; i++) {
-			cout << "[" << i + 1 << "] " << sellerArr[i]->getName() << endl;
+			if (typeid(*(userArr[i])) == typeid(Seller)) {
+				cout << "[" << sellersIndex + 1 << "] " << *(userArr[i]) << endl;
+				sellersIndex++;
+			}
 		}
 	}
 }
 
-void Menu::printBuyers(Buyer **buyerArr, int size) {
+void Menu::printBuyers(User **userArr, int size) {
 	if (size <= 0) {
 		cout << "No buyers present in system." << endl;
 	}
 	else {
 		for (int i = 0; i < size; i++) {
-			cout << "[" << i + 1 << "] " << buyerArr[i]->getName() << endl;
+			if (typeid(*(userArr[i])) == typeid(Buyer))
+				cout << "[" << i + 1 << "] " << *(userArr[i]) << endl;
 		}
 	}
 }
 
-bool Menu::printProducts(Seller **sellerArr, int size) {
+bool Menu::printProducts(User **userArr, int size) {
 	bool foundProducts = false; // If there are sellers but no products whatsoever, should stay false
 	if (size <= 0) {
 		cout << "There are no sellers present in the system." << endl;
 	}
 	else {
-		for (int i = 0; i < size; i++) {
-			int productsNum = sellerArr[i]->getProductsLogSize();
-			if (productsNum <= 0) { // Seller has no products, no use in printing him/her
-				continue;
+		for (int i = 0; i < size; i++)
+		{
+			if (typeid(*(userArr[i])) == typeid(Seller))
+			{
+				int productsNum = dynamic_cast<Seller*>(userArr[i])->getProductsLogSize();
+				if (productsNum <= 0) { // Seller has no products, no use in printing him/her
+					continue;
+				}
+				foundProducts = true; // Some seller has some products
+				printSeperatorBlock('-');
+				cout << "[" << i + 1 << "] Seller: " << dynamic_cast<Seller*>(userArr[i])->getName() << endl;
+				for (int j = 0; j < productsNum; j++) {
+					cout << "\t[" << j + 1 << "] " << dynamic_cast<Seller*>(userArr[i])->getProducts()[j]->getName() << endl;
+				}
+				printSeperatorBlock('-');
+				cout << endl;
 			}
-			foundProducts = true; // Some seller has some products
-			printSeperatorBlock('-');
-			cout << "[" << i + 1 << "] Seller: " << sellerArr[i]->getName() << endl;
-			for (int j = 0; j < productsNum; j++) {
-				cout << "\t[" << j + 1 << "] " << sellerArr[i]->getProducts()[j]->getName() << endl;
-			}
-			printSeperatorBlock('-');
-			cout << endl;
 		}
 	}
 	return foundProducts;
@@ -141,7 +150,7 @@ void Menu::printSeperatorBlock(char sep) {
 	cout << endl;
 }
 
-void Menu::printProductsWithName(Seller **sellerArr, int size) {
+void Menu::printProductsWithName(User **userArr, int size) {
 	char findName[MAX_LENGTH];
 	bool found = false; //bool to indicate whether we found matching products or not
 	if (size <= 0) { //if there are no products in the system
@@ -153,16 +162,18 @@ void Menu::printProductsWithName(Seller **sellerArr, int size) {
 		cin.getline(findName, MAX_LENGTH + 1);
 		cout << endl << endl;
 		for (int i = 0; i < size; i++) { //this loop runs on every seller
-			int productsNum = sellerArr[i]->getProductsLogSize(); //how many products the current seller has
-			if (productsNum <= 0) { // Seller has no products, no use in printing him/her
-				continue;
-			}
-			for (int j = 0; j < productsNum; j++) { //this loop prints every product in the current seller's stock
-				if (strcmp(findName, sellerArr[i]->getProducts()[j]->getName()) == 0) {
-					found = true;
-					printSeperatorBlock('-');
-					sellerArr[i]->getProducts()[j]->show();
-					printSeperatorBlock('-');
+			if (typeid(userArr[i]) == typeid(Seller)) {
+				int productsNum = dynamic_cast<Seller*>(userArr[i])->getProductsLogSize(); //how many products the current seller has
+				if (productsNum <= 0) { // Seller has no products, no use in printing him/her
+					continue;
+				}
+				for (int j = 0; j < productsNum; j++) { //this loop prints every product in the current seller's stock
+					if (strcmp(findName, dynamic_cast<Seller*>(userArr[i])->getProducts()[j]->getName()) == 0) {
+						found = true;
+						printSeperatorBlock('-');
+						dynamic_cast<Seller*>(userArr[i])->getProducts()[j]->show();
+						printSeperatorBlock('-');
+					}
 				}
 			}
 		}

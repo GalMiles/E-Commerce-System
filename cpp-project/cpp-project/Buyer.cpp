@@ -125,7 +125,7 @@ Order** Buyer::getOrderArr() { return orderArr; }
 
 const Buyer& Buyer::operator>(const Buyer& other) const
 {
-	if (this->shoppingCart->getTotalPrice > other.shoppingCart->getTotalPrice)
+	if (this->shoppingCart->getTotalPrice() > other.shoppingCart->getTotalPrice())
 		return *this;
 
 	else

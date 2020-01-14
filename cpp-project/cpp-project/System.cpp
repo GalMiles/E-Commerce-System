@@ -47,44 +47,34 @@ void System::userArrRealloc()
 	this->userArr = new_arr;
 }
 
-/*
-void System::addUserToArr(User &user)
-{
-	if (this->userArrLogSize == this->userArrPhySize)
-		userArrRealloc();
-
-	userArr[userArrLogSize] = new User(user);
-	(this->userArrLogSize)++;
-}
-
 void System::addUser(eUserType userType)
 {
-char userName[MAX_LENGTH];
-char password[MAX_LENGTH];
-char country[MAX_LENGTH];
-char city[MAX_LENGTH];
-char street[MAX_LENGTH];
-int homeNumber;
+	char userName[MAX_LENGTH];
+	char password[MAX_LENGTH];
+	char country[MAX_LENGTH];
+	char city[MAX_LENGTH];
+	char street[MAX_LENGTH];
+	int homeNumber;
 
-theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber, MAX_LENGTH);
+	theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber, MAX_LENGTH);
 
-Address newAddress(country, city, street, homeNumber);
+	Address newAddress(country, city, street, homeNumber);
 
-if (userType == BUYER)
-{
-ShoppingCart newShoppingCart;
-Buyer newBuyer(userName, password, &newAddress, &newShoppingCart);
-addUserToArr(newBuyer);
-this->buyerCount++;
+	if (userType == BUYER)
+	{
+		ShoppingCart newShoppingCart;
+		Buyer newBuyer(userName, password, &newAddress, &newShoppingCart);
+		(*this) += newBuyer;
+		this->buyerCount++;
+	}
+
+	else if (userType == SELLER) {
+		Seller newSeller(userName, password, &newAddress);
+		(*this) += newSeller;
+		this->sellerCount++;
+	}
 }
 
-else if (userType == SELLER) {
-Seller newSeller(userName, password, &newAddress);
-addUserToArr(newSeller);
-this->sellerCount++;
-}
-}
-*/
 
 const System& System::operator+=(const Seller seller)
 {
@@ -135,13 +125,13 @@ void System::performChoice(int choice)
 		payForAnOrder();
 		break;
 	case 8:
-		theMenu.printBuyers(buyerArr, buyerArrLogSize);
+		theMenu.printBuyers(userArr, userArrLogSize);
 		break;
 	case 9:
-		theMenu.printSellers(sellerArr, sellerArrLogSize);
+		theMenu.printSellers(userArr, userArrLogSize);
 		break;
 	case 10:
-		theMenu.printProductsWithName(sellerArr, sellerArrLogSize);
+		theMenu.printProductsWithName(userArr, userArrLogSize);
 		break;
 	}
 }
@@ -149,14 +139,14 @@ void System::performChoice(int choice)
 
 void System::addProductToSeller()
 {
-	if (isEmpty(this->sellerArrLogSize)) {
+	if (isEmpty(this->sellerCount)) {
 		cout << "No sellers present in system." << endl;
 	}
 	else {
 		cout << "\nPlease choose the seller to whom you'd like the add a product: " << endl;
-		theMenu.printSellers(sellerArr, sellerArrLogSize); //print all of the sellers
-		int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
-		Seller *chosenSeller = sellerArr[chosenSellerIndex];
+		theMenu.printSellers(userArr, userArrLogSize); //print all of the sellers
+		int chosenSellerIndex = theMenu.getUserChoice(sellerCount) - 1;
+		Seller *chosenSeller = (Seller*)userArr[chosenSellerIndex];
 		char productName[MAX_LENGTH];
 		double price;
 		Product::eCategory categoryChoice;
@@ -176,16 +166,16 @@ void System::addFeedbackToSeller()
 	}
 	else {
 		cout << "\nPlease choose a buyer to submit feedback: " << endl;
-		theMenu.printBuyers(buyerArr, buyerArrLogSize);
-		int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
-		Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+		theMenu.printBuyers(userArr, userArrLogSize);
+		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
+		Buyer *chosenBuyer = (Buyer*)userArr[chosenBuyerIndex];
 		// Show only sellers from whom the respective buyer had bought
 		if (isEmpty(chosenBuyer->getSellerArrLogSize())) {
 			cout << chosenBuyer->getName() << " hasn't bought from any sellers yet." << endl;
 		}
 		else {
 			cout << "\nPlease choose the seller to whom you'd like the add a feedback: " << endl;
-			theMenu.printSellers(chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
+			theMenu.printSellers((User**)chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
 			int chosenSellerIndex = theMenu.getUserChoice(chosenBuyer->getSellerArrLogSize()) - 1;
 			Seller *chosenSeller = chosenBuyer->getSellerArr()[chosenSellerIndex];
 			char feedBackContent[MAX_FEEDBACK_SIZE];
@@ -198,18 +188,18 @@ void System::addFeedbackToSeller()
 }
 
 void System::addProductToShoppingCart() {
-	if (isEmpty(this->buyerArrLogSize)) {
+	if (isEmpty(this->buyerCount)) {
 		cout << "No buyers present in system." << endl;
 	}
 	else {
 		cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
-		theMenu.printBuyers(buyerArr, buyerArrLogSize);
-		int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
-		Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
-		if (theMenu.printProducts(sellerArr, sellerArrLogSize)) {
-			cout << "Please choose a seller to buy from " << "[1 ~ " << sellerArrLogSize << "]: " << endl;
-			int chosenSellerIndex = theMenu.getUserChoice(sellerArrLogSize) - 1;
-			Seller *chosenSeller = sellerArr[chosenSellerIndex];
+		theMenu.printBuyers(userArr, userArrLogSize);
+		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount - 1);
+		Buyer *chosenBuyer = (Buyer*)userArr[chosenBuyerIndex];
+		if (theMenu.printProducts(userArr, userArrLogSize)) {
+			cout << "Please choose a seller to buy from " << "[1 ~ " << sellerCount << "]: " << endl;
+			int chosenSellerIndex = theMenu.getUserChoice(sellerCount) - 1;
+			Seller *chosenSeller = (Seller*)userArr[chosenSellerIndex];
 			cout << "Please choose the desired product number from this seller " << "[1 ~ " << chosenSeller->getProductsLogSize() << "]: " << endl;
 			int chosenProductIndex = theMenu.getUserChoice(chosenSeller->getProductsLogSize()) - 1;
 			Product *chosenProduct = chosenSeller->getProducts()[chosenProductIndex];
@@ -222,14 +212,14 @@ void System::addProductToShoppingCart() {
 }
 
 void System::placeOrder() {
-	if (isEmpty(this->buyerArrLogSize)) {
+	if (isEmpty(this->buyerCount)) {
 		cout << "No buyers present in system." << endl;
 	}
 	else {
 		cout << "\nPlease choose a buyer to make an order for: " << endl;
-		theMenu.printBuyers(buyerArr, buyerArrLogSize);
-		int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
-		Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+		theMenu.printBuyers(userArr, userArrLogSize);
+		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
+		Buyer *chosenBuyer = (Buyer*)userArr[chosenBuyerIndex];
 		if (isEmpty(chosenBuyer->getShoppingCart()->getShoppingCartLogSize())) {
 			cout << "This buyer doesn't have any products in his/her shopping cart." << endl;
 		}
@@ -261,14 +251,14 @@ void System::placeOrder() {
 }
 
 void System::payForAnOrder() {
-	if (isEmpty(this->buyerArrLogSize)) {
+	if (isEmpty(this->buyerCount)) {
 		cout << "No buyers present in system." << endl;
 	}
 	else {
 		cout << "Please choose a buyer to pay for an order: " << endl;
-		theMenu.printBuyers(buyerArr, buyerArrLogSize);
-		int chosenBuyerIndex = theMenu.getUserChoice(buyerArrLogSize) - 1;
-		Buyer *chosenBuyer = buyerArr[chosenBuyerIndex];
+		theMenu.printBuyers(userArr, userArrLogSize);
+		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
+		Buyer *chosenBuyer = (Buyer*)userArr[chosenBuyerIndex];
 		if (isEmpty(chosenBuyer->getOrderArrLogSize())) {
 			cout << "This buyer does not have any orders to pay for." << endl;
 		}

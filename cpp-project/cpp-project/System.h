@@ -24,9 +24,8 @@ public:
 	void initSystem(); //initialize the system
 	bool isEmpty(int size); //determintes if an array is empty
 	void userArrRealloc();
-	/*void addUserToArr(User &user);
+	//void addUserToArr(User &user);
 	void addUser(eUserType userType); //creates a new user - buyer or seller
-	*/
 	const System& operator+=(const Seller seller);//instead of the two functions in comment
 	const System& operator+=(const Buyer buyer);
 
@@ -40,8 +39,6 @@ public:
 
 private:
 	Menu theMenu;
-	Seller **sellerArr;
-	Buyer **buyerArr;
 	User** userArr;
 	int userArrLogSize;
 	int userArrPhySize;

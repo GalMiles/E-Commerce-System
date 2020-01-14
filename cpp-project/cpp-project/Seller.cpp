@@ -126,9 +126,14 @@ int Seller::getProductsLogSize() {
 
 void Seller::toOs(ostream& os) const
 {
-	os << "The Seller's products are:" << endl;
-	for (int i = 0; i < productsLogSize; i++)
-	{
-		os << (products[i])->getName();
+	if (this->productsLogSize == 0) {
+		cout << "The seller has no products" << endl;
+	}
+	else {
+		os << "The Seller's products are:" << endl;
+		for (int i = 0; i < productsLogSize; i++)
+		{
+			os << (products[i])->getName();
+		}
 	}
 }

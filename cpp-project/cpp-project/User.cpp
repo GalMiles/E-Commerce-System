@@ -50,7 +50,7 @@ void User::show() const
 
 ostream& operator<<(ostream& os, const User& user)
 {
-	os << typeid(user).name + 6 << "'s name:" << user.name << endl;
+	os << (typeid(user).name())+6 << "'s name:" << user.name << endl;
 	user.toOs(os); //using buyer/seller method
 	return os;
 }

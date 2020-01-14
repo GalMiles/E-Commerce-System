@@ -25,6 +25,7 @@ public:
 
 	User(char* name, char* password, Address* address); //c'tor
 	User(const User& otherUser); //copy c'tor
+	virtual ~User();
 
 	void show() const; //print user's info
 
