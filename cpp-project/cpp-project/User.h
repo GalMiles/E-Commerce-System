@@ -28,6 +28,10 @@ public:
 
 	void show() const; //print user's info
 
+	friend ostream& operator<<(ostream& os, const User& user);
+	virtual void toOs(ostream& os) const = 0;
+
+
 private:
 	char*		name;
 	char*		password;

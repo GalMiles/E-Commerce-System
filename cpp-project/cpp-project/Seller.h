@@ -31,8 +31,9 @@ public:
 	int getProductsLogSize();
 	void addProduct(Product &product); //add product to productArr
 	void addFeedback(Feedback &feedback); //add feedback to feedbackArr
-	void show() const; //print info about this seller
+	void show() const; //using instead in operator<<
 
+	virtual void toOs(ostream& os) const override;
 
 private:
 	Product	  **products;

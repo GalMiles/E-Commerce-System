@@ -43,8 +43,10 @@ public:
 	ShoppingCart* getShoppingCart();
 
 	const Buyer& operator>(const Buyer& other) const;
+	virtual void toOs(ostream& os) const override;
 
-	void show(); //print buyer's info
+
+	void show(); 
 
 private:
 	Seller			**sellerArr;

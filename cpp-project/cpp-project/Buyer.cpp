@@ -132,3 +132,8 @@ const Buyer& Buyer::operator>(const Buyer& other) const
 		return other;
 }
 
+void Buyer::toOs(ostream& os) const
+{
+	os << "and his shopping cart's total price is:" <<this->shoppingCart->getTotalPrice() << endl;
+}
+
