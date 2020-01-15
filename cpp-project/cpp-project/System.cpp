@@ -158,7 +158,7 @@ void System::addProductToSeller()
 		cout << "\nPlease choose the seller to whom you'd like the add a product: " << endl;
 		theMenu.printSellers(userArr, userArrLogSize); //print all of the sellers
 		int chosenSellerIndex = theMenu.getUserChoice(sellerCount) - 1;
-		Seller *chosenSeller = (Seller*)userArr[chosenSellerIndex];
+		Seller *chosenSeller = dynamic_cast<Seller*>(userArr[chosenSellerIndex]);
 		char productName[MAX_LENGTH];
 		double price;
 		Product::eCategory categoryChoice;
@@ -180,7 +180,7 @@ void System::addFeedbackToSeller()
 		cout << "\nPlease choose a buyer to submit feedback: " << endl;
 		theMenu.printBuyers(userArr, userArrLogSize);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
-		Buyer *chosenBuyer = (Buyer*)userArr[chosenBuyerIndex];
+		Buyer *chosenBuyer = dynamic_cast<Buyer*>(userArr[chosenBuyerIndex]);
 		// Show only sellers from whom the respective buyer had bought
 		if (isEmpty(chosenBuyer->getSellerArrLogSize())) {
 			cout << chosenBuyer->getName() << " hasn't bought from any sellers yet." << endl;
@@ -207,11 +207,11 @@ void System::addProductToShoppingCart() {
 		cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
 		theMenu.printBuyers(userArr, userArrLogSize);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount - 1);
-		Buyer *chosenBuyer = (Buyer*)userArr[chosenBuyerIndex];
+		Buyer *chosenBuyer = dynamic_cast<Buyer*>(userArr[chosenBuyerIndex]);
 		if (theMenu.printProducts(userArr, userArrLogSize)) {
 			cout << "Please choose a seller to buy from " << "[1 ~ " << sellerCount << "]: " << endl;
 			int chosenSellerIndex = theMenu.getUserChoice(sellerCount) - 1;
-			Seller *chosenSeller = (Seller*)userArr[chosenSellerIndex];
+			Seller *chosenSeller = dynamic_cast<Seller*>(userArr[chosenSellerIndex]);
 			cout << "Please choose the desired product number from this seller " << "[1 ~ " << chosenSeller->getProductsLogSize() << "]: " << endl;
 			int chosenProductIndex = theMenu.getUserChoice(chosenSeller->getProductsLogSize()) - 1;
 			Product *chosenProduct = chosenSeller->getProducts()[chosenProductIndex];
@@ -231,7 +231,7 @@ void System::placeOrder() {
 		cout << "\nPlease choose a buyer to make an order for: " << endl;
 		theMenu.printBuyers(userArr, userArrLogSize);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
-		Buyer *chosenBuyer = (Buyer*)userArr[chosenBuyerIndex];
+		Buyer *chosenBuyer = dynamic_cast<Buyer*>(userArr[chosenBuyerIndex]);
 		if (isEmpty(chosenBuyer->getShoppingCart()->getShoppingCartLogSize())) {
 			cout << "This buyer doesn't have any products in his/her shopping cart." << endl;
 		}
@@ -270,7 +270,7 @@ void System::payForAnOrder() {
 		cout << "Please choose a buyer to pay for an order: " << endl;
 		theMenu.printBuyers(userArr, userArrLogSize);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
-		Buyer *chosenBuyer = (Buyer*)userArr[chosenBuyerIndex];
+		Buyer *chosenBuyer = dynamic_cast<Buyer*>(userArr[chosenBuyerIndex]);
 		if (isEmpty(chosenBuyer->getOrderArrLogSize())) {
 			cout << "This buyer does not have any orders to pay for." << endl;
 		}
