@@ -23,7 +23,7 @@ class Product;
 
 class Order;
 
-class Buyer : public User
+class Buyer : virtual public User
 {
 public:
 	Buyer::Buyer(char* name, char* password, Address* address, ShoppingCart *shoppingCart); //c'tor
@@ -46,7 +46,7 @@ public:
 	virtual void toOs(ostream& os) const override;
 
 
-	void show(); 
+	void show() const; 
 
 private:
 	Seller			**sellerArr;

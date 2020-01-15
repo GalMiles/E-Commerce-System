@@ -17,7 +17,7 @@ using namespace std;
 //forward declaration
 class Feedback;
 
-class Seller : public User
+class Seller : virtual public User
 {
 public:
 	Seller(char* name, char* password, Address* address); //c'tor

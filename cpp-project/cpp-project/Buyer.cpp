@@ -53,7 +53,7 @@ ShoppingCart* Buyer::getShoppingCart() {
 	return this->shoppingCart;
 }
 
-void Buyer::show()
+void Buyer::show() const
 {
 	//buyerUser->show();
 }

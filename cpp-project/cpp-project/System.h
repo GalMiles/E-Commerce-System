@@ -6,6 +6,7 @@ It contains arrays of all of the users in the system
 #ifndef __SYSTEM_H
 #define __SYSTEM_H
 
+#include "SellerBuyer.h"
 #include "Seller.h"
 #include "Buyer.h"
 #include "Menu.h"
@@ -28,6 +29,7 @@ public:
 	void addUser(eUserType userType); //creates a new user - buyer or seller
 	const System& operator+=(const Seller seller);//instead of the two functions in comment
 	const System& operator+=(const Buyer buyer);
+	const System& operator+=(const SellerBuyer sellerbuyer);
 
 	void performChoice(int choice); //gets a choice and performs the desired action
 	void addProductToSeller(); //add product to seller's stock

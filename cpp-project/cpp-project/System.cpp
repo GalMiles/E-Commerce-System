@@ -100,6 +100,18 @@ const System& System::operator+=(const Buyer buyer)
 
 }
 
+const System& System::operator+=(const SellerBuyer sellerbuyer)
+{
+	if (this->userArrLogSize == this->userArrPhySize)
+		userArrRealloc();
+
+	userArr[userArrLogSize] = new SellerBuyer(sellerbuyer);
+	(this->userArrLogSize)++;
+
+	return *this;
+
+}
+
 void System::performChoice(int choice)
 {
 	switch (choice) {
