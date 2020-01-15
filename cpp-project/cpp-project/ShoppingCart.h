@@ -29,13 +29,14 @@ public:
 	int getShoppingCartLogSize();
 	int getShoppingCartPhySize();
 
-	int getTotalPrice();
+	double getTotalPrice();
+	void setTotalPrice(double price);
 
 private:
 	Product** shoppingCart;
 	int shoppingCartPhysSize;
 	int shoppingCartLogSize;
-	int totalPrice;
+	double totalPrice;
 };
 
 #endif // __SHOPPINGCART_H

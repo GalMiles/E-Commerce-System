@@ -6,6 +6,7 @@ ShoppingCart::ShoppingCart() //constructor
 	this->shoppingCartLogSize = 0;
 	this->shoppingCartPhysSize = 1;
 	this->shoppingCart = new Product*[1];
+	this->totalPrice = 0;
 }
 
 ShoppingCart::ShoppingCart(const ShoppingCart& otherShoppingCart) {
@@ -15,6 +16,7 @@ ShoppingCart::ShoppingCart(const ShoppingCart& otherShoppingCart) {
 	for (int i = 0; i < otherShoppingCart.shoppingCartLogSize; i++) {
 		addProductToShoppingCart(*(new Product(*otherShoppingCart.shoppingCart[i])));
 	}
+	this->totalPrice = otherShoppingCart.totalPrice;
 }
 
 ShoppingCart::~ShoppingCart() //d'tor
@@ -94,4 +96,8 @@ void ShoppingCart::removeProductFromShoppingCart(int productID) {
 	}
 }
 
-int ShoppingCart::getTotalPrice() { return this->totalPrice; }
+double ShoppingCart::getTotalPrice() { return this->totalPrice; }
+
+void ShoppingCart::setTotalPrice(double price) {
+	this->totalPrice = price;
+}

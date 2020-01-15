@@ -38,6 +38,8 @@ public:
 	void placeOrder(); //place an order (no payment)
 	void payForAnOrder(); //pay for an existing order
 
+	int getCorrectIndex(eUserType userType, int index); //returns the actual index of the user
+
 
 private:
 	Menu theMenu;

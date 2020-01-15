@@ -133,7 +133,7 @@ void Seller::toOs(ostream& os) const
 		os << "The Seller's products are:" << endl;
 		for (int i = 0; i < productsLogSize; i++)
 		{
-			os << (products[i])->getName();
+			os << (products[i])->getName() << endl;
 		}
 	}
 }

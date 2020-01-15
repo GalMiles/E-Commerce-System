@@ -134,6 +134,6 @@ const Buyer& Buyer::operator>(const Buyer& other) const
 
 void Buyer::toOs(ostream& os) const
 {
-	os << "and his shopping cart's total price is:" <<this->shoppingCart->getTotalPrice() << endl;
+	os << "and his/her shopping cart's total price is: " <<this->shoppingCart->getTotalPrice() << endl;
 }
 
