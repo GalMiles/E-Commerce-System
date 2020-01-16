@@ -262,7 +262,7 @@ int Menu::testOperatorsOptions() {
 	cout << "(1) Test the > operator: Compare two Buyers by their ShoppingCart's total price" << endl;
 	cout << "(2) Test the += operator: Add a user to the system's users array" << endl;
 	cout << "(3) Test the << opearor: Print an Address object" << endl;
-	cout << "(4) Test the << operator: Print a User object" << endl;
+	cout << "(4) Test the << operator: Print a Seller object" << endl;
 	cout << "(5) Test the << operator: Print a ShoppingCart object" << endl;
 	
 	int choice = getUserChoice(5);

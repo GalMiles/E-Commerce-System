@@ -98,6 +98,6 @@ void Address::show() const
 
 ostream& operator<<(ostream & os, const Address & address)
 {
-	os << address.country << " " << address.city << ", " << address.street << ", " << address.homeNumber;
+	os << address.country << ", " << address.city << ", " << address.street << ", " << address.homeNumber;
 	return os;
 }

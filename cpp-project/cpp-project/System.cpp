@@ -206,11 +206,14 @@ void System::testOperators(int choice) {
 		break;
 	case 4:
 		addUser(SELLER);
-		cout << *userArr[userArrLogSize];
+		theMenu.printSeperatorBlock('+');
+		cout << *(userArr[userArrLogSize-1]);
 		break;
 
 	case 5:
-		
+		addUser(BUYER);
+		theMenu.printSeperatorBlock('+');
+		cout << *(userArr[userArrLogSize - 1]);
 		break;
 	}
 }
