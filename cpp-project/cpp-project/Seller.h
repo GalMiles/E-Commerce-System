@@ -32,8 +32,8 @@ public:
 	void addProduct(Product &product); //add product to productArr
 	void addFeedback(Feedback &feedback); //add feedback to feedbackArr
 	void show() const; //using instead in operator<<
-
 	virtual void toOs(ostream& os) const override;
+
 
 private:
 	Product	  **products;

@@ -15,6 +15,7 @@ public:
 
 
 	virtual void toOs(ostream& os) const override;
+	void show() const;
 
 };
 

@@ -96,7 +96,7 @@ void Menu::printSellers(User **userArr, int size) {
 		int sellersIndex = 0;
 		for (int i = 0; i < size; i++) {
 			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
-				cout << "[" << sellersIndex + 1 << "] " << *(userArr[i]) << endl;
+				cout << "[" << sellersIndex + 1 << "] "<<*(userArr[i])<<endl;
 				sellersIndex++;
 			}
 		}
@@ -111,7 +111,7 @@ void Menu::printBuyers(User **userArr, int size) {
 		int buyersIndex = 0;
 		for (int i = 0; i < size; i++) {
 			if ((typeid(*(userArr[i])) == typeid(Buyer)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
-				cout << "[" << buyersIndex + 1 << "] " << *(userArr[i]) << endl;
+				cout << "[" << buyersIndex + 1 << "] " << *(userArr[i])<< endl;
 				buyersIndex++;
 			}
 		}
@@ -204,3 +204,36 @@ void Menu::addProductToSeller(char* productName, double& price, Product::eCatego
 	}
 	categoryChoice = (Product::eCategory)(getUserChoice(NUM_OF_CATEGORIES) - 1);
 }
+
+void Menu::printSellersNames(User **userArr, int size)
+{
+	if (size <= 0) {
+		cout << "No sellers present in system." << endl;
+	}
+	else {
+		int sellersIndex = 0;
+		for (int i = 0; i < size; i++) {
+			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
+				cout << "[" << sellersIndex + 1 << "] " << (userArr[i])->getUserName() << endl;
+				sellersIndex++;
+			}
+		}
+	}
+}
+
+void Menu::printBuyersNames(User **userArr, int size)
+{
+	if (size <= 0) {
+		cout << "No buyers present in system." << endl;
+	}
+	else {
+		int buyersIndex = 0;
+		for (int i = 0; i < size; i++) {
+			if ((typeid(*(userArr[i])) == typeid(Buyer)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
+				cout << "[" << buyersIndex + 1 << "] " << (userArr[i])->getUserName() << endl;
+				buyersIndex++;
+			}
+		}
+	}
+}
+

@@ -167,9 +167,11 @@ void System::addProductToSeller()
 	if (isEmpty(this->sellerCount)) {
 		cout << "No sellers present in system." << endl;
 	}
-	else {
+	else 
+	{
 		cout << "\nPlease choose the seller to whom you'd like the add a product: " << endl;
-		theMenu.printSellers(userArr, userArrLogSize); //print all of the sellers
+		theMenu.printSellersNames(userArr, userArrLogSize);
+	//print all of the sellers
 		int chosenSellerIndex = theMenu.getUserChoice(sellerCount) - 1;
 		int correctIndex = getCorrectIndex(SELLER, chosenSellerIndex, this->userArr, this->userArrLogSize);
 		Seller *chosenSeller = dynamic_cast<Seller*>(userArr[correctIndex]);
@@ -192,7 +194,7 @@ void System::addFeedbackToSeller()
 	}
 	else {
 		cout << "\nPlease choose a buyer to submit feedback: " << endl;
-		theMenu.printBuyers(userArr, userArrLogSize);
+		theMenu.printBuyersNames(userArr, userArrLogSize);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
 		int correctBuyerIndex = getCorrectIndex(BUYER, chosenBuyerIndex,this->userArr, this->userArrLogSize);
 		Buyer *chosenBuyer = dynamic_cast<Buyer*>(userArr[correctBuyerIndex]);
@@ -202,7 +204,7 @@ void System::addFeedbackToSeller()
 		}
 		else {
 			cout << "\nPlease choose the seller to whom you'd like the add a feedback: " << endl;
-			theMenu.printSellers(chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
+			theMenu.printSellersNames(chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
 			int chosenSellerIndex = theMenu.getUserChoice(chosenBuyer->getSellerArrLogSize()) - 1;
 			int correctSellerIndex = getCorrectIndex(SELLER, chosenSellerIndex, chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
 			Seller *chosenSeller = dynamic_cast<Seller*>(chosenBuyer->getSellerArr()[correctSellerIndex]);
@@ -221,7 +223,7 @@ void System::addProductToShoppingCart() {
 	}
 	else {
 		cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
-		theMenu.printBuyers(userArr, userArrLogSize);
+		theMenu.printBuyersNames(userArr, userArrLogSize);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
 		int correctBuyerIndex = getCorrectIndex(BUYER, chosenBuyerIndex, this->userArr,this->userArrLogSize);
 		Buyer *chosenBuyer = dynamic_cast<Buyer*>(userArr[correctBuyerIndex]);
@@ -247,7 +249,7 @@ void System::placeOrder() {
 	}
 	else {
 		cout << "\nPlease choose a buyer to make an order for: " << endl;
-		theMenu.printBuyers(userArr, userArrLogSize);
+		theMenu.printBuyersNames(userArr, userArrLogSize);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
 		int correctBuyerIndex = getCorrectIndex(BUYER, chosenBuyerIndex, this->userArr, this->userArrLogSize);
 		Buyer *chosenBuyer = dynamic_cast<Buyer*>(userArr[correctBuyerIndex]);
@@ -287,7 +289,7 @@ void System::payForAnOrder() {
 	}
 	else {
 		cout << "Please choose a buyer to pay for an order: " << endl;
-		theMenu.printBuyers(userArr, userArrLogSize);
+		theMenu.printBuyersNames(userArr, userArrLogSize);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
 		int correctBuyerIndex = getCorrectIndex(BUYER, chosenBuyerIndex, this->userArr, this->userArrLogSize);
 		Buyer *chosenBuyer = dynamic_cast<Buyer*>(userArr[correctBuyerIndex]);
