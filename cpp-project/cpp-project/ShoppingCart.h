@@ -32,6 +32,9 @@ public:
 	double getTotalPrice();
 	void setTotalPrice(double price);
 
+	friend ostream& operator<<(ostream& os, const ShoppingCart& shoppingCart);
+
+
 private:
 	Product** shoppingCart;
 	int shoppingCartPhysSize;

@@ -225,9 +225,9 @@ void Menu::addProductToSeller(char* productName, double& price, Product::eCatego
 	categoryChoice = (Product::eCategory)(getUserChoice(NUM_OF_CATEGORIES) - 1);
 }
 
-void Menu::printSellersNames(User **userArr, int size)
+void Menu::printSellersNames(User **userArr, int size, int numOfKind)
 {
-	if (size <= 0) {
+	if (numOfKind <= 0) {
 		cout << "No sellers present in system." << endl;
 	}
 	else {
@@ -241,9 +241,9 @@ void Menu::printSellersNames(User **userArr, int size)
 	}
 }
 
-void Menu::printBuyersNames(User **userArr, int size)
+void Menu::printBuyersNames(User **userArr, int size, int numOfKind)
 {
-	if (size <= 0) {
+	if (numOfKind <= 0) {
 		cout << "No buyers present in system." << endl;
 	}
 	else {
