@@ -39,6 +39,7 @@ public:
 	void payForAnOrder(); //pay for an existing order
 
 	int getCorrectIndex(eUserType userType, int index, User** userArr, int arrSize); //returns the actual index of the user
+	void testOperators(int chocie);
 
 
 private:

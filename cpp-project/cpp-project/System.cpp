@@ -163,6 +163,68 @@ void System::performChoice(int choice)
 	case 12:
 		theMenu.printProductsWithName(userArr, userArrLogSize, sellerCount);
 		break;
+	case 13:
+		testOperators(theMenu.testOperatorsOptions());
+		break;
+	}
+}
+
+void System::testOperators(int choice) {
+	switch (choice) {
+	case 1:
+		if ((this->buyerCount) < 2)
+			cout << "Not enough buyers present in system." << endl;
+		else {
+			cout << "\nPlease select two buyers to compare: " << endl;
+			theMenu.printBuyersNames(userArr, userArrLogSize);
+			cout << "Buyer 1:" << endl;
+			int chosenBuyer1Index = theMenu.getUserChoice(buyerCount) - 1;
+			int correctBuyer1Index = getCorrectIndex(BUYER, chosenBuyer1Index, this->userArr, this->userArrLogSize);
+			Buyer *chosenBuyer1 = dynamic_cast<Buyer*>(userArr[correctBuyer1Index]);
+
+			cout << "Buyer 2:" << endl;
+			int chosenBuyer2Index = theMenu.getUserChoice(buyerCount) - 1;
+			int correctBuyer2Index = getCorrectIndex(BUYER, chosenBuyer2Index, this->userArr, this->userArrLogSize);
+			Buyer *chosenBuyer2 = dynamic_cast<Buyer*>(userArr[correctBuyer2Index]);
+
+			if (chosenBuyer1 > chosenBuyer2)
+				cout << "Buyer 1 > Buyer 2" << endl;
+			else
+				cout << "Buyer 1 < Buyer 2" << endl;
+		}
+
+	case 2:
+		cout << "Adding a new Buyer to the System's users array" << endl;
+		addUser(BUYER);
+		cout << "The new user was added" << endl;
+
+	case 3:
+		bool foundProducts = false; // If there are sellers but no products whatsoever, should stay false
+		if (sellerCount <= 0) {
+			cout << "There are no sellers present in the system." << endl;
+		}
+		else {
+			for (int i = 0; i < userArrLogSize && !foundProducts; i++)
+			{
+				if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer)))
+				{
+					int productsNum = dynamic_cast<Seller*>(userArr[i])->getProductsLogSize();
+					if (productsNum <= 0) { // Seller has no product
+						continue;
+					}
+					foundProducts = true;
+					cout << dynamic_cast<Seller*>(userArr[i])->getProducts()[0] << endl;
+					cout << endl;
+				}
+			}
+		}
+	case 4:
+		if (userArrLogSize <= 0)
+			cout << "No users are present in the system. Please add a user and try again." << endl;
+		else
+			cout << userArr[0] << endl;
+	case 5:
+
 	}
 }
 
@@ -311,7 +373,7 @@ void System::payForAnOrder() {
 		}
 		else {
 			bool unpaidOrders = false; // Unless there are unpaid orders, the buyer can't pay
-			cout << "This buyer has placed the following orders: " << endl << endl;
+			cout << "This buyer has placed the following orders: " << endl;
 			for (int i = 0; i < chosenBuyer->getOrderArrLogSize(); i++) {
 				Order* tempOrder = chosenBuyer->getOrderArr()[i];
 				bool isThisOrderPaid = tempOrder->isPaid();

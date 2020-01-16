@@ -14,7 +14,7 @@ This class is in charge of getting input from the user
 #include "SellerBuyer.h"
 using namespace std;
 
-const int OPTIONS_LENGTH = 13; //number of options in the menu
+const int OPTIONS_LENGTH = 14; //number of options in the menu
 const int SEPERATOR_BLOCK_LENGTH = 52; // Amount of chars to print per seperator block
 
 class Menu
@@ -37,11 +37,13 @@ public:
 	void printSellersNames(User **userArr, int size);
 	void printBuyersNames(User **userArr, int size);
 
+	int testOperatorsOptions();
+
 
 	
 private:
 	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a Seller who is also a Buyer", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",
-		"Place an order", "Pay for an order", "Show all buyers", "Show all sellers", "Show all Sellers who are also Buyers", "Search for a product", "Exit" };
+		"Place an order", "Pay for an order", "Show all buyers", "Show all sellers", "Show all Sellers who are also Buyers", "Search for a product", "Test operators", "Exit" };
 };
 
 #endif
