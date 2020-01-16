@@ -1,5 +1,5 @@
 /*
-This class holds info about buyers.
+This class holds info about buyers. It inherits from User
 It contains their user's info, their shopping cart, an array of the sellers they have purchased from and their order history
 */
 

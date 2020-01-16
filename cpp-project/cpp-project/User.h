@@ -17,7 +17,7 @@ class User
 {
 public:
 
-	char *getUserName();
+	char *getUserName(); 
 	void setUserName(char* name);
 	void setPassword(char* password);
 	void setAddress(Address* address);
@@ -25,11 +25,11 @@ public:
 
 	User(char* name, char* password, Address* address); //c'tor
 	User(const User& otherUser); //copy c'tor
-	virtual ~User();
+	virtual ~User(); // d'tor is virtual for inheritance purpose
 
 	void show() const; //print user's info
 
-	friend ostream& operator<<(ostream& os, const User& user);
+	friend ostream& operator<<(ostream& os, const User& user); //print << operator
 	virtual void toOs(ostream& os) const = 0;
 
 

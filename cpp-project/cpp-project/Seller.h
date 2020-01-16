@@ -1,5 +1,5 @@
 /*
-This class holds info about sellers
+This class holds info about sellers. It inherits from User
 */
 
 #ifndef __SELLER_H

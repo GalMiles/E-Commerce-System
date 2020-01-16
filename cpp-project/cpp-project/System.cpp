@@ -349,7 +349,8 @@ void System::payForAnOrder() {
 	}
 }
 
-int System::getCorrectIndex(eUserType userType, int index, User** userArr, int arrSize) {
+int System::getCorrectIndex(eUserType userType, int index, User** userArr, int arrSize) //since the array is a mix of all kinds of user, we need to rectify the index in order to access the user in our system's array
+{
 	int matchesTypeCount = 0;
 	if (userType == SELLER) {
 		for (int i = 0; i < arrSize; i++) {
