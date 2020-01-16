@@ -95,7 +95,7 @@ void Menu::printSellers(User **userArr, int size) {
 	else {
 		int sellersIndex = 0;
 		for (int i = 0; i < size; i++) {
-			if (typeid(*(userArr[i])) == typeid(Seller)) {
+			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
 				cout << "[" << sellersIndex + 1 << "] " << *(userArr[i]) << endl;
 				sellersIndex++;
 			}
@@ -110,7 +110,7 @@ void Menu::printBuyers(User **userArr, int size) {
 	else {
 		int buyersIndex = 0;
 		for (int i = 0; i < size; i++) {
-			if (typeid(*(userArr[i])) == typeid(Buyer)) {
+			if ((typeid(*(userArr[i])) == typeid(Buyer)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
 				cout << "[" << buyersIndex + 1 << "] " << *(userArr[i]) << endl;
 				buyersIndex++;
 			}
@@ -127,7 +127,7 @@ bool Menu::printProducts(User **userArr, int size) {
 		int sellersIndex = 0;
 		for (int i = 0; i < size; i++)
 		{
-			if (typeid(*(userArr[i])) == typeid(Seller))
+			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer)))
 			{
 				int productsNum = dynamic_cast<Seller*>(userArr[i])->getProductsLogSize();
 				if (productsNum <= 0) { // Seller has no products, no use in printing him/her
@@ -168,7 +168,7 @@ void Menu::printProductsWithName(User **userArr, int size) {
 		cin.getline(findName, MAX_LENGTH + 1);
 		cout << endl << endl;
 		for (int i = 0; i < size; i++) { //this loop runs on every seller
-			if (typeid(userArr[i]) == typeid(Seller)) {
+			if ((typeid(userArr[i]) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
 				int productsNum = dynamic_cast<Seller*>(userArr[i])->getProductsLogSize(); //how many products the current seller has
 				if (productsNum <= 0) { // Seller has no products, no use in printing him/her
 					continue;

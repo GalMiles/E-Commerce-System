@@ -38,7 +38,7 @@ public:
 	char *getName();
 	int getSellerArrLogSize();
 	int getOrderArrLogSize();
-	Seller **getSellerArr();
+	User **getSellerArr();
 	Order **getOrderArr();
 	ShoppingCart* getShoppingCart();
 
@@ -49,7 +49,7 @@ public:
 	void show() const; 
 
 private:
-	Seller			**sellerArr;
+	User			**sellerArr;
 	Order			**orderArr;
 	ShoppingCart	*shoppingCart;
 	int             sellerArrLogSize;

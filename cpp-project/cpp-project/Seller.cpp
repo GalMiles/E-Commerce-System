@@ -84,12 +84,17 @@ void Seller::feedbackArrRealloc()
 
 void Seller::show() const
 {
-	this->show(); //using User's method
+	User::show(); //using User's method
 
-	cout << "The Seller's products are:" << endl;
-	for (int i = 0; i < productsLogSize; i++)
-	{
-		cout << (products[i])->getName();
+	if (this->productsLogSize == 0) {
+		cout << "The seller has no products" << endl;
+	}
+	else {
+		cout << "The Seller's products are:" << endl;
+		for (int i = 0; i < productsLogSize; i++)
+		{
+			cout << (products[i])->getName() << endl;
+		}
 	}
 
 }

@@ -3,7 +3,7 @@
 Buyer::Buyer(char* name, char* password, Address* address, ShoppingCart *shoppingCart) : User(name, password, address)
 {
 	setShoppingCart(shoppingCart);
-	this->sellerArr = new Seller*[1];
+	this->sellerArr = new User*[1];
 	this->sellerArr[0] = nullptr;
 	this->sellerArrLogSize = 0;
 	this->sellerArrPhySize = 1;
@@ -16,7 +16,7 @@ Buyer::Buyer(char* name, char* password, Address* address, ShoppingCart *shoppin
 
 Buyer::Buyer(const Buyer& otherBuyer) : User(move(otherBuyer))
 {
-	this->sellerArr = new Seller*[1];
+	this->sellerArr = new User*[1];
 	this->sellerArr[0] = nullptr;
 	this->sellerArrLogSize = 0;
 	this->sellerArrPhySize = 1;
@@ -25,7 +25,7 @@ Buyer::Buyer(const Buyer& otherBuyer) : User(move(otherBuyer))
 	this->orderArrLogSize = 0;
 	this->orderArrPhySize = 1;
 	for (int i = 0; i < otherBuyer.sellerArrLogSize; i++) {
-		addSellerToBuyerArr(*(new Seller(*otherBuyer.sellerArr[i])));
+		addSellerToBuyerArr(*(new Seller(*(dynamic_cast<Seller*>(otherBuyer.sellerArr[i])))));
 	}
 	shoppingCart = new ShoppingCart(*otherBuyer.shoppingCart);
 }
@@ -60,9 +60,9 @@ void Buyer::show() const
 
 void Buyer::sellerArrRealloc()
 {
-	Seller **new_arr;
+	User **new_arr;
 	this->sellerArrPhySize *= 2;
-	new_arr = new Seller*[this->sellerArrPhySize];
+	new_arr = new User*[this->sellerArrPhySize];
 
 	for (int i = 0; i < this->sellerArrLogSize; i++)
 	{
@@ -119,7 +119,7 @@ int Buyer::getSellerArrLogSize() { return sellerArrLogSize; }
 
 int Buyer::getOrderArrLogSize() { return orderArrLogSize; }
 
-Seller** Buyer::getSellerArr() { return sellerArr; }
+User** Buyer::getSellerArr() { return sellerArr; }
 
 Order** Buyer::getOrderArr() { return orderArr; }
 

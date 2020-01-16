@@ -12,8 +12,9 @@ public:
 	SellerBuyer(Seller&& seller, Buyer&& buyer); //copy c'tor
 	~SellerBuyer();//d'tor
 
-	virtual void toOs(ostream& os) const override;
 
+
+	virtual void toOs(ostream& os) const override;
 
 };
 

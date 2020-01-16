@@ -11,9 +11,10 @@ This class is in charge of getting input from the user
 #include "Feedback.h"
 #include "Seller.h"
 #include "Product.h"
+#include "SellerBuyer.h"
 using namespace std;
 
-const int OPTIONS_LENGTH = 11; //number of options in the menu
+const int OPTIONS_LENGTH = 12; //number of options in the menu
 const int SEPERATOR_BLOCK_LENGTH = 52; // Amount of chars to print per seperator block
 
 class Menu
@@ -26,6 +27,7 @@ public:
 	void getFeedbackFromUser(char* feedBack, int feedBackSize, char* date); //get info required to create a Feedback object
 	void addProductToSeller(char* productName, double& price, Product::eCategory& categoryChoice); //get info required in order to add a product to a seller's stock
 	void printSellers(User **userArr, int size); //print info about all of the sellers in the system
+	void printSellers(Seller **sellerArr, int size); //print info about all of the sellers in the system
 	void printBuyers(User **userArr, int size); //print info about all of the buyers in the system
 	bool printProducts(User **userArr, int size); //print all of the seller's products
 	void printProductsWithName(User **userArr, int size); //search for a product and print all of the matching ones
@@ -33,7 +35,7 @@ public:
 
 	
 private:
-	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",
+	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a Seller who is also a Buyer", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",
 		"Place an order", "Pay for an order", "Show all buyers", "Show all sellers", "Search for a product", "Exit" };
 };
 

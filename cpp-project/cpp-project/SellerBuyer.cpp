@@ -16,8 +16,7 @@ SellerBuyer::~SellerBuyer()
 
 void SellerBuyer::toOs(ostream& os) const
 {
-	Seller::show();
-	Buyer::show();
+	cout << this << endl;
 }
 
 

@@ -20,7 +20,7 @@ public:
 	System(); //c'tor
 	System(System& other) = delete; //disabling the copy c'tor
 	~System(); //d'tor
-	enum eUserType { SELLER, BUYER };
+	enum eUserType { SELLER, BUYER, SELLER_BUYER };
 	const char STORE_NAME[8] = "AlmoGal";
 	void initSystem(); //initialize the system
 	bool isEmpty(int size); //determintes if an array is empty
@@ -38,7 +38,7 @@ public:
 	void placeOrder(); //place an order (no payment)
 	void payForAnOrder(); //pay for an existing order
 
-	int getCorrectIndex(eUserType userType, int index); //returns the actual index of the user
+	int getCorrectIndex(eUserType userType, int index, User** userArr, int arrSize); //returns the actual index of the user
 
 
 private:
