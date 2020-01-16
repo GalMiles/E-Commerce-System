@@ -333,7 +333,7 @@ void System::payForAnOrder() {
 					chosenBuyerShoppingCart->removeProductFromShoppingCart(chosenOrderShoppingCart->getProducts()[i]->getProductId());
 				}
 				for (int i = 0; i < chosenOrderShoppingCart->getShoppingCartLogSize(); i++) {
-					chosenBuyer->addSellerToBuyerArr(*chosenOrderShoppingCart->getProducts()[i]->getSeller());
+					chosenBuyer->addSellerToBuyerArr(chosenOrderShoppingCart->getProducts()[i]->getSeller());
 				}
 				chosenBuyer->getShoppingCart()->setTotalPrice(0);
 			}

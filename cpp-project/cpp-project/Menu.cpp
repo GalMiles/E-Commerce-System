@@ -23,6 +23,10 @@ int Menu::getUserChoice(int optionsLength)
 		cout << "Invalid option. Please select an option between 1 and " << optionsLength << endl;
 		cout << "\nChoice: ";
 		cin >> choice;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+		}
 	}
 
 	return choice;

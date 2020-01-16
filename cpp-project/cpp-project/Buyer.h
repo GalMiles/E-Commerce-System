@@ -32,7 +32,7 @@ public:
 
 	void sellerArrRealloc(); //reallocate memory for sellerArr
 	void orderArrRealloc(); //reallocate memory for orderArr
-	void addSellerToBuyerArr(Seller &seller); //add seller to the buyer's sellers array
+	void addSellerToBuyerArr(User *seller); //add seller to the buyer's sellers array
 	void addOrderToOrderArr(Order &order); //add order to they buyer's order history
 	void setShoppingCart(ShoppingCart* shoppingCart);
 	char *getName();
