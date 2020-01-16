@@ -18,6 +18,7 @@ class Address
 public:
 	Address(char* country, char* city, char* street, int homeNumber); //c'tor
 	Address(const Address& otherAddress); //copy c'tor
+	~Address();
 	bool setCountry(char *country); 
 	bool setCity(char *city);
 	bool setStreet(char *street);
@@ -31,10 +32,12 @@ public:
 	bool isAddressValid(char* addressStr); //validates the address
 	void show() const; //prints the address
 
+	friend ostream& operator<<(ostream& os, const Address& adress);
+
 private:
-	char country[MAX_LENGTH];
-	char city[MAX_LENGTH];
-	char street[MAX_LENGTH];
+	char* country;
+	char* city;
+	char* street;
 	int homeNumber;
 };
 

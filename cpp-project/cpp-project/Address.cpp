@@ -1,6 +1,9 @@
 #include "Address.h"
 
 Address::Address(char* country, char* city, char* street, int homeNumber) {
+	this->country = new char[strlen(country) + 1];
+	this->city = new char[strlen(city) + 1];
+	this->street = new char[strlen(street) + 1];
 	setCountry(country);
 	setCity(city);
 	setStreet(street);
@@ -8,11 +11,18 @@ Address::Address(char* country, char* city, char* street, int homeNumber) {
 }
 
 Address::Address(const Address& otherAddress) {
-	strcpy(this->city, otherAddress.city);
-	strcpy(this->country, otherAddress.country);
-	strcpy(this->street, otherAddress.street);
-	homeNumber = *(new int(otherAddress.homeNumber));
+	country = *(new char*(otherAddress.country));
+	city = *(new char*(otherAddress.city));
+	street = *(new char*(otherAddress.street));
+	homeNumber = otherAddress.homeNumber;
 }
+
+Address::~Address() {
+	delete this->country;
+	delete this->city;
+	delete this->street;
+}
+
 
 char* Address::getCountry()
 {
@@ -84,4 +94,10 @@ bool Address::isAddressValid(char* addressStr) {
 void Address::show() const
 {
 	cout << "The address is:" << homeNumber << " " << street << "," << city << "," << country << endl;
+}
+
+ostream& operator<<(ostream & os, const Address & address)
+{
+	os << address.country << " " << address.city << ", " << address.street << ", " << address.homeNumber;
+	return os;
 }

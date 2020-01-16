@@ -202,17 +202,15 @@ void System::testOperators(int choice) {
 		break;
 
 	case 3:
-		cout << "Let's create a new seller to add a product to, so that we can print this product" << endl;
-		addUser(SELLER); //creating a new seller
-		Product("testProduct", 100.99, Product::eCategory::CHILDREN, dynamic_cast<Seller*>(userArr[userArrLogSize]));
+		cout << Address("Israel", "Holon", "Yeffet", 24);
 		break;
 	case 4:
 		addUser(SELLER);
-		cout << userArr[userArrLogSize];
+		cout << *userArr[userArrLogSize];
 		break;
 
 	case 5:
-		cout << ShoppingCart() << endl;
+		
 		break;
 	}
 }
