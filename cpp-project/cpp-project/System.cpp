@@ -170,13 +170,14 @@ void System::performChoice(int choice)
 }
 
 void System::testOperators(int choice) {
+	bool foundProducts = false; // If there are sellers but no products whatsoever, should stay false
 	switch (choice) {
 	case 1:
 		if ((this->buyerCount) < 2)
 			cout << "Not enough buyers present in system." << endl;
 		else {
 			cout << "\nPlease select two buyers to compare: " << endl;
-			theMenu.printBuyersNames(userArr, userArrLogSize);
+			theMenu.printBuyersNames(userArr, userArrLogSize, buyerCount);
 			cout << "Buyer 1:" << endl;
 			int chosenBuyer1Index = theMenu.getUserChoice(buyerCount) - 1;
 			int correctBuyer1Index = getCorrectIndex(BUYER, chosenBuyer1Index, this->userArr, this->userArrLogSize);
@@ -190,41 +191,29 @@ void System::testOperators(int choice) {
 			if (chosenBuyer1 > chosenBuyer2)
 				cout << "Buyer 1 > Buyer 2" << endl;
 			else
-				cout << "Buyer 1 < Buyer 2" << endl;
+				cout << "Buyer 1 <= Buyer 2" << endl;
 		}
+		break;
 
 	case 2:
 		cout << "Adding a new Buyer to the System's users array" << endl;
 		addUser(BUYER);
 		cout << "The new user was added" << endl;
+		break;
 
 	case 3:
-		bool foundProducts = false; // If there are sellers but no products whatsoever, should stay false
-		if (sellerCount <= 0) {
-			cout << "There are no sellers present in the system." << endl;
-		}
-		else {
-			for (int i = 0; i < userArrLogSize && !foundProducts; i++)
-			{
-				if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer)))
-				{
-					int productsNum = dynamic_cast<Seller*>(userArr[i])->getProductsLogSize();
-					if (productsNum <= 0) { // Seller has no product
-						continue;
-					}
-					foundProducts = true;
-					cout << dynamic_cast<Seller*>(userArr[i])->getProducts()[0] << endl;
-					cout << endl;
-				}
-			}
-		}
+		cout << "Let's create a new seller to add a product to, so that we can print this product" << endl;
+		addUser(SELLER); //creating a new seller
+		Product("testProduct", 100.99, Product::eCategory::CHILDREN, dynamic_cast<Seller*>(userArr[userArrLogSize]));
+		break;
 	case 4:
-		if (userArrLogSize <= 0)
-			cout << "No users are present in the system. Please add a user and try again." << endl;
-		else
-			cout << userArr[0] << endl;
-	case 5:
+		addUser(SELLER);
+		cout << userArr[userArrLogSize];
+		break;
 
+	case 5:
+		cout << ShoppingCart() << endl;
+		break;
 	}
 }
 
@@ -317,7 +306,7 @@ void System::placeOrder() {
 	}
 	else {
 		cout << "\nPlease choose a buyer to make an order for: " << endl;
-		theMenu.printBuyersNames(userArr, userArrLogSize, buyerCount);
+		theMenu.printBuyers(userArr, userArrLogSize, buyerCount);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
 		int correctBuyerIndex = getCorrectIndex(BUYER, chosenBuyerIndex, this->userArr, this->userArrLogSize);
 		Buyer *chosenBuyer = dynamic_cast<Buyer*>(userArr[correctBuyerIndex]);
