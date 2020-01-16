@@ -70,3 +70,11 @@ void Product::show() {
 	cout << "* Proudct Price: " << this->getPrice() << endl;
 	cout << "* Sold By: " << this->getSeller()->getName() << endl;
 }
+
+ostream& operator<<(ostream& os, const Product& product)
+{
+	os << "* Product ID: " <<product.productId << endl;
+	os << "* Product Name: " << product.name << endl;
+	os << "* Proudct Price: " << product.price << endl;
+	return os;
+}

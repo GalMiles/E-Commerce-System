@@ -34,6 +34,7 @@ public:
 	Seller* getSeller();
 	void show(); //prints the product's info
 
+	friend ostream& operator<<(ostream& os, const Product& product);
 
 private:
 	static int productCounter; //productId counter

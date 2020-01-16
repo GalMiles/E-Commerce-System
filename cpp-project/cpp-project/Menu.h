@@ -26,12 +26,17 @@ public:
 	bool validateDate(char* date); //validate date
 	void getFeedbackFromUser(char* feedBack, int feedBackSize, char* date); //get info required to create a Feedback object
 	void addProductToSeller(char* productName, double& price, Product::eCategory& categoryChoice); //get info required in order to add a product to a seller's stock
+	void printSellers(User **userArr, int size); //print info about all of the sellers in the system
+	void printBuyers(User **userArr, int size); //print info about all of the buyers in the system
 	void printSellers(User **userArr, int arrSize, int numOfKind); //print info about all of the sellers in the system
 	void printSellerBuyers(User **userArr, int arrSize, int numOfKind); //print info about all of the seller/buyers in the system
 	void printBuyers(User **userArr, int arrSize, int numOfKind); //print info about all of the buyers in the system
 	bool printProducts(User **userArr, int size); //print all of the seller's products
 	void printProductsWithName(User **userArr, int size, int sellerCount); //search for a product and print all of the matching ones
 	void printSeperatorBlock(char sep); //print separators (to make the UI look nicer)
+	void printSellersNames(User **userArr, int size);
+	void printBuyersNames(User **userArr, int size);
+
 
 	
 private:

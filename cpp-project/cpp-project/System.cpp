@@ -172,8 +172,13 @@ void System::addProductToSeller()
 	if (isEmpty(this->sellerCount)) {
 		cout << "No sellers present in system." << endl;
 	}
-	else {
+	else 
+	{
 		cout << "\nPlease choose the seller to whom you'd like the add a product: " << endl;
+
+		theMenu.printSellersNames(userArr, userArrLogSize);
+	//print all of the sellers
+
 		theMenu.printSellers(userArr, userArrLogSize, sellerCount); //print all of the sellers
 		int chosenSellerIndex = theMenu.getUserChoice(sellerCount) - 1;
 		int correctIndex = getCorrectIndex(SELLER, chosenSellerIndex, this->userArr, this->userArrLogSize);
@@ -197,6 +202,7 @@ void System::addFeedbackToSeller()
 	}
 	else {
 		cout << "\nPlease choose a buyer to submit feedback: " << endl;
+		theMenu.printBuyersNames(userArr, userArrLogSize);
 		theMenu.printBuyers(userArr, userArrLogSize, buyerCount);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
 		int correctBuyerIndex = getCorrectIndex(BUYER, chosenBuyerIndex,this->userArr, this->userArrLogSize);
@@ -207,6 +213,7 @@ void System::addFeedbackToSeller()
 		}
 		else {
 			cout << "\nPlease choose the seller to whom you'd like the add a feedback: " << endl;
+			theMenu.printSellersNames(chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
 			theMenu.printSellers(chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize(), chosenBuyer->getSellerArrLogSize());
 			int chosenSellerIndex = theMenu.getUserChoice(chosenBuyer->getSellerArrLogSize()) - 1;
 			int correctSellerIndex = getCorrectIndex(SELLER, chosenSellerIndex, chosenBuyer->getSellerArr(), chosenBuyer->getSellerArrLogSize());
@@ -226,6 +233,7 @@ void System::addProductToShoppingCart() {
 	}
 	else {
 		cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
+		theMenu.printBuyersNames(userArr, userArrLogSize);
 		theMenu.printBuyers(userArr, userArrLogSize, buyerCount);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
 		int correctBuyerIndex = getCorrectIndex(BUYER, chosenBuyerIndex, this->userArr,this->userArrLogSize);
@@ -252,6 +260,7 @@ void System::placeOrder() {
 	}
 	else {
 		cout << "\nPlease choose a buyer to make an order for: " << endl;
+		theMenu.printBuyersNames(userArr, userArrLogSize);
 		theMenu.printBuyers(userArr, userArrLogSize, buyerCount);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
 		int correctBuyerIndex = getCorrectIndex(BUYER, chosenBuyerIndex, this->userArr, this->userArrLogSize);
@@ -292,6 +301,7 @@ void System::payForAnOrder() {
 	}
 	else {
 		cout << "Please choose a buyer to pay for an order: " << endl;
+		theMenu.printBuyersNames(userArr, userArrLogSize);
 		theMenu.printBuyers(userArr, userArrLogSize, buyerCount);
 		int chosenBuyerIndex = theMenu.getUserChoice(buyerCount) - 1;
 		int correctBuyerIndex = getCorrectIndex(BUYER, chosenBuyerIndex, this->userArr, this->userArrLogSize);
