@@ -18,9 +18,7 @@ public:
 	~SellerBuyer();//d'tor
 
 
-
 	virtual void toOs(ostream& os) const override;
-	void show() const;
 
 };
 

@@ -33,7 +33,7 @@ public:
 	virtual void toOs(ostream& os) const = 0;
 
 
-private:
+protected:
 	char*		name;
 	char*		password;
 	Address		*address;
