@@ -25,7 +25,7 @@ Buyer::Buyer(const Buyer& otherBuyer) : User(move(otherBuyer))
 	this->orderArrLogSize = 0;
 	this->orderArrPhySize = 1;
 	for (int i = 0; i < otherBuyer.sellerArrLogSize; i++) {
-		addSellerToBuyerArr(*(new Seller(*(dynamic_cast<Seller*>(otherBuyer.sellerArr[i])))));
+		addSellerToBuyerArr(otherBuyer.sellerArr[i]);
 	}
 	shoppingCart = new ShoppingCart(*otherBuyer.shoppingCart);
 }
@@ -89,12 +89,12 @@ void Buyer::orderArrRealloc() {
 	this->orderArr = new_arr;
 }
 
-void Buyer::addSellerToBuyerArr(Seller &seller)
+void Buyer::addSellerToBuyerArr(User *seller)
 {
 	if (this->sellerArrLogSize == this->sellerArrPhySize) //realloc arr
 		sellerArrRealloc();
 
-	sellerArr[this->sellerArrLogSize] = new Seller(seller);
+	sellerArr[this->sellerArrLogSize] = seller;
 	(this->sellerArrLogSize)++;
 }
 

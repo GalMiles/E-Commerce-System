@@ -23,6 +23,10 @@ int Menu::getUserChoice(int optionsLength)
 		cout << "Invalid option. Please select an option between 1 and " << optionsLength << endl;
 		cout << "\nChoice: ";
 		cin >> choice;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+		}
 	}
 
 	return choice;
@@ -88,13 +92,13 @@ void Menu::getFeedbackFromUser(char* feedBack, int feedBackSize, char* date) {
 	cin.getline(feedBack, feedBackSize);
 }
 
-void Menu::printSellers(User **userArr, int size) {
-	if (size <= 0) {
+void Menu::printSellers(User **userArr, int arrSize, int numOfKind) {
+	if (numOfKind <= 0) {
 		cout << "No sellers present in system." << endl;
 	}
 	else {
 		int sellersIndex = 0;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < arrSize; i++) {
 			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
 				cout << "[" << sellersIndex + 1 << "] "<<*(userArr[i])<<endl;
 				sellersIndex++;
@@ -103,16 +107,31 @@ void Menu::printSellers(User **userArr, int size) {
 	}
 }
 
-void Menu::printBuyers(User **userArr, int size) {
-	if (size <= 0) {
+void Menu::printBuyers(User **userArr, int arrSize, int numOfKind) {
+	if (numOfKind <= 0) {
 		cout << "No buyers present in system." << endl;
 	}
 	else {
 		int buyersIndex = 0;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < arrSize; i++) {
 			if ((typeid(*(userArr[i])) == typeid(Buyer)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
 				cout << "[" << buyersIndex + 1 << "] " << *(userArr[i])<< endl;
 				buyersIndex++;
+			}
+		}
+	}
+}
+
+void Menu::printSellerBuyers(User **userArr, int arrSize, int numOfKind) {
+	if (numOfKind <= 0) {
+		cout << "No Sellers who are also Buyers present in system." << endl;
+	}
+	else {
+		int SBIndex = 0;
+		for (int i = 0; i < arrSize; i++) {
+			if ((typeid(*(userArr[i])) == typeid(SellerBuyer))) {
+				cout << "[" << SBIndex + 1 << "] " << *(userArr[i]) << endl;
+				SBIndex++;
 			}
 		}
 	}
@@ -156,10 +175,10 @@ void Menu::printSeperatorBlock(char sep) {
 	cout << endl;
 }
 
-void Menu::printProductsWithName(User **userArr, int size) {
+void Menu::printProductsWithName(User **userArr, int size, int sellerCount) {
 	char findName[MAX_LENGTH];
 	bool found = false; //bool to indicate whether we found matching products or not
-	if (size <= 0) { //if there are no products in the system
+	if (sellerCount <= 0) { //if there are no products in the system
 		cout << "There are no products present in the system." << endl;
 	}
 	else { //get input from the user and search for the item they are looking for
@@ -168,7 +187,8 @@ void Menu::printProductsWithName(User **userArr, int size) {
 		cin.getline(findName, MAX_LENGTH + 1);
 		cout << endl << endl;
 		for (int i = 0; i < size; i++) { //this loop runs on every seller
-			if ((typeid(userArr[i]) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
+			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) 
+			{
 				int productsNum = dynamic_cast<Seller*>(userArr[i])->getProductsLogSize(); //how many products the current seller has
 				if (productsNum <= 0) { // Seller has no products, no use in printing him/her
 					continue;

@@ -48,6 +48,7 @@ private:
 	int userArrPhySize;
 	int sellerCount;
 	int buyerCount;
+	int sellerBuyerCount;
 };
 
 #endif
