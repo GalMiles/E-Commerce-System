@@ -101,3 +101,14 @@ double ShoppingCart::getTotalPrice() { return this->totalPrice; }
 void ShoppingCart::setTotalPrice(double price) {
 	this->totalPrice = price;
 }
+
+ostream& operator<<(ostream& os, const ShoppingCart& shoppingCart)
+{
+	for (int i = 0; i < shoppingCart.shoppingCartLogSize; i++)
+	{
+		os << "[" << i + 1 << "]";
+		os<< *(shoppingCart.shoppingCart[i]) << endl;
+		 
+	}
+	return os;
+}
