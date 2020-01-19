@@ -1,40 +1,23 @@
 #include "Address.h"
 
-Address::Address(char* country, char* city, char* street, int homeNumber) {
-	this->country = new char[strlen(country) + 1];
-	this->city = new char[strlen(city) + 1];
-	this->street = new char[strlen(street) + 1];
+Address::Address(string country, string city, string street, int homeNumber) {
 	setCountry(country);
 	setCity(city);
 	setStreet(street);
 	setHomeNumber(homeNumber);
 }
 
-Address::Address(const Address& otherAddress) {
-	country = *(new char*(otherAddress.country));
-	city = *(new char*(otherAddress.city));
-	street = *(new char*(otherAddress.street));
-	homeNumber = otherAddress.homeNumber;
-}
-
-Address::~Address() {
-	delete this->country;
-	delete this->city;
-	delete this->street;
-}
-
-
-char* Address::getCountry()
+string Address::getCountry()
 {
 	return country;
 }
 
-char* Address::getCity()
+string Address::getCity()
 {
 	return city;
 }
 
-char* Address::getStreet()
+string Address::getStreet()
 {
 	return street;
 }
@@ -44,33 +27,33 @@ int Address::getHomeNumber()
 	return homeNumber;
 }
 
-bool Address::setCountry(char *country)
+bool Address::setCountry(string country)
 {
 	if (isAddressValid(country))
 	{
-		strcpy(this->country, country);
+		this->country = country;
 		return true;
 	}
 	else
 		return false;
 }
 
-bool Address::setCity(char *city)
+bool Address::setCity(string city)
 {
 	if (isAddressValid(city))
 	{
-		strcpy(this->city, city);
+		this->city = city;
 		return true;
 	}
 	else
 		return false;
 }
 
-bool Address::setStreet(char *street)
+bool Address::setStreet(string street)
 {
 	if (isAddressValid(street))
 	{
-		strcpy(this->street, street);
+		this->street = street;
 		return true;
 	}
 	else
@@ -82,8 +65,8 @@ void Address::setHomeNumber(int homeNumber)
 	this->homeNumber = homeNumber;
 }
 
-bool Address::isAddressValid(char* addressStr) {
-	int length = strlen(addressStr);
+bool Address::isAddressValid(string addressStr) {
+	int length = addressStr.length();
 	for (int i = 0; i < length; i++) {
 		if ((addressStr[i] < 'A' || (addressStr[i] > 'Z' && addressStr[i] < 'a') || addressStr[i] > 'z'))
 			return false;

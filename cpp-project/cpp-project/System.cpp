@@ -52,11 +52,11 @@ void System::userArrRealloc()
 
 void System::addUser(eUserType userType)
 {
-	char userName[MAX_LENGTH];
-	char password[MAX_LENGTH];
-	char country[MAX_LENGTH];
-	char city[MAX_LENGTH];
-	char street[MAX_LENGTH];
+	string userName;
+	string password;
+	string country;
+	string city;
+	string street;
 	int homeNumber;
 
 	theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber, MAX_LENGTH);
@@ -269,8 +269,8 @@ void System::addFeedbackToSeller()
 			char feedBackContent[MAX_FEEDBACK_SIZE];
 			char feedBackDate[DATE_LENGTH];
 			theMenu.getFeedbackFromUser(feedBackContent, MAX_FEEDBACK_SIZE, feedBackDate);
-			Feedback newFeedback(chosenBuyer->getName(), feedBackContent, feedBackDate);
-			chosenSeller->addFeedback(newFeedback);
+			//Feedback newFeedback(chosenBuyer->getName(), feedBackContent, feedBackDate);
+			//chosenSeller->addFeedback(newFeedback);
 		}
 	}
 }

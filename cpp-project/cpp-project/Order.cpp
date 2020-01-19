@@ -6,7 +6,6 @@ Order::Order(ShoppingCart* shoppingCart, Buyer* buyer)
 	setNumOfProducts(shoppingCart);
 	setBuyer(buyer);
 	calculateTotalPrice();
-	this->sellers = new Seller*[numOfProducts];
 	setOrderSellers();
 	setPaymentStatus(false);
 }
@@ -16,20 +15,10 @@ Order::Order(const Order& otherOrder) {
 	numOfProducts = *(new int(shoppingCart->getShoppingCartLogSize()));
 	buyer = new Buyer(*otherOrder.buyer);
 	calculateTotalPrice();
-	sellers = new Seller*[numOfProducts];
-	for (int i = 0; i < numOfProducts; i++) {
-		sellers[i] = otherOrder.sellers[i];
-	}
+	this->sellers = otherOrder.sellers;
 	paid = otherOrder.paid;
 }
 
-Order::~Order() {
-	for (int i = 0; i < this->numOfProducts; i++)
-	{
-		this->sellers[i] = nullptr;
-	}
-	delete[]sellers;
-}
 
 void Order::setBuyer(Buyer* buyer) {
 	this->buyer = buyer;
@@ -59,6 +48,7 @@ ShoppingCart* Order::getOrderShoppingCart() {
 	return this->shoppingCart;
 }
 
+/*
 void Order::setOrderSellers() {
 	Product* p;
 	for (int i = 0; i < numOfProducts; i++) {
@@ -66,6 +56,7 @@ void Order::setOrderSellers() {
 		sellers[i] = p->getSeller();
 	}
 }
+*/
 
 void Order::calculateTotalPrice()
 {

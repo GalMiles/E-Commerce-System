@@ -7,6 +7,8 @@ This class holds info about the shopping cart
 
 
 #include <iostream>
+#include <list>
+#include <iterator>
 #include <string.h>
 using namespace std;
 
@@ -19,26 +21,18 @@ class ShoppingCart
 public:
 	ShoppingCart(); //c'tor
 	ShoppingCart(const ShoppingCart& otherShoppingCart); //copy c'tor
-	~ShoppingCart(); //d'tor
-	Product** getProducts();
+	//Product** getProducts();
 	void addProductToShoppingCart(Product& productToAdd);
 	void removeProductFromShoppingCart(int productID);
-	void shoppingCartRealloc();
 	void show(); //print shopping cart
-
-	int getShoppingCartLogSize();
-	int getShoppingCartPhySize();
-
 	double getTotalPrice();
 	void setTotalPrice(double price);
 
-	friend ostream& operator<<(ostream& os, const ShoppingCart& shoppingCart);
+	friend ostream& operator<<(ostream& os, const ShoppingCart& SCToPrint);
 
 
 private:
-	Product** shoppingCart;
-	int shoppingCartPhysSize;
-	int shoppingCartLogSize;
+	list<Product*> shoppingCart;
 	double totalPrice;
 };
 

@@ -17,13 +17,13 @@ class User
 {
 public:
 
-	char *getUserName(); 
-	void setUserName(char* name);
-	void setPassword(char* password);
+	string getUserName();
+	void setUserName(string name);
+	void setPassword(string password);
 	void setAddress(Address* address);
 	Address* getAddress();
 
-	User(char* name, char* password, Address* address); //c'tor
+	User(string name, string password, Address* address); //c'tor
 	User(const User& otherUser); //copy c'tor
 	virtual ~User(); // d'tor is virtual for inheritance purpose
 
@@ -34,8 +34,8 @@ public:
 
 
 protected:
-	char*		name;
-	char*		password;
+	string		name;
+	string		password;
 	Address		*address;
 };
 

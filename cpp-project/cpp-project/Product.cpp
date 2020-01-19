@@ -3,11 +3,10 @@
 
 int Product::productCounter = 0; //initialize the productId counter
 
-Product::Product(char *productName, double price, eCategory category, Seller* productSeller) //c'tor
+Product::Product(string productName, double price, eCategory category, Seller* productSeller) //c'tor
 {
 	productId = ++productCounter;
 
-	name = new char[strlen(productName) + 1];
 	setProductName(productName);
 	setPrice(price);
 	setCategory(category);
@@ -15,21 +14,15 @@ Product::Product(char *productName, double price, eCategory category, Seller* pr
 }
 
 Product::Product(const Product& otherProduct) {
-	name = new char[strlen(otherProduct.name) + 1];
-	//name = *(new char*(otherProduct.name));
-	strcpy(name, otherProduct.name);
-	price = *(new double(otherProduct.price));
-	category = *(new eCategory(otherProduct.category));
-	productId = *(new int(otherProduct.productId));
+	name = otherProduct.name;
+	price = otherProduct.price;
+	category = eCategory(otherProduct.category);
+	productId = otherProduct.productId;
 	productSeller = new Seller(*otherProduct.productSeller);
 }
 
-Product::~Product() {
-	delete this->name;
-}
-
-void Product::setProductName(char* productName) {
-	strcpy(this->name, productName);
+void Product::setProductName(string productName) {
+	this->name = productName;
 }
 
 void Product::setPrice(double price) {
@@ -44,7 +37,7 @@ void Product::setProductSeller(Seller* productSeller) {
 	this->productSeller = productSeller;
 }
 
-char* Product::getName()
+string Product::getName()
 {
 	return name;
 }

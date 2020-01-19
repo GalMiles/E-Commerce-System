@@ -20,7 +20,7 @@ class Order
 private:
 	ShoppingCart* shoppingCart;
 	Buyer* buyer;
-	Seller** sellers;
+	list<Seller*> sellers;
 	double totalPrice;
 	int numOfProducts;
 	bool paid;
@@ -29,7 +29,6 @@ private:
 public:
 	Order(ShoppingCart* shoppingCart, Buyer* buyer); //c'tor
 	Order(const Order& otherOrder); //copy c'tor
-	~Order(); //d'tor
 	Buyer* getBuyer();
 	void calculateTotalPrice(); //calculates total price of the items
 	double getTotalPrice();
@@ -39,7 +38,7 @@ public:
 	void setNumOfProducts(ShoppingCart* shoppingCart);
 	void setShoppingCart(ShoppingCart* shoppingCart);
 	ShoppingCart* getOrderShoppingCart();
-	void setOrderSellers(); //set array of sellers whom the products of this order were purchased from
+	//void setOrderSellers(); //set array of sellers whom the products of this order were purchased from
 	enum ePaymentStatus { UNPAID, PAID };
 	static constexpr char* paymentStatuses[] = { "UNPAID", "PAID" }; //strings for the enum
 };

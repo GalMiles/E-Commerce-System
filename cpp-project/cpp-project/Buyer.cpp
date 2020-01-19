@@ -1,48 +1,20 @@
 #include "Buyer.h"
 
-Buyer::Buyer(char* name, char* password, Address* address, ShoppingCart *shoppingCart) : User(name, password, address)
+Buyer::Buyer(string name, string password, Address* address, ShoppingCart *shoppingCart) : User(name, password, address)
 {
 	setShoppingCart(shoppingCart);
-	this->sellerArr = new User*[1];
-	this->sellerArr[0] = nullptr;
-	this->sellerArrLogSize = 0;
-	this->sellerArrPhySize = 1;
-	this->orderArr = new Order*[1];
-	this->orderArr[0] = nullptr;
-	this->orderArrLogSize = 0;
-	this->orderArrPhySize = 1;
 }
 
 
 Buyer::Buyer(const Buyer& otherBuyer) : User(move(otherBuyer))
 {
-	this->sellerArr = new User*[1];
-	this->sellerArr[0] = nullptr;
-	this->sellerArrLogSize = 0;
-	this->sellerArrPhySize = 1;
-	this->orderArr = new Order*[1];
-	this->orderArr[0] = nullptr;
-	this->orderArrLogSize = 0;
-	this->orderArrPhySize = 1;
-	for (int i = 0; i < otherBuyer.sellerArrLogSize; i++) {
-		addSellerToBuyerArr(otherBuyer.sellerArr[i]);
-	}
+	this->sellerArr = otherBuyer.sellerArr;
 	shoppingCart = new ShoppingCart(*otherBuyer.shoppingCart);
 }
 
 Buyer::~Buyer()
 {
-	for (int i = 0; i < this->sellerArrPhySize; i++)
-	{
-		this->sellerArr[i] = nullptr;
-	}
-	delete[]sellerArr; 
 
-	for (int i = 0; i < this->orderArrPhySize; i++)
-	{
-		this->orderArr[i] = nullptr;
-	}
-	delete[]orderArr;
 }
 
 void Buyer::setShoppingCart(ShoppingCart* shoppingCart) {
@@ -58,70 +30,26 @@ void Buyer::show() const
 	//buyerUser->show();
 }
 
-void Buyer::sellerArrRealloc()
-{
-	User **new_arr;
-	this->sellerArrPhySize *= 2;
-	new_arr = new User*[this->sellerArrPhySize];
-
-	for (int i = 0; i < this->sellerArrLogSize; i++)
-	{
-		new_arr[i] = (this->sellerArr[i]);
-		this->sellerArr[i] = nullptr;
-	}
-	delete[] this->sellerArr;
-
-	this->sellerArr = new_arr;
-}
-
-void Buyer::orderArrRealloc() {
-	Order **new_arr;
-	this->orderArrPhySize *= 2;
-	new_arr = new Order*[this->orderArrPhySize];
-
-	for (int i = 0; i < this->orderArrLogSize; i++)
-	{
-		new_arr[i] = (this->orderArr[i]);
-		this->orderArr[i] = nullptr;
-	}
-	delete[] this->orderArr;
-
-	this->orderArr = new_arr;
-}
-
 void Buyer::addSellerToBuyerArr(User *seller)
 {
-	if (this->sellerArrLogSize == this->sellerArrPhySize) //realloc arr
-		sellerArrRealloc();
-
-	sellerArr[this->sellerArrLogSize] = seller;
-	(this->sellerArrLogSize)++;
+	this->sellerArr.push_back(seller);
 }
 
 void Buyer::addOrderToOrderArr(Order &order)
 {
-	if (this->orderArrLogSize == this->orderArrPhySize) //realloc arr
-		orderArrRealloc();
-
-	orderArr[this->orderArrLogSize] = new Order(order);
-	(this->orderArrLogSize)++;
+	this->orderArr.push_back(&order);
 }
 
-//User *Buyer::getUser() { return this->buyerUser; }
-
-
-char* Buyer::getName()
+string Buyer::getName()
 {
 	return(this->getUserName());
 }
 
-int Buyer::getSellerArrLogSize() { return sellerArrLogSize; }
-
-int Buyer::getOrderArrLogSize() { return orderArrLogSize; }
-
+/*
 User** Buyer::getSellerArr() { return sellerArr; }
 
 Order** Buyer::getOrderArr() { return orderArr; }
+*/
 
 const Buyer& Buyer::operator>(const Buyer& other) const
 {

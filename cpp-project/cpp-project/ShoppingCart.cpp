@@ -3,81 +3,39 @@
 ShoppingCart::ShoppingCart() //constructor
 {
 	this->totalPrice = 0;
-	this->shoppingCartLogSize = 0;
-	this->shoppingCartPhysSize = 1;
-	this->shoppingCart = new Product*[1];
-	this->totalPrice = 0;
 }
 
 ShoppingCart::ShoppingCart(const ShoppingCart& otherShoppingCart) {
-	this->shoppingCartLogSize = 0;
-	this->shoppingCartPhysSize = 1;
-	this->shoppingCart = new Product*[1];
-	for (int i = 0; i < otherShoppingCart.shoppingCartLogSize; i++) {
-		addProductToShoppingCart(*(new Product(*otherShoppingCart.shoppingCart[i])));
-	}
+	this->shoppingCart = otherShoppingCart.shoppingCart;
 	this->totalPrice = otherShoppingCart.totalPrice;
 }
 
-ShoppingCart::~ShoppingCart() //d'tor
-{
-	for (int i = 0; i < this->shoppingCartPhysSize; i++)
-	{
-		this->shoppingCart[i] = nullptr;
-	}
-	delete[]shoppingCart;
-}
-
+/*
 Product** ShoppingCart::getProducts()
 {
 	return shoppingCart;
 }
+*/
 
-void ShoppingCart::shoppingCartRealloc()
-{
-	Product **new_arr;
-	this->shoppingCartPhysSize *= 2;
-	new_arr = new Product*[this->shoppingCartPhysSize];
-
-	for (int i = 0; i < this->shoppingCartLogSize; i++)
-	{
-		new_arr[i] = (this->shoppingCart[i]);
-		this->shoppingCart[i] = nullptr;
-	}
-	delete[] this->shoppingCart;
-
-	this->shoppingCart = new_arr;
-}
 
 void ShoppingCart::addProductToShoppingCart(Product& productToAdd)
 {
-	if (this->shoppingCartLogSize == this->shoppingCartPhysSize) //realloc shopping cart
-		shoppingCartRealloc();
-
-	this->shoppingCart[this->shoppingCartLogSize] = new Product(productToAdd); // add product
-	(this->shoppingCartLogSize)++;
-	this->totalPrice += productToAdd.getPrice();
-}
-
-int ShoppingCart::getShoppingCartLogSize()
-{
-	return (this->shoppingCartLogSize);
-}
-
-int ShoppingCart::getShoppingCartPhySize()
-{
-	return (this->shoppingCartPhysSize);
+	this->shoppingCart.push_back(&productToAdd);
 }
 
 void ShoppingCart::show() {
-	for (int i = 0; i < shoppingCartLogSize; i++) {
+	list<Product*>::iterator itr = shoppingCart.begin();
+	list<Product*>::iterator itrEnd = shoppingCart.end();
+	int i = 0;
+	for ( ; itr != itrEnd; ++itr) {
 		cout << "[" << i + 1 << "]" << endl;
-		shoppingCart[i]->show();
+		i++;
+		(*itr)->show();
 	}
 }
-
+/*
 void ShoppingCart::removeProductFromShoppingCart(int productID) {
-	if (this->shoppingCartLogSize <= 0) { //if there are no products in the shopping cart
+	if (shoppingCart.empty()) { //if there are no products in the shopping cart
 		return;
 	}
 	else {
@@ -95,6 +53,7 @@ void ShoppingCart::removeProductFromShoppingCart(int productID) {
 		shoppingCartLogSize--;
 	}
 }
+*/
 
 double ShoppingCart::getTotalPrice() { return this->totalPrice; }
 
@@ -102,13 +61,15 @@ void ShoppingCart::setTotalPrice(double price) {
 	this->totalPrice = price;
 }
 
-ostream& operator<<(ostream& os, const ShoppingCart& shoppingCart)
+ostream& operator<<(ostream& os, const ShoppingCart& SCToPrint)
 {
-	for (int i = 0; i < shoppingCart.shoppingCartLogSize; i++)
-	{
-		os << "[" << i + 1 << "]";
-		os<< *(shoppingCart.shoppingCart[i]) << endl;
-		 
+	list<Product*>::const_iterator itr = SCToPrint.shoppingCart.begin();
+	list<Product*>::const_iterator itrEnd = SCToPrint.shoppingCart.end();
+	int i = 0;
+	for (; itr != itrEnd; ++itr) {
+		cout << "[" << i + 1 << "]" << endl;
+		i++;
+		(*itr)->show();
 	}
 	return os;
 }

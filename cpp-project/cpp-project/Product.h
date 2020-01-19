@@ -21,14 +21,13 @@ public:
 	enum eCategory { CHILDREN, CLOTHES, HOME, SPORT };
 	static constexpr char* categories[] = { "Children", "Clothes", "Home", "Sport" }; //strings for the enum
 
-	Product(char *productName, double price, eCategory category, Seller* productSeller); //c'tor
+	Product(string productName, double price, eCategory category, Seller* productSeller); //c'tor
 	Product(const Product& otherProduct);//copy c'tor
-	~Product();
-	void setProductName(char* productName);
+	void setProductName(string productName);
 	void setPrice(double price);
 	void setCategory(eCategory category);
 	void setProductSeller(Seller* productSeller);
-	char *getName();
+	string getName();
 	double getPrice();
 	int getProductId();
 	Seller* getSeller();
@@ -38,7 +37,7 @@ public:
 
 private:
 	static int productCounter; //productId counter
-	char *name;
+	string name;
 	double price;
 	eCategory category;
 	int productId;

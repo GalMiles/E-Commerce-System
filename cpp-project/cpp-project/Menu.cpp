@@ -14,6 +14,7 @@ void Menu::printMenu()
 
 int Menu::getUserChoice(int optionsLength)
 {
+	cin.clear();
 	cout << "\nChoice: ";
 	int choice;
 	cin >> choice;
@@ -33,21 +34,21 @@ int Menu::getUserChoice(int optionsLength)
 }
 
 
-void Menu::getUserInfoFromUser(char* userName, char* password, char*country, char* city, char* street, int& homeNumber, int maxLength) {
+void Menu::getUserInfoFromUser(string& userName, string& password, string& country, string& city, string& street, int& homeNumber, int maxLength) {
 	cin.ignore();
 	cout << "Please enter user name: ";
-	cin.getline(userName, maxLength + 1);
+	getline(cin, userName);
 
 	cout << "\nPlease enter password: ";
-	cin.getline(password, maxLength + 1);
+	getline(cin, password);
 
 	cout << "\nPlease enter your address:" << endl;
 	cout << "Country: ";
-	cin.getline(country, maxLength + 1);
+	getline(cin, country);
 	cout << "\nCity: ";
-	cin.getline(city, maxLength + 1);
+	getline(cin, city);
 	cout << "\nStreet: ";
-	cin.getline(street, maxLength + 1);
+	getline(cin, street);
 	cout << "\nHome number: ";
 	cin >> homeNumber;
 }
