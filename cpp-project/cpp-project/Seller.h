@@ -23,12 +23,12 @@ class Feedback;
 class Seller : virtual public User
 {
 public:
-	Seller(string name, string password, Address* address); //c'tor
+	Seller(string& name, string& password, Address* address); //c'tor
 	Seller(const Seller& otherSeller); //copy c'tor
 	~Seller(); //d'tor
 
-	//Product* getProducts();
-	string getName();
+	list<Product*>& getProducts();
+	const string getName();
 	void addProduct(Product &product); //add product to productArr
 	void addFeedback(Feedback &feedback); //add feedback to feedbackArr
 	virtual void toOs(ostream& os) const override;

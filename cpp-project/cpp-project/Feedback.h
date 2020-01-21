@@ -18,18 +18,18 @@ const int DATE_LENGTH = 11; //limit the date's string length
 class Feedback
 {
 public:
-	Feedback(string userName, string content, string date); //c'tor
+	Feedback(string& userName, string& content, string& date); //c'tor
 	Feedback(const Feedback& otherFeedback); //copy c'tor
-	void setUserName(string userName);
-	void setDate(string date);
-	void setContent(string content);
-	string getUserName();
-	string getDate();
-	string getContent();
+	void setUserName(string& userName);
+	void setDate(string& date);
+	void setContent(string& content);
+	const string getUserName();
+	const string getDate();
+	const string getContent();
 
 private:
 	string userName;
-	string date[DATE_LENGTH];
+	string date;
 	string content;
 };
 #endif

@@ -16,10 +16,10 @@ const int MAX_LENGTH = 20; //length limit for strings
 class Address
 {
 public:
-	Address(string country, string city, string street, int homeNumber); //c'tor
-	bool setCountry(string country);
-	bool setCity(string city);
-	bool setStreet(string street);
+	Address(string& country, string& city, string& street, int homeNumber); //c'tor
+	bool setCountry(string& country);
+	bool setCity(string& city);
+	bool setStreet(string& street);
 	void setHomeNumber(int homeNumber);
 
 	string getCountry();
@@ -27,7 +27,7 @@ public:
 	string getStreet();
 	int getHomeNumber();
 
-	bool isAddressValid(string addressStr); //validates the address
+	bool isAddressValid(string& addressStr); //validates the address
 	void show() const; //prints the address
 
 	friend ostream& operator<<(ostream& os, const Address& adress);

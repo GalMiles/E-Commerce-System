@@ -28,16 +28,16 @@ class Order;
 class Buyer : virtual public User
 {
 public:
-	Buyer::Buyer(string name, string password, Address* address, ShoppingCart *shoppingCart); //c'tor
+	Buyer::Buyer(string& name, string& password, Address* address, ShoppingCart *shoppingCart); //c'tor
 	Buyer(const Buyer& otherBuyer); //copy c'tor
 	~Buyer(); //d'tor
 
 	void addSellerToBuyerArr(User *seller); //add seller to the buyer's sellers array
 	void addOrderToOrderArr(Order &order); //add order to they buyer's order history
 	void setShoppingCart(ShoppingCart* shoppingCart);
-	string getName();
-	//User *getSellerArr();
-	//Order *getOrderArr();
+	const string getName();
+	list<User*>& getSellerArr();
+	list<Order*>& getOrderArr();
 	ShoppingCart* getShoppingCart();
 
 	const Buyer& operator>(const Buyer& other) const;

@@ -1,6 +1,6 @@
 #include "Feedback.h"
 
-Feedback::Feedback(string userName, string content, string date) //feedback c'tor
+Feedback::Feedback(string& userName, string& content, string& date) //feedback c'tor
 {
 	setUserName(userName);
 	setContent(content);
@@ -12,29 +12,29 @@ Feedback::Feedback(const Feedback& otherFeedback) {
 	this->content = otherFeedback.content;
 }
 
-void Feedback::setUserName(string userName) {
+void Feedback::setUserName(string& userName) {
 	this->userName = userName;
 }
 
-void Feedback::setDate(string date) {
+void Feedback::setDate(string& date) {
 	this->date = date;
 }
 
-void Feedback::setContent(string content) {
+void Feedback::setContent(string& content) {
 	this->content = content;
 }
 
-string Feedback::getUserName()
+const string Feedback::getUserName()
 {
 	return this->userName;
 }
 
-string Feedback::getDate()
+const string Feedback::getDate()
 {
 	return this->date;
 }
 
-string Feedback::getContent()
+const string Feedback::getContent()
 {
 	return this->content;
 }

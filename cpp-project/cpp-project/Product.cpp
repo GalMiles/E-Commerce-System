@@ -3,7 +3,7 @@
 
 int Product::productCounter = 0; //initialize the productId counter
 
-Product::Product(string productName, double price, eCategory category, Seller* productSeller) //c'tor
+Product::Product(string& productName, double price, eCategory category, Seller* productSeller) //c'tor
 {
 	productId = ++productCounter;
 
@@ -13,6 +13,7 @@ Product::Product(string productName, double price, eCategory category, Seller* p
 	setProductSeller(productSeller);
 }
 
+/*
 Product::Product(const Product& otherProduct) {
 	name = otherProduct.name;
 	price = otherProduct.price;
@@ -20,8 +21,9 @@ Product::Product(const Product& otherProduct) {
 	productId = otherProduct.productId;
 	productSeller = new Seller(*otherProduct.productSeller);
 }
+*/
 
-void Product::setProductName(string productName) {
+void Product::setProductName(string& productName) {
 	this->name = productName;
 }
 
@@ -37,23 +39,23 @@ void Product::setProductSeller(Seller* productSeller) {
 	this->productSeller = productSeller;
 }
 
-string Product::getName()
+const string Product::getName()
 {
 	return name;
 }
 
-double Product::getPrice()
+const double Product::getPrice()
 {
 	return price;
 }
 
-int Product::getProductId()
+const int Product::getProductId()
 {
 	return productId;
 }
 
 
-Seller* Product::getSeller() {
+const Seller* Product::getSeller() {
 	return this->productSeller;
 }
 

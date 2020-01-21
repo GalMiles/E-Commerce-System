@@ -28,17 +28,16 @@ private:
 
 public:
 	Order(ShoppingCart* shoppingCart, Buyer* buyer); //c'tor
-	Order(const Order& otherOrder); //copy c'tor
+	//Order(const Order& otherOrder); //copy c'tor
 	Buyer* getBuyer();
 	void calculateTotalPrice(); //calculates total price of the items
 	double getTotalPrice();
 	bool isPaid(); //is this order paid
 	void setPaymentStatus(bool paymentStatus); //sets payment status - PAID/UNPAID
 	void setBuyer(Buyer* buyer);
-	void setNumOfProducts(ShoppingCart* shoppingCart);
 	void setShoppingCart(ShoppingCart* shoppingCart);
 	ShoppingCart* getOrderShoppingCart();
-	//void setOrderSellers(); //set array of sellers whom the products of this order were purchased from
+	void setOrderSellers(); //set array of sellers whom the products of this order were purchased from
 	enum ePaymentStatus { UNPAID, PAID };
 	static constexpr char* paymentStatuses[] = { "UNPAID", "PAID" }; //strings for the enum
 };

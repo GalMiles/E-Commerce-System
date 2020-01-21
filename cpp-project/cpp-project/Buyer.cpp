@@ -1,6 +1,6 @@
 #include "Buyer.h"
 
-Buyer::Buyer(string name, string password, Address* address, ShoppingCart *shoppingCart) : User(name, password, address)
+Buyer::Buyer(string& name, string& password, Address* address, ShoppingCart *shoppingCart) : User(name, password, address)
 {
 	setShoppingCart(shoppingCart);
 }
@@ -40,16 +40,14 @@ void Buyer::addOrderToOrderArr(Order &order)
 	this->orderArr.push_back(&order);
 }
 
-string Buyer::getName()
+const string Buyer::getName()
 {
 	return(this->getUserName());
 }
 
-/*
-User** Buyer::getSellerArr() { return sellerArr; }
+list<User*>& Buyer::getSellerArr() { return sellerArr; }
 
-Order** Buyer::getOrderArr() { return orderArr; }
-*/
+list<Order*>& Buyer::getOrderArr() { return orderArr; }
 
 const Buyer& Buyer::operator>(const Buyer& other) const
 {

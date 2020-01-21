@@ -33,7 +33,6 @@ int Menu::getUserChoice(int optionsLength)
 	return choice;
 }
 
-
 void Menu::getUserInfoFromUser(string& userName, string& password, string& country, string& city, string& street, int& homeNumber, int maxLength) {
 	cin.ignore();
 	cout << "Please enter user name: ";
@@ -93,73 +92,85 @@ void Menu::getFeedbackFromUser(char* feedBack, int feedBackSize, char* date) {
 	cin.getline(feedBack, feedBackSize);
 }
 
-void Menu::printSellers(User **userArr, int arrSize, int numOfKind) {
+void Menu::printSellers(const list<User*>& userArr, int numOfKind) {
 	if (numOfKind <= 0) {
 		cout << "No sellers present in system." << endl;
 	}
 	else {
+		list<User*>::const_iterator itr = userArr.begin();
+		list<User*>::const_iterator itrEnd = userArr.end();
 		int sellersIndex = 0;
-		for (int i = 0; i < arrSize; i++) {
-			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
-				cout << "[" << sellersIndex + 1 << "] "<<*(userArr[i])<<endl;
+		for ( ; itr != itrEnd; ++itr) {
+			if (isSeller(**itr)) {
+				cout << "[" << sellersIndex + 1 << "] "<< (*itr) <<endl;
 				sellersIndex++;
 			}
 		}
 	}
 }
 
-void Menu::printBuyers(User **userArr, int arrSize, int numOfKind) {
+void Menu::printBuyers(const list<User*>& userArr, int numOfKind) {
 	if (numOfKind <= 0) {
 		cout << "No buyers present in system." << endl;
 	}
 	else {
+		list<User*>::const_iterator itr = userArr.begin();
+		list<User*>::const_iterator itrEnd = userArr.end();
 		int buyersIndex = 0;
-		for (int i = 0; i < arrSize; i++) {
-			if ((typeid(*(userArr[i])) == typeid(Buyer)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
-				cout << "[" << buyersIndex + 1 << "] " << *(userArr[i])<< endl;
+		for (; itr != itrEnd; ++itr) {
+			if (isBuyer(**itr)) {
+				cout << "[" << buyersIndex + 1 << "] " << (*itr) << endl;
 				buyersIndex++;
 			}
 		}
 	}
 }
 
-void Menu::printSellerBuyers(User **userArr, int arrSize, int numOfKind) {
+void Menu::printSellerBuyers(const list<User*>& userArr, int numOfKind) {
 	if (numOfKind <= 0) {
 		cout << "No Sellers who are also Buyers present in system." << endl;
 	}
 	else {
-		int SBIndex = 0;
-		for (int i = 0; i < arrSize; i++) {
-			if ((typeid(*(userArr[i])) == typeid(SellerBuyer))) {
-				cout << "[" << SBIndex + 1 << "] " << *(userArr[i]) << endl;
-				SBIndex++;
+		list<User*>::const_iterator itr = userArr.begin();
+		list<User*>::const_iterator itrEnd = userArr.end();
+		int buyersIndex = 0;
+		for (; itr != itrEnd; ++itr) {
+			if (isSellerBuyer(**itr)) {
+				cout << "[" << buyersIndex + 1 << "] " << (*itr) << endl;
+				buyersIndex++;
 			}
 		}
 	}
 }
 
-bool Menu::printProducts(User **userArr, int size) {
+bool Menu::printProducts(list<User*>& userArr, int size) {
 	bool foundProducts = false; // If there are sellers but no products whatsoever, should stay false
 	if (size <= 0) {
 		cout << "There are no sellers present in the system." << endl;
 	}
 	else {
+		list<User*>::const_iterator itr = userArr.begin();
+		list<User*>::const_iterator itrEnd = userArr.end();
 		int sellersIndex = 0;
-		for (int i = 0; i < size; i++)
+		for ( ; itr != itrEnd ; ++itr)
 		{
-			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer)))
+			if (isSeller(**itr))
 			{
-				int productsNum = dynamic_cast<Seller*>(userArr[i])->getProductsLogSize();
+				int productsNum = dynamic_cast<Seller*>(*itr)->getProducts().size();
 				if (productsNum <= 0) { // Seller has no products, no use in printing him/her
 					continue;
 				}
 				foundProducts = true; // Some seller has some products
 				printSeperatorBlock('-');
-				cout << "[" << sellersIndex + 1 << "] Seller: " << dynamic_cast<Seller*>(userArr[i])->getName() << endl;
+				cout << "[" << sellersIndex + 1 << "] Seller: " << dynamic_cast<Seller*>(*itr)->getName() << endl;
 				sellersIndex++;
 
-				for (int j = 0; j < productsNum; j++) {
-					cout << "\t[" << j + 1 << "] " << dynamic_cast<Seller*>(userArr[i])->getProducts()[j]->getName() << endl;
+				list<Product*>::iterator productItr = dynamic_cast<Seller*>(*itr)->getProducts().begin();
+				list<Product*>::iterator productItrEnd = dynamic_cast<Seller*>(*itr)->getProducts().end();
+				int j = 1;
+				for ( ; productItr != productItrEnd; ++productItr) {
+					cout << "\t[" << j << "] " << (*productItr)->getName() << endl;
+					j++;
 				}
 				printSeperatorBlock('-');
 				cout << endl;
@@ -176,8 +187,8 @@ void Menu::printSeperatorBlock(char sep) {
 	cout << endl;
 }
 
-void Menu::printProductsWithName(User **userArr, int size, int sellerCount) {
-	char findName[MAX_LENGTH];
+void Menu::printProductsWithName(list<User*>& userArr, int sellerCount) {
+	string findName;
 	bool found = false; //bool to indicate whether we found matching products or not
 	if (sellerCount <= 0) { //if there are no products in the system
 		cout << "There are no products present in the system." << endl;
@@ -185,20 +196,25 @@ void Menu::printProductsWithName(User **userArr, int size, int sellerCount) {
 	else { //get input from the user and search for the item they are looking for
 		cout << "Please enter product name to search for (case-sensitive): ";
 		cin.ignore();
-		cin.getline(findName, MAX_LENGTH + 1);
+		getline(cin, findName);
 		cout << endl << endl;
-		for (int i = 0; i < size; i++) { //this loop runs on every seller
-			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) 
+		list<User*>::const_iterator itr = userArr.begin();
+		list<User*>::const_iterator itrEnd = userArr.end();
+
+		for (; itr != itrEnd; ++itr) { //this loop runs on every seller
+			if (isSeller(**itr)) 
 			{
-				int productsNum = dynamic_cast<Seller*>(userArr[i])->getProductsLogSize(); //how many products the current seller has
+				int productsNum = dynamic_cast<Seller*>(*itr)->getProducts().size(); //how many products the current seller has
 				if (productsNum <= 0) { // Seller has no products, no use in printing him/her
 					continue;
 				}
-				for (int j = 0; j < productsNum; j++) { //this loop prints every product in the current seller's stock
-					if (strcmp(findName, dynamic_cast<Seller*>(userArr[i])->getProducts()[j]->getName()) == 0) {
+				list<Product*>::iterator productItr = dynamic_cast<Seller*>(*itr)->getProducts().begin();
+				list<Product*>::iterator productItrEnd = dynamic_cast<Seller*>(*itr)->getProducts().end();
+				for ( ; productItr != productItrEnd; ++productItr) { //this loop prints every product in the current seller's stock
+					if (findName == (*productItr)->getName()) {
 						found = true;
 						printSeperatorBlock('-');
-						dynamic_cast<Seller*>(userArr[i])->getProducts()[j]->show();
+						(*productItr)->show();
 						printSeperatorBlock('-');
 					}
 				}
@@ -209,12 +225,12 @@ void Menu::printProductsWithName(User **userArr, int size, int sellerCount) {
 	}
 }
 
-void Menu::addProductToSeller(char* productName, double& price, Product::eCategory& categoryChoice)
+void Menu::addProductToSeller(string& productName, double& price, Product::eCategory& categoryChoice)
 {
 	cin.ignore();
 
 	cout << "Please enter the product's name: ";
-	cin.getline(productName, 20);
+	getline(cin, productName);
 
 	cout << "\nPlease Enter the product's price: ";
 	cin >> price;
@@ -226,16 +242,18 @@ void Menu::addProductToSeller(char* productName, double& price, Product::eCatego
 	categoryChoice = (Product::eCategory)(getUserChoice(NUM_OF_CATEGORIES) - 1);
 }
 
-void Menu::printSellersNames(User **userArr, int size, int numOfKind)
+void Menu::printSellersNames(const list<User*>& userArr, int numOfKind)
 {
 	if (numOfKind <= 0) {
 		cout << "No sellers present in system." << endl;
 	}
 	else {
+		list<User*>::const_iterator itr = userArr.begin();
+		list<User*>::const_iterator itrEnd = userArr.end();
 		int sellersIndex = 0;
-		for (int i = 0; i < size; i++) {
-			if ((typeid(*(userArr[i])) == typeid(Seller)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
-				cout << "[" << sellersIndex + 1 << "] " << (userArr[i])->getUserName() << endl;
+		for (; itr != itrEnd; ++itr) {
+			if (isSeller(**itr)) {
+				cout << "[" << sellersIndex + 1 << "] " << (*itr)->getUserName() << endl;
 				sellersIndex++;
 			}
 		}
@@ -268,4 +286,16 @@ int Menu::testOperatorsOptions() {
 	
 	int choice = getUserChoice(5);
 	return choice;
+}
+
+bool Menu::isSeller(User& user) {
+	return (typeid(user) == typeid(Seller)) || (typeid(user) == typeid(SellerBuyer));
+}
+
+bool Menu::isBuyer(User& user) {
+	return (typeid(user) == typeid(Buyer)) || (typeid(user) == typeid(SellerBuyer));
+}
+
+bool Menu::isSellerBuyer(User& user) {
+	return ((typeid(user) == typeid(SellerBuyer)));
 }

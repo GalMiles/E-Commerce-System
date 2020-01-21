@@ -21,16 +21,16 @@ public:
 	enum eCategory { CHILDREN, CLOTHES, HOME, SPORT };
 	static constexpr char* categories[] = { "Children", "Clothes", "Home", "Sport" }; //strings for the enum
 
-	Product(string productName, double price, eCategory category, Seller* productSeller); //c'tor
-	Product(const Product& otherProduct);//copy c'tor
-	void setProductName(string productName);
+	Product(string& productName, double price, eCategory category, Seller* productSeller); //c'tor
+	//Product(const Product& otherProduct);//copy c'tor
+	void setProductName(string& productName);
 	void setPrice(double price);
 	void setCategory(eCategory category);
 	void setProductSeller(Seller* productSeller);
-	string getName();
-	double getPrice();
-	int getProductId();
-	Seller* getSeller();
+	const string getName();
+	const double getPrice();
+	const int getProductId();
+	const Seller* getSeller();
 	void show(); //prints the product's info
 
 	friend ostream& operator<<(ostream& os, const Product& product);

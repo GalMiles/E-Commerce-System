@@ -12,8 +12,6 @@ It contains arrays of all of the users in the system
 #include "Menu.h"
 #include "Order.h"
 
-const int MAX_FEEDBACK_SIZE = 100; //limit the feedback's length
-
 class System
 {
 public:
@@ -21,10 +19,10 @@ public:
 	System(System& other) = delete; //disabling the copy c'tor
 	~System(); //d'tor
 	enum eUserType { SELLER, BUYER, SELLER_BUYER };
-	const char STORE_NAME[8] = "AlmoGal";
+	const string storeName = "AlmoGal";
 	void initSystem(); //initialize the system
 	bool isEmpty(int size); //determintes if an array is empty
-	void userArrRealloc();
+	//void userArrRealloc();
 	//void addUserToArr(User &user);
 	void addUser(eUserType userType); //creates a new user - buyer or seller
 	const System& operator+=(const Seller seller);//instead of the two functions in comment
@@ -44,9 +42,7 @@ public:
 
 private:
 	Menu theMenu;
-	User** userArr;
-	int userArrLogSize;
-	int userArrPhySize;
+	list<User*> userArr;
 	int sellerCount;
 	int buyerCount;
 	int sellerBuyerCount;

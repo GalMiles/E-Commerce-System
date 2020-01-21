@@ -4,7 +4,7 @@
 #include "Feedback.h"
 
 
-Seller::Seller(string name, string password, Address* address) : User(name, password, address)
+Seller::Seller(string& name, string& password, Address* address) : User(name, password, address)
 {
 
 }
@@ -19,7 +19,6 @@ Seller::~Seller() {
 
 }
 
-
 void Seller::addProduct(Product &product) {
 	this->products.push_back(&product);
 }
@@ -29,13 +28,12 @@ void Seller::addFeedback(Feedback &feedback)
 	this->feedbackArr.push_back(&feedback);
 }
 
-/*
-Product** Seller::getProducts() {
-	return this->products;
-}*/
+list<Product*>& Seller::getProducts() {
+	return products;
+}
 
 
-string Seller::getName()
+const  Seller::getName()
 {
 	return(this->getUserName());
 }

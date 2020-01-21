@@ -3,24 +3,22 @@
 
 System::System() : theMenu()
 {
-	this->userArrLogSize = 0;
-	this->userArrPhySize = 1;
-	this->userArr = new User*[1];
-	this->sellerCount = 0;
-	this->buyerCount = 0;
-	this->sellerBuyerCount = 0;
+	sellerCount = 0;
+	buyerCount = 0;
+	sellerBuyerCount = 0;
 }
 
+/*
 System::~System() {
 	for (int i = 0; i < userArrPhySize; i++) {
 		this->userArr[i] = nullptr;
 	}
 	delete[]userArr;
-}
+}*/
 
 void System::initSystem() //initialize the system
 {
-	cout << "Welcome to " << STORE_NAME << endl;
+	cout << "Welcome to " << storeName << endl;
 	int choice;
 	do {
 		cout << endl;
@@ -32,22 +30,6 @@ void System::initSystem() //initialize the system
 
 bool System::isEmpty(int size) {
 	return (size <= 0);
-}
-
-void System::userArrRealloc()
-{
-	User **new_arr;
-	this->userArrPhySize *= 2;
-	new_arr = new User *[this->userArrPhySize];
-
-	for (int i = 0; i < this->userArrLogSize; i++)
-	{
-		new_arr[i] = (this->userArr[i]);
-		this->userArr[i] = nullptr;
-	}
-	delete[] this->userArr;
-
-	this->userArr = new_arr;
 }
 
 void System::addUser(eUserType userType)
@@ -67,27 +49,27 @@ void System::addUser(eUserType userType)
 	{
 		ShoppingCart newShoppingCart;
 		Buyer newBuyer(userName, password, &newAddress, &newShoppingCart);
-		(*this) += newBuyer;
+		userArr.push_back(&newBuyer);
 		this->buyerCount++;
 	}
 
 	else if (userType == SELLER) {
 		Seller newSeller(userName, password, &newAddress);
-		(*this) += newSeller;
+		userArr.push_back(&newSeller);
 		this->sellerCount++;
 	}
 
 	else if (userType == SELLER_BUYER) {
 		ShoppingCart newShoppingCart;
 		SellerBuyer newSellerBuyer(Seller(userName, password, &newAddress), Buyer(userName, password, &newAddress, &newShoppingCart));
-		(*this) += newSellerBuyer;
+		userArr.push_back(&newSellerBuyer);
 		sellerCount++;
 		buyerCount++;
 		sellerBuyerCount++;
 	}
 }
 
-
+/*
 const System& System::operator+=(const Seller seller)
 {
 	if (this->userArrLogSize == this->userArrPhySize)
@@ -123,6 +105,7 @@ const System& System::operator+=(const SellerBuyer sellerbuyer)
 	return *this;
 
 }
+*/
 
 void System::performChoice(int choice)
 {
@@ -217,7 +200,6 @@ void System::testOperators(int choice) {
 		break;
 	}
 }
-
 
 void System::addProductToSeller()
 {

@@ -1,6 +1,6 @@
 #include "Address.h"
 
-Address::Address(string country, string city, string street, int homeNumber) {
+Address::Address(string& country, string& city, string& street, int homeNumber) {
 	setCountry(country);
 	setCity(city);
 	setStreet(street);
@@ -27,7 +27,7 @@ int Address::getHomeNumber()
 	return homeNumber;
 }
 
-bool Address::setCountry(string country)
+bool Address::setCountry(string& country)
 {
 	if (isAddressValid(country))
 	{
@@ -38,7 +38,7 @@ bool Address::setCountry(string country)
 		return false;
 }
 
-bool Address::setCity(string city)
+bool Address::setCity(string& city)
 {
 	if (isAddressValid(city))
 	{
@@ -49,7 +49,7 @@ bool Address::setCity(string city)
 		return false;
 }
 
-bool Address::setStreet(string street)
+bool Address::setStreet(string& street)
 {
 	if (isAddressValid(street))
 	{
@@ -65,7 +65,7 @@ void Address::setHomeNumber(int homeNumber)
 	this->homeNumber = homeNumber;
 }
 
-bool Address::isAddressValid(string addressStr) {
+bool Address::isAddressValid(string& addressStr) {
 	int length = addressStr.length();
 	for (int i = 0; i < length; i++) {
 		if ((addressStr[i] < 'A' || (addressStr[i] > 'Z' && addressStr[i] < 'a') || addressStr[i] > 'z'))

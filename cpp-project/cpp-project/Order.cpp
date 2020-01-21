@@ -3,13 +3,13 @@
 Order::Order(ShoppingCart* shoppingCart, Buyer* buyer)
 {
 	setShoppingCart(shoppingCart);
-	setNumOfProducts(shoppingCart);
 	setBuyer(buyer);
 	calculateTotalPrice();
 	setOrderSellers();
 	setPaymentStatus(false);
 }
 
+/*
 Order::Order(const Order& otherOrder) {
 	shoppingCart = new ShoppingCart(*otherOrder.shoppingCart);
 	numOfProducts = *(new int(shoppingCart->getShoppingCartLogSize()));
@@ -17,7 +17,7 @@ Order::Order(const Order& otherOrder) {
 	calculateTotalPrice();
 	this->sellers = otherOrder.sellers;
 	paid = otherOrder.paid;
-}
+}*/
 
 
 void Order::setBuyer(Buyer* buyer) {
@@ -36,10 +36,6 @@ void Order::setPaymentStatus(bool paymentStatus) {
 	this->paid = paymentStatus;
 }
 
-void Order::setNumOfProducts(ShoppingCart* shoppingCart) {
-	this->numOfProducts = shoppingCart->getShoppingCartLogSize();
-}
-
 void Order::setShoppingCart(ShoppingCart* shoppingCart) {
 	this->shoppingCart = shoppingCart;
 }
@@ -48,23 +44,21 @@ ShoppingCart* Order::getOrderShoppingCart() {
 	return this->shoppingCart;
 }
 
-/*
 void Order::setOrderSellers() {
-	Product* p;
+	list<Product*>::iterator itr;
 	for (int i = 0; i < numOfProducts; i++) {
-		p = shoppingCart->getProducts()[i];
-		sellers[i] = p->getSeller();
+		itr = shoppingCart->getProducts().begin();
+		sellers.push_back((*itr)->getSeller());
 	}
 }
-*/
 
 void Order::calculateTotalPrice()
 {
-	Product* p;
+	list<Product*>::iterator itr = shoppingCart->getProducts().begin();
+	list<Product*>::iterator itrEnd = shoppingCart->getProducts().end();
 	this->totalPrice = 0;
-	for (int i = 0; i < numOfProducts; i++) {
-		p = shoppingCart->getProducts()[i];
-		this->totalPrice += p->getPrice();
+	for (; itr != itrEnd; ++itr) {
+		this->totalPrice += (*itr)->getPrice();
 	}
 }
 
