@@ -260,16 +260,18 @@ void Menu::printSellersNames(const list<User*>& userArr, int numOfKind)
 	}
 }
 
-void Menu::printBuyersNames(User **userArr, int size, int numOfKind)
+void Menu::printBuyersNames(const list<User*>& userArr, int numOfKind)
 {
 	if (numOfKind <= 0) {
 		cout << "No buyers present in system." << endl;
 	}
 	else {
+		list<User*>::const_iterator itr = userArr.begin();
+		list<User*>::const_iterator itrEnd = userArr.end();
 		int buyersIndex = 0;
-		for (int i = 0; i < size; i++) {
-			if ((typeid(*(userArr[i])) == typeid(Buyer)) || (typeid(*(userArr[i])) == typeid(SellerBuyer))) {
-				cout << "[" << buyersIndex + 1 << "] " << (userArr[i])->getUserName() << endl;
+		for (; itr != itrEnd; ++itr) {
+			if (isBuyer(**itr)) {
+				cout << "[" << buyersIndex + 1 << "] " << (*itr)->getUserName() << endl;
 				buyersIndex++;
 			}
 		}

@@ -33,7 +33,7 @@ public:
 	void printProductsWithName(list<User*>& userArr, int sellerCount); //search for a product and print all of the matching ones
 	void printSeperatorBlock(char sep); //print separators (to make the UI look nicer)
 	void printSellersNames(const list<User*>& userArr, int numOfKind);
-	void printBuyersNames(User **userArr, int size, int numOfKind);
+	void printBuyersNames(const list<User*>& userArr, int numOfKind);
 	bool isSeller(User& user);
 	bool isBuyer(User& user);
 	bool isSellerBuyer(User& user);
