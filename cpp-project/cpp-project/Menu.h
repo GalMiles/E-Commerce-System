@@ -24,7 +24,7 @@ public:
 	int getUserChoice(int optionsLength); //gets a choice from the user and validates it is within the options range
 	void getUserInfoFromUser(string& userName, string& password, string& country, string& city, string& street, int& homeNumber, int maxLength); //get info required to create a User object
 	bool validateDate(char* date); //validate date
-	void getFeedbackFromUser(char* feedBack, int feedBackSize, char* date); //get info required to create a Feedback object
+	void getFeedbackFromUser(string& feedBack, string& date); //get info required to create a Feedback object
 	void addProductToSeller(string& productName, double& price, Product::eCategory& categoryChoice); //get info required in order to add a product to a seller's stock
 	void printSellers(const list<User*>& userArr, int numOfKind); //print info about all of the sellers in the system
 	void printSellerBuyers(const list<User*>& userArr, int numOfKind); //print info about all of the seller/buyers in the system
@@ -34,11 +34,13 @@ public:
 	void printSeperatorBlock(char sep); //print separators (to make the UI look nicer)
 	void printSellersNames(const list<User*>& userArr, int numOfKind);
 	void printBuyersNames(const list<User*>& userArr, int numOfKind);
-	bool isSeller(User& user);
-	bool isBuyer(User& user);
-	bool isSellerBuyer(User& user);
+	friend bool isSeller(User& user);
+	friend bool isBuyer(User& user);
+	friend bool isSellerBuyer(User& user);
 
 	int testOperatorsOptions();
+
+	void getStrFromUser(string& input);
 
 
 	
@@ -47,6 +49,17 @@ private:
 		"Place an order", "Pay for an order", "Show all buyers", "Show all sellers", "Show all Sellers who are also Buyers", "Search for a product", "Test operators", "Exit" };
 };
 
+bool isSeller(User& user) {
+	return (typeid(user) == typeid(Seller)) || (typeid(user) == typeid(SellerBuyer));
+}
+
+bool isBuyer(User& user) {
+	return (typeid(user) == typeid(Buyer)) || (typeid(user) == typeid(SellerBuyer));
+}
+
+bool isSellerBuyer(User& user) {
+	return ((typeid(user) == typeid(SellerBuyer)));
+}
 
 
 #endif

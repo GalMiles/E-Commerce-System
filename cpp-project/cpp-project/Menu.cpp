@@ -80,16 +80,16 @@ bool Menu::validateDate(char* date) { //make sure the submitted date is in DD/MM
 	return true;
 }
 
-void Menu::getFeedbackFromUser(char* feedBack, int feedBackSize, char* date) {
+void Menu::getFeedbackFromUser(string& feedBack, string& date) {
 	cin.ignore();
 	bool isDateValid = false;
 	do {
 		cout << "\nPlease enter feedback date (DD/MM/YYYY format, e.g. 08/02/2019): ";
-		cin.getline(date, DATE_LENGTH);
+		getline(cin, date);
 		isDateValid = validateDate(date);
 	} while (!isDateValid);
-	cout << "\nPlease enter your feedback (Maximum " << feedBackSize << " characters): " << endl;
-	cin.getline(feedBack, feedBackSize);
+	cout << "\nPlease enter your feedback: " << endl;
+	getline(cin, feedBack);
 }
 
 void Menu::printSellers(const list<User*>& userArr, int numOfKind) {
@@ -278,26 +278,7 @@ void Menu::printBuyersNames(const list<User*>& userArr, int numOfKind)
 	}
 }
 
-int Menu::testOperatorsOptions() {
-	cout << "Please select the desired operator:" << endl;
-	cout << "(1) Test the > operator: Compare two Buyers by their ShoppingCart's total price" << endl;
-	cout << "(2) Test the += operator: Add a user to the system's users array" << endl;
-	cout << "(3) Test the << opearor: Print an Address object" << endl;
-	cout << "(4) Test the << operator: Print a Seller object" << endl;
-	cout << "(5) Test the << operator: Print a Buyer object" << endl;
-	
-	int choice = getUserChoice(5);
-	return choice;
-}
-
-bool Menu::isSeller(User& user) {
-	return (typeid(user) == typeid(Seller)) || (typeid(user) == typeid(SellerBuyer));
-}
-
-bool Menu::isBuyer(User& user) {
-	return (typeid(user) == typeid(Buyer)) || (typeid(user) == typeid(SellerBuyer));
-}
-
-bool Menu::isSellerBuyer(User& user) {
-	return ((typeid(user) == typeid(SellerBuyer)));
+void Menu::getStrFromUser(string& input) {
+	cin.ignore();
+	getline(cin, input);
 }

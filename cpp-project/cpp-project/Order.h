@@ -7,11 +7,11 @@ This class holds info about orders
 
 #include <iostream>
 #include <string.h>
-using namespace std;
-
 #include "Seller.h"
 #include "ShoppingCart.h"
 #include "Buyer.h"
+using namespace std;
+
 
 class Buyer;
 
