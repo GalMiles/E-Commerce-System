@@ -17,7 +17,7 @@ class System
 public:
 	System(); //c'tor
 	System(System& other) = delete; //disabling the copy c'tor
-	~System(); //d'tor
+	//~System(); //d'tor
 	enum eUserType { SELLER, BUYER, SELLER_BUYER };
 	const string storeName = "AlmoGal";
 	void initSystem(); //initialize the system
@@ -25,9 +25,12 @@ public:
 	//void userArrRealloc();
 	//void addUserToArr(User &user);
 	void addUser(eUserType userType); //creates a new user - buyer or seller
+
+	/*
 	const System& operator+=(const Seller seller);//instead of the two functions in comment
 	const System& operator+=(const Buyer buyer);
 	const System& operator+=(const SellerBuyer sellerbuyer);
+	*/
 
 	void performChoice(int choice); //gets a choice and performs the desired action
 	void addProductToSeller(); //add product to seller's stock
@@ -35,10 +38,8 @@ public:
 	void addProductToShoppingCart(); //add product to shopping cart
 	void placeOrder(); //place an order (no payment)
 	void payForAnOrder(); //pay for an existing order
-
-	int getCorrectIndex(eUserType userType, int index, User** userArr, int arrSize); //returns the actual index of the user
-	void testOperators(int chocie); // a function to test the operators we overloaded
-
+	void findUserByName(User*& user, list<User*>& userList);
+	void findProductByName(Product*& user, list<Product*>& productList);
 
 private:
 	Menu theMenu;
@@ -46,6 +47,38 @@ private:
 	int sellerCount;
 	int buyerCount;
 	int sellerBuyerCount;
+};
+
+class isUserFound //object function
+{
+public:
+	isUserFound(string& name) { m_name = name; }
+	bool operator()(User* val)
+	{
+		if (val->getUserName() == m_name)
+			return true;
+
+		return false;
+	}
+
+private:
+	string m_name;
+};
+
+class isProductFound //object function
+{
+public:
+	isProductFound(string& name) { m_name = name; }
+	bool operator()(Product* val)
+	{
+		if (val->getName() == m_name)
+			return true;
+
+		return false;
+	}
+
+private:
+	string m_name;
 };
 
 #endif

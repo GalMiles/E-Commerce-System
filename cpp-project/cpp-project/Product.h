@@ -30,7 +30,7 @@ public:
 	const string getName();
 	const double getPrice();
 	const int getProductId();
-	const Seller* getSeller();
+	Seller* getSeller();
 	void show(); //prints the product's info
 
 	friend ostream& operator<<(ostream& os, const Product& product);

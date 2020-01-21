@@ -45,9 +45,10 @@ ShoppingCart* Order::getOrderShoppingCart() {
 }
 
 void Order::setOrderSellers() {
-	list<Product*>::iterator itr;
-	for (int i = 0; i < numOfProducts; i++) {
-		itr = shoppingCart->getProducts().begin();
+	list<Product*>::iterator itr = shoppingCart->getProducts().begin();
+	list<Product*>::iterator itrEnd = shoppingCart->getProducts().end();
+
+	for ( ; itr != itrEnd; ++itr) {
 		sellers.push_back((*itr)->getSeller());
 	}
 }

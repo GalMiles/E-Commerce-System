@@ -38,8 +38,6 @@ public:
 	friend bool isBuyer(User& user);
 	friend bool isSellerBuyer(User& user);
 
-	int testOperatorsOptions();
-
 	void getStrFromUser(string& input);
 
 
@@ -48,18 +46,6 @@ private:
 	const char *options[OPTIONS_LENGTH] = { "Add a buyer", "Add a seller", "Add a Seller who is also a Buyer", "Add a product to seller's stock", "Add seller feedback", "Add a product to your shopping cart",
 		"Place an order", "Pay for an order", "Show all buyers", "Show all sellers", "Show all Sellers who are also Buyers", "Search for a product", "Test operators", "Exit" };
 };
-
-bool isSeller(User& user) {
-	return (typeid(user) == typeid(Seller)) || (typeid(user) == typeid(SellerBuyer));
-}
-
-bool isBuyer(User& user) {
-	return (typeid(user) == typeid(Buyer)) || (typeid(user) == typeid(SellerBuyer));
-}
-
-bool isSellerBuyer(User& user) {
-	return ((typeid(user) == typeid(SellerBuyer)));
-}
 
 
 #endif

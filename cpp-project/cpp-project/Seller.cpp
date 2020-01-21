@@ -33,7 +33,7 @@ list<Product*>& Seller::getProducts() {
 }
 
 
-const  Seller::getName()
+const string Seller::getName()
 {
 	return(this->getUserName());
 }

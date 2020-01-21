@@ -52,6 +52,7 @@ void Menu::getUserInfoFromUser(string& userName, string& password, string& count
 	cin >> homeNumber;
 }
 
+
 bool Menu::validateDate(char* date) { //make sure the submitted date is in DD/MM/YYYY format
 	const char s[2] = "/"; // Date is delimited by / (e.g. 18/12/2019)
 	char *token;
@@ -86,7 +87,7 @@ void Menu::getFeedbackFromUser(string& feedBack, string& date) {
 	do {
 		cout << "\nPlease enter feedback date (DD/MM/YYYY format, e.g. 08/02/2019): ";
 		getline(cin, date);
-		isDateValid = validateDate(date);
+		//isDateValid = validateDate(date);
 	} while (!isDateValid);
 	cout << "\nPlease enter your feedback: " << endl;
 	getline(cin, feedBack);
@@ -281,4 +282,17 @@ void Menu::printBuyersNames(const list<User*>& userArr, int numOfKind)
 void Menu::getStrFromUser(string& input) {
 	cin.ignore();
 	getline(cin, input);
+}
+
+
+bool isSeller(User& user) {
+	return (typeid(user) == typeid(Seller)) || (typeid(user) == typeid(SellerBuyer));
+}
+
+bool isBuyer(User& user) {
+	return (typeid(user) == typeid(Buyer)) || (typeid(user) == typeid(SellerBuyer));
+}
+
+bool isSellerBuyer(User& user) {
+	return ((typeid(user) == typeid(SellerBuyer)));
 }
