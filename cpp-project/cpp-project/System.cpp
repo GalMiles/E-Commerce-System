@@ -169,7 +169,7 @@ void System::addProductToSeller()
 		Product::eCategory categoryChoice;
 		theMenu.addProductToSeller(productName, price, categoryChoice);
 		Product newProduct(productName, price, categoryChoice, dynamic_cast<Seller*>(chosenSeller)); //createa new product
-		dynamic_cast<Seller*>(chosenSeller)->addProduct(newProduct);
+		dynamic_cast<Seller*>(chosenSeller)->addProduct(*(new Product(newProduct)));
 	}
 }
 

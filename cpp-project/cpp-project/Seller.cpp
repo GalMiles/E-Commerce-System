@@ -49,7 +49,7 @@ void Seller::toOs(ostream& os) const
 		os << "The Seller's products are:" << endl;
 		for ( ; itr != itrEnd; ++itr)
 		{
-			os << *itr << endl;
+			os << **itr << endl;
 		}
 	}
 }
