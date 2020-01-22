@@ -228,8 +228,6 @@ void Menu::printProductsWithName(list<User*>& userArr, int sellerCount) {
 
 void Menu::addProductToSeller(string& productName, double& price, Product::eCategory& categoryChoice)
 {
-	cin.ignore();
-
 	cout << "Please enter the product's name: ";
 	getline(cin, productName);
 

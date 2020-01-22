@@ -164,7 +164,6 @@ void System::addProductToSeller()
 
 		User* chosenSeller;
 		findUserByName(chosenSeller, this->userArr);
-
 		string productName;
 		double price;
 		Product::eCategory categoryChoice;
@@ -353,7 +352,7 @@ void System::findUserByName(User*& user, list<User*>& userList) {
 	string toFind;
 
 	do {
-		cout << "Choice: ";
+		cout << "Choice(username): ";
 		theMenu.getStrFromUser(toFind);
 		cout << endl;
 		chosenUser = find_if(itr, itrEnd, isUserFound(toFind));
@@ -372,7 +371,7 @@ void System::findProductByName(Product*& user, list<Product*>& productList) {
 	string toFind;
 
 	do {
-		cout << "Choice: ";
+		cout << "Choice(proudct name): ";
 		theMenu.getStrFromUser(toFind);
 		cout << endl;
 		chosenProduct = find_if(itr, itrEnd, isProductFound(toFind));
