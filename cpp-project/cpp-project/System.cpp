@@ -208,10 +208,10 @@ void System::addFeedbackToSeller()
 }
 
 void System::addProductToShoppingCart() {
-	if (isEmpty(this->buyerCount)) {
+	if (isEmpty(this->buyerCount)) { //check if there are buyers
 		cout << "No buyers present in system." << endl;
 	}
-	else {
+	else { //there are buyers
 		cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
 		theMenu.printBuyersNames(userArr,buyerCount );
 		
@@ -224,13 +224,13 @@ void System::addProductToShoppingCart() {
 			User* chosenSeller;
 			findUserByName(chosenSeller, this->userArr);
 
-			cout << "Please choose the desired product number from this seller: " << endl;
+			cout << "Please choose the desired product from this seller: " << endl;
 			Product *chosenProduct;
 			findProductByName(chosenProduct, dynamic_cast<Seller*>(chosenSeller)->getProducts());
 
 			dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->addProductToShoppingCart(*chosenProduct);
 		}
-		else {
+		else { //if no products were found
 			cout << "No products present in the system." << endl;
 		}
 	}

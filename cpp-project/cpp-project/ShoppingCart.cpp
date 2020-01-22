@@ -23,6 +23,7 @@ list<Product*>& ShoppingCart::getProducts()
 void ShoppingCart::addProductToShoppingCart(Product& productToAdd)
 {
 	this->shoppingCart.push_back(&productToAdd);
+	this->totalPrice += productToAdd.getPrice();
 }
 
 void ShoppingCart::show() const {
