@@ -7,7 +7,7 @@ This class holds info about the shopping cart
 
 
 #include <iostream>
-#include <list>
+#include <vector>
 #include <iterator>
 #include <string>
 #include <algorithm>
@@ -23,7 +23,7 @@ class ShoppingCart
 public:
 	ShoppingCart(); //c'tor
 	//ShoppingCart(const ShoppingCart& otherShoppingCart); //copy c'tor
-	list<Product*>& getProducts();
+	vector<Product*>& getProducts();
 	void addProductToShoppingCart(Product& productToAdd);
 	void removeProductFromShoppingCart(int productID);
 	void show() const; //print shopping cart
@@ -33,7 +33,7 @@ public:
 	friend ostream& operator<<(ostream& os, const ShoppingCart& SCToPrint);
 
 private:
-	list<Product*> shoppingCart;
+	vector<Product*> shoppingCart;
 	double totalPrice;
 };
 

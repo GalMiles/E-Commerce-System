@@ -51,7 +51,7 @@ void System::performChoice(int choice)
 		addProductToShoppingCart();
 		break;
 	case 7:
-		//placeOrder();
+		placeOrder();
 		break;
 	case 8:
 		//payForAnOrder();
@@ -236,7 +236,7 @@ void System::addProductToShoppingCart() {
 	}
 }
 
-/*
+
 void System::placeOrder() {
 	if (isEmpty(this->buyerCount)) {
 		cout << "No buyers present in system." << endl;
@@ -252,32 +252,38 @@ void System::placeOrder() {
 			cout << "This buyer doesn't have any products in his/her shopping cart." << endl;
 		}
 		else {
-			int stringSize = (chosenBuyer->getShoppingCart()->getShoppingCartLogSize() * 2) + 1; // (Integer + comma) per product in Shopping Cart + '\0'
+			int stringSize = (dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->getProducts().size() * 2) + 1; // (Integer + comma) per product in Shopping Cart + '\0'
 			char* productsString = new char[stringSize];
+
 			const char s[2] = ","; // Each product in user input is supposed to be separated by commas
 			char *token;
 			int productIndex;
 			cout << "The following products are in your shopping cart: " << endl << endl;
 			theMenu.printSeperatorBlock('-');
-			chosenBuyer->getShoppingCart()->show();
+
+			dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->show();
 			theMenu.printSeperatorBlock('-');
+
 			cout << endl << "Please choose product/s to order, separated by commas with no whitespace (e.g. 1,2,4,6): ";
 			cin.ignore();
 			cin.getline(productsString, stringSize);
+
 			ShoppingCart orderShoppingCart;
 			token = strtok(productsString, s); // Get first product that user wanted to order
 			while (token != NULL) {
 				productIndex = atoi(token) - 1;
-				orderShoppingCart.addProductToShoppingCart(*chosenBuyer->getShoppingCart()->getProducts()[productIndex]);
+				orderShoppingCart.addProductToShoppingCart(*(dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->getProducts()[productIndex]));
 				token = strtok(NULL, s);
 			}
 			Order newOrder(&orderShoppingCart, dynamic_cast<Buyer*>(chosenBuyer));
 			dynamic_cast<Buyer*>(chosenBuyer)->addOrderToOrderArr(newOrder);
+
 			delete[] productsString;
 		}
 	}
 }
 
+/*
 void System::payForAnOrder() {
 	if (isEmpty(this->buyerCount)) {
 		cout << "No buyers present in system." << endl;
@@ -315,7 +321,7 @@ void System::payForAnOrder() {
 				cout << "Please choose an unpaid order to pay for: " << "[1 ~ " << dynamic_cast<Buyer*>(chosenBuyer)->getOrderArr().size() << ']';
 				do {
 					cin.ignore();
-					orderChoiceIndex = theMenu.getUserChoice(dynamic_cast<Buyer*>(chosenBuyer)->>getOrderArr().size()) - 1;
+					orderChoiceIndex = theMenu.getUserChoice(dynamic_cast<Buyer*>(chosenBuyer)->getOrderArr().size()) - 1;
 					chosenOrder = chosenBuyer->getOrderArr()[orderChoiceIndex];
 					if (chosenOrder->isPaid()) {
 						cout << "This order has already been paid for." << endl;

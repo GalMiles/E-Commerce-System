@@ -45,8 +45,8 @@ ShoppingCart* Order::getOrderShoppingCart() {
 }
 
 void Order::setOrderSellers() {
-	list<Product*>::iterator itr = shoppingCart->getProducts().begin();
-	list<Product*>::iterator itrEnd = shoppingCart->getProducts().end();
+	vector<Product*>::iterator itr = shoppingCart->getProducts().begin();
+	vector<Product*>::iterator itrEnd = shoppingCart->getProducts().end();
 
 	for ( ; itr != itrEnd; ++itr) {
 		sellers.push_back((*itr)->getSeller());
@@ -55,8 +55,8 @@ void Order::setOrderSellers() {
 
 void Order::calculateTotalPrice()
 {
-	list<Product*>::iterator itr = shoppingCart->getProducts().begin();
-	list<Product*>::iterator itrEnd = shoppingCart->getProducts().end();
+	vector<Product*>::iterator itr = shoppingCart->getProducts().begin();
+	vector<Product*>::iterator itrEnd = shoppingCart->getProducts().end();
 	this->totalPrice = 0;
 	for (; itr != itrEnd; ++itr) {
 		this->totalPrice += (*itr)->getPrice();

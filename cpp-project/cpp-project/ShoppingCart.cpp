@@ -13,7 +13,7 @@ ShoppingCart::ShoppingCart(const ShoppingCart& otherShoppingCart) {
 }*/
 
 
-list<Product*>& ShoppingCart::getProducts()
+vector<Product*>& ShoppingCart::getProducts()
 {
 	return shoppingCart;
 }
@@ -27,8 +27,8 @@ void ShoppingCart::addProductToShoppingCart(Product& productToAdd)
 }
 
 void ShoppingCart::show() const {
-	list<Product*>::const_iterator itr = shoppingCart.begin();
-	list<Product*>::const_iterator itrEnd = shoppingCart.end();
+	vector<Product*>::const_iterator itr = shoppingCart.begin();
+	vector<Product*>::const_iterator itrEnd = shoppingCart.end();
 	int i = 0;
 	for ( ; itr != itrEnd; ++itr) {
 		cout << "[" << i + 1 << "]" << endl;
@@ -43,7 +43,7 @@ void ShoppingCart::removeProductFromShoppingCart(int productID)
 	
 	else
 	{
-		list<Product*>::iterator found = find_if(shoppingCart.begin(), shoppingCart.end(), isIdFound(productID));
+		vector<Product*>::iterator found = find_if(shoppingCart.begin(), shoppingCart.end(), isIdFound(productID));
 	}
 		
 }
@@ -57,8 +57,8 @@ void ShoppingCart::setTotalPrice(double price) {
 
 ostream& operator<<(ostream& os, const ShoppingCart& SCToPrint)
 {
-	list<Product*>::const_iterator itr = SCToPrint.shoppingCart.begin();
-	list<Product*>::const_iterator itrEnd = SCToPrint.shoppingCart.end();
+	vector<Product*>::const_iterator itr = SCToPrint.shoppingCart.begin();
+	vector<Product*>::const_iterator itrEnd = SCToPrint.shoppingCart.end();
 	int i = 0;
 	for (; itr != itrEnd; ++itr) {
 		cout << "[" << i + 1 << "]" << endl;
