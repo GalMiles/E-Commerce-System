@@ -103,7 +103,7 @@ void Menu::printSellers(const list<User*>& userArr, int numOfKind) {
 		int sellersIndex = 0;
 		for ( ; itr != itrEnd; ++itr) {
 			if (isSeller(**itr)) {
-				cout << "[" << sellersIndex + 1 << "] "<< (*itr) <<endl;
+				cout << "[" << sellersIndex + 1 << "] "<< (**itr) <<endl;
 				sellersIndex++;
 			}
 		}
@@ -120,7 +120,7 @@ void Menu::printBuyers(const list<User*>& userArr, int numOfKind) {
 		int buyersIndex = 0;
 		for (; itr != itrEnd; ++itr) {
 			if (isBuyer(**itr)) {
-				cout << "[" << buyersIndex + 1 << "] " << (*itr) << endl;
+				cout << "[" << buyersIndex + 1 << "] " << (**itr) << endl;
 				buyersIndex++;
 			}
 		}
@@ -137,7 +137,7 @@ void Menu::printSellerBuyers(const list<User*>& userArr, int numOfKind) {
 		int buyersIndex = 0;
 		for (; itr != itrEnd; ++itr) {
 			if (isSellerBuyer(**itr)) {
-				cout << "[" << buyersIndex + 1 << "] " << (*itr) << endl;
+				cout << "[" << buyersIndex + 1 << "] " << (**itr) << endl;
 				buyersIndex++;
 			}
 		}

@@ -28,6 +28,49 @@ void System::initSystem() //initialize the system
 	} while (choice != OPTIONS_LENGTH); //while the user didn't ask to exit the program
 }
 
+
+void System::performChoice(int choice)
+{
+	switch (choice) {
+	case 1:
+		addUser(BUYER); //create a new Buyer user
+		break;
+	case 2:
+		addUser(SELLER); //create a new Seller user
+		break;
+	case 3:
+		addUser(SELLER_BUYER); //create a new Seller user
+		break;
+	case 4:
+		addProductToSeller();
+		break;
+	case 5:
+		addFeedbackToSeller();
+		break;
+	case 6:
+		addProductToShoppingCart();
+		break;
+	case 7:
+		//placeOrder();
+		break;
+	case 8:
+		//payForAnOrder();
+		break;
+	case 9:
+		theMenu.printBuyers(userArr, buyerCount);
+		break;
+	case 10:
+		theMenu.printSellers(userArr, sellerCount);
+		break;
+	case 11:
+		theMenu.printSellerBuyers(userArr, sellerBuyerCount);
+		break;
+	case 12:
+		theMenu.printProductsWithName(userArr, sellerCount);
+		break;
+	}
+}
+
 bool System::isEmpty(int size) {
 	return (size <= 0);
 }
@@ -49,20 +92,20 @@ void System::addUser(eUserType userType)
 	{
 		ShoppingCart newShoppingCart;
 		Buyer newBuyer(userName, password, &newAddress, &newShoppingCart);
-		userArr.push_back(&newBuyer);
+		userArr.push_back(new Buyer(newBuyer));
 		this->buyerCount++;
 	}
 
 	else if (userType == SELLER) {
 		Seller newSeller(userName, password, &newAddress);
-		userArr.push_back(&newSeller);
+		userArr.push_back(new Seller(newSeller));
 		this->sellerCount++;
 	}
 
 	else if (userType == SELLER_BUYER) {
 		ShoppingCart newShoppingCart;
 		SellerBuyer newSellerBuyer(Seller(userName, password, &newAddress), Buyer(userName, password, &newAddress, &newShoppingCart));
-		userArr.push_back(&newSellerBuyer);
+		userArr.push_back(new SellerBuyer(newSellerBuyer));
 		sellerCount++;
 		buyerCount++;
 		sellerBuyerCount++;
@@ -107,47 +150,6 @@ const System& System::operator+=(const SellerBuyer sellerbuyer)
 }
 */
 
-void System::performChoice(int choice)
-{
-	switch (choice) {
-	case 1:
-		addUser(BUYER); //create a new Buyer user
-		break;
-	case 2:
-		addUser(SELLER); //create a new Seller user
-		break;
-	case 3:
-		addUser(SELLER_BUYER); //create a new Seller user
-		break;
-	case 4:
-		addProductToSeller();
-		break;
-	case 5:
-		addFeedbackToSeller();
-		break;
-	case 6:
-		addProductToShoppingCart();
-		break;
-	case 7:
-		//placeOrder();
-		break;
-	case 8:
-		//payForAnOrder();
-		break;
-	case 9:
-		theMenu.printBuyers(userArr, buyerCount);
-		break;
-	case 10:
-		theMenu.printSellers(userArr, sellerCount);
-		break;
-	case 11:
-		theMenu.printSellerBuyers(userArr, sellerBuyerCount);
-		break;
-	case 12:
-		theMenu.printProductsWithName(userArr, sellerCount);
-		break;
-	}
-}
 
 void System::addProductToSeller()
 {
@@ -234,6 +236,7 @@ void System::addProductToShoppingCart() {
 		}
 	}
 }
+
 /*
 void System::placeOrder() {
 	if (isEmpty(this->buyerCount)) {
