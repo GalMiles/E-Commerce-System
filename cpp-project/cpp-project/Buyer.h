@@ -40,6 +40,9 @@ public:
 	list<Order*>& getOrderArr();
 	ShoppingCart* getShoppingCart();
 
+	bool getOrderStatus();
+	Order* getUnpaidOrder();
+
 	const Buyer& operator>(const Buyer& other) const;
 	virtual void toOs(ostream& os) const override;
 
@@ -47,8 +50,10 @@ public:
 	void show() const; 
 
 private:
-	list<User*>	sellerArr;
-	list<Order*>	orderArr;
+	list<User*>		sellerArr;
+	Order*			unpaidOrder;
+	bool			isUnpaidOrder; //indicates whether the seller has an unpaid order or not
+	list<Order*>	orderHistory;
 	ShoppingCart	*shoppingCart;
 };
 

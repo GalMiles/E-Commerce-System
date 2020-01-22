@@ -44,6 +44,11 @@ void ShoppingCart::removeProductFromShoppingCart(int productID)
 	else
 	{
 		vector<Product*>::iterator found = find_if(shoppingCart.begin(), shoppingCart.end(), isIdFound(productID));
+		if (found != shoppingCart.end()) {
+			this->totalPrice -= (*found)->getPrice();
+			shoppingCart.erase(found);
+		}
+
 	}
 		
 }

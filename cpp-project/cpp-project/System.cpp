@@ -283,7 +283,6 @@ void System::placeOrder() {
 	}
 }
 
-/*
 void System::payForAnOrder() {
 	if (isEmpty(this->buyerCount)) {
 		cout << "No buyers present in system." << endl;
@@ -294,61 +293,35 @@ void System::payForAnOrder() {
 		User* chosenBuyer;
 		findUserByName(chosenBuyer, this->userArr);
 
-		if (isEmpty(dynamic_cast<Buyer*>(chosenBuyer)->getOrderArr().size())) {
+		if (dynamic_cast<Buyer*>(chosenBuyer)->getOrderStatus())
+		{
+			cout << "The following order is pending payment: " << endl;
+			theMenu.printSeperatorBlock('+');
+			dynamic_cast<Buyer*>(chosenBuyer)->getUnpaidOrder()->getOrderShoppingCart()->show();
+			cout << "\nTotal Price: " << dynamic_cast<Buyer*>(chosenBuyer)->getUnpaidOrder()->getTotalPrice() << endl;
+			theMenu.printSeperatorBlock('+');
+			cout << "\nProccessing payment..." << endl;
+			dynamic_cast<Buyer*>(chosenBuyer)->getUnpaidOrder()->setPaymentStatus(true);
+			cout << "\nPayment complete." << endl;
+			theMenu.printSeperatorBlock('*');
+
+			ShoppingCart* chosenOrderShoppingCart = dynamic_cast<Buyer*>(chosenBuyer)->getUnpaidOrder()->getOrderShoppingCart();
+			ShoppingCart* chosenBuyerShoppingCart = dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart();
+
+			vector<Product*>::iterator itr = chosenOrderShoppingCart->getProducts().begin();
+			vector<Product*>::iterator itrEnd = chosenOrderShoppingCart->getProducts().end();
+
+			for (; itr != itrEnd; ++itr) { //remove the items from the buyer's shopping cart
+				chosenBuyerShoppingCart->removeProductFromShoppingCart((*itr)->getProductId());
+				dynamic_cast<Buyer*>(chosenBuyer)->addSellerToBuyerArr((*itr)->getSeller());
+			}
+
+		}
+
+		else
 			cout << "This buyer does not have any orders to pay for." << endl;
-		}
-		else {
-			bool unpaidOrders = false; // Unless there are unpaid orders, the buyer can't pay
-			cout << "This buyer has placed the following orders: " << endl;
-			list<Order*>::iterator itr = dynamic_cast<Buyer*>(chosenBuyer)->getOrderArr().begin();
-			list<Order*>::iterator itrEnd = dynamic_cast<Buyer*>(chosenBuyer)->getOrderArr().end();
-			int i = 0;
-			for ( ; itr!= itrEnd; ++itr, i++) {
-				bool isThisOrderPaid = (*itr)->isPaid();
-				if (!isThisOrderPaid && !unpaidOrders) { // There is at least one unpaid order
-					unpaidOrders = true;
-				}
-				cout << "[ Order Number " << i + 1 << " ]\t(Status: " << Order::paymentStatuses[isThisOrderPaid] << ')' << endl;
-				theMenu.printSeperatorBlock('+');
-				(*itr)->getOrderShoppingCart()->show();
-				cout << "\n$ Total Price: " << (*itr)->getTotalPrice() << endl;
-				theMenu.printSeperatorBlock('+');
-				cout << endl;
-			}
-			int orderChoiceIndex;
-			Order* chosenOrder;
-			if (unpaidOrders) {
-				cout << "Please choose an unpaid order to pay for: " << "[1 ~ " << dynamic_cast<Buyer*>(chosenBuyer)->getOrderArr().size() << ']';
-				do {
-					cin.ignore();
-					orderChoiceIndex = theMenu.getUserChoice(dynamic_cast<Buyer*>(chosenBuyer)->getOrderArr().size()) - 1;
-					chosenOrder = chosenBuyer->getOrderArr()[orderChoiceIndex];
-					if (chosenOrder->isPaid()) {
-						cout << "This order has already been paid for." << endl;
-					}
-				} while (chosenOrder->isPaid());
-				theMenu.printSeperatorBlock('*');
-				cout << "\nProcessing payment...";
-				chosenOrder->setPaymentStatus(true);
-				cout << "\nPayment complete." << endl;
-				theMenu.printSeperatorBlock('*');
-				ShoppingCart* chosenOrderShoppingCart = chosenOrder->getOrderShoppingCart();
-				ShoppingCart* chosenBuyerShoppingCart = chosenBuyer->getShoppingCart();
-				for (int i = 0; i < chosenOrderShoppingCart->getShoppingCartLogSize(); i++) {
-					chosenBuyerShoppingCart->removeProductFromShoppingCart(chosenOrderShoppingCart->getProducts()[i]->getProductId());
-				}
-				for (int i = 0; i < chosenOrderShoppingCart->getShoppingCartLogSize(); i++) {
-					chosenBuyer->addSellerToBuyerArr(chosenOrderShoppingCart->getProducts()[i]->getSeller());
-				}
-				chosenBuyer->getShoppingCart()->setTotalPrice(0);
-			}
-			else {
-				cout << "All orders are already paid for." << endl;
-			}
-		}
 	}
 }
-*/
 
 void System::findUserByName(User*& user, list<User*>& userList) {
 	

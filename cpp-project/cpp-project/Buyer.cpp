@@ -3,8 +3,9 @@
 Buyer::Buyer(string& name, string& password, Address* address, ShoppingCart *shoppingCart) : User(name, password, address)
 {
 	setShoppingCart(shoppingCart);
+	this->unpaidOrder = NULL;
+	this->isUnpaidOrder = false;
 }
-
 
 Buyer::Buyer(const Buyer& otherBuyer) : User(move(otherBuyer))
 {
@@ -37,7 +38,7 @@ void Buyer::addSellerToBuyerArr(User *seller)
 
 void Buyer::addOrderToOrderArr(Order &order)
 {
-	this->orderArr.push_back(&order);
+	this->orderHistory.push_back(&order);
 }
 
 const string Buyer::getName()
@@ -47,7 +48,7 @@ const string Buyer::getName()
 
 list<User*>& Buyer::getSellerArr() { return sellerArr; }
 
-list<Order*>& Buyer::getOrderArr() { return orderArr; }
+list<Order*>& Buyer::getOrderArr() { return orderHistory; }
 
 const Buyer& Buyer::operator>(const Buyer& other) const
 {
@@ -63,3 +64,6 @@ void Buyer::toOs(ostream& os) const
 	os << "and his/her shopping cart's total price is: " <<this->shoppingCart->getTotalPrice() << endl;
 }
 
+bool Buyer::getOrderStatus() { return this->isUnpaidOrder; }
+
+Order* Buyer::getUnpaidOrder() { return this->unpaidOrder; }
