@@ -18,6 +18,10 @@ int Menu::getUserChoice(int optionsLength)
 	cout << "\nChoice: ";
 	int choice;
 	cin >> choice;
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+	}
 	cout << endl;
 
 	while (choice < 1 || choice > optionsLength) { //if the choice is not valid
@@ -50,6 +54,11 @@ void Menu::getUserInfoFromUser(string& userName, string& password, string& count
 	getline(cin, street);
 	cout << "\nHome number: ";
 	cin >> homeNumber;
+
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+	}
 }
 
 
@@ -233,6 +242,10 @@ void Menu::addProductToSeller(string& productName, double& price, Product::eCate
 
 	cout << "\nPlease Enter the product's price: ";
 	cin >> price;
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+	}
 
 	cout << "\nPlease select the product's category:" << endl;
 	for (int i = 1; i <= 4; i++) {

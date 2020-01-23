@@ -22,6 +22,7 @@ void System::initSystem() //initialize the system
 {
 	cout << "Welcome to " << storeName << endl;
 	int choice;
+
 	do {
 		cout << endl;
 		theMenu.printMenu();
@@ -85,11 +86,17 @@ void System::addUser(eUserType userType)
 	string city;
 	string street;
 	int homeNumber;
+	bool valid;
 
-	theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber);
+	do {
+		theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber);
+		valid = (isStrValid(country) && isStrValid(city) && isStrValid(street));
+		if (!valid)
+			std::cout << "Invalid input was submitted. Please try again." << endl;
+	} while (!valid);
 
 	Address newAddress(country, city, street, homeNumber);
-
+	
 	if (userType == BUYER)
 	{
 		ShoppingCart newShoppingCart;
@@ -366,3 +373,11 @@ void System::findProductByName(Product*& user, list<Product*>& productList) {
 	user = *chosenProduct;
 }
 
+bool System::isStrValid(string& str) {
+	int length = str.length();
+	for (int i = 0; i < length; i++) {
+		if ((str[i] < 'A' || (str[i] > 'Z' && str[i] < 'a') || str[i] > 'z'))
+			return false;
+	}
+	return true;
+}
