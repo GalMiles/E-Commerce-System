@@ -81,13 +81,13 @@ bool Menu::validateDate(char* date) { //make sure the submitted date is in DD/MM
 	return true;
 }
 
-void Menu::getFeedbackFromUser(string& feedBack, string& date) {
-	cin.ignore();
+void Menu::getFeedbackFromUser(string& feedBack, char* date) {
+	//cleanBuffer();
 	bool isDateValid = false;
 	do {
 		cout << "\nPlease enter feedback date (DD/MM/YYYY format, e.g. 08/02/2019): ";
-		getline(cin, date);
-		//isDateValid = validateDate(date);
+		cin.getline(date, 11);
+		isDateValid = validateDate(date);
 	} while (!isDateValid);
 	cout << "\nPlease enter your feedback: " << endl;
 	getline(cin, feedBack);

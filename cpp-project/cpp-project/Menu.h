@@ -24,7 +24,7 @@ public:
 	int getUserChoice(int optionsLength); //gets a choice from the user and validates it is within the options range
 	void getUserInfoFromUser(string& userName, string& password, string& country, string& city, string& street, int& homeNumber); //get info required to create a User object
 	bool validateDate(char* date); //validate date
-	void getFeedbackFromUser(string& feedBack, string& date); //get info required to create a Feedback object
+	void getFeedbackFromUser(string& feedBack, char* date); //get info required to create a Feedback object
 	void addProductToSeller(string& productName, double& price, Product::eCategory& categoryChoice); //get info required in order to add a product to a seller's stock
 	void printSellers(const list<User*>& userArr, int numOfKind); //print info about all of the sellers in the system
 	void printSellerBuyers(const list<User*>& userArr, int numOfKind); //print info about all of the seller/buyers in the system

@@ -31,7 +31,6 @@ void System::initSystem() //initialize the system
 	} while (choice != OPTIONS_LENGTH); //while the user didn't ask to exit the program
 }
 
-
 void System::performChoice(int choice)
 {
 	switch (choice) {
@@ -92,7 +91,7 @@ void System::addUser(eUserType userType)
 		theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber);
 		valid = (isStrValid(country) && isStrValid(city) && isStrValid(street));
 		if (!valid)
-			std::cout << "Invalid input was submitted. Please try again." << endl;
+			cout << "Invalid input was submitted. Please try again." << endl;
 	} while (!valid);
 
 	Address newAddress(country, city, street, homeNumber);
@@ -194,6 +193,8 @@ void System::addFeedbackToSeller()
 	else {
 		cout << "\nPlease choose a buyer to submit feedback: " << endl;
 		theMenu.printBuyersNames(userArr, buyerCount);
+		
+		theMenu.cleanBuffer();
 		User* chosenBuyer;
 		findUserByName(chosenBuyer, this->userArr);
 
@@ -209,10 +210,10 @@ void System::addFeedbackToSeller()
 			findUserByName(chosenSeller, dynamic_cast<Buyer*>(chosenBuyer)->getSellerArr());
 
 			string feedBackContent;
-			string feedBackDate;
+			char feedBackDate[11];
 			theMenu.getFeedbackFromUser(feedBackContent, feedBackDate);
 			Feedback newFeedback((chosenBuyer)->getUserName(), feedBackContent, feedBackDate);
-			dynamic_cast<Seller*>(chosenSeller)->addFeedback(newFeedback);
+			dynamic_cast<Seller*>(chosenSeller)->addFeedback(*new Feedback(newFeedback));
 		}
 	}
 }
