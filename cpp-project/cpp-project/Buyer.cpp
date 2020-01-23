@@ -71,6 +71,7 @@ Order* Buyer::getUnpaidOrder() { return this->unpaidOrder; }
 void Buyer::closeOrder() {
 	this->addOrderToOrderArr(* (new Order(*unpaidOrder)));
 	this->unpaidOrder = NULL;
+	this->isUnpaidOrder = false;
 }
 
 void Buyer::setUnpaidOrder(Order& order) {

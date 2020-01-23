@@ -37,7 +37,7 @@ void Order::setPaymentStatus(bool paymentStatus) {
 }
 
 void Order::setShoppingCart(ShoppingCart* shoppingCart) {
-	this->shoppingCart = shoppingCart;
+	this->shoppingCart = new ShoppingCart(*shoppingCart);
 }
 
 ShoppingCart* Order::getOrderShoppingCart() {
