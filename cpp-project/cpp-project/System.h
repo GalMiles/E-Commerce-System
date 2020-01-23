@@ -17,7 +17,7 @@ class System
 public:
 	System(); //c'tor
 	System(System& other) = delete; //disabling the copy c'tor
-	//~System(); //d'tor
+	~System(); //d'tor
 	enum eUserType { SELLER, BUYER, SELLER_BUYER };
 	const string storeName = "AlmoGal";
 	void initSystem(); //initialize the system

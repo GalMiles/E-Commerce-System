@@ -8,13 +8,15 @@ System::System() : theMenu()
 	sellerBuyerCount = 0;
 }
 
-/*
+
 System::~System() {
-	for (int i = 0; i < userArrPhySize; i++) {
-		this->userArr[i] = nullptr;
+	list<User*>::iterator itr = userArr.begin();
+	list<User*>::iterator itrEnd = userArr.end();
+
+	for (; itr != itrEnd; ++itr) { //loop to free the memory allocated for this Data Structure
+		delete *itr;
 	}
-	delete[]userArr;
-}*/
+}
 
 void System::initSystem() //initialize the system
 {
