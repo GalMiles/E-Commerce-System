@@ -33,7 +33,7 @@ int Menu::getUserChoice(int optionsLength)
 	return choice;
 }
 
-void Menu::getUserInfoFromUser(string& userName, string& password, string& country, string& city, string& street, int& homeNumber, int maxLength) {
+void Menu::getUserInfoFromUser(string& userName, string& password, string& country, string& city, string& street, int& homeNumber) {
 	cin.ignore();
 	cout << "Please enter user name: ";
 	getline(cin, userName);

@@ -86,7 +86,7 @@ void System::addUser(eUserType userType)
 	string street;
 	int homeNumber;
 
-	theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber, MAX_LENGTH);
+	theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber);
 
 	Address newAddress(country, city, street, homeNumber);
 
