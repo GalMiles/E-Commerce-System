@@ -15,23 +15,17 @@ void Menu::printMenu()
 int Menu::getUserChoice(int optionsLength)
 {
 	cin.clear();
-	cout << "\nChoice: ";
+	cout << "\n\nChoice: ";
 	int choice;
 	cin >> choice;
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
-	}
+	validateCin();
 	cout << endl;
 
 	while (choice < 1 || choice > optionsLength) { //if the choice is not valid
 		cout << "Invalid option. Please select an option between 1 and " << optionsLength << endl;
 		cout << "\nChoice: ";
 		cin >> choice;
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(INT_MAX, '\n');
-		}
+		validateCin();
 	}
 
 	return choice;
@@ -55,12 +49,9 @@ void Menu::getUserInfoFromUser(string& userName, string& password, string& count
 	cout << "\nHome number: ";
 	cin >> homeNumber;
 
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
-	}
-}
+	validateCin();
 
+}
 
 bool Menu::validateDate(char* date) { //make sure the submitted date is in DD/MM/YYYY format
 	const char s[2] = "/"; // Date is delimited by / (e.g. 18/12/2019)
@@ -294,7 +285,6 @@ void Menu::getStrFromUser(string& input) {
 	getline(cin, input);
 }
 
-
 bool isSeller(User& user) {
 	return (typeid(user) == typeid(Seller)) || (typeid(user) == typeid(SellerBuyer));
 }
@@ -313,4 +303,11 @@ void Menu::cleanBuffer() const
 	do {
 		c = getchar();
 	} while (c != EOF && c != '\n');
+}
+
+void Menu::validateCin() {
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+	}
 }

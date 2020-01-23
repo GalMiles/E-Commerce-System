@@ -22,7 +22,6 @@ using namespace std;
 
 //forward declarations:
 class Product;
-
 class Order;
 
 class Buyer : virtual public User
@@ -34,27 +33,24 @@ public:
 
 	void addSellerToBuyerArr(User *seller); //add seller to the buyer's sellers array
 	void addOrderToOrderArr(Order &order); //add order to they buyer's order history
-	void setShoppingCart(ShoppingCart* shoppingCart);
+	void setShoppingCart(ShoppingCart* shoppingCart); 
+	void setUnpaidOrder(Order& order); //set the current unpaid order
 	const string getName();
 	list<User*>& getSellerArr();
 	list<Order*>& getOrderArr();
 	ShoppingCart* getShoppingCart();
-
 	bool getOrderStatus();
-	void closeOrder();
-	void setUnpaidOrder(Order& order);
 	Order* getUnpaidOrder();
-
+	void closeOrder();
 	const Buyer& operator>(const Buyer& other) const;
 	virtual void toOs(ostream& os) const override;
-
-
 	void show() const; 
+
 
 private:
 	list<User*>		sellerArr;
 	Order*			unpaidOrder;
-	bool			isUnpaidOrder; //indicates whether the seller has an unpaid order or not
+	bool			orderStatus; //indicates whether the seller has an unpaid order or not
 	list<Order*>	orderHistory;
 	ShoppingCart	*shoppingCart;
 };

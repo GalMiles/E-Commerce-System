@@ -4,7 +4,7 @@ Buyer::Buyer(string& name, string& password, Address* address, ShoppingCart *sho
 {
 	setShoppingCart(shoppingCart);
 	this->unpaidOrder = NULL;
-	this->isUnpaidOrder = false;
+	this->orderStatus = false;
 }
 
 Buyer::Buyer(const Buyer& otherBuyer) : User(move(otherBuyer))
@@ -64,14 +64,14 @@ void Buyer::toOs(ostream& os) const
 	os << "and his/her shopping cart's total price is: " <<this->shoppingCart->getTotalPrice() << endl;
 }
 
-bool Buyer::getOrderStatus() { return this->isUnpaidOrder; }
+bool Buyer::getOrderStatus() { return this->orderStatus; }
 
 Order* Buyer::getUnpaidOrder() { return this->unpaidOrder; }
 
 void Buyer::closeOrder() {
 	this->addOrderToOrderArr(* (new Order(*unpaidOrder)));
 	this->unpaidOrder = NULL;
-	this->isUnpaidOrder = false;
+	this->orderStatus = false;
 }
 
 void Buyer::setUnpaidOrder(Order& order) {
