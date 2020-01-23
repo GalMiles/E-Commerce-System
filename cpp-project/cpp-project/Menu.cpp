@@ -278,8 +278,6 @@ void Menu::printBuyersNames(const list<User*>& userArr, int numOfKind)
 }
 
 void Menu::getStrFromUser(string& input) {
-	//cleanBuffer();
-	//cin.ignore();
 	getline(cin, input);
 }
 

@@ -37,7 +37,6 @@ private:
 	Buyer* buyer;
 	list<Seller*> sellers;
 	double totalPrice;
-	int numOfProducts;
 	bool paid;
 };
 

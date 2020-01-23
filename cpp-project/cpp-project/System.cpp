@@ -162,6 +162,7 @@ void System::addProductToSeller()
 
 		theMenu.printSellersNames(userArr, sellerCount); //print all of the sellers
 
+		theMenu.cleanBuffer();
 		User* chosenSeller;
 		findUserByName(chosenSeller, this->userArr);
 		string productName;
@@ -215,6 +216,7 @@ void System::addProductToShoppingCart() {
 		cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
 		theMenu.printBuyersNames(userArr,buyerCount );
 		
+		theMenu.cleanBuffer();
 		User* chosenBuyer;
 		findUserByName(chosenBuyer, this->userArr);
 
@@ -236,7 +238,6 @@ void System::addProductToShoppingCart() {
 	}
 }
 
-
 void System::placeOrder() {
 	if (isEmpty(this->buyerCount)) {
 		cout << "No buyers present in system." << endl;
@@ -244,6 +245,8 @@ void System::placeOrder() {
 	else {
 		cout << "\nPlease choose a buyer to make an order for: " << endl;
 		theMenu.printBuyers(userArr, buyerCount);
+
+		theMenu.cleanBuffer();
 
 		User* chosenBuyer;
 		findUserByName(chosenBuyer, this->userArr);
@@ -262,8 +265,7 @@ void System::placeOrder() {
 			dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->show();
 			theMenu.printSeperatorBlock('-');
 			cout << endl << "Please choose product/s to order, separated by commas with no whitespace (e.g. 1,2,4,6): ";
-			theMenu.cleanBuffer();
-			//cin.ignore();
+			//theMenu.cleanBuffer();
 			cin.getline(productsString, stringSize); // TODO: VALIDATE USER INPUT (SOME PRODUCTS ENTERED ETC.)
 			ShoppingCart orderShoppingCart;
 			token = strtok(productsString, s); // Get first product that user wanted to order
@@ -288,6 +290,8 @@ void System::payForAnOrder() {
 		cout << "Please choose a buyer to pay for an order: " << endl;
 		theMenu.printBuyersNames(userArr, buyerCount);
 		User* chosenBuyer;
+
+		theMenu.cleanBuffer();
 		findUserByName(chosenBuyer, this->userArr);
 
 		if (dynamic_cast<Buyer*>(chosenBuyer)->getOrderStatus())
@@ -326,7 +330,8 @@ void System::findUserByName(User*& user, list<User*>& userList) {
 	list<User*>::iterator chosenUser = userList.end();
 	string toFind;
 
-	cin.ignore();
+	//theMenu.cleanBuffer();
+	//cin.ignore();
 	do {
 		cout << "Choice(username): ";
 		theMenu.getStrFromUser(toFind);
@@ -346,6 +351,7 @@ void System::findProductByName(Product*& user, list<Product*>& productList) {
 	list<Product*>::iterator chosenProduct = productList.end();
 	string toFind;
 
+	//cin.ignore();
 	do {
 		cout << "Choice(proudct name): ";
 		theMenu.getStrFromUser(toFind);
