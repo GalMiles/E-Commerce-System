@@ -262,11 +262,12 @@ void System::placeOrder() {
 			dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->show();
 			theMenu.printSeperatorBlock('-');
 			cout << endl << "Please choose product/s to order, separated by commas with no whitespace (e.g. 1,2,4,6): ";
-			cin.ignore();
+			theMenu.cleanBuffer();
+			//cin.ignore();
 			cin.getline(productsString, stringSize); // TODO: VALIDATE USER INPUT (SOME PRODUCTS ENTERED ETC.)
 			ShoppingCart orderShoppingCart;
 			token = strtok(productsString, s); // Get first product that user wanted to order
-			while (token != NULL); {
+			while (token != NULL) {
 				productIndex = atoi(token) - 1;
 				orderShoppingCart.addProductToShoppingCart(*(dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->getProducts()[productIndex]));
 				token = strtok(NULL, s);
