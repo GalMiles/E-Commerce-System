@@ -41,6 +41,8 @@ public:
 	ShoppingCart* getShoppingCart();
 
 	bool getOrderStatus();
+	void closeOrder();
+	void setUnpaidOrder(Order& order);
 	Order* getUnpaidOrder();
 
 	const Buyer& operator>(const Buyer& other) const;

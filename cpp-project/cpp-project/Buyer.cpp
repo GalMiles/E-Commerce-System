@@ -67,3 +67,12 @@ void Buyer::toOs(ostream& os) const
 bool Buyer::getOrderStatus() { return this->isUnpaidOrder; }
 
 Order* Buyer::getUnpaidOrder() { return this->unpaidOrder; }
+
+void Buyer::closeOrder() {
+	this->addOrderToOrderArr(* (new Order(*unpaidOrder)));
+	this->unpaidOrder = NULL;
+}
+
+void Buyer::setUnpaidOrder(Order& order) {
+	this->unpaidOrder = &order;
+}

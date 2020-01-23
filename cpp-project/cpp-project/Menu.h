@@ -37,8 +37,9 @@ public:
 	friend bool isSeller(User& user);
 	friend bool isBuyer(User& user);
 	friend bool isSellerBuyer(User& user);
-
 	void getStrFromUser(string& input);
+
+	void cleanBuffer() const;
 
 
 	

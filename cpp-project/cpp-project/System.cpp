@@ -54,7 +54,7 @@ void System::performChoice(int choice)
 		placeOrder();
 		break;
 	case 8:
-		//payForAnOrder();
+		payForAnOrder();
 		break;
 	case 9:
 		theMenu.printBuyers(userArr, buyerCount);
@@ -254,29 +254,25 @@ void System::placeOrder() {
 		else {
 			int stringSize = (dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->getProducts().size() * 2) + 1; // (Integer + comma) per product in Shopping Cart + '\0'
 			char* productsString = new char[stringSize];
-
 			const char s[2] = ","; // Each product in user input is supposed to be separated by commas
 			char *token;
 			int productIndex;
 			cout << "The following products are in your shopping cart: " << endl << endl;
 			theMenu.printSeperatorBlock('-');
-
 			dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->show();
 			theMenu.printSeperatorBlock('-');
-
 			cout << endl << "Please choose product/s to order, separated by commas with no whitespace (e.g. 1,2,4,6): ";
 			cin.ignore();
-			cin.getline(productsString, stringSize);
-
+			cin.getline(productsString, stringSize); // TODO: VALIDATE USER INPUT (SOME PRODUCTS ENTERED ETC.)
 			ShoppingCart orderShoppingCart;
 			token = strtok(productsString, s); // Get first product that user wanted to order
-			while (token != NULL) {
+			while (token != NULL); {
 				productIndex = atoi(token) - 1;
 				orderShoppingCart.addProductToShoppingCart(*(dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->getProducts()[productIndex]));
 				token = strtok(NULL, s);
 			}
 			Order newOrder(&orderShoppingCart, dynamic_cast<Buyer*>(chosenBuyer));
-			dynamic_cast<Buyer*>(chosenBuyer)->addOrderToOrderArr(newOrder);
+			dynamic_cast<Buyer*>(chosenBuyer)->setUnpaidOrder(*(new Order(newOrder)));
 
 			delete[] productsString;
 		}
@@ -315,9 +311,8 @@ void System::payForAnOrder() {
 				chosenBuyerShoppingCart->removeProductFromShoppingCart((*itr)->getProductId());
 				dynamic_cast<Buyer*>(chosenBuyer)->addSellerToBuyerArr((*itr)->getSeller());
 			}
-
+			dynamic_cast<Buyer*>(chosenBuyer)->closeOrder();
 		}
-
 		else
 			cout << "This buyer does not have any orders to pay for." << endl;
 	}
@@ -330,6 +325,7 @@ void System::findUserByName(User*& user, list<User*>& userList) {
 	list<User*>::iterator chosenUser = userList.end();
 	string toFind;
 
+	cin.ignore();
 	do {
 		cout << "Choice(username): ";
 		theMenu.getStrFromUser(toFind);

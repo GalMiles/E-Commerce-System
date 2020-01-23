@@ -278,8 +278,8 @@ void Menu::printBuyersNames(const list<User*>& userArr, int numOfKind)
 }
 
 void Menu::getStrFromUser(string& input) {
-	cin.clear();
-	//cin.ignore(INT_MAX, '\n');
+	//cleanBuffer();
+	//cin.ignore();
 	getline(cin, input);
 }
 
@@ -294,4 +294,12 @@ bool isBuyer(User& user) {
 
 bool isSellerBuyer(User& user) {
 	return ((typeid(user) == typeid(SellerBuyer)));
+}
+
+void Menu::cleanBuffer() const
+{
+	int c;
+	do {
+		c = getchar();
+	} while (c != EOF && c != '\n');
 }
