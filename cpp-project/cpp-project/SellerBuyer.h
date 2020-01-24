@@ -16,6 +16,8 @@ public:
 	SellerBuyer(const Seller& seller, const Buyer& buyer);//c'tor
 	SellerBuyer(Seller&& seller, Buyer&& buyer); //copy c'tor
 	~SellerBuyer();//d'tor
+	SellerBuyer(ifstream& inFile);
+
 
 
 	virtual void toOs(ostream& os) const override;

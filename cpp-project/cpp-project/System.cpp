@@ -1,4 +1,5 @@
 #include "System.h"
+#include <fstream>
 
 
 System::System() : theMenu()
@@ -18,6 +19,7 @@ System::~System() {
 
 void System::initSystem() //initialize the system
 {
+	list<User*> userArr= loadAllUsers("AlmoGal.txt");
 	cout << "Welcome to " << storeName << endl;
 	int choice;
 	do {
@@ -26,6 +28,7 @@ void System::initSystem() //initialize the system
 		choice = theMenu.getUserChoice(OPTIONS_LENGTH);
 		performChoice(choice);
 	} while (choice != OPTIONS_LENGTH); //while the user didn't ask to exit the program
+
 }
 
 
@@ -33,7 +36,7 @@ void System::performChoice(int choice)
 {
 	switch (choice) {
 	case 1:
-		addUser(BUYER); //create a new Buyer user
+		(BUYER); //create a new Buyer user
 		break;
 	case 2:
 		addUser(SELLER); //create a new Seller user
@@ -360,4 +363,44 @@ void System::findProductByName(Product*& user, list<Product*>& productList) {
 
 	user = *chosenProduct;
 }
+list<User*>System::loadAllUsers(string fileName)
+{
+	User *user;
+	ifstream inFile(fileName, ios::in);//OPEN
+
+	list<User*> userArrFromFile;
+	bool feof = false;
+	while (!feof)
+	{
+		user = loadUser(inFile);
+		userArrFromFile.push_back(user);
+		if (inFile.eof()) //get to end of file
+		{
+			feof = true;
+			continue;
+		}
+	}
+	inFile.close();
+	return userArrFromFile;
+}
+User*::System::loadUser(ifstream& inFile)
+{
+	string type;
+	inFile >> type;
+	if (type == typeid(Buyer).name()+6)
+	{
+		return new Buyer(inFile);
+	}
+	else if (type == typeid(Seller).name() + 6)
+	{
+		return new Seller(inFile);
+	}
+	
+	else //type=SELLERBUYER
+	{
+		return new SellerBuyer(inFile);
+	}
+}
+
+
 

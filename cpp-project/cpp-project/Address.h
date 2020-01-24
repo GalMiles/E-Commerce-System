@@ -7,6 +7,7 @@ This holds address info - country, city, street and home number
 
 #include<iostream>
 #include<string>
+#include <fstream>
 using namespace std;
 
 #pragma warning(disable: 4996)
@@ -31,6 +32,8 @@ public:
 	void show() const; //prints the address
 
 	friend ostream& operator<<(ostream& os, const Address& adress);
+	friend istream& operator>>(istream& in, Address& address);
+
 
 private:
 	string country;

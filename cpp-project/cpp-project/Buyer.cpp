@@ -67,3 +67,7 @@ void Buyer::toOs(ostream& os) const
 bool Buyer::getOrderStatus() { return this->isUnpaidOrder; }
 
 Order* Buyer::getUnpaidOrder() { return this->unpaidOrder; }
+
+Buyer::Buyer(ifstream& inFile) :User(inFile)
+{
+}

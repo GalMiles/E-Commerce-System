@@ -84,3 +84,16 @@ ostream& operator<<(ostream & os, const Address & address)
 	os << address.country << ", " << address.city << ", " << address.street << ", " << address.homeNumber;
 	return os;
 }
+
+istream& operator >> (istream& in, Address& address)
+{
+	if (typeid(in) == typeid(ifstream))//write from file
+		in >> address;
+
+	else // cin>> user
+	{
+		in >> address.country >> address.city >> address.street >> address.homeNumber;
+
+	}
+	return in;
+}

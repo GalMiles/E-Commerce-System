@@ -53,3 +53,4 @@ void Seller::toOs(ostream& os) const
 		}
 	}
 }
+Seller::Seller(ifstream& inFile) :User(inFile){}

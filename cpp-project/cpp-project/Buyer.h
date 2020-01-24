@@ -31,6 +31,7 @@ public:
 	Buyer::Buyer(string& name, string& password, Address* address, ShoppingCart *shoppingCart); //c'tor
 	Buyer(const Buyer& otherBuyer); //copy c'tor
 	~Buyer(); //d'tor
+	Buyer(ifstream& inFile);
 
 	void addSellerToBuyerArr(User *seller); //add seller to the buyer's sellers array
 	void addOrderToOrderArr(Order &order); //add order to they buyer's order history
@@ -45,8 +46,6 @@ public:
 
 	const Buyer& operator>(const Buyer& other) const;
 	virtual void toOs(ostream& os) const override;
-
-
 	void show() const; 
 
 private:

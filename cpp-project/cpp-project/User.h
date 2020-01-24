@@ -7,6 +7,7 @@ This class holds general user info (address, password, user name - info which is
 
 #include <iostream>
 #include <string.h>
+#include <fstream>
 #include "Address.h"
 
 using namespace std;
@@ -26,10 +27,13 @@ public:
 	User(string name, string password, Address* address); //c'tor
 	User(const User& otherUser); //copy c'tor
 	virtual ~User(); // d'tor is virtual for inheritance purpose
+	User(ifstream& in);//c'tor to load data from file
 
 	void show() const; //print user's info
 
 	friend ostream& operator<<(ostream& os, const User& user); //print << operator
+	friend istream& operator >> (istream& in, User& user);
+
 	virtual void toOs(ostream& os) const = 0;
 
 

@@ -11,6 +11,7 @@ It contains arrays of all of the users in the system
 #include "Buyer.h"
 #include "Menu.h"
 #include "Order.h"
+#include <fstream>
 
 class System
 {
@@ -40,6 +41,9 @@ public:
 	void payForAnOrder(); //pay for an existing order
 	void findUserByName(User*& user, list<User*>& userList);
 	void findProductByName(Product*& user, list<Product*>& productList);
+	list<User*> loadAllUsers(string fileName);
+	User* loadUser(ifstream& inFile);
+
 
 private:
 	Menu theMenu;

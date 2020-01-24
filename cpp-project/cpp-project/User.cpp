@@ -48,7 +48,30 @@ void User::show() const
 
 ostream& operator<<(ostream& os, const User& user)
 {
-	os << (typeid(user).name())+6 << "'s name: " << user.name << endl;
-	user.toOs(os); //using buyer/seller method
+	if (typeid(os) == typeid(ofstream))//write to file
+		os << user << endl;
+
+	else // write to screen
+	{
+		os << (typeid(user).name()) + 6 << "'s name: " << user.name << endl;
+		user.toOs(os); //using buyer/seller method
+	}
+	
 	return os;
+}
+
+User::User(ifstream& in) { in >> *this; }//c'tor that gets file
+
+istream& operator>>(istream& in, User& user)
+{
+	if (typeid(in) == typeid(ifstream))//write from file
+		in >> user;
+
+	else // cin>> user
+	{
+		in >> user.name >> user.password;
+		in >> *(user.address);
+
+	}
+	return in;
 }
