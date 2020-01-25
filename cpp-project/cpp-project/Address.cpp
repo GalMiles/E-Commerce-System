@@ -7,25 +7,14 @@ Address::Address(string& country, string& city, string& street, int homeNumber) 
 	setHomeNumber(homeNumber);
 }
 
-string Address::getCountry()
-{
-	return country;
-}
+string Address::getCountry() { return country; }
 
-string Address::getCity()
-{
-	return city;
-}
+string Address::getCity() { return city; }
 
-string Address::getStreet()
-{
-	return street;
-}
+string Address::getStreet() { return street; }
 
-int Address::getHomeNumber()
-{
-	return homeNumber;
-}
+int Address::getHomeNumber() { return homeNumber; }
+
 
 bool Address::setCountry(string& country)
 {

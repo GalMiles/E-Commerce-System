@@ -9,19 +9,22 @@ System::System() : theMenu()
 	sellerBuyerCount = 0;
 }
 
-/*
+
 System::~System() {
-	for (int i = 0; i < userArrPhySize; i++) {
-		this->userArr[i] = nullptr;
+	list<User*>::iterator itr = userArr.begin();
+	list<User*>::iterator itrEnd = userArr.end();
+
+	for (; itr != itrEnd; ++itr) { //loop to free the memory allocated for this Data Structure
+		delete *itr;
 	}
-	delete[]userArr;
-}*/
+}
 
 void System::initSystem() //initialize the system
 {
 	list<User*> userArr= loadAllUsers("AlmoGal.txt");
 	cout << "Welcome to " << storeName << endl;
 	int choice;
+
 	do {
 		cout << endl;
 		theMenu.printMenu();
@@ -30,7 +33,6 @@ void System::initSystem() //initialize the system
 	} while (choice != OPTIONS_LENGTH); //while the user didn't ask to exit the program
 
 }
-
 
 void System::performChoice(int choice)
 {
@@ -57,7 +59,7 @@ void System::performChoice(int choice)
 		placeOrder();
 		break;
 	case 8:
-		//payForAnOrder();
+		payForAnOrder();
 		break;
 	case 9:
 		theMenu.printBuyers(userArr, buyerCount);
@@ -86,11 +88,17 @@ void System::addUser(eUserType userType)
 	string city;
 	string street;
 	int homeNumber;
+	bool valid;
 
-	theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber, MAX_LENGTH);
+	do {
+		theMenu.getUserInfoFromUser(userName, password, country, city, street, homeNumber);
+		valid = (isStrValid(country) && isStrValid(city) && isStrValid(street));
+		if (!valid)
+			cout << "Invalid input was submitted. Please try again." << endl;
+	} while (!valid);
 
 	Address newAddress(country, city, street, homeNumber);
-
+	
 	if (userType == BUYER)
 	{
 		ShoppingCart newShoppingCart;
@@ -165,6 +173,7 @@ void System::addProductToSeller()
 
 		theMenu.printSellersNames(userArr, sellerCount); //print all of the sellers
 
+		theMenu.cleanBuffer();
 		User* chosenSeller;
 		findUserByName(chosenSeller, this->userArr);
 		string productName;
@@ -187,6 +196,8 @@ void System::addFeedbackToSeller()
 	else {
 		cout << "\nPlease choose a buyer to submit feedback: " << endl;
 		theMenu.printBuyersNames(userArr, buyerCount);
+		
+		theMenu.cleanBuffer();
 		User* chosenBuyer;
 		findUserByName(chosenBuyer, this->userArr);
 
@@ -202,10 +213,10 @@ void System::addFeedbackToSeller()
 			findUserByName(chosenSeller, dynamic_cast<Buyer*>(chosenBuyer)->getSellerArr());
 
 			string feedBackContent;
-			string feedBackDate;
+			char feedBackDate[11];
 			theMenu.getFeedbackFromUser(feedBackContent, feedBackDate);
 			Feedback newFeedback((chosenBuyer)->getUserName(), feedBackContent, feedBackDate);
-			dynamic_cast<Seller*>(chosenSeller)->addFeedback(newFeedback);
+			dynamic_cast<Seller*>(chosenSeller)->addFeedback(*new Feedback(newFeedback));
 		}
 	}
 }
@@ -218,6 +229,7 @@ void System::addProductToShoppingCart() {
 		cout << "\nPlease choose a buyer to add a product to his/her shopping cart: " << endl;
 		theMenu.printBuyersNames(userArr,buyerCount );
 		
+		theMenu.cleanBuffer();
 		User* chosenBuyer;
 		findUserByName(chosenBuyer, this->userArr);
 
@@ -239,7 +251,6 @@ void System::addProductToShoppingCart() {
 	}
 }
 
-
 void System::placeOrder() {
 	if (isEmpty(this->buyerCount)) {
 		cout << "No buyers present in system." << endl;
@@ -247,6 +258,8 @@ void System::placeOrder() {
 	else {
 		cout << "\nPlease choose a buyer to make an order for: " << endl;
 		theMenu.printBuyers(userArr, buyerCount);
+
+		theMenu.cleanBuffer();
 
 		User* chosenBuyer;
 		findUserByName(chosenBuyer, this->userArr);
@@ -257,20 +270,16 @@ void System::placeOrder() {
 		else {
 			int stringSize = (dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->getProducts().size() * 2) + 1; // (Integer + comma) per product in Shopping Cart + '\0'
 			char* productsString = new char[stringSize];
-
 			const char s[2] = ","; // Each product in user input is supposed to be separated by commas
 			char *token;
 			int productIndex;
 			cout << "The following products are in your shopping cart: " << endl << endl;
 			theMenu.printSeperatorBlock('-');
-
 			dynamic_cast<Buyer*>(chosenBuyer)->getShoppingCart()->show();
 			theMenu.printSeperatorBlock('-');
-
 			cout << endl << "Please choose product/s to order, separated by commas with no whitespace (e.g. 1,2,4,6): ";
-			cin.ignore();
-			cin.getline(productsString, stringSize);
-
+			//theMenu.cleanBuffer();
+			cin.getline(productsString, stringSize); // TODO: VALIDATE USER INPUT (SOME PRODUCTS ENTERED ETC.)
 			ShoppingCart orderShoppingCart;
 			token = strtok(productsString, s); // Get first product that user wanted to order
 			while (token != NULL) {
@@ -279,7 +288,7 @@ void System::placeOrder() {
 				token = strtok(NULL, s);
 			}
 			Order newOrder(&orderShoppingCart, dynamic_cast<Buyer*>(chosenBuyer));
-			dynamic_cast<Buyer*>(chosenBuyer)->addOrderToOrderArr(newOrder);
+			dynamic_cast<Buyer*>(chosenBuyer)->setUnpaidOrder(*(new Order(newOrder)));
 
 			delete[] productsString;
 		}
@@ -294,6 +303,8 @@ void System::payForAnOrder() {
 		cout << "Please choose a buyer to pay for an order: " << endl;
 		theMenu.printBuyersNames(userArr, buyerCount);
 		User* chosenBuyer;
+
+		theMenu.cleanBuffer();
 		findUserByName(chosenBuyer, this->userArr);
 
 		if (dynamic_cast<Buyer*>(chosenBuyer)->getOrderStatus())
@@ -318,9 +329,8 @@ void System::payForAnOrder() {
 				chosenBuyerShoppingCart->removeProductFromShoppingCart((*itr)->getProductId());
 				dynamic_cast<Buyer*>(chosenBuyer)->addSellerToBuyerArr((*itr)->getSeller());
 			}
-
+			dynamic_cast<Buyer*>(chosenBuyer)->closeOrder();
 		}
-
 		else
 			cout << "This buyer does not have any orders to pay for." << endl;
 	}
@@ -333,6 +343,8 @@ void System::findUserByName(User*& user, list<User*>& userList) {
 	list<User*>::iterator chosenUser = userList.end();
 	string toFind;
 
+	//theMenu.cleanBuffer();
+	//cin.ignore();
 	do {
 		cout << "Choice(username): ";
 		theMenu.getStrFromUser(toFind);
@@ -352,6 +364,7 @@ void System::findProductByName(Product*& user, list<Product*>& productList) {
 	list<Product*>::iterator chosenProduct = productList.end();
 	string toFind;
 
+	//cin.ignore();
 	do {
 		cout << "Choice(proudct name): ";
 		theMenu.getStrFromUser(toFind);
@@ -404,3 +417,11 @@ User*::System::loadUser(ifstream& inFile)
 
 
 
+bool System::isStrValid(string& str) {
+	int length = str.length();
+	for (int i = 0; i < length; i++) {
+		if ((str[i] < 'A' || (str[i] > 'Z' && str[i] < 'a') || str[i] > 'z'))
+			return false;
+	}
+	return true;
+}

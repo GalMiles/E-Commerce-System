@@ -12,7 +12,6 @@ using namespace std;
 
 #pragma warning(disable: 4996)
 
-const int MAX_LENGTH = 20; //length limit for strings
 
 class Address
 {

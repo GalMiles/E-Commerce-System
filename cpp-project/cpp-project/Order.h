@@ -17,15 +17,6 @@ class Buyer;
 
 class Order
 {
-private:
-	ShoppingCart* shoppingCart;
-	Buyer* buyer;
-	list<Seller*> sellers;
-	double totalPrice;
-	int numOfProducts;
-	bool paid;
-
-
 public:
 	Order(ShoppingCart* shoppingCart, Buyer* buyer); //c'tor
 	//Order(const Order& otherOrder); //copy c'tor
@@ -40,6 +31,13 @@ public:
 	void setOrderSellers(); //set array of sellers whom the products of this order were purchased from
 	enum ePaymentStatus { UNPAID, PAID };
 	static constexpr char* paymentStatuses[] = { "UNPAID", "PAID" }; //strings for the enum
+
+private:
+	ShoppingCart* shoppingCart;
+	Buyer* buyer;
+	list<Seller*> sellers;
+	double totalPrice;
+	bool paid;
 };
 
 #endif

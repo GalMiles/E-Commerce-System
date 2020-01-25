@@ -15,25 +15,23 @@ void Menu::printMenu()
 int Menu::getUserChoice(int optionsLength)
 {
 	cin.clear();
-	cout << "\nChoice: ";
+	cout << "\n\nChoice: ";
 	int choice;
 	cin >> choice;
+	validateCin();
 	cout << endl;
 
 	while (choice < 1 || choice > optionsLength) { //if the choice is not valid
 		cout << "Invalid option. Please select an option between 1 and " << optionsLength << endl;
 		cout << "\nChoice: ";
 		cin >> choice;
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(INT_MAX, '\n');
-		}
+		validateCin();
 	}
 
 	return choice;
 }
 
-void Menu::getUserInfoFromUser(string& userName, string& password, string& country, string& city, string& street, int& homeNumber, int maxLength) {
+void Menu::getUserInfoFromUser(string& userName, string& password, string& country, string& city, string& street, int& homeNumber) {
 	cin.ignore();
 	cout << "Please enter user name: ";
 	getline(cin, userName);
@@ -50,8 +48,10 @@ void Menu::getUserInfoFromUser(string& userName, string& password, string& count
 	getline(cin, street);
 	cout << "\nHome number: ";
 	cin >> homeNumber;
-}
 
+	validateCin();
+
+}
 
 bool Menu::validateDate(char* date) { //make sure the submitted date is in DD/MM/YYYY format
 	const char s[2] = "/"; // Date is delimited by / (e.g. 18/12/2019)
@@ -81,13 +81,13 @@ bool Menu::validateDate(char* date) { //make sure the submitted date is in DD/MM
 	return true;
 }
 
-void Menu::getFeedbackFromUser(string& feedBack, string& date) {
-	cin.ignore();
+void Menu::getFeedbackFromUser(string& feedBack, char* date) {
+	//cleanBuffer();
 	bool isDateValid = false;
 	do {
 		cout << "\nPlease enter feedback date (DD/MM/YYYY format, e.g. 08/02/2019): ";
-		getline(cin, date);
-		//isDateValid = validateDate(date);
+		cin.getline(date, 11);
+		isDateValid = validateDate(date);
 	} while (!isDateValid);
 	cout << "\nPlease enter your feedback: " << endl;
 	getline(cin, feedBack);
@@ -233,6 +233,10 @@ void Menu::addProductToSeller(string& productName, double& price, Product::eCate
 
 	cout << "\nPlease Enter the product's price: ";
 	cin >> price;
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+	}
 
 	cout << "\nPlease select the product's category:" << endl;
 	for (int i = 1; i <= 4; i++) {
@@ -278,11 +282,8 @@ void Menu::printBuyersNames(const list<User*>& userArr, int numOfKind)
 }
 
 void Menu::getStrFromUser(string& input) {
-	cin.clear();
-	//cin.ignore(INT_MAX, '\n');
 	getline(cin, input);
 }
-
 
 bool isSeller(User& user) {
 	return (typeid(user) == typeid(Seller)) || (typeid(user) == typeid(SellerBuyer));
@@ -294,4 +295,19 @@ bool isBuyer(User& user) {
 
 bool isSellerBuyer(User& user) {
 	return ((typeid(user) == typeid(SellerBuyer)));
+}
+
+void Menu::cleanBuffer() const
+{
+	int c;
+	do {
+		c = getchar();
+	} while (c != EOF && c != '\n');
+}
+
+void Menu::validateCin() {
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+	}
 }
