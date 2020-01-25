@@ -20,7 +20,7 @@ void SellerBuyer::toOs(ostream& os) const
 	Buyer::toOs(os);
 }
 
-SellerBuyer::SellerBuyer(ifstream& inFile) :User(inFile) {}
+SellerBuyer::SellerBuyer(ifstream& inFile) :User(inFile) { }
 
 
 
