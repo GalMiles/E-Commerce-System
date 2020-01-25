@@ -54,7 +54,7 @@ Array<T>::~Array()
 template<class T>
 const Array<T>& Array<T>::operator=(const Array<T>& other)
 {
-	if (this != other)
+	if (this != &other)
 	{
 		delete[]arr;
 		phySize = other.phySize;

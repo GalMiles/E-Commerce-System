@@ -27,7 +27,7 @@ void Seller::addProduct(Product &product) {
 
 void Seller::addFeedback(Feedback &feedback)
 {
-	this->feedbackArr.push_back(&feedback);
+	this->feedbackArr+=(&feedback);
 }
 
 list<Product*>& Seller::getProducts() {

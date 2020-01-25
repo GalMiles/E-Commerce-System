@@ -11,6 +11,7 @@ This class holds info about sellers. It inherits from User
 #include <string>
 #include "User.h"
 #include "Product.h"
+#include "Array.h"
 using namespace std;
 
 #pragma warning(disable: 4996)
@@ -38,7 +39,7 @@ public:
 
 private:
 	list<Product*> products;
-	list<Feedback*> feedbackArr;
+	Array<Feedback*> feedbackArr;
 
 };
 
