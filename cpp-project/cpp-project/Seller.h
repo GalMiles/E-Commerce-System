@@ -35,6 +35,7 @@ public:
 	virtual void toOs(ostream& os) const override;
 
 
+
 private:
 	list<Product*> products;
 	list<Feedback*> feedbackArr;

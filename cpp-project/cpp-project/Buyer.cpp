@@ -68,11 +68,9 @@ bool Buyer::getOrderStatus() { return this->orderStatus; }
 
 Order* Buyer::getUnpaidOrder() { return this->unpaidOrder; }
 
-<<<<<<< HEAD
 Buyer::Buyer(ifstream& inFile) :User(inFile)
 {
 }
-=======
 void Buyer::closeOrder() {
 	this->addOrderToOrderArr(* (new Order(*unpaidOrder)));
 	this->unpaidOrder = NULL;
@@ -82,4 +80,3 @@ void Buyer::closeOrder() {
 void Buyer::setUnpaidOrder(Order& order) {
 	this->unpaidOrder = &order;
 }
->>>>>>> 9f7c672e8626c78eb148a4027e173ea8d1bce517

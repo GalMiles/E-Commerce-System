@@ -14,6 +14,8 @@ Seller::Seller(const Seller& otherSeller) : User(move(otherSeller))
 	this->products = otherSeller.products;
 	this->feedbackArr = otherSeller.feedbackArr;
 }
+Seller::Seller(ifstream& inFile) : User(inFile) {}
+
 
 Seller::~Seller() {
 
@@ -53,4 +55,4 @@ void Seller::toOs(ostream& os) const
 		}
 	}
 }
-Seller::Seller(ifstream& inFile) :User(inFile){}
+

@@ -7,11 +7,11 @@ Address::Address(string& country, string& city, string& street, int homeNumber) 
 	setHomeNumber(homeNumber);
 }
 
-string Address::getCountry() { return country; }
+string& Address::getCountry() { return country; }
 
-string Address::getCity() { return city; }
+string& Address::getCity() { return city; }
 
-string Address::getStreet() { return street; }
+string& Address::getStreet() { return street; }
 
 int Address::getHomeNumber() { return homeNumber; }
 
@@ -68,21 +68,29 @@ void Address::show() const
 	cout << "The address is:" << homeNumber << " " << street << "," << city << "," << country << endl;
 }
 
-ostream& operator<<(ostream & os, const Address & address)
-{
-	os << address.country << ", " << address.city << ", " << address.street << ", " << address.homeNumber;
-	return os;
-}
+
 
 istream& operator >> (istream& in, Address& address)
 {
-	if (typeid(in) == typeid(ifstream))//write from file
-		in >> address;
+	in >> address.country >> address.city >> address.street >> address.homeNumber;
 
-	else // cin>> user
-	{
-		in >> address.country >> address.city >> address.street >> address.homeNumber;
-
-	}
 	return in;
+}
+
+ostream& operator<<(ostream& os, Address& address)
+{
+	os << "blabla";
+
+	return os;
+
+}
+
+const Address& Address::operator=(const Address& address)
+{
+	this->country = address.country;
+	this->city = address.city;
+	this->street = address.street;
+	this->homeNumber = address.homeNumber;
+
+	return *this;
 }

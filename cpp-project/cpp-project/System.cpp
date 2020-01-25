@@ -21,7 +21,17 @@ System::~System() {
 
 void System::initSystem() //initialize the system
 {
-	list<User*> userArr= loadAllUsers("AlmoGal.txt");
+	ifstream inFile("AlmoGal.txt", ios::in);//OPEN
+	if (!inFile.fail())//open succeed
+	{
+		loadAllUsers(inFile, this->userArr);//load data
+	}
+	else
+	
+	{
+		cout << "no users to upload" << endl;
+	}
+	
 	cout << "Welcome to " << storeName << endl;
 	int choice;
 
@@ -31,6 +41,7 @@ void System::initSystem() //initialize the system
 		choice = theMenu.getUserChoice(OPTIONS_LENGTH);
 		performChoice(choice);
 	} while (choice != OPTIONS_LENGTH); //while the user didn't ask to exit the program
+	this->SaveAllUsers(userArr, "AlmoGal.txt"); //saving data
 
 }
 
@@ -38,7 +49,7 @@ void System::performChoice(int choice)
 {
 	switch (choice) {
 	case 1:
-		(BUYER); //create a new Buyer user
+		addUser(BUYER); //create a new Buyer user
 		break;
 	case 2:
 		addUser(SELLER); //create a new Seller user
@@ -376,46 +387,60 @@ void System::findProductByName(Product*& user, list<Product*>& productList) {
 
 	user = *chosenProduct;
 }
-list<User*>System::loadAllUsers(string fileName)
+
+void System::loadAllUsers(ifstream& inFile, list<User*>& userArr)
 {
 	User *user;
-	ifstream inFile(fileName, ios::in);//OPEN
+	
+	int size;
+	inFile >> size;
 
-	list<User*> userArrFromFile;
-	bool feof = false;
-	while (!feof)
+	for (int i = 0; i < size; i++)
 	{
 		user = loadUser(inFile);
-		userArrFromFile.push_back(user);
-		if (inFile.eof()) //get to end of file
-		{
-			feof = true;
-			continue;
-		}
+		userArr.push_back(user);
 	}
 	inFile.close();
-	return userArrFromFile;
+
 }
 User*::System::loadUser(ifstream& inFile)
 {
-	string type;
+	char type[4];
 	inFile >> type;
-	if (type == typeid(Buyer).name()+6)
+	if (strcmp(type, "Buy")==0)
 	{
 		return new Buyer(inFile);
 	}
-	else if (type == typeid(Seller).name() + 6)
+	else if (strcmp(type, "Sel") == 0)
 	{
 		return new Seller(inFile);
 	}
 	
-	else //type=SELLERBUYER
+	else if (strcmp(type, "SeB") == 0)//type=SELLERBUYER
 	{
 		return new SellerBuyer(inFile);
 	}
 }
 
 
+void System::SaveAllUsers(list<User*> allUsers, const string fileName)
+{
+	ofstream outFile(fileName, ios::trunc);//open new file or distroy the exists one
+	int size = allUsers.size();
+	outFile << size <<endl;
+
+	list<User*>::iterator itr = userArr.begin();
+	list<User*>::iterator itrEnd = userArr.end();
+
+	for (; itr != itrEnd; ++itr)
+	{
+		(*itr)->saveType(outFile);
+		(*itr)->saveUser(outFile);
+
+	}
+	outFile.close();
+
+}
 
 bool System::isStrValid(string& str) {
 	int length = str.length();

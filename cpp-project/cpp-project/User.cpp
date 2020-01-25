@@ -1,6 +1,6 @@
 #include "User.h"
 
-User::User(string name, string password, Address *address)
+User::User(string& name, string& password, Address *address)
 {
 	setUserName(name);
 	setPassword(password);
@@ -64,14 +64,33 @@ User::User(ifstream& in) { in >> *this; }//c'tor that gets file
 
 istream& operator>>(istream& in, User& user)
 {
-	if (typeid(in) == typeid(ifstream))//write from file
-		in >> user;
 
-	else // cin>> user
-	{
-		in >> user.name >> user.password;
-		in >> *(user.address);
+	in >> user.name >> user.password;
+	/*in >> *(user.address);*/
 
-	}
+	
 	return in;
 }
+
+void User::saveType(ofstream& outFile) const
+{
+	//only 3 letters of type
+	char type[4];
+	if (strcmp(typeid(*this).name() + 6, "SellerBuyer") == 0)
+		strncpy(type,"SeB",3);
+	else //if its seller or buyer
+	{
+		strncpy(type, typeid(*this).name() + 6, 3);
+	}
+	outFile.write(type, 3);
+	outFile.write(" ", 1);
+}
+
+void User::saveUser(ofstream& outFile) const
+{
+	outFile << this->name << " ";
+	outFile << this->password<< " ";
+	outFile << *(this->address);
+
+}
+

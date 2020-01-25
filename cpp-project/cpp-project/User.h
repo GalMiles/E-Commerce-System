@@ -24,7 +24,7 @@ public:
 	void setAddress(Address* address);
 	Address* getAddress();
 
-	User(string name, string password, Address* address); //c'tor
+	User(string& name, string& password, Address* address); //c'tor
 	User(const User& otherUser); //copy c'tor
 	virtual ~User(); // d'tor is virtual for inheritance purpose
 	User(ifstream& in);//c'tor to load data from file
@@ -35,6 +35,8 @@ public:
 	friend istream& operator >> (istream& in, User& user);
 
 	virtual void toOs(ostream& os) const = 0;
+	virtual void saveUser(ofstream& outFile) const;
+	void saveType(ofstream& outFile) const;
 
 
 protected:

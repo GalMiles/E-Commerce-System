@@ -12,11 +12,9 @@ It contains arrays of all of the users in the system
 #include "Buyer.h"
 #include "Menu.h"
 #include "Order.h"
-<<<<<<< HEAD
 #include <fstream>
-=======
+
 using namespace std;
->>>>>>> 9f7c672e8626c78eb148a4027e173ea8d1bce517
 
 class System
 {
@@ -44,13 +42,13 @@ public:
 	void payForAnOrder(); //pay for an existing order
 	void findUserByName(User*& user, list<User*>& userList);
 	void findProductByName(Product*& user, list<Product*>& productList);
-<<<<<<< HEAD
-	list<User*> loadAllUsers(string fileName);
-	User* loadUser(ifstream& inFile);
 
-=======
+	void loadAllUsers(ifstream& inFile, list<User*>& userArr);
+	User* loadUser(ifstream& inFile);
+	void SaveAllUsers(list<User*> allUsers, const string fileName);
+
+
 	bool isStrValid(string& str);
->>>>>>> 9f7c672e8626c78eb148a4027e173ea8d1bce517
 
 private:
 	Menu theMenu;
