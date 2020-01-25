@@ -23,7 +23,7 @@ class Feedback;
 class Seller : virtual public User
 {
 public:
-	Seller(string& name, string& password, Address* address); //c'tor
+	Seller(string& name, string& password, const Address& address); //c'tor
 	Seller(const Seller& otherSeller); //copy c'tor
 	~Seller(); //d'tor
 	Seller(ifstream& inFile);

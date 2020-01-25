@@ -4,7 +4,7 @@
 #include "Feedback.h"
 
 
-Seller::Seller(string& name, string& password, Address* address) : User(name, password, address)
+Seller::Seller(string& name, string& password, const Address& address) : User(name, password, address)
 {
 
 }

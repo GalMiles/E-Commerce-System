@@ -21,10 +21,10 @@ public:
 	string getUserName();
 	void setUserName(string name);
 	void setPassword(string password);
-	void setAddress(Address* address);
-	Address* getAddress();
+	/*void setAddress(Address address);*/
+	Address getAddress();
 
-	User(string& name, string& password, Address* address); //c'tor
+	User(string& name, string& password, const Address& address); //c'tor
 	User(const User& otherUser); //copy c'tor
 	virtual ~User(); // d'tor is virtual for inheritance purpose
 	User(ifstream& in);//c'tor to load data from file
@@ -42,7 +42,7 @@ public:
 protected:
 	string		name;
 	string		password;
-	Address		*address;
+	Address		address;
 };
 
 #endif

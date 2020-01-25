@@ -113,64 +113,26 @@ void System::addUser(eUserType userType)
 	if (userType == BUYER)
 	{
 		ShoppingCart newShoppingCart;
-		Buyer newBuyer(userName, password, &newAddress, &newShoppingCart);
+		Buyer newBuyer(userName, password, newAddress, &newShoppingCart);
 		userArr.push_back(new Buyer(newBuyer));
 		this->buyerCount++;
 	}
 
 	else if (userType == SELLER) {
-		Seller newSeller(userName, password, &newAddress);
+		Seller newSeller(userName, password, newAddress);
 		userArr.push_back(new Seller(newSeller));
 		this->sellerCount++;
 	}
 
 	else if (userType == SELLER_BUYER) {
 		ShoppingCart newShoppingCart;
-		SellerBuyer newSellerBuyer(Seller(userName, password, &newAddress), Buyer(userName, password, &newAddress, &newShoppingCart));
+		SellerBuyer newSellerBuyer(Seller(userName, password, newAddress), Buyer(userName, password, newAddress, &newShoppingCart));
 		userArr.push_back(new SellerBuyer(newSellerBuyer));
 		sellerCount++;
 		buyerCount++;
 		sellerBuyerCount++;
 	}
 }
-
-/*
-const System& System::operator+=(const Seller seller)
-{
-	if (this->userArrLogSize == this->userArrPhySize)
-		userArrRealloc();
-
-	userArr[userArrLogSize] = new Seller(seller);
-	(this->userArrLogSize)++;
-
-	return *this;
-
-}
-
-const System& System::operator+=(const Buyer buyer)
-{
-	if (this->userArrLogSize == this->userArrPhySize)
-		userArrRealloc();
-
-	userArr[userArrLogSize] = new Buyer(buyer);
-	(this->userArrLogSize)++;
-
-	return *this;
-
-}
-
-const System& System::operator+=(const SellerBuyer sellerbuyer)
-{
-	if (this->userArrLogSize == this->userArrPhySize)
-		userArrRealloc();
-
-	userArr[userArrLogSize] = new SellerBuyer(sellerbuyer);
-	(this->userArrLogSize)++;
-
-	return *this;
-
-}
-*/
 
 
 void System::addProductToSeller()
@@ -436,6 +398,7 @@ void System::SaveAllUsers(list<User*> allUsers, const string fileName)
 	{
 		(*itr)->saveType(outFile);
 		(*itr)->saveUser(outFile);
+		outFile << endl;
 
 	}
 	outFile.close();

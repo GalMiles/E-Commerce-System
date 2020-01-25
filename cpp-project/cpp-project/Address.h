@@ -17,6 +17,8 @@ class Address
 {
 public:
 	Address(string& country, string& city, string& street, int homeNumber);//c'tor
+	Address(const Address& other);
+	Address(ifstream& in);
 	~Address() {}
 	bool setCountry(string& country);
 	bool setCity(string& city);
@@ -33,7 +35,7 @@ public:
 	const Address& operator=(const Address& address);
 
 
-	friend ostream& operator<<(ostream& os, Address& address);
+	friend ostream& operator<<(ostream& os, const Address& address);
 	friend istream& operator>>(istream& in, Address& address);
 
 

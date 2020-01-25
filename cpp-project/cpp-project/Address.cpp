@@ -6,7 +6,17 @@ Address::Address(string& country, string& city, string& street, int homeNumber) 
 	setStreet(street);
 	setHomeNumber(homeNumber);
 }
-
+Address::Address(const Address& other)
+{
+	country = other.country;
+	city = other.city;
+	street = other.street;
+	homeNumber = other.homeNumber;
+}
+Address::Address(ifstream& in)
+{
+	in >> *this;
+}
 string& Address::getCountry() { return country; }
 
 string& Address::getCity() { return city; }
@@ -77,9 +87,9 @@ istream& operator >> (istream& in, Address& address)
 	return in;
 }
 
-ostream& operator<<(ostream& os, Address& address)
+ostream& operator<<(ostream& os, const Address& address)
 {
-	os << "blabla";
+	os << address.country << " " << address.city<<" "<<address.street<< " " <<address.homeNumber<< " ";
 
 	return os;
 
@@ -94,3 +104,4 @@ const Address& Address::operator=(const Address& address)
 
 	return *this;
 }
+

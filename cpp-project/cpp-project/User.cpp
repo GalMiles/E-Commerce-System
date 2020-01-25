@@ -1,16 +1,17 @@
 #include "User.h"
 
-User::User(string& name, string& password, Address *address)
+User::User(string& name, string& password, const Address& address): address(address) //c'tor
 {
 	setUserName(name);
 	setPassword(password);
-	setAddress(address);
+	
 }
 
-User::User(const User& otherUser) {
+User::User(const User& otherUser) :address(otherUser.address)
+{
 	this->name = otherUser.name;
 	this->password = otherUser.password;
-	address = otherUser.address;
+	
 }
 
 User::~User() {
@@ -25,9 +26,9 @@ void User::setPassword(string password) {
 	this->password = password;
 }
 
-void User::setAddress(Address* address) {
+/*void User::setAddress(Address* address) {
 	this->address = address;
-}
+}*/
 
 
 string User::getUserName()
@@ -35,7 +36,7 @@ string User::getUserName()
 	return name;
 }
 
-Address* User::getAddress()
+Address User::getAddress()
 {
 	return address;
 }
@@ -60,13 +61,18 @@ ostream& operator<<(ostream& os, const User& user)
 	return os;
 }
 
-User::User(ifstream& in) { in >> *this; }//c'tor that gets file
+User::User(ifstream& in) : address(in)
+{
+	in >> this->name;
+	in >> this->password;
+
+}//c'tor that gets file
 
 istream& operator>>(istream& in, User& user)
 {
 
 	in >> user.name >> user.password;
-	/*in >> *(user.address);*/
+	in >> user.address;
 
 	
 	return in;
@@ -88,9 +94,9 @@ void User::saveType(ofstream& outFile) const
 
 void User::saveUser(ofstream& outFile) const
 {
+	outFile << this->address << " ";
 	outFile << this->name << " ";
-	outFile << this->password<< " ";
-	outFile << *(this->address);
+	outFile << this->password << " ";
 
 }
 

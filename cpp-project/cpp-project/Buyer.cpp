@@ -1,6 +1,6 @@
 #include "Buyer.h"
 
-Buyer::Buyer(string& name, string& password, Address* address, ShoppingCart *shoppingCart) : User(name, password, address)
+Buyer::Buyer(string& name, string& password, const Address& address, ShoppingCart *shoppingCart) : User(name, password, address)
 {
 	setShoppingCart(shoppingCart);
 	this->unpaidOrder = NULL;

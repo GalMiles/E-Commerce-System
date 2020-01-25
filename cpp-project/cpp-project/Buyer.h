@@ -27,7 +27,7 @@ class Order;
 class Buyer : virtual public User
 {
 public:
-	Buyer::Buyer(string& name, string& password, Address* address, ShoppingCart *shoppingCart); //c'tor
+	Buyer::Buyer(string& name, string& password, const Address& address, ShoppingCart *shoppingCart); //c'tor
 	Buyer(const Buyer& otherBuyer); //copy c'tor
 	~Buyer(); //d'tor
 	Buyer(ifstream& inFile);
