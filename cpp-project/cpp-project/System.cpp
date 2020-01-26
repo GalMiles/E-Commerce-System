@@ -399,7 +399,6 @@ void System::SaveAllUsers(list<User*> allUsers, const string fileName)
 		(*itr)->saveType(outFile);
 		(*itr)->saveUser(outFile);
 		outFile << endl;
-
 	}
 	outFile.close();
 

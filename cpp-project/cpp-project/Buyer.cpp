@@ -70,7 +70,11 @@ Order* Buyer::getUnpaidOrder() { return this->unpaidOrder; }
 
 Buyer::Buyer(ifstream& inFile) :User(inFile)
 {
+	this->shoppingCart = new ShoppingCart();
+	this->unpaidOrder = NULL;
+	this->orderStatus = false;
 }
+
 void Buyer::closeOrder() {
 	this->addOrderToOrderArr(* (new Order(*unpaidOrder)));
 	this->unpaidOrder = NULL;
