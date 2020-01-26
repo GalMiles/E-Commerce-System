@@ -371,15 +371,18 @@ User*::System::loadUser(ifstream& inFile)
 	inFile >> type;
 	if (strcmp(type, "Buy")==0)
 	{
+		buyerCount++;
 		return new Buyer(inFile);
 	}
 	else if (strcmp(type, "Sel") == 0)
 	{
+		sellerCount++;
 		return new Seller(inFile);
 	}
 	
 	else if (strcmp(type, "SeB") == 0)//type=SELLERBUYER
 	{
+		sellerBuyerCount++;
 		return new SellerBuyer(inFile);
 	}
 }
