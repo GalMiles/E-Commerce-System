@@ -262,7 +262,6 @@ void System::placeOrder() {
 			}
 			Order newOrder(&orderShoppingCart, dynamic_cast<Buyer*>(chosenBuyer));
 			dynamic_cast<Buyer*>(chosenBuyer)->setUnpaidOrder(*(new Order(newOrder)));
-
 			delete[] productsString;
 		}
 	}

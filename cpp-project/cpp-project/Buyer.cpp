@@ -83,4 +83,5 @@ void Buyer::closeOrder() {
 
 void Buyer::setUnpaidOrder(Order& order) {
 	this->unpaidOrder = &order;
+	this->orderStatus = true;
 }
